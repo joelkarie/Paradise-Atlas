@@ -219,3 +219,17 @@ One command that:
 That’s how real backend systems are operated.
 
 Just tell me when you’re ready for that.
+
+2. Simple relational model (recommended)
+Visit
+id (PK)
+date/time
+location_id (FK → Location)
+Location
+id (PK)
+name (e.g., “Boston”, “Yosemite National Park”)
+location_type_id (FK → LocationType)
+LocationType
+id (PK)
+name (City, Landmark, National Park, Museum, etc.)
+optional: description, hierarchy, rules
