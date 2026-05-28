@@ -14,5 +14,9 @@
 - I attempted to parse the theatre data and add it to the theatre table
 - next step: ensure theatre table was correctly imported
 
+## Current State (May 27)
 
+- Parsed digs added (manually) to tables and joined to the visits table. 
+- first_view was created that allows me to see the theatres associated with visits/locations.
+- next step: correclty import digs to save brands and holding companies. correct order of capitols
 
