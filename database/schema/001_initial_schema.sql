@@ -102,7 +102,10 @@ CREATE TABLE "digs" (
   "price_per_night" numeric(10,2),
   "notes" text,
   "created_at" timestamptz DEFAULT (now()),
-  "updated_at" timestamptz DEFAULT (now())
+  "updated_at" timestamptz DEFAULT (now()),
+
+  CONSTRAINT unique_digs
+    UNIQUE (address)
 );
 
 CREATE TABLE "digs_type" (
