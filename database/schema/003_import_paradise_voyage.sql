@@ -11,7 +11,8 @@ INSERT INTO location (
     latitude,
     longitude,
     state_province,
-    country
+    country, 
+    census_name
 )
 SELECT DISTINCT
     "City",
@@ -25,7 +26,8 @@ SELECT DISTINCT
     NULLIF(NULLIF(NULLIF("Latitude", '-'), '~'), '')::numeric,
     NULLIF(NULLIF(NULLIF("Longitude", '-'), '~'), '')::numeric,
     "State/Province",
-    "Country"
+    "Country",
+    "Census Name"
 FROM paradise_voyage_raw_import
 ON CONFLICT (name, state_province, country)
 DO NOTHING;
@@ -76,49 +78,6 @@ JOIN digs d
     ON d.address = r."Digs Address"
 JOIN hotel_brand hb
     ON hb.name = r."Hotel Brand";
--- INSERT INTO hotel_details (digs_id, hotel_brand_id)
--- SELECT
---     d.id,
---     hb.id
--- FROM paradise_voyage_raw_import r 
--- JOIN digs d
---     ON LOWER(TRIM(d.address)) = LOWER(TRIM(r."Digs Address"))
--- JOIN digs_type dt
---     ON dt.id = d.digs_type_id
--- JOIN hotel_brand hb
---     ON hb.name = r."Hotel Brand"
--- WHERE dt.name = 'hotel'
---     AND r."Hotel Brand" IS NOT NULL;
-
-
--- TRUNCATE TABLE visit RESTART IDENTITY CASCADE;
--- INSERT INTO visit (
---     date,
---     original_stop_number,
---     location_id, 
---     theatre_id, 
---     digs_id
--- )
--- SELECT
---     NULLIF(NULLIF(NULLIF("Visit Date", '-'), '~'), '')::date,
---     NULLIF(NULLIF(NULLIF("Original  Stop Number", '-'), '~'), '')::integer,
---     l.id,
---     t.id,
---     d.id
--- FROM paradise_voyage_raw_import r
--- JOIN location l
---     ON l.name = r."City"
---    AND l.state_province = r."State/Province"
---    AND l.country = r."Country"
--- LEFT JOIN theatre t
---     ON LOWER(TRIM(t.name)) =
---        LOWER(TRIM(r."Theatre"))
---    AND LOWER(TRIM(t.address)) =
---        LOWER(TRIM(r."Theatre Address"))
--- LEFT JOIN digs d
---     ON LOWER(TRIM(d.address)) =
---        LOWER(TRIM(r."Digs Address"))
--- ON CONFLICT (date, location_id) DO NOTHING;
 
 INSERT INTO visit (
     date,
