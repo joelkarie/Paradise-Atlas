@@ -189,10 +189,10 @@ CREATE TABLE paradise_voyage_raw_import (
     "Digs Lat" text,
     "Digs Lon" text,
     "Housing Dist" text,
-    "Num Hotels" text, -- Not used
-    "Joel Could Live" text, -- Not used
-    "Michael Could Live" text, -- Not used
-    "Highlight" text, -- Not used
+    "Num Hotels" text, -- Not used (Not necessary?)
+    "Joel Could Live" text,
+    "Michael Could Live" text,
+    "Highlight" text,
     "Original  Stop Number" text,
     "AKA" text,
     "Manhole" text,

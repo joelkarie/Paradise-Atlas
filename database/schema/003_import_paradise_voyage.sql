@@ -32,6 +32,18 @@ FROM paradise_voyage_raw_import
 ON CONFLICT (name, state_province, country)
 DO NOTHING;
 
+INSERT INTO location_rating (location_id, joel_could_live, michael_could_live, highlight)
+SELECT
+    l.id,
+    NULLIF(NULLIF(r."Joel Could Live", '-'), '')::boolean,
+    NULLIF(NULLIF(r."Michael Could Live", '-'), '')::boolean,
+    NULLIF(NULLIF(r."Highlight", '-'), '')::text
+
+FROM paradise_voyage_raw_import r 
+JOIN location l
+    ON l.name = r."City"
+   AND l.state_province = r."State/Province"
+   AND l.country = r."Country";
 
 INSERT INTO theatre (name, address, latitude, longitude)
 SELECT DISTINCT
