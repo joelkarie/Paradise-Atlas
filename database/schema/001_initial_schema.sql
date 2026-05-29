@@ -181,8 +181,8 @@ CREATE TABLE paradise_voyage_raw_import (
     "Theatre Lon" text,
     "Company Housing" text,
     "Digs" text,
-    "Holding Company" text,
-    "Hotel Brand" text, -- TODO investigate
+    "Hotel Holding" text,
+    "Hotel Brand" text,
     "Digs Address" text,
     "Digs Lat" text,
     "Digs Lon" text,

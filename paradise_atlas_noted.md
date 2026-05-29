@@ -25,3 +25,9 @@
 - Enriched the digs table
 - Updated csv info
 - next step: fix hotel holding/brand join. Add some custom views.
+
+## Current State (May 29)
+
+- Corrected hotel tables.
+
+- next step: correct 'Original Stop Number"

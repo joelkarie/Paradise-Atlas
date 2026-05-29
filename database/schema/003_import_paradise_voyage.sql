@@ -59,19 +59,36 @@ WHERE r."Digs Address" IS NOT NULL
     AND r."Digs Address" <> ''
 ON CONFLICT (address) DO NOTHING;
 
+INSERT INTO hotel_brand (name, hotel_holding_company_id)
+SELECT DISTINCT
+    r."Hotel Brand",
+    hc.id
+FROM paradise_voyage_raw_import r
+JOIN hotel_holding_company hc
+    ON hc.name = r."Hotel Holding";
+
 INSERT INTO hotel_details (digs_id, hotel_brand_id)
 SELECT
     d.id,
     hb.id
 FROM paradise_voyage_raw_import r 
 JOIN digs d
-    ON LOWER(TRIM(d.address)) = LOWER(TRIM(r."Digs Address"))
-JOIN digs_type dt
-    ON dt.id = d.digs_type_id
+    ON d.address = r."Digs Address"
 JOIN hotel_brand hb
-    ON hb.name = r."Hotel Brand"
-WHERE dt.name = 'hotel'
-    AND r."Hotel Brand" IS NOT NULL;
+    ON hb.name = r."Hotel Brand";
+-- INSERT INTO hotel_details (digs_id, hotel_brand_id)
+-- SELECT
+--     d.id,
+--     hb.id
+-- FROM paradise_voyage_raw_import r 
+-- JOIN digs d
+--     ON LOWER(TRIM(d.address)) = LOWER(TRIM(r."Digs Address"))
+-- JOIN digs_type dt
+--     ON dt.id = d.digs_type_id
+-- JOIN hotel_brand hb
+--     ON hb.name = r."Hotel Brand"
+-- WHERE dt.name = 'hotel'
+--     AND r."Hotel Brand" IS NOT NULL;
 
 
 -- TRUNCATE TABLE visit RESTART IDENTITY CASCADE;
