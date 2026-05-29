@@ -44,7 +44,6 @@ CREATE TABLE "national_park_details" (
 
 CREATE TABLE "city_details" (
   "location_id" integer PRIMARY KEY,
-  "census_name" text,
   "population" integer,
   "is_city_capital" bool
 );

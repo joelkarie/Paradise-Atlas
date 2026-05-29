@@ -38,7 +38,18 @@ SELECT
     NULLIF(NULLIF(r."Joel Could Live", '-'), '')::boolean,
     NULLIF(NULLIF(r."Michael Could Live", '-'), '')::boolean,
     NULLIF(NULLIF(r."Highlight", '-'), '')::text
+FROM paradise_voyage_raw_import r 
+JOIN location l
+    ON l.name = r."City"
+   AND l.state_province = r."State/Province"
+   AND l.country = r."Country";
 
+INSERT INTO city_details (location_id, population, is_city_capital)
+SELECT
+    l.id,
+    NULLIF(
+    REPLACE(NULLIF(NULLIF(r."Population", '-'), ''), ',', ''),'')::integer,
+    NULLIF(NULLIF(r."Capitol", '-'), '')::boolean
 FROM paradise_voyage_raw_import r 
 JOIN location l
     ON l.name = r."City"
