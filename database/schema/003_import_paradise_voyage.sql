@@ -30,34 +30,6 @@ FROM paradise_voyage_raw_import
 ON CONFLICT (name, state_province, country)
 DO NOTHING;
 
-TRUNCATE TABLE visit RESTART IDENTITY CASCADE;
-INSERT INTO visit (
-    date,
-    original_stop_number,
-    location_id, 
-    theatre_id, 
-    digs_id
-)
-SELECT
-    NULLIF(NULLIF(NULLIF("Visit Date", '-'), '~'), '')::date,
-    NULLIF(NULLIF(NULLIF("Original  Stop Number", '-'), '~'), '')::integer,
-    l.id,
-    t.id,
-    d.id
-FROM paradise_voyage_raw_import r
-JOIN location l
-    ON l.name = r."City"
-   AND l.state_province = r."State/Province"
-   AND l.country = r."Country"
-LEFT JOIN theatre t
-    ON LOWER(TRIM(t.name)) =
-       LOWER(TRIM(r."Theatre"))
-   AND LOWER(TRIM(t.address)) =
-       LOWER(TRIM(r."Theatre Address"))
-LEFT JOIN digs d
-    ON LOWER(TRIM(d.address)) =
-       LOWER(TRIM(r."Digs Address"))
-ON CONFLICT (date, location_id) DO NOTHING;
 
 INSERT INTO theatre (name, address, latitude, longitude)
 SELECT DISTINCT
@@ -70,16 +42,90 @@ WHERE "Theatre" IS NOT NULL
   AND "Theatre" <> ''
 ON CONFLICT (name, address) DO NOTHING;
 
-INSERT INTO digs (address, latitude, longitude, company_housing)
+INSERT INTO digs (address, latitude, longitude, digs_type_id, company_housing)
 SELECT DISTINCT
-    "Digs Address",
-    NULLIF(NULLIF("Digs Lat", '-'), '')::numeric,
-    NULLIF(NULLIF("Digs Lon", '-'), '')::numeric,
+    r."Digs Address",
+    NULLIF(NULLIF(r."Digs Lat", '-'), '')::numeric,
+    NULLIF(NULLIF(r."Digs Lon", '-'), '')::numeric,
+    dt.id,
     CASE
-        WHEN "Company Housing" ILIKE 'TRUE' THEN TRUE
+        WHEN r."Company Housing" ILIKE 'TRUE' THEN TRUE
         ELSE FALSE
     END
-FROM paradise_voyage_raw_import
-WHERE "Digs Address" IS NOT NULL
-    AND "Digs Address" <> ''
+FROM paradise_voyage_raw_import r
+LEFT JOIN digs_type dt
+    ON LOWER(dt.name) = LOWER(r."Digs")
+WHERE r."Digs Address" IS NOT NULL
+    AND r."Digs Address" <> ''
 ON CONFLICT (address) DO NOTHING;
+
+INSERT INTO hotel_details (digs_id, hotel_brand_id)
+SELECT
+    d.id,
+    hb.id
+FROM paradise_voyage_raw_import r 
+JOIN digs d
+    ON LOWER(TRIM(d.address)) = LOWER(TRIM(r."Digs Address"))
+JOIN digs_type dt
+    ON dt.id = d.digs_type_id
+JOIN hotel_brand hb
+    ON hb.name = r."Hotel Brand"
+WHERE dt.name = 'hotel'
+    AND r."Hotel Brand" IS NOT NULL;
+
+
+-- TRUNCATE TABLE visit RESTART IDENTITY CASCADE;
+-- INSERT INTO visit (
+--     date,
+--     original_stop_number,
+--     location_id, 
+--     theatre_id, 
+--     digs_id
+-- )
+-- SELECT
+--     NULLIF(NULLIF(NULLIF("Visit Date", '-'), '~'), '')::date,
+--     NULLIF(NULLIF(NULLIF("Original  Stop Number", '-'), '~'), '')::integer,
+--     l.id,
+--     t.id,
+--     d.id
+-- FROM paradise_voyage_raw_import r
+-- JOIN location l
+--     ON l.name = r."City"
+--    AND l.state_province = r."State/Province"
+--    AND l.country = r."Country"
+-- LEFT JOIN theatre t
+--     ON LOWER(TRIM(t.name)) =
+--        LOWER(TRIM(r."Theatre"))
+--    AND LOWER(TRIM(t.address)) =
+--        LOWER(TRIM(r."Theatre Address"))
+-- LEFT JOIN digs d
+--     ON LOWER(TRIM(d.address)) =
+--        LOWER(TRIM(r."Digs Address"))
+-- ON CONFLICT (date, location_id) DO NOTHING;
+
+INSERT INTO visit (
+    date,
+    visit_order,
+    original_stop_number,
+    location_id, 
+    theatre_id, 
+    digs_id
+)
+SELECT
+    NULLIF(NULLIF(NULLIF(r."Visit Date", '-'), '~'), '')::date,
+    NULLIF(NULLIF(NULLIF(r."Visit Order", '-'),'~'), '')::integer,
+    NULLIF(NULLIF(NULLIF(r."Original  Stop Number", '-'), '~'), '')::integer,
+    l.id,
+    t.id,
+    d.id
+FROM paradise_voyage_raw_import r
+JOIN location l
+    ON l.name = r."City"
+   AND l.state_province = r."State/Province"
+   AND l.country = r."Country"
+LEFT JOIN theatre t
+    ON t.name = r."Theatre"
+   AND t.address = r."Theatre Address"
+LEFT JOIN digs d
+    ON d.address = r."Digs Address"
+ON CONFLICT (date, location_id) DO NOTHING;

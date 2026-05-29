@@ -1,1 +1,1 @@
-SELECT * FROM visit;
+SELECT l.name, d.address, dt.name FROM visit v JOIN location l ON l.id = v.location_id JOIN digs d ON d.id = v.digs_id JOIN digs_type dt ON dt.id = d.digs_type_id WHERE l.state_province = 'California' ORDER BY v.visit_order ASC;

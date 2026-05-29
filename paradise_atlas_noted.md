@@ -20,3 +20,8 @@
 - first_view was created that allows me to see the theatres associated with visits/locations.
 - next step: correclty import digs to save brands and holding companies. correct order of capitols
 
+## Current State (May 28)
+
+- Enriched the digs table
+- Updated csv info
+- next step: fix hotel holding/brand join. Add some custom views.
