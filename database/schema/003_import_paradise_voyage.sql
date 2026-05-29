@@ -85,7 +85,8 @@ INSERT INTO visit (
     original_stop_number,
     location_id, 
     theatre_id, 
-    digs_id
+    digs_id,
+    housing_distance
 )
 SELECT
     NULLIF(NULLIF(NULLIF(r."Visit Date", '-'), '~'), '')::date,
@@ -93,7 +94,8 @@ SELECT
     NULLIF(NULLIF(NULLIF(r."Original  Stop Number", '-'), '~'), '')::integer,
     l.id,
     t.id,
-    d.id
+    d.id,
+    NULLIF(NULLIF(NULLIF(r."Housing Dist", '-'), '~'), '')::float
 FROM paradise_voyage_raw_import r
 JOIN location l
     ON l.name = r."City"

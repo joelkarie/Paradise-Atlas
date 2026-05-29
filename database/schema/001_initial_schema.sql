@@ -7,6 +7,7 @@ CREATE TABLE "visit" (
   "digs_id" integer,
   "theatre_id" integer,
   "capitol_id" integer,
+  "housing_distance" float,
   "created_at" timestamptz DEFAULT (now()),
   "updated_at" timestamptz DEFAULT (now()),
 
@@ -187,7 +188,7 @@ CREATE TABLE paradise_voyage_raw_import (
     "Digs Address" text,
     "Digs Lat" text,
     "Digs Lon" text,
-    "Housing Dist" text, -- Not used
+    "Housing Dist" text,
     "Num Hotels" text, -- Not used
     "Joel Could Live" text, -- Not used
     "Michael Could Live" text, -- Not used
