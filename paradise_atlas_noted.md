@@ -29,5 +29,7 @@
 ## Current State (May 29)
 
 - Corrected hotel tables.
+- capitol table was added with correct inserts.
+- housing_distance_view added
 
 - next step: correct 'Original Stop Number"
