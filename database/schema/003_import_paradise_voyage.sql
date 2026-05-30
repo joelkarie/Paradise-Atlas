@@ -105,6 +105,41 @@ JOIN digs d
 JOIN hotel_brand hb
     ON hb.name = r."Hotel Brand";
 
+
+INSERT INTO capitol (
+    name,
+    address,
+    latitude,
+    longitude,
+    capitol_num,
+    year_completed,
+    architect,
+    architectural_style,
+    size_sq_ft,
+    dome_height,
+    fact
+)
+SELECT
+    c."State",
+    NULLIF(NULLIF(NULLIF(c."Capitol Address", '-'), '~'), '')::text,
+    NULLIF(NULLIF(c."Latitude", '-'), '')::numeric,
+    NULLIF(NULLIF(c."Longitude", '-'), '')::numeric,
+    NULLIF(NULLIF(r."Capitol Num", '-'), '')::numeric,
+    c."Year Completed",
+    c."Architect",
+    c."Architectural Style",
+    NULLIF(NULLIF(c."Approximate Size (sq ft)", '-'), '')::numeric,
+    NULLIF(NULLIF(NULLIF(c."Dome Height", '-'), '~'), '')::text,
+    c."Trivia Fact"
+FROM us_capitol_raw_import c
+JOIN LATERAL (
+    SELECT r."Capitol Num"
+    FROM paradise_voyage_raw_import r
+    WHERE r."State/Province" = c."State"
+      AND r."Capitol" = 'TRUE'
+    LIMIT 1
+) r ON TRUE;
+
 INSERT INTO visit (
     date,
     visit_order,
