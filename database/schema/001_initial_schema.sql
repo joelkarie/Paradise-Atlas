@@ -7,7 +7,7 @@ CREATE TABLE "visit" (
   "digs_id" integer,
   "theatre_id" integer,
   "capitol_id" integer,
-  "housing_distance" float,
+  "housing_distance" numeric,
   "created_at" timestamptz DEFAULT (now()),
   "updated_at" timestamptz DEFAULT (now()),
 
