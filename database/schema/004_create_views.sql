@@ -11,3 +11,10 @@ JOIN location l ON l.id = v.location_id
 JOIN theatre t ON t.id = v.theatre_id
 WHERE v.housing_distance IS NOT NULL
 ORDER BY v.housing_distance DESC;
+
+CREATE VIEW capitol_completion_view AS
+SELECT l.name AS "Capital", cap.year_completed AS "Completion", v.visit_order AS "Visit Num" FROM visit v
+JOIN location l on l.id = v.location_id
+JOIN capitol cap ON cap.id = v.capitol_id
+WHERE v.capitol_id IS NOT NULL
+ORDER BY cap.year_completed ASC;
