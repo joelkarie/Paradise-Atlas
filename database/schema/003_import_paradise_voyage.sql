@@ -189,7 +189,8 @@ INSERT INTO visit (
     location_id, 
     theatre_id, 
     digs_id,
-    housing_distance
+    housing_distance,
+    capitol_id
 )
 SELECT
     NULLIF(NULLIF(NULLIF(r."Visit Date", '-'), '~'), '')::date,
@@ -198,7 +199,8 @@ SELECT
     l.id,
     t.id,
     d.id,
-    NULLIF(NULLIF(NULLIF(r."Housing Dist", '-'), '~'), '')::float
+    NULLIF(NULLIF(NULLIF(r."Housing Dist", '-'), '~'), '')::float,
+    cap.id
 FROM paradise_voyage_raw_import r
 JOIN location l
     ON l.name = r."City"
@@ -209,4 +211,10 @@ LEFT JOIN theatre t
    AND t.address = r."Theatre Address"
 LEFT JOIN digs d
     ON d.address = r."Digs Address"
+LEFT JOIN city_details cd
+    ON cd.location_id = l.id
+LEFT JOIN capitol cap
+    ON cap.name = l.state_province
+   AND cap.country = l.country
+   AND cd.is_city_capital = TRUE
 ON CONFLICT (date, location_id) DO NOTHING;
