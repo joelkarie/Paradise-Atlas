@@ -3,6 +3,7 @@ TRUNCATE TABLE us_capitol_raw_import;
 
 \copy paradise_voyage_raw_import FROM 'paradise_voyage_raw_data.csv' DELIMITER ',' CSV HEADER;
 \copy us_capitol_raw_import FROM 'us_state_capitols_with_coordinates.csv' DELIMITER ',' CSV HEADER;
+\copy canadian_legislative_buildings_import FROM 'canadian_legislative_buildings.csv' DELIMITER ',' CSV HEADER;
 
 
 -- psql -d atlas_paradiso -f 003_import_paradise_voyage.sql
@@ -117,7 +118,8 @@ INSERT INTO capitol (
     architectural_style,
     size_sq_ft,
     dome_height,
-    fact
+    fact,
+    country
 )
 SELECT
     c."State",
@@ -130,12 +132,52 @@ SELECT
     c."Architectural Style",
     NULLIF(NULLIF(c."Approximate Size (sq ft)", '-'), '')::numeric,
     NULLIF(NULLIF(NULLIF(c."Dome Height", '-'), '~'), '')::text,
-    c."Trivia Fact"
+    c."Trivia Fact",
+    'USA'
 FROM us_capitol_raw_import c
 JOIN LATERAL (
     SELECT r."Capitol Num"
     FROM paradise_voyage_raw_import r
     WHERE r."State/Province" = c."State"
+      AND r."Capitol" = 'TRUE'
+    LIMIT 1
+) r ON TRUE;
+
+INSERT INTO capitol (
+    name,
+    address,
+    latitude,
+    longitude,
+    capitol_num,
+    year_completed,
+    architect,
+    architectural_style,
+    size_sq_ft,
+    dome_height,
+    fact, 
+    country
+)
+SELECT
+    c."Province/Territory",
+    NULLIF(NULLIF(NULLIF(c."Address", '-'), '~'), '')::text,
+    NULLIF(NULLIF(c."Latitude", '-'), '')::numeric,
+    NULLIF(NULLIF(c."Longitude", '-'), '')::numeric,
+    NULLIF(NULLIF(r."Capitol Num", '-'), '')::numeric,
+    c."Year Completed",
+    c."Architect",
+    c."Architectural Style",
+    NULLIF(
+    REPLACE(NULLIF(c."Approximate Size (sq ft)", ''), ',', ''),
+    ''
+)::numeric,
+    NULLIF(NULLIF(NULLIF(c."Height / Dome Height", '-'), '~'), '')::text,
+    c."Trivia Fact",
+    'Canada'
+FROM canadian_legislative_buildings_import c
+JOIN LATERAL (
+    SELECT r."Capitol Num"
+    FROM paradise_voyage_raw_import r
+    WHERE r."State/Province" = c."Province/Territory"
       AND r."Capitol" = 'TRUE'
     LIMIT 1
 ) r ON TRUE;
