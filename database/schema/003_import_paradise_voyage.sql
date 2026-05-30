@@ -1,6 +1,9 @@
 TRUNCATE TABLE paradise_voyage_raw_import;
+TRUNCATE TABLE us_capitol_raw_import;
 
 \copy paradise_voyage_raw_import FROM 'paradise_voyage_raw_data.csv' DELIMITER ',' CSV HEADER;
+\copy us_capitol_raw_import FROM 'us_state_capitols_with_coordinates.csv' DELIMITER ',' CSV HEADER;
+
 
 -- psql -d atlas_paradiso -f 003_import_paradise_voyage.sql
 

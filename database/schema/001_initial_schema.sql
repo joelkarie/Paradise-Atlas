@@ -197,3 +197,18 @@ CREATE TABLE paradise_voyage_raw_import (
     "Manhole" text,
     "Population" text
 );
+
+DROP TABLE IF EXISTS us_capitol_raw_import;
+
+CREATE TABLE us_capitol_raw_import (
+    "State" text,
+    "Capitol Address" text,
+    "Year Completed" text,
+    "Architect" text,
+    "Architectural Style" text,
+    "Approximate Size (sq ft)" text,
+    "Dome Height" text,
+    "Trivia Fact" text,
+    "Latitude" text,
+    "Longitude" text
+);
