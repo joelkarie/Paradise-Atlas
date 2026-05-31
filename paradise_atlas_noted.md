@@ -31,5 +31,12 @@
 - Corrected hotel tables.
 - capitol table was added with correct inserts.
 - housing_distance_view added
-
 - next step: correct 'Original Stop Number"
+
+## Current State (May 30)
+
+- Canadian legislative building csv imported and added to capitol table
+- capitol table joined with visit table
+- excel sheet containing housing costs for 2026 & 20205 created saved in Mac::/Documents/Rafiki
+- capitol_completion_view added to views
+- next step: correct 'Original Stop Number', research data visualization (DBeaver?)
