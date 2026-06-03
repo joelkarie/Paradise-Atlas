@@ -31,3 +31,11 @@ FROM visit v
 JOIN theatre t ON t.id = v.theatre_id
 JOIN location l ON l.id = v.location_id
 ORDER BY v.visit_order ASC;
+
+CREATE VIEW joel_could_live_view AS
+SELECT l.name AS "City", l.state_province AS "State/Province", l.country AS "Country"
+FROM location l 
+JOIN location_rating lr ON lr.location_id = l.id
+WHERE lr.joel_could_live = True
+ORDER BY l.name ASC;
+
