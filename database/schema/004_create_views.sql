@@ -39,3 +39,9 @@ JOIN location_rating lr ON lr.location_id = l.id
 WHERE lr.joel_could_live = True
 ORDER BY l.name ASC;
 
+CREATE VIEW capitol_visit_order_view AS
+SELECT l.name as "City", l.state_province as "State?Province", l.latitude AS "Latitude", l.longitude AS "Longitude"
+FROM visit v
+JOIN location l on l.id = v.location_id
+JOIN capitol cap ON cap.id = v.capitol_id
+ORDER BY v.date ASC;
