@@ -18,3 +18,9 @@ JOIN location l on l.id = v.location_id
 JOIN capitol cap ON cap.id = v.capitol_id
 WHERE v.capitol_id IS NOT NULL
 ORDER BY cap.year_completed ASC;
+
+CREATE VIEW visit_order_view AS
+SELECT v.visit_order AS "Visit Number", l.name AS "Location", l.state_province AS "State/Province", v.date AS "Date", l.latitude AS "Latitude", l.longitude AS "Longitude"
+FROM visit v 
+JOIN location l on l.id = v.location_id
+ORDER BY v.visit_order ASC;
