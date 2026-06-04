@@ -4,7 +4,7 @@ TRUNCATE TABLE us_capitol_raw_import;
 \copy paradise_voyage_raw_import FROM 'paradise_voyage_raw_data.csv' DELIMITER ',' CSV HEADER;
 \copy us_capitol_raw_import FROM 'us_state_capitols_with_coordinates.csv' DELIMITER ',' CSV HEADER;
 \copy canadian_legislative_buildings_import FROM 'canadian_legislative_buildings.csv' DELIMITER ',' CSV HEADER;
-
+\copy tour_housing_calculation_import from 'tour_housing_calculations.csv' DELIMITER ',' CSV HEADER;
 
 -- psql -d atlas_paradiso -f 003_import_paradise_voyage.sql
 
@@ -218,3 +218,36 @@ LEFT JOIN capitol cap
    AND cap.country = l.country
    AND cd.is_city_capital = TRUE
 ON CONFLICT (date, location_id) DO NOTHING;
+
+INSERT INTO housing_calculations (
+    digs_id,
+    total_paid_personal,
+    total_company_paid,
+    total_days_stayed,
+    daily_cost,
+    daily_buyout,
+    daily_housing_buyout,
+    other_stay,
+    total_spent,
+    weeks,
+    combined_weekly_buyout,
+    housing_buyout,
+    housing_savings
+)
+SELECT
+    v.digs_id,
+    NULLIF(NULLIF(NULLIF(th."Total Digs Paid", '-'), '~'), '')::numeric,
+    NULLIF(NULLIF(NULLIF(th."Company Housing Days",  '-'), '~'), '')::numeric,
+    NULLIF(NULLIF(NULLIF(th."Total Stayed",  '-'), '~'), '')::numeric,
+    NULLIF(NULLIF(NULLIF(th."Daily Cost",  '-'), '~'), '')::numeric,
+    NULLIF(NULLIF(NULLIF(th."Daily Buyout", '-'), '~'), '')::numeric,
+    NULLIF(NULLIF(NULLIF(th."Daily Housing Buyout", '-'), '~'), '')::numeric,
+    NULLIF(NULLIF(NULLIF(th."Other Stay", '-'), '~'), '')::numeric,
+    NULLIF(NULLIF(NULLIF(th."Total Spent", '-'), '~'), '')::numeric,
+    NULLIF(NULLIF(NULLIF(th."Weeks", '-'), '~'), '')::numeric,
+    NULLIF(NULLIF(NULLIF(th."Total Buyout", '-'), '~'), '')::numeric,
+    NULLIF(NULLIF(NULLIF(th."Housing Buyout", '-'), '~'), '')::numeric,
+    NULLIF(NULLIF(NULLIF(th."Housing Savings", '-'), '~'), '')::numeric
+FROM tour_housing_calculation_import th
+JOIN location l on l.name = th."City" AND l.state_province = th."State/Province"
+JOIN visit v ON v.location_id = l.id;

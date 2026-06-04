@@ -139,6 +139,29 @@ CREATE TABLE "hotel_brand" (
   "hotel_holding_company_id" integer
 );
 
+CREATE TABLE "housing_calculations" (
+  "digs_id" integer PRIMARY KEY,
+  "total_paid_personal" numeric(10,2),
+  "total_company_paid" numeric(10,2),
+  "total_days_stayed" integer,
+  "daily_cost" numeric(10,2),
+  "daily_buyout" numeric(10,2),
+  "daily_housing_buyout" numeric(10,2),
+  "other_stay" numeric(10,2),
+  "total_spent" numeric(10,2),
+  "weeks" integer,
+  "combined_weekly_buyout" numeric(10,2),
+  "housing_buyout" numeric(10,2),
+  "housing_savings" numeric(10,2)
+);
+
+/*
+TODO: housing_calculations should eventually use internal calculations instead of so many variables.
+All of the calculations should be possible using:
+City, State, Weeks, Date, On Our Own, Company Housing Nights, Daily Buyout, Total Paid, Other Stay Payments.
+
+*/
+
 ALTER TABLE "visit" ADD FOREIGN KEY ("location_id") REFERENCES "location" ("id") DEFERRABLE INITIALLY IMMEDIATE;
 
 ALTER TABLE "visit" ADD FOREIGN KEY ("digs_id") REFERENCES "digs" ("id") DEFERRABLE INITIALLY IMMEDIATE;
@@ -166,6 +189,8 @@ ALTER TABLE "hotel_details" ADD FOREIGN KEY ("digs_id") REFERENCES "digs" ("id")
 ALTER TABLE "hotel_details" ADD FOREIGN KEY ("hotel_brand_id") REFERENCES "hotel_brand" ("id") DEFERRABLE INITIALLY IMMEDIATE;
 
 ALTER TABLE "hotel_brand" ADD FOREIGN KEY ("hotel_holding_company_id") REFERENCES "hotel_holding_company" ("id") DEFERRABLE INITIALLY IMMEDIATE;
+
+ALTER TABLE "housing_calculations" ADD FOREIGN KEY ("digs_id") REFERENCES "digs" ("id") DEFERRABLE INITIALLY IMMEDIATE;
 
 DROP TABLE IF EXISTS paradise_voyage_raw_import;
 
@@ -238,3 +263,24 @@ CREATE TABLE canadian_legislative_buildings_import (
     "Latitude" text,
     "Longitude" text
 );
+
+CREATE TABLE tour_housing_calculation_import (
+  "City" text,
+  "State/Province" text,
+  "Total Digs Paid" text,
+  "Company Housing Days" text,
+  "Company Paid" text,
+  "Total Stayed" text,
+  "Daily Cost" text,
+  "Daily Buyout" text,
+  "Daily Housing Buyout" text,
+  "Weekly Buyout" text,
+  "Other Stay" text,
+  "Total Spent" text,
+  "Weeks" text,
+  "Total Buyout" text, -- Total buyout for the week with housing and per diem
+  "Housing Buyout" text,
+  "Housing Savings" text,
+  "Order" text,
+  "Year" text
+)

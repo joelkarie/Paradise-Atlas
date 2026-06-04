@@ -40,3 +40,9 @@
 - excel sheet containing housing costs for 2026 & 20205 created saved in Mac::/Documents/Rafiki
 - capitol_completion_view added to views
 - next step: correct 'Original Stop Number', research data visualization (DBeaver?)
+
+## Current State (June 4)
+
+- Updated visit csv with all stop dates.
+- Added tour housing calculation csv and table.
+- next step: create tour housing view. add all stops to visit csv (this will take some time)
