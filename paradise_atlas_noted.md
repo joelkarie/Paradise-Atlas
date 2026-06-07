@@ -46,3 +46,9 @@
 - Updated visit csv with all stop dates.
 - Added tour housing calculation csv and table.
 - next step: create tour housing view. add all stops to visit csv (this will take some time)
+
+## Current State (June 6)
+
+- Add additional housing calculations
+_ Add route handlers
+- next step: Patagonia table, 
