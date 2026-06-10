@@ -5,6 +5,7 @@ TRUNCATE TABLE us_capitol_raw_import;
 \copy us_capitol_raw_import FROM 'flat_files/us_state_capitols_with_coordinates.csv' DELIMITER ',' CSV HEADER;
 \copy canadian_legislative_buildings_import FROM 'flat_files/canadian_legislative_buildings.csv' DELIMITER ',' CSV HEADER;
 \copy tour_housing_calculation_import from 'flat_files/tour_housing_calculations.csv' DELIMITER ',' CSV HEADER;
+\copy trip_import from 'flat_files/trip_dates.csv' DELIMITER ',' CSV HEADER;
 
 -- psql -d atlas_paradiso -f 003_import_paradise_voyage.sql
 
@@ -253,3 +254,12 @@ SELECT
 FROM tour_housing_calculation_import th
 JOIN location l on l.name = th."City" AND l.state_province = th."State/Province"
 JOIN visit v ON v.location_id = l.id;
+
+INSERT INTO trip (name, start_date, end_date, description)
+SELECT
+    "Trip Name",
+    NULLIF(NULLIF(NULLIF("Start Date", '-'), '~'), '')::date,
+    NULLIF(NULLIF(NULLIF("Finish Date", '-'), '~'), '')::date,
+    NULLIF(NULLIF(NULLIF("Order", '-'), '~'), '')::integer
+FROM trip_import;
+-- ON CONFLICT (name, start_date, end_date) DO NOTHING;
