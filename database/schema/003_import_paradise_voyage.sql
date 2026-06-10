@@ -184,6 +184,7 @@ JOIN LATERAL (
 
 INSERT INTO visit (
     date,
+    visit_number,
     visit_order,
     original_stop_number,
     location_id, 
@@ -194,6 +195,7 @@ INSERT INTO visit (
 )
 SELECT
     NULLIF(NULLIF(NULLIF(r."Visit Date", '-'), '~'), '')::date,
+    NULLIF(NULLIF(NULLIF(r."Visit Number", '-'), '~'), '')::integer,
     NULLIF(NULLIF(NULLIF(r."Visit Order", '-'),'~'), '')::integer,
     NULLIF(NULLIF(NULLIF(r."Original Stop Number", '-'), '~'), '')::integer,
     l.id,

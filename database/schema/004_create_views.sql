@@ -25,6 +25,12 @@ FROM visit v
 JOIN location l on l.id = v.location_id
 ORDER BY v.visit_order ASC;
 
+CREATE VIEW journey_view AS
+SELECT v.visit_number AS "Visit Number", l.name AS "Location", l.state_province AS "State/Province", v.date AS "Date", l.latitude AS "Latitude", l.longitude AS "Longitude"
+FROM visit v 
+JOIN location l on l.id = v.location_id
+ORDER BY v.date ASC;
+
 CREATE VIEW theatre_view AS
 SELECT t.name AS "Venue", l.name AS "City", l.state_province AS "State/Province", v.date AS "Date", l.latitude AS "Latitude", l.longitude AS "Longitude"
 FROM visit v

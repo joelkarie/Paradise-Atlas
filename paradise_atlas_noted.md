@@ -50,5 +50,13 @@
 ## Current State (June 6)
 
 - Add additional housing calculations
-_ Add route handlers
-- next step: Patagonia table, 
+- Add route handlers
+- next step: Patagonia table.
+
+## Current State (June 6)
+
+- Add updated visit information csv
+- Move csv's into a dedicated folder
+- Add updated csv data to tables
+- add journey_view 
+
