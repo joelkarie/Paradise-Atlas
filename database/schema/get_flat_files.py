@@ -36,3 +36,8 @@ trip_dates_url = 'https://docs.google.com/spreadsheets/d/1Ws02OpUDF6pkYNBhZ6drc0
 file_path = './flat_files/trip_dates.csv'
 urlretrieve(trip_dates_url, file_path)
 print('\nDownloaded trip_dates to: ' + file_path)
+
+patagonia_url = 'https://docs.google.com/spreadsheets/d/176hkB3rx-bl4Lx2OD1bMPDXBW49-_BGQDtJWbYtE7II/export?format=csv'
+file_path = './flat_files/patagonia_visit_data.csv'
+urlretrieve(patagonia_url, file_path)
+print('\nDownloaded patagonia_visit_data to: ' + file_path)

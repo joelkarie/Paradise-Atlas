@@ -1,0 +1,40 @@
+name,city,state_province,country,address,postal_code,latitude,longitude,visited
+Patagonia San Francisco,San Francisco,CA,USA,"770 North Point, San Francisco, CA",94109,37.8059263,-122.4199197,TRUE
+Patagonia Santa Cruz Outlet,Santa Cruz,CA,USA,"415 River St #C, Santa Cruz, CA",95060,36.98159036,-122.0296546,TRUE
+Patagonia Santa Monica,Santa Monica,CA,USA,"1345 3rd St, Santa Monica, CA",90401,34.0161581,-118.496461,TRUE
+Patagonia Ventura,Ventura,CA,USA,"235 W Santa Clara St, Ventura, CA",93001,34.2798679,-119.3041132,FALSE
+Patagonia Pasadena,Pasadena,CA,USA,"47 N Fair Oaks Ave, Pasadena, CA",91103,34.1466612,-118.150772,FALSE
+Patagonia Cardiff-by-the-Sea,Cardiff-by-the-Sea,CA,USA,"2185 San Elijo Ave, Cardiff-by-the-Sea, CA",92007,33.0197568,-117.2815252,FALSE
+Patagonia Palo Alto,Palo Alto,CA,USA,"525 Alma St, Palo Alto, CA",94301,37.4431498,-122.1629901,TRUE
+Patagonia Boulder,Boulder,CO,USA,"1630 Pearl St, Boulder, CO",80302,40.0188127,-105.2741325,TRUE
+Patagonia Denver,Denver,CO,USA,"2600 Walnut St, Denver, CO",80205,39.759204,-104.9857375,TRUE
+Patagonia Telluride,Telluride,CO,USA,"200 W Colorado Ave, Telluride, CO",81435,37.9373018,-107.8119457,TRUE
+Patagonia Washington DC,Washington,DC,USA,"3104 M St NW, Washington, DC",20007,38.9050004,-77.0614023,TRUE
+Patagonia Atlanta Buckhead,Atlanta,GA,USA,"34 E Andrews Dr NW, Atlanta, GA",30305,33.8432644,-84.3801632,TRUE
+Patagonia Atlanta Beltline,Atlanta,GA,USA,"124 Krog St NE, Atlanta, GA",30307,33.7573126,-84.3646454,TRUE
+Patagonia Haleiwa Surf Shop,Haleiwa,HI,USA,"66-250 Kamehameha Hwy, Haleiwa, HI",96712,21.586152,-158.1028893,TRUE
+Patagonia Haleiwa,Haleiwa,HI,USA,"66-252 Kamehameha Hwy, Haleiwa, HI",96712,21.58646177,-158.103116,TRUE
+Patagonia Honolulu,Honolulu,HI,USA,"535 Ward Ave, Honolulu, HI",96814,21.2979953,-157.8535373,TRUE
+Patagonia Chicago Magnificent Mile,Chicago,IL,USA,"48 E Walton St, Chicago, IL",60611,41.9001076,-87.6266107,TRUE
+Patagonia Chicago Fulton Market,Chicago,IL,USA,"1115 W Fulton Market, Chicago, IL",60607,41.8865352,-87.6554272,TRUE
+Patagonia Freeport Outlet,Freeport,ME,USA,"100 Main St, Freeport, ME",4032,43.8575347,-70.1024382,TRUE
+Patagonia Baltimore Outlet,Baltimore,MD,USA,"700 S Caroline St, Baltimore, MD",21231,39.283284,-76.596719,TRUE
+Patagonia Boston,Boston,MA,USA,"346 Newbury St, Boston, MA",2115,42.3481722,-71.0869717,TRUE
+Patagonia Cambridge,Cambridge,MA,USA,"39 Brattle St, Cambridge, MA",2138,42.3737519,-71.1211416,TRUE
+Patagonia St Paul,St Paul,MN,USA,"1648 Grand Ave, St Paul, MN",55105,44.9398194,-93.170154,TRUE
+Patagonia Dillon Outlet,Dillon,MT,USA,"16 S Idaho St, Dillon, MT",59725,45.216806,-112.6367416,TRUE
+Patagonia Reno Outlet,Reno,NV,USA,"130 S Center St, Reno, NV",89501,39.5158133,-119.8071501,TRUE
+Patagonia SoHo,New York,NY,USA,"61-63 Crosby St, New York, NY",10012,40.7255226,-73.9955979,TRUE
+Patagonia Upper West Side,New York,NY,USA,"426 Columbus Ave, New York, NY",10024,40.7830704,-73.9751188,TRUE
+Patagonia Brooklyn,Brooklyn,NY,USA,"70 N 6th St, Brooklyn, NY",11249,40.7190939,-73.9614983,TRUE
+Patagonia Charlotte,Charlotte,NC,USA,"101 W Worthington Ave Suite 180, Charlotte, NC",28203,35.2114003,-80.8600074,TRUE
+Patagonia Portland,Portland,OR,USA,"1106 W Burnside St, Portland, OR",97209,45.5228032,-122.682357,TRUE
+Patagonia Pittsburgh,Pittsburgh,PA,USA,"5509 Walnut St, Pittsburgh, PA",15232,40.451415,-79.93331,FALSE
+Patagonia Ardmore,Ardmore,PA,USA,"61 Anderson Ave, Ardmore, PA",19003,40.0093282,-75.2899551,FALSE
+Patagonia Nashville,Nashville,TN,USA,"601 Overton St, Nashville, TN",37203,36.152027,-86.782422,TRUE
+Patagonia Austin,Austin,TX,USA,"316 Congress Ave, Austin, TX",78701,30.2659971,-97.7440507,TRUE
+Patagonia Salt Lake City Outlet,Salt Lake City,UT,USA,"2292 S Highland Dr, Salt Lake City, UT",84106,40.7119263,-111.8551057,FALSE
+Patagonia Alexandria,Alexandria,VA,USA,"815½ King St, Alexandria, VA",22314,38.8055537,-77.04858,TRUE
+Patagonia Seattle,Seattle,WA,USA,"2100 1st Ave, Seattle, WA",98121,47.6121071,-122.3438932,TRUE
+Patagonia Vancouver,Vancouver,BC,Canada,"1994 W 4th Ave, Vancouver, BC",V6J 1M5,49.2678717,-123.1501228,TRUE
+Patagonia Toronto,Toronto,ON,Canada,"500 King St W, Toronto, ON",M5V 1L7,43.6452279,-79.3968824,TRUE

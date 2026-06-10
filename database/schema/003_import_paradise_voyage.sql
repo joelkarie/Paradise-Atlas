@@ -6,7 +6,7 @@ TRUNCATE TABLE us_capitol_raw_import;
 \copy canadian_legislative_buildings_import FROM 'flat_files/canadian_legislative_buildings.csv' DELIMITER ',' CSV HEADER;
 \copy tour_housing_calculation_import from 'flat_files/tour_housing_calculations.csv' DELIMITER ',' CSV HEADER;
 \copy trip_import from 'flat_files/trip_dates.csv' DELIMITER ',' CSV HEADER;
-
+\copy patagonia_store_visit_import from 'flat_files/patagonia_visit_data.csv' DELIMITER ',' CSV HEADER;
 -- psql -d atlas_paradiso -f 003_import_paradise_voyage.sql
 
 INSERT INTO location (
@@ -182,6 +182,29 @@ JOIN LATERAL (
       AND r."Capitol" = 'TRUE'
     LIMIT 1
 ) r ON TRUE;
+
+INSERT INTO patagonia_store_visit (
+    store_name,
+    city,
+    state_province,
+    country,
+    address,
+    postal_code,
+    latitude,
+    longitude,
+    visited
+)
+SELECT
+    "name",
+    "city",
+    "state_province",
+    "country",
+    "address",
+    "postal_code",
+    NULLIF(NULLIF("latitude", '-'), '')::numeric,
+    NULLIF(NULLIF("longitude", '-'), '')::numeric,
+    NULLIF(NULLIF("visited", '-'), '')::boolean
+FROM patagonia_store_visit_import;
 
 INSERT INTO visit (
     date,

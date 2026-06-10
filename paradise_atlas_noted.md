@@ -59,4 +59,7 @@
 - Move csv's into a dedicated folder
 - Add updated csv data to tables
 - add journey_view 
+- add trip data and tables
+- add patagonia data and tables
+
 
