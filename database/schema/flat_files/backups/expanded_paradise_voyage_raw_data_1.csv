@@ -306,6 +306,6 @@ Visit Number,Visit Order,City,State/Province,Country,Latitude,Longitude,Year Vis
 305,262,Newport,Rhode Island,USA,41.4899827,-71.3137707,2026,2026-05-22,City,Newport,FALSE,-,1,FALSE,,,,,FALSE,Visit,,,,,,,,TRUE,,,,,,
 306,263,Cambridge,Massachusetts,USA,42.3656347,-71.1040018,2026,2026-05-26,City,Cambridge,FALSE,-,1,FALSE,,,,,FALSE,Visit,,,,,,,,FALSE,,,,,,
 307,264,New Bedford,Massachusetts,USA,41.6362152,-70.934205,2026,2026-05-27,City,New Bedford,FALSE,-,1,FALSE,,,,,FALSE,Visit,,,,,,,,TRUE,,,,,,
-308,265,Provincetown,Massachusetts,USA,42.04754023,-70.19011366,2026,2026-06-01,City,Provincetown,FALSE,-,1,FALSE,,,,,FALSE,Other,The Queen Vic,The Queen Vic,,-70.19011366,,,,,,,,,,
+308,265,Provincetown,Rhode Island,USA,,,2026,2026-06-01,City,Provincetown,FALSE,,,,,,,,,,,,,,,,,,,,,,,
 309,266,South Orange,New Jersey,USA,,,2026,2026-06-07,City,South Orange,FALSE,,,,,,,,,,,,,,,,,,,,,,,
 310,,Cincinnati,Ohio,USA,,,2026,2026-06-08,,Cincinnati,FALSE,,,,,,,,,,,,,,,,,,,,,,,
