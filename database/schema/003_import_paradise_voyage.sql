@@ -1,10 +1,10 @@
 TRUNCATE TABLE paradise_voyage_raw_import;
 TRUNCATE TABLE us_capitol_raw_import;
 
-\copy paradise_voyage_raw_import FROM 'paradise_voyage_raw_data.csv' DELIMITER ',' CSV HEADER;
-\copy us_capitol_raw_import FROM 'us_state_capitols_with_coordinates.csv' DELIMITER ',' CSV HEADER;
-\copy canadian_legislative_buildings_import FROM 'canadian_legislative_buildings.csv' DELIMITER ',' CSV HEADER;
-\copy tour_housing_calculation_import from 'tour_housing_calculations.csv' DELIMITER ',' CSV HEADER;
+\copy paradise_voyage_raw_import FROM 'flat_files/expanded_paradise_voyage_raw_data.csv' DELIMITER ',' CSV HEADER;
+\copy us_capitol_raw_import FROM 'flat_files/us_state_capitols_with_coordinates.csv' DELIMITER ',' CSV HEADER;
+\copy canadian_legislative_buildings_import FROM 'flat_files/canadian_legislative_buildings.csv' DELIMITER ',' CSV HEADER;
+\copy tour_housing_calculation_import from 'flat_files/tour_housing_calculations.csv' DELIMITER ',' CSV HEADER;
 
 -- psql -d atlas_paradiso -f 003_import_paradise_voyage.sql
 
@@ -37,7 +37,7 @@ ON CONFLICT (name, state_province, country)
 DO NOTHING;
 
 INSERT INTO location_rating (location_id, joel_could_live, michael_could_live, highlight)
-SELECT
+SELECT DISTINCT ON (l.id)
     l.id,
     NULLIF(NULLIF(r."Joel Could Live", '-'), '')::boolean,
     NULLIF(NULLIF(r."Michael Could Live", '-'), '')::boolean,
@@ -49,7 +49,7 @@ JOIN location l
    AND l.country = r."Country";
 
 INSERT INTO city_details (location_id, population, is_city_capital)
-SELECT
+SELECT DISTINCT ON (l.id)
     l.id,
     NULLIF(
     REPLACE(NULLIF(NULLIF(r."Population", '-'), ''), ',', ''),'')::integer,
@@ -97,7 +97,7 @@ JOIN hotel_holding_company hc
     ON hc.name = r."Hotel Holding";
 
 INSERT INTO hotel_details (digs_id, hotel_brand_id)
-SELECT
+SELECT DISTINCT ON (d.id)
     d.id,
     hb.id
 FROM paradise_voyage_raw_import r 
@@ -195,11 +195,11 @@ INSERT INTO visit (
 SELECT
     NULLIF(NULLIF(NULLIF(r."Visit Date", '-'), '~'), '')::date,
     NULLIF(NULLIF(NULLIF(r."Visit Order", '-'),'~'), '')::integer,
-    NULLIF(NULLIF(NULLIF(r."Original  Stop Number", '-'), '~'), '')::integer,
+    NULLIF(NULLIF(NULLIF(r."Original Stop Number", '-'), '~'), '')::integer,
     l.id,
     t.id,
     d.id,
-    NULLIF(NULLIF(NULLIF(r."Housing Dist", '-'), '~'), '')::float,
+    NULLIF(TRIM(NULLIF(NULLIF(r."Housing Dist", '-'), '~')), '')::float,
     cap.id
 FROM paradise_voyage_raw_import r
 JOIN location l

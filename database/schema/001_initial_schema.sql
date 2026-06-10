@@ -196,6 +196,7 @@ ALTER TABLE "housing_calculations" ADD FOREIGN KEY ("digs_id") REFERENCES "digs"
 DROP TABLE IF EXISTS paradise_voyage_raw_import;
 
 CREATE TABLE paradise_voyage_raw_import (
+    "Visit Number" text,
     "Visit Order" text,
     "City" text,
     "State/Province" text,
@@ -226,7 +227,7 @@ CREATE TABLE paradise_voyage_raw_import (
     "Joel Could Live" text,
     "Michael Could Live" text,
     "Highlight" text,
-    "Original  Stop Number" text,
+    "Original Stop Number" text,
     "AKA" text,
     "Manhole" text,
     "Population" text
