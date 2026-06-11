@@ -1,123 +1,19 @@
 from fastapi import FastAPI
-from sqlalchemy import create_engine, text
-
-# Start Uvicorn
-# uvicorn app.main:app --reload
-# uvicorn main:app --reload
-app = FastAPI()
-
-
-@app.get("/")
-def root():
-    return {"message": "Atlas Paradiso API"}
-
-
-DATABASE_URL = "postgresql+psycopg://joelkarie:@localhost/atlas_paradiso"
-
-engine = create_engine(DATABASE_URL)
-
-# @app.get("/test-db")
-# def test_db():
-
-#     with engine.connect() as conn:
-
-#         result = conn.execute(
-#             text("SELECT COUNT(*) FROM location")
-#         )
-
-#         count = result.scalar()
-
-#     return {
-#         "locations": count
-#     }
-
-
-@app.get("/locations")
-def locations():
-
-    with engine.connect() as conn:
-
-        rows = conn.execute(text("""
-            SELECT *
-            FROM location l
-            ORDER BY l.name
-        """))
-
-        return [dict(row._mapping) for row in rows]
-
-
-@app.get("/visit_order")
-def visit_order():
-
-    with engine.connect() as conn:
-
-        rows = conn.execute(text("""
-            SELECT *
-            FROM visit_order_view
-        """))
-
-        return [dict(row._mapping) for row in rows]
-
-
-@app.get("/housing_distances")
-def housing_distances():
-
-    with engine.connect() as conn:
-
-        rows = conn.execute(text("""
-            SELECT *
-            FROM housing_distance_view hd
-        """))
-
-        return [dict(row._mapping) for row in rows]
-
-@app.get("/capitols")
-def capitols():
-
-    with engine.connect() as conn:
-
-        rows = conn.execute(text("""
-            SELECT * 
-            FROM capitol_visit_order_view
-        """))
-    
-    return [dict(row._mapping) for row in rows]
-
-# @app.get("/joel_could_live")
-# def joel_could_live():
-
-#     with engine.connect() as conn:
-    
-#         rows = conn.execute(text("""
-#         SELECT * 
-#         FROM joel_could_live_view 
-#         """))
-    
-#     return [dict(row._mapping) for row in rows]
-
-
-# @app.get("/theatres")
-# def theatres():
-
-#     with engine.connect() as conn:
-
-#         rows = conn.execute(text("""
-#             SELECT *
-#             FROM theatre t
-#             ORDER BY t.name
-#         """))
-
-#         return [dict(row._mapping) for row in rows]
-
-# from app.routers import theatres
-# from app.routers.theatres_router import theatres
-# app = FastAPI()
-
-# app.include_router(theatres.router)
 
 from app.routers.theatres_router import router as theatre_router
 from app.routers.joel_could_live_router import router as joel_could_live_router
+from app.routers.capitols_router import router as capitols_router
+from app.routers.housing_distances_router import router as housing_distances_router
+from app.routers.visit_order import router as visit_order_router
+from app.routers.locations_router import router as locations_router
+
+app = FastAPI()
 
 app.include_router(theatre_router)
 app.include_router(joel_could_live_router)
+app.include_router(capitols_router)
+app.include_router(housing_distances_router)
+app.include_router(visit_order_router)
+app.include_router(locations_router)
+
 print("End of script")
