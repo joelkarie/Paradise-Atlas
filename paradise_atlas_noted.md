@@ -62,5 +62,6 @@
 - Add trip data and tables
 - Add patagonia data and tables
 - Add routers and services
+- next step: Build maps with routers/services
 
 
