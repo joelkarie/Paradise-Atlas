@@ -3,6 +3,7 @@ from sqlalchemy import create_engine, text
 
 # Start Uvicorn
 # uvicorn app.main:app --reload
+# uvicorn main:app --reload
 app = FastAPI()
 
 
@@ -82,31 +83,41 @@ def capitols():
     
     return [dict(row._mapping) for row in rows]
 
-@app.get("/joel_could_live")
-def joel_could_live():
+# @app.get("/joel_could_live")
+# def joel_could_live():
 
-    with engine.connect() as conn:
+#     with engine.connect() as conn:
     
-        rows = conn.execute(text("""
-        SELECT * 
-        FROM joel_could_live_view 
-        """))
+#         rows = conn.execute(text("""
+#         SELECT * 
+#         FROM joel_could_live_view 
+#         """))
     
-    return [dict(row._mapping) for row in rows]
+#     return [dict(row._mapping) for row in rows]
 
 
-@app.get("/theatres")
-def theatres():
+# @app.get("/theatres")
+# def theatres():
 
-    with engine.connect() as conn:
+#     with engine.connect() as conn:
 
-        rows = conn.execute(text("""
-            SELECT *
-            FROM theatre t
-            ORDER BY t.name
-        """))
+#         rows = conn.execute(text("""
+#             SELECT *
+#             FROM theatre t
+#             ORDER BY t.name
+#         """))
 
-        return [dict(row._mapping) for row in rows]
+#         return [dict(row._mapping) for row in rows]
 
+# from app.routers import theatres
+# from app.routers.theatres_router import theatres
+# app = FastAPI()
 
+# app.include_router(theatres.router)
+
+from app.routers.theatres_router import router as theatre_router
+from app.routers.joel_could_live_router import router as joel_could_live_router
+
+app.include_router(theatre_router)
+app.include_router(joel_could_live_router)
 print("End of script")
