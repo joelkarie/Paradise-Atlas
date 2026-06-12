@@ -7,7 +7,15 @@ from app.routers.housing_distances_router import router as housing_distances_rou
 from app.routers.visit_order import router as visit_order_router
 from app.routers.locations_router import router as locations_router
 
+# # Start Uvicorn
+# # uvicorn app.main:app --reload
+
 app = FastAPI()
+
+@app.get("/")
+def root():
+    return {"message": "Atlas Paradiso API"}
+
 
 app.include_router(theatre_router)
 app.include_router(joel_could_live_router)
