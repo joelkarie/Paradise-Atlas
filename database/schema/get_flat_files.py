@@ -8,7 +8,7 @@ urlretrieve(old_voyage_url, file_path)
 print('\nDownloaded paradise_voyage_raw_data to: ' + file_path)
 
 # The expanded_paradise_voyage_raw_data file includes the same data as paradise_voyage_raw_data, but with additional columns for visit number and housing distance. These columns were added after the initial import, so they are not included in the original file.
-updated_voyage_url = 'https://docs.google.com/spreadsheets/d/1uRJVpvtj_NJBfJsMan-ihiUcVEqTWKW91parzWwmynk/export?format=csv'
+updated_voyage_url = 'https://docs.google.com/spreadsheets/d/1RWUVlGamiYoALi72beJZuxogaPo3lccTQ9-8LRI9CWg/export?format=csv'
 file_path = './flat_files/expanded_paradise_voyage_raw_data.csv'
 urlretrieve(updated_voyage_url, file_path)
 print('\nDownloaded expanded_paradise_voyage_raw_data to: ' + file_path)
