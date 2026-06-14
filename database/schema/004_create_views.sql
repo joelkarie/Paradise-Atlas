@@ -39,7 +39,7 @@ JOIN location l ON l.id = v.location_id
 ORDER BY v.visit_order ASC;
 
 CREATE VIEW joel_could_live_view AS
-SELECT l.name AS "City", l.state_province AS "State/Province", l.country AS "Country"
+SELECT l.name AS "City", l.state_province AS "State/Province", l.country AS "Country",l.latitude AS "Latitude", l.longitude AS "Longitude"
 FROM location l 
 JOIN location_rating lr ON lr.location_id = l.id
 WHERE lr.joel_could_live = True
