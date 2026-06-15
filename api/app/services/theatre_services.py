@@ -8,7 +8,7 @@ def get_theatres():
 
         rows = conn.execute(text("""
             SELECT *
-            FROM theatre t
+            FROM theatre_view t
             ORDER BY t.name
         """))
 

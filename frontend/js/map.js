@@ -25,7 +25,8 @@ fetch("http://localhost:8000/theatres")
             .addTo(map)
             .bindPopup(`
                 <b>${theatre.name}</b><br>
-                ${theatre.address}
+                ${theatre.city}, ${theatre.state_province}
+                ${theatre.date ? `<br><i>Visited on ${theatre.date}</i>` : ''}
             `);
 
         });

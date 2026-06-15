@@ -32,7 +32,7 @@ JOIN location l on l.id = v.location_id
 ORDER BY v.date ASC;
 
 CREATE VIEW theatre_view AS
-SELECT t.name AS "Venue", l.name AS "City", l.state_province AS "State/Province", v.date AS "Date", l.latitude AS "Latitude", l.longitude AS "Longitude"
+SELECT t.name AS name, l.name AS city, l.state_province AS state_province, v.date AS date, l.latitude AS latitude, l.longitude AS longitude
 FROM visit v
 JOIN theatre t ON t.id = v.theatre_id
 JOIN location l ON l.id = v.location_id
