@@ -6,7 +6,7 @@ from app.routers.capitols_router import router as capitols_router
 from app.routers.housing_distances_router import router as housing_distances_router
 from app.routers.visit_order import router as visit_order_router
 from app.routers.locations_router import router as locations_router
-
+from fastapi.middleware.cors import CORSMiddleware
 # # Start Uvicorn
 # # uvicorn app.main:app --reload
 
@@ -16,6 +16,12 @@ app = FastAPI()
 def root():
     return {"message": "Atlas Paradiso API"}
 
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 app.include_router(theatre_router)
 app.include_router(joel_could_live_router)

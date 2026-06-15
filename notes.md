@@ -105,3 +105,26 @@ Paradise-Atlas/
 ├── requirements.txt
 ├── README.md
 └── .gitignore
+
+Paradise-Atlas/
+│
+├── api/
+│   ├── main.py
+│   └── app/
+│       ├── routers/
+│       ├── services/
+│       └── database.py
+│
+├── database/
+│   └── schema/
+│
+├── maps/
+│   ├── generate_theatre_map.py
+│   └── output/
+│
+└── frontend/
+    ├── index.html
+    ├── css/
+    │   └── style.css
+    └── js/
+        └── map.js
