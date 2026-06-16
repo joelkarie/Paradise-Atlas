@@ -5,7 +5,7 @@ JOIN location l ON l.id = v.location_id
 LEFT JOIN theatre t ON t.id = v.theatre_id;
 
 CREATE VIEW housing_distance_view AS
-SELECT l.name AS "Location Name", t.name AS "Venue", ROUND(v.housing_distance, 2) AS "Distance To Housing"
+SELECT l.name AS location_name, t.name AS theatre_name, ROUND(v.housing_distance, 2) AS housing_distance
 FROM visit v
 JOIN location l ON l.id = v.location_id
 JOIN theatre t ON t.id = v.theatre_id
@@ -13,20 +13,20 @@ WHERE v.housing_distance IS NOT NULL
 ORDER BY v.housing_distance DESC;
 
 CREATE VIEW capitol_completion_view AS
-SELECT l.name AS "Capital", cap.year_completed AS "Completion", v.visit_order AS "Visit Num" FROM visit v
+SELECT l.name AS capitol_name, cap.year_completed AS year_completed, v.visit_order AS visit_order FROM visit v
 JOIN location l on l.id = v.location_id
 JOIN capitol cap ON cap.id = v.capitol_id
 WHERE v.capitol_id IS NOT NULL
 ORDER BY cap.year_completed ASC;
 
 CREATE VIEW visit_order_view AS
-SELECT v.visit_order AS "Visit Number", l.name AS "Location", l.state_province AS "State/Province", v.date AS "Date", l.latitude AS "Latitude", l.longitude AS "Longitude"
+SELECT v.visit_order AS visit_number, l.name AS location_name, l.state_province AS state_province, v.date AS date, l.latitude AS latitude, l.longitude AS longitude
 FROM visit v 
 JOIN location l on l.id = v.location_id
 ORDER BY v.visit_order ASC;
 
 CREATE VIEW journey_view AS
-SELECT v.visit_number AS "Visit Number", l.name AS "Location", l.state_province AS "State/Province", v.date AS "Date", l.latitude AS "Latitude", l.longitude AS "Longitude"
+SELECT v.visit_number AS visit_number, l.name AS location_name, l.state_province AS state_province, v.date AS date, l.latitude AS latitude, l.longitude AS longitude
 FROM visit v 
 JOIN location l on l.id = v.location_id
 ORDER BY v.date ASC;
@@ -39,14 +39,14 @@ JOIN location l ON l.id = v.location_id
 ORDER BY v.visit_order ASC;
 
 CREATE VIEW joel_could_live_view AS
-SELECT l.name AS "City", l.state_province AS "State/Province", l.country AS "Country",l.latitude AS "Latitude", l.longitude AS "Longitude"
+SELECT l.name AS city, l.state_province AS state_province, l.country AS country, l.latitude AS latitude, l.longitude AS longitude
 FROM location l 
 JOIN location_rating lr ON lr.location_id = l.id
 WHERE lr.joel_could_live = True
 ORDER BY l.name ASC;
 
 CREATE VIEW capitol_visit_order_view AS
-SELECT l.name as "City", l.state_province as "State?Province", l.latitude AS "Latitude", l.longitude AS "Longitude"
+SELECT l.name as city, l.state_province as state_province, l.latitude AS latitude, l.longitude AS longitude
 FROM visit v
 JOIN location l on l.id = v.location_id
 JOIN capitol cap ON cap.id = v.capitol_id

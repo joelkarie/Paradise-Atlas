@@ -11,6 +11,7 @@ L.tileLayer(
     }
 ).addTo(map);
 
+const theatreLayer = L.layerGroup();
 
 fetch("http://localhost:8000/theatres")
     .then(response => response.json())
@@ -22,7 +23,7 @@ fetch("http://localhost:8000/theatres")
                 theatre.latitude,
                 theatre.longitude
             ])
-            .addTo(map)
+            .addTo(theatreLayer)
             .bindPopup(`
                 <b>${theatre.name}</b><br>
                 ${theatre.city}, ${theatre.state_province}
@@ -30,5 +31,11 @@ fetch("http://localhost:8000/theatres")
             `);
 
         });
+        // theatreLayer.addTo(map);
+    
+    const overlays = {
+        "Theatres": theatreLayer
+    };
+    L.control.layers(overlays).addTo(map);
 
     });
