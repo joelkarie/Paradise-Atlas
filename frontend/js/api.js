@@ -1,0 +1,22 @@
+const API_URL = "http://localhost:8000";
+
+
+export async function getCapitols() {
+    const response = await fetch(`${API_URL}/capitols`);
+    return await response.json();
+}
+
+export async function getTheatres() {
+    const response = await fetch(`${API_URL}/theatres`);
+    return await response.json();
+}
+
+export async function getJoelCouldLive() {
+    const response = await fetch(`${API_URL}/joel-could-live`);
+    return await response.json();
+}
+
+export async function getVisitOrder() {
+    const response = await fetch(`${API_URL}/visit-order`);
+    return await response.json();
+}
