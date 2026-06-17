@@ -37,6 +37,7 @@ file_path = './flat_files/trip_dates.csv'
 urlretrieve(trip_dates_url, file_path)
 print('\nDownloaded trip_dates to: ' + file_path)
 
+# The patagonia_visit_data file includes the names, locations, and coordinates of the places visited in Patagonia, which are used to populate the location table and calculate housing distances for visits to Patagonia.
 patagonia_url = 'https://docs.google.com/spreadsheets/d/176hkB3rx-bl4Lx2OD1bMPDXBW49-_BGQDtJWbYtE7II/export?format=csv'
 file_path = './flat_files/patagonia_visit_data.csv'
 urlretrieve(patagonia_url, file_path)

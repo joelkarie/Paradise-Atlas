@@ -20,3 +20,8 @@ export async function getVisitOrder() {
     const response = await fetch(`${API_URL}/visit-order`);
     return await response.json();
 }
+
+export async function getPatagoniaStores() {
+    const response = await fetch(`${API_URL}/patagonia`);
+    return await response.json();
+}

@@ -51,3 +51,7 @@ FROM visit v
 JOIN location l on l.id = v.location_id
 JOIN capitol cap ON cap.id = v.capitol_id
 ORDER BY v.date ASC;
+
+CREATE VIEW patagonia_visit_view AS
+SELECT psv.store_name AS store_name, psv.city AS city, psv.state_province AS state_province, psv.country AS country, psv.latitude AS latitude, psv.longitude AS longitude, psv.visited AS visited
+FROM patagonia_store_visit psv
