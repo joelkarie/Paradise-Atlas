@@ -12,7 +12,7 @@ export function createVisitOrderLayer(locations) {
                     ">
             `,
             className: "",
-            iconAnchor: [38, 43]
+            iconAnchor: [15,25]
         });
         L.marker([
             location.latitude,
