@@ -1,14 +1,22 @@
 export function createTheatreLayer(theatres) {
     const theatreLayer = L.layerGroup();
-    L.marker([39.5, -98.35]).addTo(theatreLayer).bindPopup("Theatres New");
-
 
     theatres.forEach(theatre => {
 
+        const customMarker = L.divIcon({
+            html: `
+                <img src="assets/lk_logo.png"
+                    style="
+                        width:70px;
+                        filter: drop-shadow(2px 4px 3px rgba(0,0,0,0.4));
+                    ">
+            `,
+            className: "",
+            iconAnchor: [38, 43]
+        });
         L.marker([
             theatre.latitude,
-            theatre.longitude
-        ])
+            theatre.longitude], { icon: customMarker })
             .addTo(theatreLayer)
             .bindPopup(`
                 <b>${theatre.name}</b><br>
