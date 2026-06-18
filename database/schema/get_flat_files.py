@@ -42,3 +42,8 @@ patagonia_url = 'https://docs.google.com/spreadsheets/d/176hkB3rx-bl4Lx2OD1bMPDX
 file_path = './flat_files/patagonia_visit_data.csv'
 urlretrieve(patagonia_url, file_path)
 print('\nDownloaded patagonia_visit_data to: ' + file_path)
+
+quaker_meeting_houses_url = 'https://docs.google.com/spreadsheets/d/1-kFSMoJqrOZbNR61nNoQsu_cWf6zj8n2yxkZ3m-LR5s/export?format=csv'
+file_path = './flat_files/quaker_meeting_houses.csv'
+urlretrieve(quaker_meeting_houses_url, file_path)
+print('\nDownloaded quaker_meeting_houses to: ' + file_path)

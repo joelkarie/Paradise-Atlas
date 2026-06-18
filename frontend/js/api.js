@@ -25,3 +25,9 @@ export async function getPatagoniaStores() {
     const response = await fetch(`${API_URL}/patagonia`);
     return await response.json();
 }
+
+export async function getQuakerMeetings() {
+    const response = await fetch(`${API_URL}/quaker-meetings`);
+    return await response.json();
+
+}

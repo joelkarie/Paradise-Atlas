@@ -8,6 +8,7 @@ from app.routers.visit_order import router as visit_order_router
 from app.routers.locations_router import router as locations_router
 from fastapi.middleware.cors import CORSMiddleware
 from app.routers.patagonia_router import router as patagonia_router
+from app.routers.quaker_meetings_router import router as quaker_meetings_router
 
 # # Start Uvicorn
 # # uvicorn app.main:app --reload
@@ -32,5 +33,6 @@ app.include_router(housing_distances_router)
 app.include_router(visit_order_router)
 app.include_router(locations_router)
 app.include_router(patagonia_router)
+app.include_router(quaker_meetings_router)
 
 print("End of script")

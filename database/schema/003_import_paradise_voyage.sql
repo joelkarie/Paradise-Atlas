@@ -7,6 +7,7 @@ TRUNCATE TABLE us_capitol_raw_import;
 \copy tour_housing_calculation_import from 'flat_files/tour_housing_calculations.csv' DELIMITER ',' CSV HEADER;
 \copy trip_import from 'flat_files/trip_dates.csv' DELIMITER ',' CSV HEADER;
 \copy patagonia_store_visit_import from 'flat_files/patagonia_visit_data.csv' DELIMITER ',' CSV HEADER;
+\copy quaker_meeting_houses_import from 'flat_files/quaker_meeting_houses.csv' DELIMITER ',' CSV HEADER;
 -- psql -d atlas_paradiso -f 003_import_paradise_voyage.sql
 
 INSERT INTO location (
@@ -205,6 +206,25 @@ SELECT
     NULLIF(NULLIF("longitude", '-'), '')::numeric,
     NULLIF(NULLIF("visited", '-'), '')::boolean
 FROM patagonia_store_visit_import;
+
+INSERT INTO quaker_meeting_house (
+    name,
+    city,
+    state_province,
+    country,
+    address,
+    latitude,
+    longitude
+)
+SELECT
+    "Name",
+    "City",
+    "State",
+    "Country",
+    "Address",
+    NULLIF(NULLIF("Latitude", '-'), '')::numeric,
+    NULLIF(NULLIF("Longitude", '-'), '')::numeric
+FROM quaker_meeting_houses_import;
 
 INSERT INTO visit (
     date,

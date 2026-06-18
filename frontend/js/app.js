@@ -9,6 +9,9 @@ import { createVisitOrderLayer } from "./layers/visit_order.js";
 import { getVisitOrder } from "./api.js";
 import { createPatagoniaStoreLayer } from "./layers/patagonia_stores.js";
 import { getPatagoniaStores } from "./api.js";
+import { createQuakerMeetingsLayer } from "./layers/quaker_meetings.js";
+import { getQuakerMeetings } from "./api.js";
+
 
 
 async function main() {
@@ -21,6 +24,7 @@ async function main() {
     const joelCouldLiveLayer = createJoelCouldLiveLayer(await getJoelCouldLive());
     const patagoniaStoreLayer = createPatagoniaStoreLayer(await getPatagoniaStores());
     const vistitOrderLayer = createVisitOrderLayer(await getVisitOrder());
+    const quakerMeetingHouseLayer = createQuakerMeetingsLayer( await getQuakerMeetings());
 
     const overlays = {
         "Locations Visited": vistitOrderLayer,
@@ -28,6 +32,7 @@ async function main() {
         "Capitols Visited": capitolLayer,
         "Cities Joel Could Live In": joelCouldLiveLayer,
         "Patagonia Stores": patagoniaStoreLayer,
+        "Quaker Meetings Houses Attended": quakerMeetingHouseLayer
     };
 
     L.control.layers(overlays).addTo(map);

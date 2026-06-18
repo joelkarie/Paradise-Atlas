@@ -54,4 +54,8 @@ ORDER BY v.date ASC;
 
 CREATE VIEW patagonia_visit_view AS
 SELECT psv.store_name AS store_name, psv.city AS city, psv.state_province AS state_province, psv.country AS country, psv.latitude AS latitude, psv.longitude AS longitude, psv.visited AS visited
-FROM patagonia_store_visit psv
+FROM patagonia_store_visit psv;
+
+CREATE VIEW quaker_meeting_house_view AS
+SELECT qmh.name AS name, qmh.city AS city, qmh.state_province AS state_province, qmh.latitude AS latitude, qmh.longitude AS longitude
+FROM quaker_meeting_house qmh;
