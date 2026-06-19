@@ -64,4 +64,9 @@
 - Add routers and services
 - next step: Build maps with routers/services
 
+## Current State (June 18)
 
+- Api Created
+- Maps are updating using Javascript
+- Maps have custom icons
+- next step: create journey data
