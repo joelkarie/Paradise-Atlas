@@ -46,7 +46,7 @@ WHERE lr.joel_could_live = True
 ORDER BY l.name ASC;
 
 CREATE VIEW capitol_visit_order_view AS
-SELECT l.name as city, l.state_province as state_province, l.latitude AS latitude, l.longitude AS longitude
+SELECT l.name as city, l.state_province as state_province, l.latitude AS latitude, l.longitude AS longitude, cap.fact AS fact, cap.architect AS architect, cap.architectural_style AS architectural_style, cap.year_completed AS year_completed
 FROM visit v
 JOIN location l on l.id = v.location_id
 JOIN capitol cap ON cap.id = v.capitol_id
