@@ -18,7 +18,7 @@ export function createQuakerMeetingsLayer(meetings) {
             meeting.longitude], { icon: customMarker })
             .addTo(meetingLayer)
             .bindPopup(`
-                <b>${meeting.naem}</b><br>
+                <b>${meeting.name}</b><br>
                 ${meeting.city}, ${meeting.state_province}
             `);
 

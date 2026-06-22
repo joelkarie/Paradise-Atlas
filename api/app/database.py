@@ -7,5 +7,7 @@ DATABASE_URL = os.getenv(
 )
 engine = create_engine(
     DATABASE_URL,
-    pool_pre_ping=True
+    pool_pre_ping=True,
+    pool_size=5,
+    max_overflow=10,
 )
