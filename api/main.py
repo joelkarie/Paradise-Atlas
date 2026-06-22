@@ -1,4 +1,7 @@
+from app.database import engine
 from fastapi import FastAPI
+from dotenv import load_dotenv
+load_dotenv()
 
 from app.routers.theatres_router import router as theatre_router
 from app.routers.joel_could_live_router import router as joel_could_live_router
@@ -35,4 +38,18 @@ app.include_router(locations_router)
 app.include_router(patagonia_router)
 app.include_router(quaker_meetings_router)
 
+@app.get("/db-info")
+def db_info():
+    conn = engine.connect()
+    result = conn.exec_driver_sql("SELECT inet_server_addr(), inet_server_port(), current_database();")
+    row = result.fetchone()
+    conn.close()
+
+    return {
+        "ip": row[0],
+        "port": row[1],
+        "database": row[2],
+    }
+
 print("End of script")
+
