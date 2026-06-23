@@ -1,7 +1,7 @@
 body {
     margin: 0;
     font-family: 'Playfair Display', serif;
-    background-color:#3b6f94;
+    background-color:#FCC3A4;
 }
 
 h1 {
@@ -30,7 +30,7 @@ h1 {
     justify-content: center;
     align-items: center;
     min-height: 25px;
-    background-color: #b5d6de;
+    background-color: #fbfdc8;
 }
 
 .flex-container-2 img {
