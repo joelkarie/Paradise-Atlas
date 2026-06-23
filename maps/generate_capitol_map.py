@@ -1,4 +1,4 @@
-from api.app.services.capitols_services import get_capitols
+from api.services.capitols_services import get_capitols
 import folium
 from maps.generate_visit_order_map import make_visit_order_map
 

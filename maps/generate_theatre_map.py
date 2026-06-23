@@ -1,4 +1,4 @@
-from api.app.services.theatre_services import get_theatres
+from api.services.theatre_services import get_theatres
 import folium
 from folium.plugins import BeautifyIcon
 from pathlib import Path

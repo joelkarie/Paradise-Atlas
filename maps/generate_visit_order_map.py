@@ -1,4 +1,4 @@
-from api.app.services.visit_order_services import get_visit_order
+from api.services.visit_order_services import get_visit_order
 import folium
 
 BROAD_SCOPE_MAP_LOCATION_ZOOM = ([38.664067, -78.767974], 4)

@@ -1,4 +1,4 @@
-from api.app.services.joel_could_live_services import get_joel_could_live
+from api.services.joel_could_live_services import get_joel_could_live
 import folium
 
 BROAD_SCOPE_MAP_LOCATION_ZOOM = ([38.664067, -78.767974], 4)
