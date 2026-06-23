@@ -1,4 +1,4 @@
-from app.database import engine
+from api.app.database import engine
 from fastapi import FastAPI
 from dotenv import load_dotenv
 load_dotenv()
@@ -50,6 +50,10 @@ def db_info():
         "port": row[1],
         "database": row[2],
     }
+
+@app.get("/health")
+def health():
+    return {"status": "ok"}
 
 print("End of script")
 
