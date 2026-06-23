@@ -1,6 +1,11 @@
 
 export function createMap() {
-    const map = L.map('map').setView(
+    const isMobile = window.innerWidth < 768;
+
+    const map = L.map('map', {
+        zoomControl: !isMobile
+    }); 
+    map.setView(
         [39.5, -98.35],
         4
     );
@@ -10,5 +15,8 @@ export function createMap() {
             attribution: '&copy; OpenStreetMap contributors'
         }
     ).addTo(map);
+    map.touchZoom.enable();
+    map.doubleClickZoom.enable();
+    map.scrollWheelZoom.disable();
     return map;
 }

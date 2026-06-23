@@ -20,6 +20,7 @@ export function createCapitolLayer(capitols) {
         ], {icon: customMarker})
             .addTo(capitolLayer)
             .bindPopup(`
+                <div class="map-popup">
                 <b>${capitol.state_province} Capitol</b><br>
                 ${capitol.city}, ${capitol.state_province}<br>
                 Year Completed: ${capitol.year_completed}<br>
@@ -28,6 +29,7 @@ export function createCapitolLayer(capitols) {
                 Fact: ${capitol.fact}
                 <img src="images/capitols/${capitol.state_province.toLowerCase().replace(/\s+/g, "_")}.webp" 
                 width="300">
+                </d>
             `);
 
     });
