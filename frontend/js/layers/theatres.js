@@ -1,3 +1,27 @@
+async function imageExists(url) {
+    const response = await fetch(url, { method: "HEAD" });
+    return response.ok;
+}
+
+async function createTheatrePopupContent(theatre) {
+    let html = `
+                <b>${theatre.name}</b><br>
+                ${theatre.city}, ${theatre.state_province}
+                ${theatre.date ? `<br><i>Visited on ${theatre.date}</i>` : ''}
+            `;
+
+    const imageUrl = `images/theatres/${theatre.city.toLowerCase().replaceAll(" ", "_")}_theatre.webp`;
+
+    if (await imageExists(imageUrl)) {
+        html += `
+                    <img src="${imageUrl}" 
+                        style="width:100%; max-width:400px;">
+                `;
+    }
+
+    return html;
+}
+
 export function createTheatreLayer(theatres) {
     const theatreLayer = L.layerGroup();
 
@@ -14,15 +38,16 @@ export function createTheatreLayer(theatres) {
             className: "",
             iconAnchor: [38, 43]
         });
-        L.marker([
+
+        const marker = L.marker([
             theatre.latitude,
             theatre.longitude], { icon: customMarker })
-            .addTo(theatreLayer)
-            .bindPopup(`
-                <b>${theatre.name}</b><br>
-                ${theatre.city}, ${theatre.state_province}
-                ${theatre.date ? `<br><i>Visited on ${theatre.date}</i>` : ''}
-            `);
+            .addTo(theatreLayer);
+
+        marker.on("click", async () => {
+            const content = await createTheatrePopupContent(theatre);
+            marker.bindPopup(content).openPopup();
+        });
 
     });
     return theatreLayer;

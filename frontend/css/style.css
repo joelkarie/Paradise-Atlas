@@ -13,6 +13,10 @@ h1 {
     height: 65vh;
 }
 
+.banner-line {
+    border: 2px solid #0cbdb7;
+}
+
 .flex-container {
     display: flex;
     justify-content: center;
