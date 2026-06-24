@@ -26,6 +26,8 @@ async function main() {
     const vistitOrderLayer = createVisitOrderLayer(await getVisitOrder());
     const quakerMeetingHouseLayer = createQuakerMeetingsLayer( await getQuakerMeetings());
 
+    vistitOrderLayer.addTo(map)
+
     const overlays = {
         "Locations Visited": vistitOrderLayer,
         "Theatres We Have Worked At": theatreLayer,
@@ -35,7 +37,7 @@ async function main() {
         "Quaker Meetings Houses Attended": quakerMeetingHouseLayer
     };
 
-    L.control.layers(overlays).addTo(map);
+    L.control.layers(null, overlays).addTo(map);
 
 }
 
