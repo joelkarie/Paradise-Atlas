@@ -11,13 +11,13 @@ export function createCapitolLayer(capitols) {
                     ">
             `,
             className: "",
-            iconAnchor: [15,30]
+            iconAnchor: [15, 30]
         });
 
         L.marker([
             capitol.latitude,
             capitol.longitude
-        ], {icon: customMarker})
+        ], { icon: customMarker })
             .addTo(capitolLayer)
             .bindPopup(`
                 <div class="map-popup">
@@ -27,8 +27,10 @@ export function createCapitolLayer(capitols) {
                 Architect: ${capitol.architect}<br>
                 Style: ${capitol.architectural_style}<br>
                 Fact: ${capitol.fact}
-                <img src="images/capitols/${capitol.state_province.toLowerCase().replace(/\s+/g, "_")}.webp" 
-                width="300">
+                <a href="images/capitols/${capitol.state_province.toLowerCase().replace(/\s+/g, "_")}.webp"  target="_blank">
+                     <img src="images/capitols/${capitol.state_province.toLowerCase().replace(/\s+/g, "_")}.webp" 
+                        style="width:100%; max-width:300px; cursor:pointer;">
+                 </a>
                 </d>
             `);
 

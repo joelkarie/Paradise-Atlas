@@ -14,8 +14,10 @@ async function createTheatrePopupContent(theatre) {
 
     if (await imageExists(imageUrl)) {
         html += `
-                    <img src="${imageUrl}" 
-                        style="width:100%; max-width:400px;">
+            <a href="${imageUrl}" target="_blank">
+                <img src="${imageUrl}" 
+                    style="width:100%; max-width:400px; cursor:pointer;">
+            </a>
                 `;
     }
 
