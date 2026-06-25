@@ -90,7 +90,7 @@ def update_location(location_id: str = Form(...), field: str = Form(...), could_
             SET %s = %s
             WHERE location_id = %s
         """,
-            (value, field, location_id),
+            (field, value, location_id),
         )
 
     return {"status": "ok"}
