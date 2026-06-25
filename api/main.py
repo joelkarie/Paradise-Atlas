@@ -1,3 +1,4 @@
+print("🔥 API MAIN FILE LOADED")
 from api.database import engine
 from fastapi import FastAPI, Form
 from fastapi.responses import FileResponse
