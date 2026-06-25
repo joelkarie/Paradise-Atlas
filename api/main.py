@@ -1,6 +1,8 @@
 from api.database import engine
 from fastapi import FastAPI, Form
+from fastapi.responses import FileResponse
 from dotenv import load_dotenv
+import os
 
 load_dotenv()
 
@@ -91,3 +93,7 @@ def update_location(location_id: str = Form(...), joel_could_live: str = Form(..
         )
 
     return {"status": "ok"}
+
+@app.get("/admin")
+def admin_page():
+    return FileResponse("frontend/joel_admin.html")
