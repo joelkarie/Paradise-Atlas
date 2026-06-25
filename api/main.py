@@ -79,7 +79,7 @@ def admin_locations():
     return get_location_ratings()
 
 
-@app.post("/locations/update")
+@app.post("/locations/update_could_live")
 def update_location(location_id: str = Form(...), joel_could_live: str = Form(...)):
     value = True if str(joel_could_live).lower() == "true" else False
 
@@ -95,8 +95,8 @@ def update_location(location_id: str = Form(...), joel_could_live: str = Form(..
 
     return {"status": "ok"}
 
-@app.get("/admin")
-def admin_page():
+@app.get("/joel_admin")
+def joel_admin_page():
     return FileResponse("frontend/joel_admin.html")
 
 @app.get("/ping")
