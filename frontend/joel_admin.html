@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <title>Joel Admin Locations</title>
@@ -8,7 +9,7 @@
     body {
       font-family: 'Playfair Display', serif;
       margin: 20px;
-      background-color:#FCC3A4;
+      background-color: #FCC3A4;
     }
 
     .location-card {
@@ -37,20 +38,22 @@
 </head>
 
 <body>
+  <div class="flex-container">
+    <img src="assets/paradise_pelican.png" alt="Atlas Paradiso Logo" class="logo" height="170px">
+  </div>
+  <h1>Joel Locations Admin</h1>
 
-<h1>Joel Locations Admin</h1>
+  <div id="locations"></div>
 
-<div id="locations"></div>
+  <script>
+    fetch("/admin/locations")
+      .then(r => r.json())
+      .then(data => {
+        document.getElementById("locations").innerHTML = data.map(loc => {
 
-<script>
-fetch("/admin/locations")
-  .then(r => r.json())
-  .then(data => {
-    document.getElementById("locations").innerHTML = data.map(loc => {
+          const label = `${loc.location}, ${loc.state}, ${loc.country}`;
 
-      const label = `${loc.location}, ${loc.state}, ${loc.country}`;
-
-      return `
+          return `
         <div class="location-card">
 
           <div class="location-title">${label}</div>
@@ -80,24 +83,25 @@ fetch("/admin/locations")
 
         </div>
       `;
-    }).join("");
-  });
+        }).join("");
+      });
 
-function updateLocation(location_id, value) {
-  const formData = new FormData();
-  formData.append("location_id", location_id);
-  formData.append("joel_could_live", value);
+    function updateLocation(location_id, value) {
+      const formData = new FormData();
+      formData.append("location_id", location_id);
+      formData.append("joel_could_live", value);
 
-  fetch("/locations/update", {
-    method: "POST",
-    body: formData
-  })
-  .then(r => r.json())
-  .then(res => {
-    console.log("updated:", res);
-  });
-}
-</script>
+      fetch("/locations/update", {
+        method: "POST",
+        body: formData
+      })
+        .then(r => r.json())
+        .then(res => {
+          console.log("updated:", res);
+        });
+    }
+  </script>
 
 </body>
+
 </html>
