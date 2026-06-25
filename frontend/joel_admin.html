@@ -43,7 +43,7 @@
 <div id="locations"></div>
 
 <script>
-fetch("http://127.0.0.1:8000/admin/locations")
+fetch("/admin/locations")
   .then(r => r.json())
   .then(data => {
     document.getElementById("locations").innerHTML = data.map(loc => {
@@ -88,7 +88,7 @@ function updateLocation(location_id, value) {
   formData.append("location_id", location_id);
   formData.append("joel_could_live", value);
 
-  fetch("http://127.0.0.1:8000/locations/update", {
+  fetch("/locations/update", {
     method: "POST",
     body: formData
   })
