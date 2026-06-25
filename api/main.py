@@ -16,6 +16,7 @@ from api.routers.locations_router import router as locations_router
 from fastapi.middleware.cors import CORSMiddleware
 from api.routers.patagonia_router import router as patagonia_router
 from api.routers.quaker_meetings_router import router as quaker_meetings_router
+from api.routers.michael_could_live_router import router as michael_could_live_router
 
 from api.services.locations_services import get_locations, get_location_ratings
 
@@ -98,6 +99,10 @@ def update_location(location_id: str = Form(...), field: str = Form(...), could_
 @app.get("/joel_admin")
 def joel_admin_page():
     return FileResponse("frontend/joel_admin.html")
+
+@app.get("/michael_admin")
+def michael_admin_page():
+    return FileResponse("frontend/michael_admin.html")
 
 @app.get("/ping")
 def ping():
