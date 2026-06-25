@@ -85,12 +85,12 @@ def update_location(location_id: str = Form(...), field: str = Form(...), could_
 
     with engine.begin() as conn:
         conn.exec_driver_sql(
-            """
+            f"""
             UPDATE location_rating
-            SET %s = %s
+            SET {field} = %s
             WHERE location_id = %s
         """,
-            (field, value, location_id),
+            (value, location_id),
         )
 
     return {"status": "ok"}
