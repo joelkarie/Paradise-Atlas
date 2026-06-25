@@ -1,6 +1,7 @@
 from api.database import engine
-from fastapi import FastAPI
+from fastapi import FastAPI, Form
 from dotenv import load_dotenv
+
 load_dotenv()
 
 from api.routers.theatres_router import router as theatre_router
@@ -13,14 +14,17 @@ from fastapi.middleware.cors import CORSMiddleware
 from api.routers.patagonia_router import router as patagonia_router
 from api.routers.quaker_meetings_router import router as quaker_meetings_router
 
-# # Start Uvicorn
+from api.services.locations_services import get_locations, get_location_ratings
+
 # # uvicorn app.main:app --reload
 
 app = FastAPI()
 
+
 @app.get("/")
 def root():
     return {"message": "Atlas Paradiso API"}
+
 
 app.add_middleware(
     CORSMiddleware,
@@ -30,7 +34,6 @@ app.add_middleware(
         "http://localhost:5173",
         "https://paradise-atlas.onrender.com",
         "https://paradise-atlas-knx4.onrender.com",
-
     ],
     allow_credentials=True,
     allow_methods=["*"],
@@ -46,10 +49,13 @@ app.include_router(locations_router)
 app.include_router(patagonia_router)
 app.include_router(quaker_meetings_router)
 
+
 @app.get("/db-info")
 def db_info():
     conn = engine.connect()
-    result = conn.exec_driver_sql("SELECT inet_server_addr(), inet_server_port(), current_database();")
+    result = conn.exec_driver_sql(
+        "SELECT inet_server_addr(), inet_server_port(), current_database();"
+    )
     row = result.fetchone()
     conn.close()
 
@@ -59,9 +65,29 @@ def db_info():
         "database": row[2],
     }
 
+
 @app.get("/health")
 def health():
     return {"status": "ok"}
 
-print("End of script")
 
+@app.get("/admin/locations")
+def admin_locations():
+    return get_location_ratings()
+
+
+@app.post("/locations/update")
+def update_location(location_id: str = Form(...), joel_could_live: str = Form(...)):
+    value = True if str(joel_could_live).lower() == "true" else False
+
+    with engine.begin() as conn:
+        conn.exec_driver_sql(
+            """
+            UPDATE location_rating
+            SET joel_could_live = %s
+            WHERE location_id = %s
+        """,
+            (value, location_id),
+        )
+
+    return {"status": "ok"}
