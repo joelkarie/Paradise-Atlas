@@ -46,6 +46,7 @@ app.add_middleware(
 
 app.include_router(theatre_router)
 app.include_router(joel_could_live_router)
+app.include_router(michael_could_live_router)
 app.include_router(capitols_router)
 app.include_router(housing_distances_router)
 app.include_router(visit_order_router)
