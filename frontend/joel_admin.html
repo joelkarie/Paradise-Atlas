@@ -89,7 +89,8 @@
     function updateLocation(location_id, value) {
       const formData = new FormData();
       formData.append("location_id", location_id);
-      formData.append("joel_could_live", value);
+      formData.append("field", "joel_could_live");
+      formData.append("could_live", value);
 
       fetch("/locations/update_could_live", {
         method: "POST",

@@ -80,17 +80,17 @@ def admin_locations():
 
 
 @app.post("/locations/update_could_live")
-def update_location(location_id: str = Form(...), joel_could_live: str = Form(...)):
-    value = True if str(joel_could_live).lower() == "true" else False
+def update_location(location_id: str = Form(...), field: str = Form(...), could_live: str = Form(...)):
+    value = True if str(could_live).lower() == "true" else False
 
     with engine.begin() as conn:
         conn.exec_driver_sql(
             """
             UPDATE location_rating
-            SET joel_could_live = %s
+            SET %s = %s
             WHERE location_id = %s
         """,
-            (value, location_id),
+            (value, field, location_id),
         )
 
     return {"status": "ok"}
