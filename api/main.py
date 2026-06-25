@@ -97,3 +97,7 @@ def update_location(location_id: str = Form(...), joel_could_live: str = Form(..
 @app.get("/admin")
 def admin_page():
     return FileResponse("frontend/joel_admin.html")
+
+@app.get("/ping")
+def ping():
+    return {"ok": True}
