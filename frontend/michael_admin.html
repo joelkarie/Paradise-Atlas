@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Michael Admin Locations</title>
+
+  <style>
+    body {
+      font-family: 'Playfair Display', serif;
+      margin: 20px;
+      background-color: #a4e4fc;
+    }
+
+    .location-card {
+      padding: 12px;
+      margin-bottom: 12px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+    }
+
+    .location-title {
+      font-size: 18px;
+      font-weight: bold;
+      margin-bottom: 6px;
+    }
+
+    .meta {
+      color: #666;
+      font-size: 14px;
+      margin-bottom: 8px;
+    }
+
+    label {
+      margin-right: 12px;
+    }
+  </style>
+</head>
+
+<body>
+  <div>
+    <img src="assets/paradise_pelican.png" alt="Atlas Paradiso Logo" class="logo" height="170px">
+  </div>
+  <h1>Michael Locations Admin</h1>
+
+  <div id="locations"></div>
+
+  <script>
+    fetch("/admin/locations")
+      .then(r => r.json())
+      .then(data => {
+        document.getElementById("locations").innerHTML = data.map(loc => {
+
+          const label = `${loc.location}, ${loc.state}, ${loc.country}`;
+
+          return `
+        <div class="location-card">
+
+          <div class="location-title">${label}</div>
+
+          <div class="meta">
+            Michael: ${loc.michael_could_live ? "Yes" : "No"} </br>
+            Joel: ${loc.joel_could_live ? "Yes" : "No"}
+            
+          </div>
+
+          <label>
+            <input type="radio"
+              name="loc_${loc.location}"
+              value="true"
+              ${loc.michael_could_live ? "checked" : ""}
+              onchange="updateLocation('${loc.location_id}', true)">
+            True
+          </label>
+
+          <label>
+            <input type="radio"
+              name="loc_${loc.location}"
+              value="false"
+              ${!loc.michael_could_live ? "checked" : ""}
+              onchange="updateLocation('${loc.location_id}', false)">
+            False
+          </label>
+
+        </div>
+      `;
+        }).join("");
+      });
+
+    function updateLocation(location_id, value) {
+      const formData = new FormData();
+      formData.append("location_id", location_id);
+      formData.append("field", "michael_could_live");
+      formData.append("could_live", value);
+
+      fetch("/locations/update_could_live", {
+        method: "POST",
+        body: formData
+      })
+        .then(r => r.json())
+        .then(res => {
+          console.log("updated:", res);
+        });
+    }
+  </script>
+
+</body>
+
+</html>
