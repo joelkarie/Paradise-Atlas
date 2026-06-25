@@ -16,6 +16,11 @@ export async function getJoelCouldLive() {
     return await response.json();
 }
 
+export async function getMichaelCouldLive() {
+    const response = await fetch(`${API_URL}/michael-could-live`);
+    return await response.json();
+}
+
 export async function getVisitOrder() {
     const response = await fetch(`${API_URL}/visit-order`);
     return await response.json();

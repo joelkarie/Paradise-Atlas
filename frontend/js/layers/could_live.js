@@ -1,5 +1,5 @@
-export function createJoelCouldLiveLayer(cities) {
-    const joelCouldLiveLayer = L.layerGroup();
+export function createCouldLiveLayer(cities) {
+    const CouldLiveLayer = L.layerGroup();
 
     cities.forEach(city => {
         const customMarker = L.divIcon({
@@ -16,12 +16,12 @@ export function createJoelCouldLiveLayer(cities) {
         L.marker([
             city.latitude,
             city.longitude], { icon: customMarker })
-            .addTo(joelCouldLiveLayer)
+            .addTo(CouldLiveLayer)
             .bindPopup(`
                 <b>${city.city}</b><br>
                 ${city.state_province}
             `);
 
     });
-    return joelCouldLiveLayer;
+    return CouldLiveLayer;
 }
