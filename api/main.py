@@ -45,7 +45,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-app.include_router(
+routers = [
     theatre_router,
     joel_could_live_router,
     michael_could_live_router,
@@ -56,7 +56,10 @@ app.include_router(
     patagonia_router,
     quaker_meetings_router,
     together_could_live_router,
-)
+]
+
+for router in routers:
+    app.include_router(router)
 
 app.mount("/static", StaticFiles(directory="frontend"), name="static")
 
