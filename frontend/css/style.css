@@ -51,3 +51,35 @@ h1 {
     height: auto;
     border-radius: 8px;
 }
+
+
+    .location-card {
+      padding: 12px;
+      margin-bottom: 12px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+    }
+
+    .location-title {
+      font-size: 18px;
+      font-weight: bold;
+      margin-bottom: 6px;
+    }
+
+    .subtitle {
+      font-size: 14px;
+      font-weight: bold;
+      margin-bottom: 6px;
+    }
+
+    .meta {
+      color: #666;
+      font-size: 14px;
+      margin-bottom: 8px;
+    }
+
+    .rating-row {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
