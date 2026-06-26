@@ -29,7 +29,7 @@
     .subtitle {
       font-size: 14px;
       font-weight: bold;
-      margin-bottom: 6px;   
+      margin-bottom: 6px;
     }
 
     .meta {
@@ -39,11 +39,11 @@
     }
 
     .rating-row {
-        display: flex;
-        align-items: center;
-        gap: 15px;
+      display: flex;
+      align-items: center;
+      gap: 15px;
     }
-    
+
     label {
       margin-right: 12px;
     }
@@ -91,12 +91,12 @@
                       onchange="updateLocation('${loc.location_id}', false)">
                   False
               </label>
-          </div>
-          <div class="subtitle">Could you live here?</div>
 
-          <div class="meta">
-            Joel: ${loc.joel_could_live ? "Yes" : "No"} </br>
-            Michael: ${loc.micahel_could_live ? "Yes" : "No"}
+            <div class="meta">
+              Joel: ${loc.joel_could_live ? "Yes" : "No"} </br>
+              Michael: ${loc.micahel_could_live ? "Yes" : "No"}
+            </div>
+
           </div>
 
         </div>
