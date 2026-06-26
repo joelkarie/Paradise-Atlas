@@ -1,4 +1,5 @@
 print("🔥 API MAIN FILE LOADED")
+from pathlib import Path
 from api.database import engine
 from fastapi import FastAPI, Form
 from fastapi.responses import FileResponse
@@ -22,6 +23,8 @@ from api.routers.michael_could_live_router import router as michael_could_live_r
 from api.services.locations_services import get_locations, get_location_ratings
 
 # # uvicorn app.main:app --reload
+
+BASE_DIR = Path(__file__).resolve().parent.parent
 
 app = FastAPI()
 
@@ -99,13 +102,21 @@ def update_location(location_id: str = Form(...), field: str = Form(...), could_
 
     return {"status": "ok"}
 
-@app.get("/joel_admin")
+@app.get("/admin/joel")
 def joel_admin_page():
-    return FileResponse("frontend/joel_admin.html")
+    return FileResponse(BASE_DIR / "frontend" / "joel_admin.html")
 
-@app.get("/michael_admin")
+@app.get("/admin/michael")
 def michael_admin_page():
-    return FileResponse("frontend/michael_admin.html")
+    return FileResponse(BASE_DIR / "frontend" / "michael_admin.html")
+
+# @app.get("/admin/joel")
+# def joel_admin_page():
+#     return FileResponse("frontend/joel_admin.html")
+
+# @app.get("/admin/michael")
+# def michael_admin_page():
+#     return FileResponse("frontend/michael_admin.html")
 
 @app.get("/ping")
 def ping():
