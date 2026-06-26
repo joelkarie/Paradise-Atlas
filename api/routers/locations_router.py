@@ -8,7 +8,7 @@ router = APIRouter(prefix="/locations", tags=["Locations"])
 def locations():
     return get_locations()
 
-@router.post("/locations/update_could_live")
+@router.post("/update_could_live")
 def update_could_live(
     location_id: str = Form(...),
     field: str = Form(...),
