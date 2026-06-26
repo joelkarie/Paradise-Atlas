@@ -4,7 +4,7 @@ import { getTheatres } from "./api.js";
 import { createCapitolLayer } from "./layers/capitol.js";
 import { getCapitols } from "./api.js";
 import { createCouldLiveLayer } from "./layers/could_live.js";
-import { getJoelCouldLive, getMichaelCouldLive } from "./api.js";
+import { getJoelCouldLive, getMichaelCouldLive, getTogetherCouldLive} from "./api.js";
 import { createVisitOrderLayer } from "./layers/visit_order.js";
 import { getVisitOrder } from "./api.js";
 import { createPatagoniaStoreLayer } from "./layers/patagonia_stores.js";
@@ -23,6 +23,7 @@ async function main() {
     const capitolLayer = createCapitolLayer(await getCapitols());
     const joelCouldLiveLayer = createCouldLiveLayer(await getJoelCouldLive(), "joel_in_dot_gray");
     const michaelCouldLiveLayer = createCouldLiveLayer(await getMichaelCouldLive(), "michael_h");
+    const togetherCouldLiveLayer = createCouldLiveLayer(await getTogetherCouldLive(), "together_gold_dot.png" )
     const patagoniaStoreLayer = createPatagoniaStoreLayer(await getPatagoniaStores());
     const vistitOrderLayer = createVisitOrderLayer(await getVisitOrder());
     const quakerMeetingHouseLayer = createQuakerMeetingsLayer( await getQuakerMeetings());
@@ -35,6 +36,7 @@ async function main() {
         "Capitols Visited": capitolLayer,
         "Cities Michael Could Live In": michaelCouldLiveLayer,
         "Cities Joel Could Live In": joelCouldLiveLayer,
+        "Cities We Both Could Live In": togetherCouldLiveLayer,
         "Patagonia Stores": patagoniaStoreLayer,
         "Quaker Meetings Houses Attended": quakerMeetingHouseLayer
     };
