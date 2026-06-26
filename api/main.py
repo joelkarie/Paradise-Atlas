@@ -45,22 +45,21 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-app.include_router(theatre_router)
-app.include_router(joel_could_live_router)
-app.include_router(michael_could_live_router)
-app.include_router(capitols_router)
-app.include_router(housing_distances_router)
-app.include_router(visit_order_router)
-app.include_router(locations_router)
-app.include_router(patagonia_router)
-app.include_router(quaker_meetings_router)
-app.include_router(together_could_live_router)
-
-app.mount(
-    "/static",
-    StaticFiles(directory="frontend"),
-    name="static"
+app.include_router(
+    theatre_router,
+    joel_could_live_router,
+    michael_could_live_router,
+    capitols_router,
+    housing_distances_router,
+    visit_order_router,
+    locations_router,
+    patagonia_router,
+    quaker_meetings_router,
+    together_could_live_router,
 )
+
+app.mount("/static", StaticFiles(directory="frontend"), name="static")
+
 
 @app.get("/db-info")
 def db_info():
@@ -89,7 +88,9 @@ def admin_locations():
 
 
 @app.post("/locations/update_could_live")
-def update_location(location_id: str = Form(...), field: str = Form(...), could_live: str = Form(...)):
+def update_location(
+    location_id: str = Form(...), field: str = Form(...), could_live: str = Form(...)
+):
     value = True if str(could_live).lower() == "true" else False
 
     with engine.begin() as conn:
@@ -104,25 +105,21 @@ def update_location(location_id: str = Form(...), field: str = Form(...), could_
 
     return {"status": "ok"}
 
+
 @app.get("/")
 def home():
     return FileResponse(BASE_DIR / "frontend" / "index.html")
+
 
 @app.get("/admin/joel")
 def joel_admin_page():
     return FileResponse(BASE_DIR / "frontend" / "joel_admin.html")
 
+
 @app.get("/admin/michael")
 def michael_admin_page():
     return FileResponse(BASE_DIR / "frontend" / "michael_admin.html")
 
-# @app.get("/admin/joel")
-# def joel_admin_page():
-#     return FileResponse("frontend/joel_admin.html")
-
-# @app.get("/admin/michael")
-# def michael_admin_page():
-#     return FileResponse("frontend/michael_admin.html")
 
 @app.get("/ping")
 def ping():
