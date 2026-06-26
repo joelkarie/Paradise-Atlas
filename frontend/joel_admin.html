@@ -38,6 +38,12 @@
       margin-bottom: 8px;
     }
 
+    .rating-row {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+    }
+    
     label {
       margin-right: 12px;
     }
@@ -65,30 +71,33 @@
 
           <div class="location-title">${label}</div>
 
+          <div class="rating-row">
+              <div class="subtitle">Could you live here?</div>
+
+              <label>
+                  <input type="radio"
+                      name="loc_${loc.location}"
+                      value="true"
+                      ${loc.joel_could_live === true ? "checked" : ""}
+                      onchange="updateLocation('${loc.location_id}', true)">
+                  True
+              </label>
+
+              <label>
+                  <input type="radio"
+                      name="loc_${loc.location}"
+                      value="false"
+                      ${loc.joel_could_live === false ? "checked" : ""}
+                      onchange="updateLocation('${loc.location_id}', false)">
+                  False
+              </label>
+          </div>
           <div class="subtitle">Could you live here?</div>
 
           <div class="meta">
             Joel: ${loc.joel_could_live ? "Yes" : "No"} </br>
             Michael: ${loc.micahel_could_live ? "Yes" : "No"}
           </div>
-
-          <label>
-            <input type="radio"
-              name="loc_${loc.location}"
-              value="true"
-              ${loc.joel_could_live ? "checked" : ""}
-              onchange="updateLocation('${loc.location_id}', true)">
-            True
-          </label>
-
-          <label>
-            <input type="radio"
-              name="loc_${loc.location}"
-              value="false"
-              ${!loc.joel_could_live ? "checked" : ""}
-              onchange="updateLocation('${loc.location_id}', false)">
-            False
-          </label>
 
         </div>
       `;
