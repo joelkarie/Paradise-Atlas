@@ -23,7 +23,7 @@ async function main() {
     const capitolLayer = createCapitolLayer(await getCapitols());
     const joelCouldLiveLayer = createCouldLiveLayer(await getJoelCouldLive(), "joel_in_dot_gray");
     const michaelCouldLiveLayer = createCouldLiveLayer(await getMichaelCouldLive(), "michael_h");
-    const togetherCouldLiveLayer = createCouldLiveLayer(await getTogetherCouldLive(), "together_gold_dot" )
+    const togetherCouldLiveLayer = createCouldLiveLayer(await getTogetherCouldLive(), "together_gold_dot", "55" )
     const patagoniaStoreLayer = createPatagoniaStoreLayer(await getPatagoniaStores());
     const vistitOrderLayer = createVisitOrderLayer(await getVisitOrder());
     const quakerMeetingHouseLayer = createQuakerMeetingsLayer( await getQuakerMeetings());

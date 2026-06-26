@@ -1,4 +1,5 @@
-export function createCouldLiveLayer(cities, icon_filename) {
+export function createCouldLiveLayer(cities, icon_filename, icon_size) {
+    if (icon_size == undefined) { icon_size = 46}
     const CouldLiveLayer = L.layerGroup();
 
     cities.forEach(city => {
@@ -6,7 +7,7 @@ export function createCouldLiveLayer(cities, icon_filename) {
         html: `
             <img src="/static/assets/${icon_filename}.png"
                 style="
-                    width:45.8px;
+                    width:${icon_size}px;
                     filter: drop-shadow(2px 4px 3px rgba(0,0,0,0.4));
                 ">
         `,
