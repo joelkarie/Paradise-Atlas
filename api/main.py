@@ -25,11 +25,6 @@ from api.services.locations_services import get_locations, get_location_ratings
 app = FastAPI()
 
 
-@app.get("/")
-def root():
-    return {"message": "Atlas Paradiso API"}
-
-
 app.add_middleware(
     CORSMiddleware,
     allow_origins=[
@@ -108,3 +103,7 @@ def michael_admin_page():
 @app.get("/ping")
 def ping():
     return {"ok": True}
+
+@app.get("/")
+def home():
+    return FileResponse("frontend/index.html")
