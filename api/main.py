@@ -19,6 +19,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from api.routers.patagonia_router import router as patagonia_router
 from api.routers.quaker_meetings_router import router as quaker_meetings_router
 from api.routers.michael_could_live_router import router as michael_could_live_router
+from api.routers.together_could_live_router import router as together_could_live_router
 
 from api.services.locations_services import get_locations, get_location_ratings
 
@@ -53,6 +54,7 @@ app.include_router(visit_order_router)
 app.include_router(locations_router)
 app.include_router(patagonia_router)
 app.include_router(quaker_meetings_router)
+app.include_router(together_could_live_router)
 
 app.mount(
     "/static",
