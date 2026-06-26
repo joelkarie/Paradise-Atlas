@@ -90,23 +90,23 @@ def admin_locations():
     return get_location_ratings()
 
 
-@app.post("/locations/update_could_live")
-def update_location(
-    location_id: str = Form(...), field: str = Form(...), could_live: str = Form(...)
-):
-    value = True if str(could_live).lower() == "true" else False
+# @app.post("/locations/update_could_live")
+# def update_location(
+#     location_id: str = Form(...), field: str = Form(...), could_live: str = Form(...)
+# ):
+#     value = True if str(could_live).lower() == "true" else False
 
-    with engine.begin() as conn:
-        conn.exec_driver_sql(
-            f"""
-            UPDATE location_rating
-            SET {field} = %s
-            WHERE location_id = %s
-        """,
-            (value, location_id),
-        )
+#     with engine.begin() as conn:
+#         conn.exec_driver_sql(
+#             f"""
+#             UPDATE location_rating
+#             SET {field} = %s
+#             WHERE location_id = %s
+#         """,
+#             (value, location_id),
+#         )
 
-    return {"status": "ok"}
+#     return {"status": "ok"}
 
 
 @app.get("/")

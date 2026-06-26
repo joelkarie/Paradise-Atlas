@@ -1,5 +1,6 @@
 from sqlalchemy import text
 from ..database import engine
+from fastapi import Form
 
 
 def get_locations():
@@ -37,3 +38,16 @@ def get_location_ratings():
         }
         for r in rows
     ]
+
+
+def update_could_live_value(location_id, field, value):
+
+    with engine.begin() as conn:
+        conn.exec_driver_sql(
+            f"""
+            UPDATE location_rating
+            SET {field} = %s
+            WHERE location_id = %s
+        """,
+            (value, location_id),
+        )
