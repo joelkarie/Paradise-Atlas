@@ -5,7 +5,7 @@ export function createVisitOrderLayer(locations) {
     locations.forEach(location => {
         const customMarker = L.divIcon({
             html: `
-                <img src="assets/map_pin.png"
+                <img src="/static/assets/map_pin.png"
                     style="
                         width:30px;
                         filter: drop-shadow(2px 4px 3px rgba(0,0,0,0.4));

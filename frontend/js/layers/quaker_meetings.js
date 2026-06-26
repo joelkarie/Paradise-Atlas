@@ -4,7 +4,7 @@ export function createQuakerMeetingsLayer(meetings) {
     meetings.forEach(meeting => {
         const customMarker = L.divIcon({
             html: `
-                <img src="assets/quaker_star.png"
+                <img src="/static/assets/quaker_star.png"
                     style="
                         width:40px;
                         filter: drop-shadow(2px 4px 3px rgba(0,0,0,0.4));

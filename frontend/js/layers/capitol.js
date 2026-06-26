@@ -4,7 +4,7 @@ export function createCapitolLayer(capitols) {
     capitols.forEach(capitol => {
         const customMarker = L.divIcon({
             html: `
-                <img src="assets/capitol_marker.png"
+                <img src="/static/assets/capitol_marker.png"
                     style="
                         width:40px;
                         filter: drop-shadow(2px 4px 3px rgba(0,0,0,0.4));
@@ -27,8 +27,8 @@ export function createCapitolLayer(capitols) {
                 Architect: ${capitol.architect}<br>
                 Style: ${capitol.architectural_style}<br>
                 Fact: ${capitol.fact}
-                <a href="images/capitols/${capitol.state_province.toLowerCase().replace(/\s+/g, "_")}.webp"  target="_blank">
-                     <img src="images/capitols/${capitol.state_province.toLowerCase().replace(/\s+/g, "_")}.webp" 
+                <a href="/static/images/capitols/${capitol.state_province.toLowerCase().replace(/\s+/g, "_")}.webp"  target="_blank">
+                     <img src="/static/images/capitols/${capitol.state_province.toLowerCase().replace(/\s+/g, "_")}.webp" 
                         style="width:100%; max-width:300px; cursor:pointer;">
                  </a>
                 </d>

@@ -4,7 +4,7 @@ export function createCouldLiveLayer(cities, icon_filename) {
     cities.forEach(city => {
     const customMarker = L.divIcon({
         html: `
-            <img src="assets/${icon_filename}.png"
+            <img src="/static/assets/${icon_filename}.png"
                 style="
                     width:45.8px;
                     filter: drop-shadow(2px 4px 3px rgba(0,0,0,0.4));

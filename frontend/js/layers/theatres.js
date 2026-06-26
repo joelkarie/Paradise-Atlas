@@ -10,7 +10,7 @@ async function createTheatrePopupContent(theatre) {
                 ${theatre.date ? `<br><i>Visited on ${theatre.date}</i>` : ''}
             `;
 
-    const imageUrl = `images/theatres/${theatre.city.toLowerCase().replaceAll(" ", "_")}_theatre.webp`;
+    const imageUrl = `/static/images/theatres/${theatre.city.toLowerCase().replaceAll(" ", "_")}_theatre.webp`;
 
     if (await imageExists(imageUrl)) {
         html += `
@@ -31,7 +31,7 @@ export function createTheatreLayer(theatres) {
 
         const customMarker = L.divIcon({
             html: `
-                <img src="assets/lk_logo.png"
+                <img src="/static/assets/lk_logo.png"
                     style="
                         width:70px;
                         filter: drop-shadow(2px 4px 3px rgba(0,0,0,0.4));

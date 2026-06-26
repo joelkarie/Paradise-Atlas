@@ -4,7 +4,7 @@ export function createPatagoniaStoreLayer(stores) {
     stores.forEach(store => {
         const customMarker = L.divIcon({
             html: `
-                <img src="assets/patagonia_fish.png"
+                <img src="/static/assets/patagonia_fish.png"
                     style="
                         width:76.8px;
                         filter: drop-shadow(2px 4px 3px rgba(0,0,0,0.4));
