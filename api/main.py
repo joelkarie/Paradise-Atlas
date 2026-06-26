@@ -55,9 +55,9 @@ app.include_router(patagonia_router)
 app.include_router(quaker_meetings_router)
 
 app.mount(
-    "/",
-    StaticFiles(directory="frontend", html=True),
-    name="frontend"
+    "/static",
+    StaticFiles(directory="frontend"),
+    name="static"
 )
 
 @app.get("/db-info")
@@ -101,6 +101,10 @@ def update_location(location_id: str = Form(...), field: str = Form(...), could_
         )
 
     return {"status": "ok"}
+
+@app.get("/")
+def home():
+    return FileResponse(BASE_DIR / "frontend" / "index.html")
 
 @app.get("/admin/joel")
 def joel_admin_page():
