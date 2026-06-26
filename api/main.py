@@ -2,6 +2,7 @@ print("🔥 API MAIN FILE LOADED")
 from api.database import engine
 from fastapi import FastAPI, Form
 from fastapi.responses import FileResponse
+from fastapi.staticfiles import StaticFiles
 from dotenv import load_dotenv
 import os
 
@@ -49,6 +50,11 @@ app.include_router(locations_router)
 app.include_router(patagonia_router)
 app.include_router(quaker_meetings_router)
 
+app.mount(
+    "/",
+    StaticFiles(directory="frontend", html=True),
+    name="frontend"
+)
 
 @app.get("/db-info")
 def db_info():
@@ -103,7 +109,3 @@ def michael_admin_page():
 @app.get("/ping")
 def ping():
     return {"ok": True}
-
-@app.get("/")
-def home():
-    return FileResponse("frontend/index.html")
