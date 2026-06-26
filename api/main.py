@@ -26,8 +26,8 @@ app = FastAPI()
 
 
 @app.get("/")
-def root():
-    return {"message": "Atlas Paradiso API"}
+def home():
+    return FileResponse("frontend/index.html")
 
 
 app.add_middleware(
