@@ -34,6 +34,7 @@ app.add_middleware(
         "http://localhost:5173",
         "https://paradise-atlas.onrender.com",
         "https://paradise-atlas-knx4.onrender.com",
+        "https://atlas.joelkarie.com",
     ],
     allow_credentials=True,
     allow_methods=["*"],
