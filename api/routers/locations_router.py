@@ -11,9 +11,19 @@ def locations():
 
 @router.post("/update_could_live")
 def update_could_live(
-    location_id: str = Form(...), field: str = Form(...), could_live: str = Form(...)
+    location_id: str = Form(...), field: str = Form(...), value: str = Form(...)
 ):
-    value = True if str(could_live).lower() == "true" else False
+    allowed_fields = {
+        "joel_could_live",
+        "michael_could_live",
+        "joel_highlights"
+    }
+
+    if field not in allowed_fields:
+        raise ValueError("Invalid field")
+    
+    if field in ["joel_could_live", "michael_could_live"]:
+        value = True if str(value).lower() == "true" else False
 
     update_could_live_value(location_id, field, value)
 

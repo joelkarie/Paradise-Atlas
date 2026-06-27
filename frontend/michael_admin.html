@@ -78,7 +78,7 @@
             const formData = new FormData();
             formData.append("location_id", location_id);
             formData.append("field", "michael_could_live");
-            formData.append("could_live", value);
+            formData.append("value", value);
 
             fetch("/locations/update_could_live", {
                 method: "POST",
