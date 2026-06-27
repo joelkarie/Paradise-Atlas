@@ -10,7 +10,8 @@ def get_locations():
         rows = conn.execute(text("""
             SELECT *
             FROM location l
-            ORDER BY l.name
+            JOIN location_rating lr
+            ON l.id = lr.location_id;
         """))
 
         return [dict(row._mapping) for row in rows]
