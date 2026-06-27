@@ -5,19 +5,19 @@ async function createLocationsPopupContent(location) {
                 ${location.date ? `<br><i>Visited on ${location.date}</i>` : ''}
             `;
 
-    // if (location.michael_highlights) {
-    //     html += `
-    //         <br>
-    //         Michael's Highlights: ${location.michael_highlights}
-    //             `;
-    // }
+    if (location.michael_highlights) {
+        html += `
+            <br>
+            Michael's Highlights: ${location.michael_highlights}
+                `;
+    }
 
-    // if (location.joel_highlights) {
-    //     html += `
-    //         <br>
-    //         Joel's Highlights: ${location.joel_highlights}
-    //             `;
-    // }
+    if (location.joel_highlights) {
+        html += `
+            <br>
+            Joel's Highlights: ${location.joel_highlights}
+                `;
+    }
 
     return html;
 }
@@ -38,7 +38,7 @@ export function createVisitOrderLayer(locations) {
             className: "",
             iconAnchor: [15, 25]
         });
-        L.marker([
+        const marker = L.marker([
             location.latitude,
             location.longitude], { icon: customMarker })
             .addTo(visitOrderLayer);
