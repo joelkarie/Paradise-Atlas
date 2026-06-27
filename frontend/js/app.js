@@ -11,6 +11,8 @@ import { createPatagoniaStoreLayer } from "./layers/patagonia_stores.js";
 import { getPatagoniaStores } from "./api.js";
 import { createQuakerMeetingsLayer } from "./layers/quaker_meetings.js";
 import { getQuakerMeetings } from "./api.js";
+import { getLocations } from "./api.js";
+import { createLocationsLayer } from "./layers/locations.js";
 
 
 
@@ -25,13 +27,14 @@ async function main() {
     const michaelCouldLiveLayer = createCouldLiveLayer(await getMichaelCouldLive(), "michael_h");
     const togetherCouldLiveLayer = createCouldLiveLayer(await getTogetherCouldLive(), "together_gold_dot", "65")
     const patagoniaStoreLayer = createPatagoniaStoreLayer(await getPatagoniaStores());
-    const vistitOrderLayer = createVisitOrderLayer(await getVisitOrder());
+    // const vistitOrderLayer = createVisitOrderLayer(await getVisitOrder());
     const quakerMeetingHouseLayer = createQuakerMeetingsLayer(await getQuakerMeetings());
+    const locationLayer = createLocationsLayer( await getLocations);
 
-    vistitOrderLayer.addTo(map)
+    locationLayer.addTo(map)
 
     const overlays = {
-        "Locations Visited": vistitOrderLayer,
+        "Locations Visited": locationLayer,
         "Theatres We Have Worked At": theatreLayer,
         "Capitols Visited": capitolLayer,
         "Cities Michael Could Live In": michaelCouldLiveLayer,

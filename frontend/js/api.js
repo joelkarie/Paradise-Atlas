@@ -41,3 +41,9 @@ export async function getQuakerMeetings() {
     return await response.json();
 
 }
+
+export async function getLocations() {
+    const response = await fetch(`${API_URL}/locations`);
+    return await response.json();
+
+}
