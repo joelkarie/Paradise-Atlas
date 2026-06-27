@@ -39,7 +39,7 @@ async function createLocationsPopupContent(location) {
     let html = `
         <div style="min-width: 260px; line-height: 1.4;">
             <div style="font-size: 22px; font-weight: 700; margin-bottom: 2px;">
-                ${escapeHtml(location.location_name)}
+                ${escapeHtml(location.name)}
             </div>
 
             <div style="font-size: 13px; color: #666; margin-bottom: 10px;">
@@ -53,12 +53,12 @@ async function createLocationsPopupContent(location) {
             </div>
 
             <div style="margin-bottom: 6px;">
-                <span style="color: #1e88e5; font-weight: 700;">Joel:</span>
+                <span style="color: #fbfdc8; font-weight: 700;">Joel:</span>
                 <span>${joel || 'No highlights listed.'}</span>
             </div>
 
             <div>
-                <span style="color: #43a047; font-weight: 700;">Michael:</span>
+                <span style="color: #a4e4fc; font-weight: 700;">Michael:</span>
                 <span>${michael || 'No highlights listed.'}</span>
             </div>
         </div>
