@@ -1,3 +1,27 @@
+async function createLocationsPopupContent(location) {
+    let html = `
+                <b>${location.location_name}</b><br>
+                ${location.state_province}
+                ${location.date ? `<br><i>Visited on ${location.date}</i>` : ''}
+            `;
+
+    if (location.michael_highlights) {
+        html += `
+            <br>
+            Michael's Highlights: ${location.michael_highlights}
+                `;
+    }
+
+    if (location.joel_highlights) {
+        html += `
+            <br>
+            Joel's Highlights: ${location.joel_highlights}
+                `;
+    }
+
+    return html;
+}
+
 export function createVisitOrderLayer(locations) {
     const visitOrderLayer = L.layerGroup();
 
@@ -17,12 +41,12 @@ export function createVisitOrderLayer(locations) {
         L.marker([
             location.latitude,
             location.longitude], { icon: customMarker })
-            .addTo(visitOrderLayer)
-            .bindPopup(`
-                <b>${location.location_name}</b><br>
-                ${location.state_province}
-                ${location.date ? `<br><i>Visited on ${location.date}</i>` : ''}
-            `);
+            .addTo(visitOrderLayer);
+
+        marker.on("click", async () => {
+            const content = await createLocationsPopupContent(location);
+            marker.bindPopup(content).openPopup();
+        });
     });
     return visitOrderLayer;
 }
