@@ -11,7 +11,7 @@ export function createQuakerMeetingsLayer(meetings) {
                     ">
             `,
             className: "",
-            iconAnchor: [38,43]
+            iconAnchor: [38, 43]
         });
         L.marker([
             meeting.latitude,

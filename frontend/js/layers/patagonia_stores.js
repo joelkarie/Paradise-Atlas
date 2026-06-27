@@ -11,7 +11,7 @@ export function createPatagoniaStoreLayer(stores) {
                     ">
             `,
             className: "",
-            iconAnchor: [38,43]
+            iconAnchor: [38, 43]
         });
         L.marker([
             store.latitude,

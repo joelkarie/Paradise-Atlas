@@ -12,4 +12,3 @@ def get_visit_order():
         """))
 
         return [dict(row._mapping) for row in rows]
-    

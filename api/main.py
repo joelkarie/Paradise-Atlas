@@ -1,26 +1,25 @@
-print("🔥 API MAIN FILE LOADED")
-from pathlib import Path
-from api.database import engine
 from fastapi import FastAPI, Form
 from fastapi.responses import FileResponse
 from fastapi.staticfiles import StaticFiles
+from fastapi.middleware.cors import CORSMiddleware
+
 from dotenv import load_dotenv
 import os
+from pathlib import Path
 
 load_dotenv()
 
+from api.database import engine
 from api.routers.theatres_router import router as theatre_router
 from api.routers.joel_could_live_router import router as joel_could_live_router
 from api.routers.capitols_router import router as capitols_router
 from api.routers.housing_distances_router import router as housing_distances_router
 from api.routers.visit_order import router as visit_order_router
 from api.routers.locations_router import router as locations_router
-from fastapi.middleware.cors import CORSMiddleware
 from api.routers.patagonia_router import router as patagonia_router
 from api.routers.quaker_meetings_router import router as quaker_meetings_router
 from api.routers.michael_could_live_router import router as michael_could_live_router
 from api.routers.together_could_live_router import router as together_could_live_router
-
 from api.services.locations_services import get_locations, get_location_ratings
 
 # # uvicorn app.main:app --reload
@@ -61,6 +60,7 @@ routers = [
 for router in routers:
     app.include_router(router)
 
+
 app.mount("/static", StaticFiles(directory="frontend"), name="static")
 
 
@@ -88,25 +88,6 @@ def health():
 @app.get("/admin/locations")
 def admin_locations():
     return get_location_ratings()
-
-
-# @app.post("/locations/update_could_live")
-# def update_location(
-#     location_id: str = Form(...), field: str = Form(...), could_live: str = Form(...)
-# ):
-#     value = True if str(could_live).lower() == "true" else False
-
-#     with engine.begin() as conn:
-#         conn.exec_driver_sql(
-#             f"""
-#             UPDATE location_rating
-#             SET {field} = %s
-#             WHERE location_id = %s
-#         """,
-#             (value, location_id),
-#         )
-
-#     return {"status": "ok"}
 
 
 @app.get("/")

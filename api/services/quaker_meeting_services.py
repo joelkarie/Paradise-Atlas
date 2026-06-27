@@ -12,4 +12,3 @@ def get_quaker_meetings():
         """))
 
         return [dict(row._mapping) for row in rows]
-    

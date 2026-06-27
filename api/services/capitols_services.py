@@ -12,4 +12,3 @@ def get_capitols():
         """))
 
         return [dict(row._mapping) for row in rows]
-    
