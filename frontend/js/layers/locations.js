@@ -1,7 +1,7 @@
 async function createLocationsPopupContent(location) {
     console.log(location)
     let html = `
-                <b>${location.location_name}</b><br>
+                <b>${location.name}</b><br>
                 ${location.state_province}
             `;
 

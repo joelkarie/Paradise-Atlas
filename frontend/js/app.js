@@ -29,7 +29,7 @@ async function main() {
     const patagoniaStoreLayer = createPatagoniaStoreLayer(await getPatagoniaStores());
     // const vistitOrderLayer = createVisitOrderLayer(await getVisitOrder());
     const quakerMeetingHouseLayer = createQuakerMeetingsLayer(await getQuakerMeetings());
-    const locationLayer = createLocationsLayer( await getLocations);
+    const locationLayer = createLocationsLayer( await getLocations());
 
     locationLayer.addTo(map)
 
