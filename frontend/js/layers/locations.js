@@ -67,8 +67,8 @@ async function createLocationsPopupContent(location) {
         if (joel) {
             html +=`
             <div>
-                <span style="color: #1db1e7; font-weight: 700;">Michael:</span>
-                <span>${michael || 'No highlights listed.'}</span>
+                <span style="color: #dc6e1a; font-weight: 700;">Michael:</span>
+                <span>${joel || 'No highlights listed.'}</span>
             </div>            
             `
         };
