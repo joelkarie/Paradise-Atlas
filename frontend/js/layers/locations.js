@@ -47,22 +47,51 @@ async function createLocationsPopupContent(location) {
             </div>
 
             <hr style="margin: 6px 0 10px 0; border: none; border-top: 1px solid #ddd;">
+        </div>`;
 
+        if (joel || michael) {
+            html += `
             <div style="font-weight: 700; margin-bottom: 6px;">
                 Highlights:
             </div>
-
-            <div style="margin-bottom: 6px;">
-                <span style="color: #fbfdc8; font-weight: 700;">Joel:</span>
-                <span>${joel || 'No highlights listed.'}</span>
-            </div>
-
+            `
+        };
+        if (michael) {
+            html += `
             <div>
-                <span style="color: #a4e4fc; font-weight: 700;">Michael:</span>
+                <span style="color: #1db1e7; font-weight: 700;">Michael:</span>
                 <span>${michael || 'No highlights listed.'}</span>
             </div>
-        </div>
-    `;
+            `
+        };
+        if (joel) {
+            html +=`
+            <div>
+                <span style="color: #1db1e7; font-weight: 700;">Michael:</span>
+                <span>${michael || 'No highlights listed.'}</span>
+            </div>            
+            `
+        };
+
+
+
+
+
+    //         <div style="font-weight: 700; margin-bottom: 6px;">
+    //             Highlights:
+    //         </div>
+
+    //         <div style="margin-bottom: 6px;">
+    //             <span style="color: #dc6e1a; font-weight: 700;">Joel:</span>
+    //             <span>${joel || 'No highlights listed.'}</span>
+    //         </div>
+
+    //         <div>
+    //             <span style="color: #1db1e7; font-weight: 700;">Michael:</span>
+    //             <span>${michael || 'No highlights listed.'}</span>
+    //         </div>
+        
+    // `;
 
     return html;
 }
