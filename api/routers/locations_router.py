@@ -16,7 +16,8 @@ def update_could_live(
     allowed_fields = {
         "joel_could_live",
         "michael_could_live",
-        "joel_highlights"
+        "joel_highlights",
+        "michael_highlights"
     }
 
     if field not in allowed_fields:
