@@ -69,6 +69,15 @@
 
           </div>
 
+          <div class="rating-row">
+            <div class="subtitle">Highlights:</div>
+            <textarea
+              id="highlight_${loc.location_id}"
+              rows="1"
+              style="width:75%"
+              onchange="updateHighlight('${loc.location_id}', this.value)"
+            >${loc.michael_highlights ?? ""}</textarea>
+          </div>  
         </div>
       `;
                 }).join("");
@@ -89,6 +98,23 @@
                     console.log("updated:", res);
                 });
         }
+
+        function updateHighlight(location_id, value) {
+            const formData = new FormData();
+
+            formData.append("location_id", location_id);
+            formData.append("field", "michael_highlights");
+            formData.append("value", value);
+
+            fetch("/locations/update_could_live", {
+                method: "POST",
+                body: formData
+            })
+            .then(r => r.json())
+            .then(res => {
+                console.log("updated:", res);
+            });
+        }   
     </script>
 
 </body>
