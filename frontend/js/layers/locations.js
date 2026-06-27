@@ -1,23 +1,68 @@
+// async function createLocationsPopupContent(location) {
+//     console.log(location)
+//     let html = `
+//                 <b>${location.name}</b><br>
+//                 ${location.state_province}
+//             `;
+
+//     if (location.michael_highlights) {
+//         html += `
+//             <br>
+//             Michael's Highlights: ${location.michael_highlights}
+//                 `;
+//     }
+
+//     if (location.joel_highlights) {
+//         html += `
+//             <br>
+//             Joel's Highlights: ${location.joel_highlights}
+//                 `;
+//     }
+
+//     return html;
+// }
 async function createLocationsPopupContent(location) {
-    console.log(location)
+    const escapeHtml = (str) => {
+        if (!str) return '';
+        return str
+            .replace(/&/g, '&amp;')
+            .replace(/</g, '&lt;')
+            .replace(/>/g, '&gt;')
+            .replace(/"/g, '&quot;')
+            .replace(/'/g, '&#39;');
+    };
+
+    const state = escapeHtml(location.state_province || '');
+    const joel = escapeHtml(location.joel_highlights || '');
+    const michael = escapeHtml(location.michael_highlights || '');
+
     let html = `
-                <b>${location.name}</b><br>
-                ${location.state_province}
-            `;
+        <div style="min-width: 260px; line-height: 1.4;">
+            <div style="font-size: 22px; font-weight: 700; margin-bottom: 2px;">
+                ${escapeHtml(location.location_name)}
+            </div>
 
-    if (location.michael_highlights) {
-        html += `
-            <br>
-            Michael's Highlights: ${location.michael_highlights}
-                `;
-    }
+            <div style="font-size: 13px; color: #666; margin-bottom: 10px;">
+                ${state}
+            </div>
 
-    if (location.joel_highlights) {
-        html += `
-            <br>
-            Joel's Highlights: ${location.joel_highlights}
-                `;
-    }
+            <hr style="margin: 6px 0 10px 0; border: none; border-top: 1px solid #ddd;">
+
+            <div style="font-weight: 700; margin-bottom: 6px;">
+                Highlights:
+            </div>
+
+            <div style="margin-bottom: 6px;">
+                <span style="color: #1e88e5; font-weight: 700;">Joel:</span>
+                <span>${joel || 'No highlights listed.'}</span>
+            </div>
+
+            <div>
+                <span style="color: #43a047; font-weight: 700;">Michael:</span>
+                <span>${michael || 'No highlights listed.'}</span>
+            </div>
+        </div>
+    `;
 
     return html;
 }
