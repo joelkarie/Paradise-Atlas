@@ -22,6 +22,7 @@ export function createVisitOrderLayer(locations) {
         stopNum += 1
     
     });
+
     const route = locations.map(location => [
         location.latitude,
         location.longitude
@@ -30,8 +31,8 @@ export function createVisitOrderLayer(locations) {
     L.polyline(route, {
         color: "blue",
         weight: 4
-    }).addTo(map);
-    
+    }).addTo(visitOrderLayer);
+
     return visitOrderLayer;
 }
     // # Number the cities in order of visit.
