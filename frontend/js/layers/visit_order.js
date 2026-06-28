@@ -19,7 +19,7 @@ async function createLocationsPopupContent(location, locations) {
                 <span>${locations[location.visit_number - 1]}</span>
             </div>
             `
-    }
+    };
 
     if (location.visit_number < locations.length) {
         html += `
@@ -28,7 +28,9 @@ async function createLocationsPopupContent(location, locations) {
                 <span>${locations[location.visit_number + 1]}</span>
             </div>
             `
-    }
+    };
+
+    return html;
 
 }
 
