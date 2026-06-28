@@ -29,7 +29,7 @@ export function createVisitOrderLayer(locations) {
     ]);
 
     L.polyline(route, {
-        color: #a797a9,
+        color: "#a797a9",
         weight: 2
     }).addTo(visitOrderLayer);
 
