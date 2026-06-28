@@ -84,11 +84,11 @@ h1 {
 }
 
 .numbered-marker {
-    background-color: #3388ff;
+    background-color: #a961af;
     color: white;
     border-radius: 50%;
-    width: 35px !important;
-    height: 35px !important;
+    width: 28px !important;
+    height: 28px !important;
     display: flex;
     align-items: center;
     justify-content: center;

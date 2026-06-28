@@ -3,17 +3,6 @@ export function createVisitOrderLayer(locations) {
 
     var stopNum = 1;
     locations.forEach(location => {
-        // const customMarker = L.divIcon({
-        //     html: `
-        //         <img src="/static/assets/map_pin.png"
-        //             style="
-        //                 width:30px;
-        //                 filter: drop-shadow(2px 4px 3px rgba(0,0,0,0.4));
-        //             ">
-        //     `,
-        //     className: "",
-        //     iconAnchor: [15,25]
-        // });
         const customMarker = L.divIcon({
             className: "numbered-marker",
             html: stopNum,
@@ -31,7 +20,18 @@ export function createVisitOrderLayer(locations) {
                 ${location.date ? `<br><i>Visited on ${location.date}</i>` : ''}
             `);
         stopNum += 1
+    
     });
+    const route = locations.map(location => [
+        location.latitude,
+        location.longitude
+    ]);
+
+    L.polyline(route, {
+        color: "blue",
+        weight: 4
+    }).addTo(map);
+    
     return visitOrderLayer;
 }
     // # Number the cities in order of visit.
