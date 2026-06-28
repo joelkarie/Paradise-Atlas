@@ -1,8 +1,42 @@
+async function createLocationsPopupContent(location, locations) {
+    let html = `
+        <div style="min-width: 260px; line-height: 1.4;">
+            <div style="font-size: 22px; font-weight: 700; margin-bottom: 2px;">
+                ${location.name}
+            </div>
+
+            <div style="font-size: 13px; color: #666; margin-bottom: 10px;">
+                ${location.state_province}
+            </div>
+
+            <hr style="margin: 6px 0 10px 0; border: none; border-top: 1px solid #ddd;">
+        </div>`;
+
+    if (location.visit_number > 1) {
+        html += `
+            <div>
+                <span style="color: #5056cd; font-weight: 700;">Visiting From: </span>
+                <span>${locations[location.visit_number - 1]}</span>
+            </div>
+            `
+    }
+
+    if (location.visit_number < locations.length) {
+        html += `
+            <div>
+                <span style="color: #5056cd; font-weight: 700;">Traveling To: </span>
+                <span>${locations[location.visit_number + 1]}</span>
+            </div>
+            `
+    }
+
+}
+
 export function createVisitOrderLayer(locations) {
     const visitOrderLayer = L.layerGroup();
 
     locations.sort((a, b) => a.visit_number - b.visit_number);
-    
+
     locations.forEach(location => {
         const customMarker = L.divIcon({
             className: "numbered-marker",
@@ -11,15 +45,14 @@ export function createVisitOrderLayer(locations) {
             iconAnchor: [17, 35]
 
         });
-        L.marker([
+        const marker = L.marker([
             location.latitude,
             location.longitude], { icon: customMarker })
-            .addTo(visitOrderLayer)
-            .bindPopup(`
-                <b>${location.location_name}</b><br>
-                ${location.state_province}
-                ${location.date ? `<br><i>Visited on ${location.date}</i>` : ''}
-            `);
+            .addTo(visitOrderLayer);
+        marker.on("click", async () => {
+            const content = await createLocationsPopupContent(location, locations);
+            marker.bindPopup(content).openPopup();
+        });
 
     });
 
