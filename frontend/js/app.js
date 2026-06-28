@@ -27,7 +27,7 @@ async function main() {
     const michaelCouldLiveLayer = createCouldLiveLayer(await getMichaelCouldLive(), "michael_h");
     const togetherCouldLiveLayer = createCouldLiveLayer(await getTogetherCouldLive(), "together_gold_dot", "65")
     const patagoniaStoreLayer = createPatagoniaStoreLayer(await getPatagoniaStores());
-    // const vistitOrderLayer = createVisitOrderLayer(await getVisitOrder());
+    const vistitOrderLayer = createVisitOrderLayer(await getVisitOrder());
     const quakerMeetingHouseLayer = createQuakerMeetingsLayer(await getQuakerMeetings());
     const locationLayer = createLocationsLayer( await getLocations());
 
@@ -35,6 +35,7 @@ async function main() {
 
     const overlays = {
         "Locations Visited": locationLayer,
+        "Visit Order": vistitOrderLayer,
         "Theatres We Have Worked At": theatreLayer,
         "Capitols Visited": capitolLayer,
         "Cities Michael Could Live In": michaelCouldLiveLayer,
