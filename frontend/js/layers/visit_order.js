@@ -2,7 +2,7 @@ async function createLocationsPopupContent(location, locations) {
     let html = `
         <div style="min-width: 260px; line-height: 1.4;">
             <div style="font-size: 22px; font-weight: 700; margin-bottom: 2px;">
-                ${location.name}
+                ${location.location_name}
             </div>
 
             <div style="font-size: 13px; color: #666; margin-bottom: 10px;">
@@ -16,7 +16,7 @@ async function createLocationsPopupContent(location, locations) {
         html += `
             <div>
                 <span style="color: #5056cd; font-weight: 700;">Visiting From: </span>
-                <span>${locations[location.visit_number - 1].name}, ${locations[location.visit_number - 1].state_province}</span>
+                <span>${locations[location.visit_number - 1].location_name}, ${locations[location.visit_number - 1].state_province}</span>
             </div>
             `
     };
@@ -25,7 +25,7 @@ async function createLocationsPopupContent(location, locations) {
         html += `
             <div>
                 <span style="color: #5056cd; font-weight: 700;">Traveling To: </span>
-                <span>${locations[location.visit_number + 1].name}, ${locations[location.visit_number + 1].state_province}</span>
+                <span>${locations[location.visit_number + 1].location_name}, ${locations[location.visit_number + 1].state_province}</span>
             </div>
             `
     };
