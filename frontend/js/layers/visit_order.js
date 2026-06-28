@@ -1,11 +1,12 @@
 export function createVisitOrderLayer(locations) {
     const visitOrderLayer = L.layerGroup();
 
-    var stopNum = 1;
+    locations.sort((a, b) => a.visit_number - b.visit_number);
+    
     locations.forEach(location => {
         const customMarker = L.divIcon({
             className: "numbered-marker",
-            html: stopNum,
+            html: location.visit_number,
             iconSize: [35, 35],
             iconAnchor: [17, 35]
 
@@ -19,7 +20,6 @@ export function createVisitOrderLayer(locations) {
                 ${location.state_province}
                 ${location.date ? `<br><i>Visited on ${location.date}</i>` : ''}
             `);
-        stopNum += 1
 
     });
 
