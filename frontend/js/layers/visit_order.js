@@ -13,19 +13,25 @@ async function createLocationsPopupContent(location, locations) {
         </div>`;
 
     if (location.visit_number > 1) {
+        const arriveFrom = locations.find(
+            arriveLocation => arriveLocation.visit_number === location.visit_number - 1
+        )
         html += `
             <div>
                 <span style="color: #5056cd; font-weight: 700;">Visiting From: </span>
-                <span>${locations[location.visit_number - 1].location_name}, ${locations[location.visit_number - 1].state_province}</span>
+                <span>${arriveFrom.location_name}, ${arriveFrom.state_province}</span>
             </div>
             `
     };
 
     if (location.visit_number < locations.length) {
+        const departFrom = locations.find(
+            departLocation => departLocation.visit_number === location.visit_number + 1
+        )
         html += `
             <div>
                 <span style="color: #5056cd; font-weight: 700;">Traveling To: </span>
-                <span>${locations[location.visit_number + 1].location_name}, ${locations[location.visit_number + 1].state_province}</span>
+                <span>${departFrom.location_name}, ${departFrom.state_province}</span>
             </div>
             `
     };
