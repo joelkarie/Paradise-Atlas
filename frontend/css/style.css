@@ -97,3 +97,11 @@ h1 {
     border: 3px solid white;
     box-shadow: 0 0 5px rgba(0,0,0,0.4);
 }
+
+.star {
+  font-size: 2vh;
+  cursor: pointer;
+}
+.star-rating {
+    color: rgb(255, 255, 0);
+}
