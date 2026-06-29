@@ -27,10 +27,17 @@ async function createLocationsPopupContent(location) {
         </div>`;
 
         // Rating Section
+
+    if (location.joel_star_rating >=1 || location.michael_star_rating >= 1) {
         html +=`
         <div style="font-weight: 700; margin-bottom: 6px;">
             Rating:
         </div>
+        `
+    };
+
+    if (location.joel_star_rating >=1) {
+        html += `
         <div class="rating-row">
             <div class="person-label joel-label">Joel: </div>
             <div class="${location.joel_star_rating >= 1 ? 'star star-rating' : 'star'}">★</div>
@@ -39,7 +46,11 @@ async function createLocationsPopupContent(location) {
             <div class="${location.joel_star_rating >= 4 ? 'star star-rating' : 'star'}">★</div>
             <div class="${location.joel_star_rating >= 5 ? 'star star-rating' : 'star'}">★</div>
         </div>
-
+        `
+    };
+    
+    if (location.joel_star_rating >=1) {
+        html += `
         <div class="rating-row" style="font-weight: 700; margin-bottom: 6px;">
             <div class="person-label michael-label">Michael: </div>
             <div class="${location.michael_star_rating >= 1 ? 'star star-rating' : 'star'}">★</div>
@@ -48,8 +59,8 @@ async function createLocationsPopupContent(location) {
             <div class="${location.michael_star_rating >= 4 ? 'star star-rating' : 'star'}">★</div>
             <div class="${location.michael_star_rating >= 5 ? 'star star-rating' : 'star'}">★</div>
         </div>
-        
-        `;
+        `
+    };
 
         // Highlights Section
         if (joel_highlights || michael_hightlights) {

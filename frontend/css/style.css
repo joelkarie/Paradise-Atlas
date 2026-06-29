@@ -1,7 +1,7 @@
 body {
     margin: 0;
     font-family: 'Playfair Display', serif;
-    background-color:#FCC3A4;
+    background-color: #FCC3A4;
 }
 
 h1 {
@@ -95,16 +95,18 @@ h1 {
     font-size: 16px;
     font-weight: bold;
     border: 3px solid white;
-    box-shadow: 0 0 5px rgba(0,0,0,0.4);
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.4);
 }
 
 .star {
-  font-size: 2vh;
-  cursor: pointer;
+    font-size: 2vh;
+    cursor: pointer;
 }
+
 .star-rating {
     color: rgb(255, 0, 174);
 }
+
 .person-label {
     font-size: 14px;
     font-weight: 700;
