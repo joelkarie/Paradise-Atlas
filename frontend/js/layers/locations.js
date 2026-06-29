@@ -29,9 +29,9 @@ async function createLocationsPopupContent(location) {
         // Rating Section
         html +=`
         <div style="font-weight: 700; margin-bottom: 6px;">
-            Highlights:
+            Rating:
         </div>
-        <div class="rating-row">
+        <div class="rating-row" style="font-weight: 700; margin-bottom: 6px;">
             <div class="subtitle">Joel: </div>
             <div class="${location.joel_star_rating >= 1 ? 'star star-rating' : 'star'}">★</div>
             <div class="${location.joel_star_rating >= 2 ? 'star star-rating' : 'star'}">★</div>
@@ -40,7 +40,7 @@ async function createLocationsPopupContent(location) {
             <div class="${location.joel_star_rating >= 5 ? 'star star-rating' : 'star'}">★</div>
         </div>
 
-        <div class="rating-row">
+        <div class="rating-row" style="font-weight: 700; margin-bottom: 6px;">
             <div class="subtitle">Michael: </div>
             <div class="${location.michael_star_rating >= 1 ? 'star star-rating' : 'star'}">★</div>
             <div class="${location.michael_star_rating >= 2 ? 'star star-rating' : 'star'}">★</div>
