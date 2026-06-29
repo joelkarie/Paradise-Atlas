@@ -79,11 +79,26 @@
           </div>  
           <div class="rating-row">
               <div class="subtitle">Rating:</div>
-              <div onclick="update_star(1, ${loc.location_id})" class="${loc.joel_star_rating >= 1 ? 'star star-rating' : 'star'}" star-id-${loc.location_id}">★</div>
-              <div onclick="update_star(2, ${loc.location_id})" class="${loc.joel_star_rating >= 2 ? 'star star-rating' : 'star'}" star-id-${loc.location_id}">★</div>
-              <div onclick="update_star(3, ${loc.location_id})" class="${loc.joel_star_rating >= 3 ? 'star star-rating' : 'star'}" star-id-${loc.location_id}">★</div>
-              <div onclick="update_star(4, ${loc.location_id})" class="${loc.joel_star_rating >= 4 ? 'star star-rating' : 'star'}" star-id-${loc.location_id}">★</div>
-              <div onclick="update_star(5, ${loc.location_id})" class="${loc.joel_star_rating >= 5 ? 'star star-rating' : 'star'}" star-id-${loc.location_id}">★</div>
+
+              <div onclick="update_star(1, '${loc.location_id}', this)"
+                  class="${loc.joel_star_rating >= 1 ? 'star star-rating' : 'star'}"
+                  data-star-id="${loc.location_id}">★</div>
+
+              <div onclick="update_star(2, '${loc.location_id}', this)"
+                  class="${loc.joel_star_rating >= 2 ? 'star star-rating' : 'star'}"
+                  data-star-id="${loc.location_id}">★</div>
+
+              <div onclick="update_star(3, '${loc.location_id}', this)"
+                  class="${loc.joel_star_rating >= 3 ? 'star star-rating' : 'star'}"
+                  data-star-id="${loc.location_id}">★</div>
+
+              <div onclick="update_star(4, '${loc.location_id}', this)"
+                  class="${loc.joel_star_rating >= 4 ? 'star star-rating' : 'star'}"
+                  data-star-id="${loc.location_id}">★</div>
+
+              <div onclick="update_star(5, '${loc.location_id}', this)"
+                  class="${loc.joel_star_rating >= 5 ? 'star star-rating' : 'star'}"
+                  data-star-id="${loc.location_id}">★</div>
           </div>
         </div>
       `;
@@ -130,7 +145,7 @@
       document.getElementById("output");
 
     // Funtion to update rating
-    function update_star(starRating, location_id) {
+    function update_star(starRating, location_id, element) {
       remove(location_id);
       for (let i = 0; i < starRating; i++) {
         if (starRating == 1) cls = "star-lit";
@@ -158,14 +173,14 @@
     }
     // To remove the pre-applied styling
     function remove(location_id) {
-      let stars =
-        document.getElementsByClassName(`star-id-${loc.location_id}`);
-      let i = 0;
-      while (i < 5) {
-        stars[i].className = "star";
-        i++;
-      }
-    }    
+      const stars = document.querySelectorAll(
+        `[data-star-id="${location_id}"]`
+      );
+
+      stars.forEach(star => {
+        star.className = "star";
+      });
+    } 
   </script>
 
 </body>
