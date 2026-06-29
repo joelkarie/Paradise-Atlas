@@ -33,8 +33,10 @@ async function createLocationsPopupContent(location) {
     };
 
     const state = escapeHtml(location.state_province || '');
-    const joel = escapeHtml(location.joel_highlights || '');
-    const michael = escapeHtml(location.michael_highlights || '');
+    const joel_highlights = escapeHtml(location.joel_highlights || '');
+    const michael_hightlights = escapeHtml(location.michael_highlights || '');
+    const joel_star_rating = escapeHtml(location.joel_star_rating || '');
+    const michael_star_rating = escapeHtml(location.michael_star_rating || '');
 
     let html = `
         <div style="min-width: 260px; line-height: 1.4;">
@@ -49,49 +51,54 @@ async function createLocationsPopupContent(location) {
             <hr style="margin: 6px 0 10px 0; border: none; border-top: 1px solid #ddd;">
         </div>`;
 
-        if (joel || michael) {
+        // Rating Section
+        html +=`
+        <div style="font-weight: 700; margin-bottom: 6px;">
+            Highlights:
+        </div>
+        <div class="rating-row">
+            <div class="subtitle">Joel: </div>
+            <div class="${joel_star_rating >= 1 ? 'star star-rating' : 'star'}">★</div>
+            <div class="${joel_star_rating >= 2 ? 'star star-rating' : 'star'}">★</div>
+            <div class="${joel_star_rating >= 3 ? 'star star-rating' : 'star'}">★</div>
+            <div class="${joel_star_rating >= 4 ? 'star star-rating' : 'star'}">★</div>
+            <div class="${joel_star_rating >= 5 ? 'star star-rating' : 'star'}">★</div>
+        </div>
+
+        <div class="rating-row">
+            <div class="${michael_star_rating >= 1 ? 'star star-rating' : 'star'}">★</div>
+            <div class="${michael_star_rating >= 2 ? 'star star-rating' : 'star'}">★</div>
+            <div class="${michael_star_rating >= 3 ? 'star star-rating' : 'star'}">★</div>
+            <div class="${michael_star_rating >= 4 ? 'star star-rating' : 'star'}">★</div>
+            <div class="${michael_star_rating >= 5 ? 'star star-rating' : 'star'}">★</div>
+        </div>
+        
+        `;
+
+        // Highlights Section
+        if (joel_highlights || michael_hightlights) {
             html += `
             <div style="font-weight: 700; margin-bottom: 6px;">
                 Highlights:
             </div>
             `
         };
-        if (michael) {
+        if (michael_hightlights) {
             html += `
             <div>
                 <span style="color: #1db1e7; font-weight: 700;">Michael:</span>
-                <span>${michael || 'No highlights listed.'}</span>
+                <span>${michael_hightlights || 'No highlights listed.'}</span>
             </div>
             `
         };
-        if (joel) {
+        if (joel_highlights) {
             html +=`
             <div>
                 <span style="color: #dc6e1a; font-weight: 700;">Joel:</span>
-                <span>${joel || 'No highlights listed.'}</span>
+                <span>${joel_highlights || 'No highlights listed.'}</span>
             </div>            
             `
         };
-
-
-
-
-
-    //         <div style="font-weight: 700; margin-bottom: 6px;">
-    //             Highlights:
-    //         </div>
-
-    //         <div style="margin-bottom: 6px;">
-    //             <span style="color: #dc6e1a; font-weight: 700;">Joel:</span>
-    //             <span>${joel || 'No highlights listed.'}</span>
-    //         </div>
-
-    //         <div>
-    //             <span style="color: #1db1e7; font-weight: 700;">Michael:</span>
-    //             <span>${michael || 'No highlights listed.'}</span>
-    //         </div>
-        
-    // `;
 
     return html;
 }
