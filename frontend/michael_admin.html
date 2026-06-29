@@ -77,6 +77,29 @@
               style="width:75%"
               onchange="updateHighlight('${loc.location_id}', this.value)"
             >${loc.michael_highlights ?? ""}</textarea>
+          </div>
+          <div class="rating-row">
+              <div class="subtitle">Rating:</div>
+
+              <div onclick="update_star(1, '${loc.location_id}', this)"
+                  class="${loc.michael_star_rating >= 1 ? 'star star-rating' : 'star'}"
+                  data-star-id="${loc.location_id}">★</div>
+
+              <div onclick="update_star(2, '${loc.location_id}', this)"
+                  class="${loc.michael_star_rating >= 2 ? 'star star-rating' : 'star'}"
+                  data-star-id="${loc.location_id}">★</div>
+
+              <div onclick="update_star(3, '${loc.location_id}', this)"
+                  class="${loc.michael_star_rating >= 3 ? 'star star-rating' : 'star'}"
+                  data-star-id="${loc.location_id}">★</div>
+
+              <div onclick="update_star(4, '${loc.location_id}', this)"
+                  class="${loc.michael_star_rating >= 4 ? 'star star-rating' : 'star'}"
+                  data-star-id="${loc.location_id}">★</div>
+
+              <div onclick="update_star(5, '${loc.location_id}', this)"
+                  class="${loc.michael_star_rating >= 5 ? 'star star-rating' : 'star'}"
+                  data-star-id="${loc.location_id}">★</div>
           </div>  
         </div>
       `;
@@ -114,7 +137,55 @@
             .then(res => {
                 console.log("updated:", res);
             });
-        }   
+        }  
+
+        // To access the stars
+        // let stars =
+        //   document.getElementsByClassName("star");
+        let output =
+        document.getElementById("output");
+
+        // Funtion to update rating
+        function update_star(starRating, location_id, element) {
+            console.log("Updating:", location_id);
+
+            remove(location_id);
+
+            const stars = document.querySelectorAll(
+                `[data-star-id="${location_id}"]`
+            );
+
+            for (let i = 0; i < starRating; i++) {
+                stars[i].className = "star star-rating";
+            }
+
+            // Update db
+            const formData = new FormData();
+
+            formData.append("location_id", location_id);
+            formData.append("field", "joel_star_rating");
+            formData.append("value", starRating);
+
+            fetch("/locations/update_could_live", {
+                method: "POST",
+                body: formData
+            })
+            .then(r => r.json())
+            .then(res => {
+                console.log("updated:", res);
+            });
+        }
+        
+        function remove(location_id) {
+            console.log("Removing:", location_id)
+            const stars = document.querySelectorAll(
+                `[data-star-id="${location_id}"]`
+            );
+
+            stars.forEach(star => {
+                star.className = "star";
+            });
+        }
     </script>
 
 </body>
