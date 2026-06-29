@@ -146,43 +146,34 @@
 
     // Funtion to update rating
     function update_star(starRating, location_id, element) {
-      console.log("Updating:", location_id)
-      remove(location_id);
-      for (let i = 0; i < starRating; i++) {
-        if (starRating == 1) cls = "star-lit";
-        else if (starRating == 2) cls = "star-lit";
-        else if (starRating == 3) cls = "star-lit";
-        else if (starRating == 4) cls = "star-lit";
-        else if (starRating == 5) cls = "star-lit";
-        stars[i].className = "star " + cls;
-      }
-      //Update db
-      const formData = new FormData();
+        console.log("Updating:", location_id);
 
-      formData.append("location_id", location_id);
-      formData.append("field", "joel_star_rating");
-      formData.append("value", starRating);
+        remove(location_id);
 
-      fetch("/locations/update_could_live", {
-        method: "POST",
-        body: formData
-      })
+        const stars = document.querySelectorAll(
+            `[data-star-id="${location_id}"]`
+        );
+
+        for (let i = 0; i < starRating; i++) {
+            stars[i].className = "star star-rating";
+        }
+
+        // Update db
+        const formData = new FormData();
+
+        formData.append("location_id", location_id);
+        formData.append("field", "joel_star_rating");
+        formData.append("value", starRating);
+
+        fetch("/locations/update_could_live", {
+            method: "POST",
+            body: formData
+        })
         .then(r => r.json())
         .then(res => {
-          console.log("updated:", res);
+            console.log("updated:", res);
         });
     }
-    // To remove the pre-applied styling
-    function remove(location_id) {
-      console.log("Removing:", location_id)
-      const stars = document.querySelectorAll(
-        `[data-star-id="${location_id}"]`
-      );
-
-      stars.forEach(star => {
-        star.className = "star";
-      });
-    } 
   </script>
 
 </body>
