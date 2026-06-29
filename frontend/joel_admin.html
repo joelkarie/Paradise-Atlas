@@ -146,6 +146,7 @@
 
     // Funtion to update rating
     function update_star(starRating, location_id, element) {
+      console.log("Updating:", location_id)
       remove(location_id);
       for (let i = 0; i < starRating; i++) {
         if (starRating == 1) cls = "star-lit";
@@ -173,6 +174,7 @@
     }
     // To remove the pre-applied styling
     function remove(location_id) {
+      console.log("Removing:", location_id)
       const stars = document.querySelectorAll(
         `[data-star-id="${location_id}"]`
       );
