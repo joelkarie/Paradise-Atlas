@@ -13,6 +13,7 @@ async function createLocationsPopupContent(location) {
     const joel_highlights = escapeHtml(location.joel_highlights || '');
     const michael_hightlights = escapeHtml(location.michael_highlights || '');
 
+    // Basic Location Data
     let html = `
         <div style="min-width: 260px; line-height: 1.4;">
             <div style="font-size: 22px; font-weight: 700; margin-bottom: 2px;">
@@ -26,73 +27,67 @@ async function createLocationsPopupContent(location) {
             <hr style="margin: 6px 0 10px 0; border: none; border-top: 1px solid #ddd;">
         </div>`;
 
-        // Rating Section
-
-    if (location.joel_star_rating >=1 || location.michael_star_rating >= 1) {
-        html +=`
+    // Rating Section
+    if (location.joel_star_rating >= 1 || location.michael_star_rating >= 1) {
+        html += `
         <div style="font-weight: 700; margin-bottom: 6px;">
             Rating:
         </div>
         `
     };
 
-    if (location.joel_star_rating >=1) {
+    if (location.joel_star_rating >= 1) {
         let stars = ``
-        
+
         for (let i = 0; i < location.joel_star_rating; i++) {
             stars += `<div class="star-rating">★</div>`
         }
         html += `
         <div class="rating-row">
+            <div class="person-label joel-label">Joel: </div>
             ${stars}
         </div>
         `
     };
-        //    <div class="rating-row">
-        //     <div class="person-label joel-label">Joel: </div>
-        //     <div class="${location.joel_star_rating >= 1 ? 'star star-rating' : 'star'}">★</div>
-        //     <div class="${location.joel_star_rating >= 2 ? 'star star-rating' : 'star'}">★</div>
-        //     <div class="${location.joel_star_rating >= 3 ? 'star star-rating' : 'star'}">★</div>
-        //     <div class="${location.joel_star_rating >= 4 ? 'star star-rating' : 'star'}">★</div>
-        //     <div class="${location.joel_star_rating >= 5 ? 'star star-rating' : 'star'}">★</div>
-        // </div> 
-    if (location.michael_star_rating >=1) {
+
+    if (location.michael_star_rating >= 1) {
+        let stars = ``
+
+        for (let i = 0; i < location.michael_star_rating; i++) {
+            stars += `<div class="star-rating">★</div>`
+        }
         html += `
         <div class="rating-row" style="font-weight: 700; margin-bottom: 6px;">
             <div class="person-label michael-label">Michael: </div>
-            <div class="${location.michael_star_rating >= 1 ? 'star star-rating' : 'star'}">★</div>
-            <div class="${location.michael_star_rating >= 2 ? 'star star-rating' : 'star'}">★</div>
-            <div class="${location.michael_star_rating >= 3 ? 'star star-rating' : 'star'}">★</div>
-            <div class="${location.michael_star_rating >= 4 ? 'star star-rating' : 'star'}">★</div>
-            <div class="${location.michael_star_rating >= 5 ? 'star star-rating' : 'star'}">★</div>
+            ${stars}
         </div>
         `
     };
 
-        // Highlights Section
-        if (joel_highlights || michael_hightlights) {
-            html += `
+    // Highlights Section
+    if (joel_highlights || michael_hightlights) {
+        html += `
             <div style="font-weight: 700; margin-bottom: 6px;">
                 Highlights:
             </div>
             `
-        };
-        if (michael_hightlights) {
-            html += `
+    };
+    if (michael_hightlights) {
+        html += `
             <div>
                 <span class="person-label michaek-label">Michael:</span>
                 <span>${michael_hightlights || 'No highlights listed.'}</span>
             </div>
             `
-        };
-        if (joel_highlights) {
-            html +=`
+    };
+    if (joel_highlights) {
+        html += `
             <div>
                 <span class="person-label joel-label">Joel:</span>
                 <span>${joel_highlights || 'No highlights listed.'}</span>
             </div>            
             `
-        };
+    };
 
     return html;
 }
