@@ -20,10 +20,14 @@ export function createMap() {
     //         attribution: '&copy; OpenStreetMap contributors'
     //     }
     // ).addTo(map);
-    L.tileLayer('https://tiles.stadiamaps.com/tiles/stamen_watercolor/{z}/{x}/{y}.jpg', {
-        attribution: '&copy; Stadia Maps &copy; Stamen Design &copy; OpenStreetMap contributors',
+L.tileLayer(
+    'https://tiles.stadiamaps.com/tiles/stamen_watercolor/{z}/{x}/{y}.jpg?api_key=REMOVED_API_KEY',
+    {
+        attribution:
+            '&copy; Stadia Maps &copy; Stamen Design &copy; OpenStreetMap contributors',
         maxZoom: 16
-    }).addTo(map);
+    }
+).addTo(map);
     map.touchZoom.enable();
     map.doubleClickZoom.enable();
     map.scrollWheelZoom.disable();
