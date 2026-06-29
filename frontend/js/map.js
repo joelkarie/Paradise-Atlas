@@ -14,6 +14,7 @@ export function createMap() {
         [39.5, -98.35],
         4
     );
+    
     // Standard OpenStreetMap
     // L.tileLayer(
     //     'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
