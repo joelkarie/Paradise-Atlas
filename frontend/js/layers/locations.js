@@ -49,7 +49,7 @@ async function createLocationsPopupContent(location) {
         `
     };
     
-    if (location.joel_star_rating >=1) {
+    if (location.michael_star_rating >=1) {
         html += `
         <div class="rating-row" style="font-weight: 700; margin-bottom: 6px;">
             <div class="person-label michael-label">Michael: </div>
