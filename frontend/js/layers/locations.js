@@ -37,18 +37,25 @@ async function createLocationsPopupContent(location) {
     };
 
     if (location.joel_star_rating >=1) {
+        let stars = ``
+        
+        for (let i = 0; i < location.joel_star_rating; i++) {
+            stars += `<div class="star-rating">★</div>`
+        }
         html += `
         <div class="rating-row">
-            <div class="person-label joel-label">Joel: </div>
-            <div class="${location.joel_star_rating >= 1 ? 'star star-rating' : 'star'}">★</div>
-            <div class="${location.joel_star_rating >= 2 ? 'star star-rating' : 'star'}">★</div>
-            <div class="${location.joel_star_rating >= 3 ? 'star star-rating' : 'star'}">★</div>
-            <div class="${location.joel_star_rating >= 4 ? 'star star-rating' : 'star'}">★</div>
-            <div class="${location.joel_star_rating >= 5 ? 'star star-rating' : 'star'}">★</div>
+            ${stars}
         </div>
         `
     };
-    
+        //    <div class="rating-row">
+        //     <div class="person-label joel-label">Joel: </div>
+        //     <div class="${location.joel_star_rating >= 1 ? 'star star-rating' : 'star'}">★</div>
+        //     <div class="${location.joel_star_rating >= 2 ? 'star star-rating' : 'star'}">★</div>
+        //     <div class="${location.joel_star_rating >= 3 ? 'star star-rating' : 'star'}">★</div>
+        //     <div class="${location.joel_star_rating >= 4 ? 'star star-rating' : 'star'}">★</div>
+        //     <div class="${location.joel_star_rating >= 5 ? 'star star-rating' : 'star'}">★</div>
+        // </div> 
     if (location.michael_star_rating >=1) {
         html += `
         <div class="rating-row" style="font-weight: 700; margin-bottom: 6px;">
