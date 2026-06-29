@@ -45,7 +45,7 @@ def get_location_ratings():
     ]
 
 
-def update_could_live_value(location_id, field, value):
+def update_location_rating_value(location_id, field, value):
 
     with engine.begin() as conn:
         conn.exec_driver_sql(

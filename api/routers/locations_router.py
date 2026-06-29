@@ -1,5 +1,5 @@
 from fastapi import APIRouter, Form
-from ..services.locations_services import get_locations, update_could_live_value
+from ..services.locations_services import get_locations, update_location_rating_value
 
 router = APIRouter(prefix="/locations", tags=["Locations"])
 
@@ -9,8 +9,8 @@ def locations():
     return get_locations()
 
 
-@router.post("/update_could_live")
-def update_could_live(
+@router.post("/update_location_rating")
+def update_location_rating(
     location_id: str = Form(...), field: str = Form(...), value: str = Form(...)
 ):
     allowed_fields = {
@@ -28,6 +28,6 @@ def update_could_live(
     if field in ["joel_could_live", "michael_could_live"]:
         value = True if str(value).lower() == "true" else False
 
-    update_could_live_value(location_id, field, value)
+    update_location_rating_value(location_id, field, value)
 
     return {"status": "ok"}
