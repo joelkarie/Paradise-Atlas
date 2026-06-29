@@ -17,7 +17,9 @@ def update_could_live(
         "joel_could_live",
         "michael_could_live",
         "joel_highlights",
-        "michael_highlights"
+        "michael_highlights",
+        "joel_star_rating",
+        "michael_star_rating"
     }
 
     if field not in allowed_fields:

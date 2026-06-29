@@ -79,11 +79,11 @@
           </div>  
           <div class="rating-row">
               <div class="subtitle">Rating:</div>
-              <div class="star">★</div>
-              <div class="star">★</div>
-              <div class="star">★</div>
-              <div class="star">★</div>
-              <div class="star">★</div>
+              <div class="${loc.joel_star_rating >= 1 ? 'star star-rating' : 'star'}"">★</div>
+              <div class="${loc.joel_star_rating >= 2 ? 'star star-rating' : 'star'}"">★</div>
+              <div class="${loc.joel_star_rating >= 3 ? 'star star-rating' : 'star'}"">★</div>
+              <div class="${loc.joel_star_rating >= 4 ? 'star star-rating' : 'star'}"">★</div>
+              <div class="${loc.joel_star_rating >= 5 ? 'star star-rating' : 'star'}"">★</div>
           </div>
         </div>
       `;
