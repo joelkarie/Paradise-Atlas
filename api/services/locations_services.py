@@ -1,6 +1,5 @@
 from sqlalchemy import text
 from ..database import engine
-from fastapi import Form
 
 
 def get_locations():
@@ -20,7 +19,9 @@ def get_locations():
 def get_location_ratings():
     with engine.connect() as conn:
         result = conn.exec_driver_sql("""
-            SELECT l.name, l.state_province, l.country, lr.joel_could_live, lr.michael_could_live, lr.location_id, lr.joel_highlights, lr.michael_highlights, lr.joel_star_rating, lr.michael_star_rating
+            SELECT l.name, l.state_province, l.country, 
+            lr.joel_could_live, lr.michael_could_live, lr.location_id, 
+            lr.joel_highlights, lr.michael_highlights, lr.joel_star_rating, lr.michael_star_rating
             FROM location l 
             JOIN location_rating lr ON lr.location_id = l.id
             WHERE l.location_type_id = 1
@@ -39,7 +40,7 @@ def get_location_ratings():
             "joel_highlights": r[6],
             "michael_highlights": r[7],
             "joel_star_rating": r[8],
-            "michael_star_rating": r[9]
+            "michael_star_rating": r[9],
         }
         for r in rows
     ]

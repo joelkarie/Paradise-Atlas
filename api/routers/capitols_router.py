@@ -1,7 +1,7 @@
 from fastapi import APIRouter
 from ..services.capitols_services import get_capitols
 
-router = APIRouter(prefix="/capitols", tags=["Capitols"])
+router = APIRouter(prefix="/capitols", tags=["Capitols Visited"])
 
 
 @router.get("")
