@@ -1,26 +1,3 @@
-// async function createLocationsPopupContent(location) {
-//     console.log(location)
-//     let html = `
-//                 <b>${location.name}</b><br>
-//                 ${location.state_province}
-//             `;
-
-//     if (location.michael_highlights) {
-//         html += `
-//             <br>
-//             Michael's Highlights: ${location.michael_highlights}
-//                 `;
-//     }
-
-//     if (location.joel_highlights) {
-//         html += `
-//             <br>
-//             Joel's Highlights: ${location.joel_highlights}
-//                 `;
-//     }
-
-//     return html;
-// }
 async function createLocationsPopupContent(location) {
     const escapeHtml = (str) => {
         if (!str) return '';
@@ -35,8 +12,6 @@ async function createLocationsPopupContent(location) {
     const state = escapeHtml(location.state_province || '');
     const joel_highlights = escapeHtml(location.joel_highlights || '');
     const michael_hightlights = escapeHtml(location.michael_highlights || '');
-    const joel_star_rating = escapeHtml(location.joel_star_rating || '');
-    const michael_star_rating = escapeHtml(location.michael_star_rating || '');
 
     let html = `
         <div style="min-width: 260px; line-height: 1.4;">
@@ -58,19 +33,20 @@ async function createLocationsPopupContent(location) {
         </div>
         <div class="rating-row">
             <div class="subtitle">Joel: </div>
-            <div class="${joel_star_rating >= 1 ? 'star star-rating' : 'star'}">★</div>
-            <div class="${joel_star_rating >= 2 ? 'star star-rating' : 'star'}">★</div>
-            <div class="${joel_star_rating >= 3 ? 'star star-rating' : 'star'}">★</div>
-            <div class="${joel_star_rating >= 4 ? 'star star-rating' : 'star'}">★</div>
-            <div class="${joel_star_rating >= 5 ? 'star star-rating' : 'star'}">★</div>
+            <div class="${location.joel_star_rating >= 1 ? 'star star-rating' : 'star'}">★</div>
+            <div class="${location.joel_star_rating >= 2 ? 'star star-rating' : 'star'}">★</div>
+            <div class="${location.joel_star_rating >= 3 ? 'star star-rating' : 'star'}">★</div>
+            <div class="${location.joel_star_rating >= 4 ? 'star star-rating' : 'star'}">★</div>
+            <div class="${location.joel_star_rating >= 5 ? 'star star-rating' : 'star'}">★</div>
         </div>
 
         <div class="rating-row">
-            <div class="${michael_star_rating >= 1 ? 'star star-rating' : 'star'}">★</div>
-            <div class="${michael_star_rating >= 2 ? 'star star-rating' : 'star'}">★</div>
-            <div class="${michael_star_rating >= 3 ? 'star star-rating' : 'star'}">★</div>
-            <div class="${michael_star_rating >= 4 ? 'star star-rating' : 'star'}">★</div>
-            <div class="${michael_star_rating >= 5 ? 'star star-rating' : 'star'}">★</div>
+            <div class="subtitle">Michael: </div>
+            <div class="${location.michael_star_rating >= 1 ? 'star star-rating' : 'star'}">★</div>
+            <div class="${location.michael_star_rating >= 2 ? 'star star-rating' : 'star'}">★</div>
+            <div class="${location.michael_star_rating >= 3 ? 'star star-rating' : 'star'}">★</div>
+            <div class="${location.michael_star_rating >= 4 ? 'star star-rating' : 'star'}">★</div>
+            <div class="${location.michael_star_rating >= 5 ? 'star star-rating' : 'star'}">★</div>
         </div>
         
         `;
