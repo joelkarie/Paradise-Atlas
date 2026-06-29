@@ -159,7 +159,7 @@
     // To remove the pre-applied styling
     function remove(location_id) {
       let stars =
-        document.getElementsByClassName("star-id-${loc.location_id}");
+        document.getElementsByClassName(`star-id-${loc.location_id}`);
       let i = 0;
       while (i < 5) {
         stars[i].className = "star";
