@@ -31,8 +31,8 @@ async function createLocationsPopupContent(location) {
         <div style="font-weight: 700; margin-bottom: 6px;">
             Rating:
         </div>
-        <div class="rating-row" style="font-weight: 700; margin-bottom: 6px;">
-            <div class="subtitle">Joel: </div>
+        <div class="rating-row">
+            <div class="person-label joel-label">Joel: </div>
             <div class="${location.joel_star_rating >= 1 ? 'star star-rating' : 'star'}">★</div>
             <div class="${location.joel_star_rating >= 2 ? 'star star-rating' : 'star'}">★</div>
             <div class="${location.joel_star_rating >= 3 ? 'star star-rating' : 'star'}">★</div>
@@ -41,7 +41,7 @@ async function createLocationsPopupContent(location) {
         </div>
 
         <div class="rating-row" style="font-weight: 700; margin-bottom: 6px;">
-            <div class="subtitle">Michael: </div>
+            <div class="person-label michael-label">Michael: </div>
             <div class="${location.michael_star_rating >= 1 ? 'star star-rating' : 'star'}">★</div>
             <div class="${location.michael_star_rating >= 2 ? 'star star-rating' : 'star'}">★</div>
             <div class="${location.michael_star_rating >= 3 ? 'star star-rating' : 'star'}">★</div>
@@ -62,7 +62,7 @@ async function createLocationsPopupContent(location) {
         if (michael_hightlights) {
             html += `
             <div>
-                <span style="color: #1db1e7; font-weight: 700;">Michael:</span>
+                <span class="person-label michaek-label">Michael:</span>
                 <span>${michael_hightlights || 'No highlights listed.'}</span>
             </div>
             `
@@ -70,7 +70,7 @@ async function createLocationsPopupContent(location) {
         if (joel_highlights) {
             html +=`
             <div>
-                <span style="color: #dc6e1a; font-weight: 700;">Joel:</span>
+                <span class="person-label joel-label">Joel:</span>
                 <span>${joel_highlights || 'No highlights listed.'}</span>
             </div>            
             `

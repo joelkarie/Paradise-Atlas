@@ -105,3 +105,15 @@ h1 {
 .star-rating {
     color: rgb(255, 0, 174);
 }
+.person-label {
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.joel-label {
+    color: #dc6e1a;
+}
+
+.michael-label {
+    color: #1db1e7;
+}
