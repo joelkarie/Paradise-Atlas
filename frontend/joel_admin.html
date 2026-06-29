@@ -79,11 +79,11 @@
           </div>  
           <div class="rating-row">
               <div class="subtitle">Rating:</div>
-              <div class="${loc.joel_star_rating >= 1 ? 'star star-rating' : 'star'}"">★</div>
-              <div class="${loc.joel_star_rating >= 2 ? 'star star-rating' : 'star'}"">★</div>
-              <div class="${loc.joel_star_rating >= 3 ? 'star star-rating' : 'star'}"">★</div>
-              <div class="${loc.joel_star_rating >= 4 ? 'star star-rating' : 'star'}"">★</div>
-              <div class="${loc.joel_star_rating >= 5 ? 'star star-rating' : 'star'}"">★</div>
+              <div onclick="update_star(1)" class="${loc.joel_star_rating >= 1 ? 'star star-rating' : 'star'}"">★</div>
+              <div onclick="update_star(2)" class="${loc.joel_star_rating >= 2 ? 'star star-rating' : 'star'}"">★</div>
+              <div onclick="update_star(3)" class="${loc.joel_star_rating >= 3 ? 'star star-rating' : 'star'}"">★</div>
+              <div onclick="update_star(4)" class="${loc.joel_star_rating >= 4 ? 'star star-rating' : 'star'}"">★</div>
+              <div onclick="update_star(5)" class="${loc.joel_star_rating >= 5 ? 'star star-rating' : 'star'}"">★</div>
           </div>
         </div>
       `;
@@ -107,20 +107,62 @@
     }
 
     function updateHighlight(location_id, value) {
-        const formData = new FormData();
+      const formData = new FormData();
 
-        formData.append("location_id", location_id);
-        formData.append("field", "joel_highlights");
-        formData.append("value", value);
+      formData.append("location_id", location_id);
+      formData.append("field", "joel_highlights");
+      formData.append("value", value);
 
-        fetch("/locations/update_could_live", {
-            method: "POST",
-            body: formData
-        })
+      fetch("/locations/update_could_live", {
+        method: "POST",
+        body: formData
+      })
         .then(r => r.json())
         .then(res => {
-            console.log("updated:", res);
+          console.log("updated:", res);
         });
+    }
+
+    // To access the stars
+    let stars =
+      document.getElementsByClassName("star");
+    let output =
+      document.getElementById("output");
+
+    // Funtion to update rating
+    function update_star(starRating, location_id) {
+      remove();
+      for (let i = 0; i < starRating; i++) {
+        if (starRating == 1) cls = "star-lit";
+        else if (starRating == 2) cls = "star-lit";
+        else if (starRating == 3) cls = "star-lit";
+        else if (starRating == 4) cls = "star-lit";
+        else if (starRating == 5) cls = "star-lit";
+        stars[i].className = "star " + cls;
+      }
+      //Update db
+      const formData = new FormData();
+
+      formData.append("location_id", location_id);
+      formData.append("field", "joel_star_rating");
+      formData.append("value", starRating);
+
+      fetch("/locations/update_could_live", {
+        method: "POST",
+        body: formData
+      })
+        .then(r => r.json())
+        .then(res => {
+          console.log("updated:", res);
+        });      
+    }
+    // To remove the pre-applied styling
+    function remove() {
+      let i = 0;
+      while (i < 5) {
+        stars[i].className = "star";
+        i++;
+      }
     }    
   </script>
 
