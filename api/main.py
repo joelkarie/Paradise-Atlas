@@ -1,13 +1,12 @@
-from fastapi import FastAPI, Form
+from pathlib import Path
+from dotenv import load_dotenv
+
+load_dotenv()
+
+from fastapi import FastAPI
 from fastapi.responses import FileResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.middleware.cors import CORSMiddleware
-
-from dotenv import load_dotenv
-import os
-from pathlib import Path
-
-load_dotenv()
 
 from api.database import engine
 from api.routers.theatres_router import router as theatre_router
@@ -20,14 +19,11 @@ from api.routers.patagonia_router import router as patagonia_router
 from api.routers.quaker_meetings_router import router as quaker_meetings_router
 from api.routers.michael_could_live_router import router as michael_could_live_router
 from api.routers.together_could_live_router import router as together_could_live_router
-from api.services.locations_services import get_locations, get_location_ratings
-
-# # uvicorn app.main:app --reload
+from api.services.locations_services import get_location_ratings
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 app = FastAPI()
-
 
 app.add_middleware(
     CORSMiddleware,
@@ -61,6 +57,7 @@ for router in routers:
     app.include_router(router)
 
 
+# Mount files from frontend so that they are available to the api
 app.mount("/static", StaticFiles(directory="frontend"), name="static")
 
 
@@ -85,11 +82,18 @@ def health():
     return {"status": "ok"}
 
 
+@app.get("/ping")
+def ping():
+    return {"ok": True}
+
+
 @app.get("/admin/locations")
 def admin_locations():
     return get_location_ratings()
 
 
+# Serve frontend HTML pages for the main site and admin interfaces
+# Each route returns the corresponding HTML file from the frontend directory.
 @app.get("/")
 def home():
     return FileResponse(BASE_DIR / "frontend" / "index.html")
@@ -103,8 +107,3 @@ def joel_admin_page():
 @app.get("/admin/michael")
 def michael_admin_page():
     return FileResponse(BASE_DIR / "frontend" / "michael_admin.html")
-
-
-@app.get("/ping")
-def ping():
-    return {"ok": True}
