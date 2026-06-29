@@ -1,3 +1,4 @@
+/* GENERAL STYLES */
 body {
     margin: 0;
     font-family: 'Playfair Display', serif;
@@ -42,6 +43,7 @@ h1 {
     border-radius: 10px;
 }
 
+/* MAP STYLES */
 .map-popup {
     width: min(300px, 80vw);
 }
@@ -65,6 +67,7 @@ h1 {
     margin-bottom: 6px;
 }
 
+/* POPUP DATA STYLES */
 .subtitle {
     font-size: 14px;
     font-weight: bold;
@@ -98,6 +101,7 @@ h1 {
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.4);
 }
 
+/* STAR RATING STYLES */
 .star {
     font-size: 2vh;
     cursor: pointer;
@@ -107,15 +111,15 @@ h1 {
     color: rgb(255, 0, 174);
 }
 
-.person-label {
-    font-size: 14px;
-    font-weight: 700;
-}
-
 .joel-label {
     color: #74d377;
 }
 
 .michael-label {
     color: #1db1e7;
+}
+
+.person-label {
+    font-size: 14px;
+    font-weight: 700;
 }
