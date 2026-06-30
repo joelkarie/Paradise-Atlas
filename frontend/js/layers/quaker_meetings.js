@@ -18,10 +18,20 @@ export function createQuakerMeetingsLayer(meetings) {
             meeting.longitude], { icon: customMarker })
             .addTo(meetingLayer)
             .bindPopup(`
-                <b>${meeting.name}</b><br>
-                ${meeting.city}, ${meeting.state_province}
+                <div style="min-width: 260px; line-height: 1.4;">
+                            <div style="font-size: 22px; font-weight: 700; margin-bottom: 2px;">
+                                ${meeting.name}
+                            </div>
+
+                            <div style="font-size: 13px; color: #666; margin-bottom: 10px;">
+                                ${meeting.city}, ${meeting.state_province}
+                            </div>
+
+                            <hr style="margin: 6px 0 10px 0; border: none; border-top: 1px solid #ddd;">
+                </div>
             `, {keepInView: true});
 
     });
     return meetingLayer;
 }
+
