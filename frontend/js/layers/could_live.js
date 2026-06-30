@@ -19,8 +19,17 @@ export function createCouldLiveLayer(cities, icon_filename, icon_size) {
             city.longitude], { icon: customMarker })
             .addTo(CouldLiveLayer)
             .bindPopup(`
-                <b>${city.city}</b><br>
-                ${city.state_province}
+                <div style="min-width: 260px; line-height: 1.4;">
+                            <div style="font-size: 22px; font-weight: 700; margin-bottom: 2px;">
+                                ${city.city}
+                            </div>
+
+                            <div style="font-size: 13px; color: #666; margin-bottom: 10px;">
+                                ${city.state_province}
+                            </div>
+
+                            <hr style="margin: 6px 0 10px 0; border: none; border-top: 1px solid #ddd;">
+                </div>
             `, {keepInView: true});
 
     });

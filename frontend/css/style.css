@@ -87,7 +87,7 @@ h1 {
 }
 
 .numbered-marker {
-    background-color: #a961af;
+    background-color: #a47ca8;
     color: white;
     border-radius: 50%;
     width: 28px !important;
@@ -97,7 +97,7 @@ h1 {
     justify-content: center;
     font-size: 16px;
     font-weight: bold;
-    border: 3px solid white;
+    border: 3px solid #a47ca8;
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.4);
 }
 
@@ -108,11 +108,11 @@ h1 {
 }
 
 .star-rating {
-    color: rgb(255, 0, 174);
+    color: rgb(231, 95, 188);
 }
 
 .joel-label {
-    color: #74d377;
+    color: #ddd232;
 }
 
 .michael-label {
