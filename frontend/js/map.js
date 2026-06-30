@@ -14,7 +14,7 @@ export function createMap() {
         [39.5, -98.35],
         4
     );
-    
+
     // Standard OpenStreetMap
     // L.tileLayer(
     //     'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
@@ -23,15 +23,22 @@ export function createMap() {
     //     }
     // ).addTo(map);
 
-    // Prettier Thunderforest tileset 
+    // // Prettier Thunderforest tileset 
+    // L.tileLayer(
+    //     'https://api.thunderforest.com/outdoors/{z}/{x}/{y}.png?apikey=REMOVED_API_KEY',
+    //     {
+    //         attribution: '&copy; Thunderforest &copy; OpenStreetMap contributors',
+    //         maxZoom: 18
+    //     }
+    // ).addTo(map);
+
     L.tileLayer(
-        'https://api.thunderforest.com/outdoors/{z}/{x}/{y}.png?apikey=REMOVED_API_KEY',
+        'https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}',
         {
-            attribution: '&copy; Thunderforest &copy; OpenStreetMap contributors',
-            maxZoom: 18
+            attribution: 'Tiles &copy; Esri &mdash; Sources: Esri, Garmin, USGS, NGA, and others'
         }
     ).addTo(map);
-    
+
     map.touchZoom.enable();
     map.doubleClickZoom.enable();
     map.scrollWheelZoom.disable();
