@@ -26,13 +26,12 @@ Atlas Paradiso transforms travel experiences into an interactive map. It allows 
 
 ## Screenshots
 
-_Add screenshots here_
+![Map of Unique Locations Visited](screenshots/location_map.png)
+![Map of Capitols Visited](screenshots/capitol_map.png)
+![Map of Quaker Meeting Houses Visited](screenshots/quaker_map.png)
+![Joel's Editing Page](screenshots/joel_loc.png)
+![Michael's Editing Page](screenshots/michael_loc.png)
 
-Example:
-
-```
-![Atlas Paradiso Map](screenshots/map.png)
-```
 
 ---
 
@@ -60,76 +59,36 @@ Example:
 
 ```
 Atlas-Paradiso/
-│
-├── backend/
+├── README.md
+├── api
+│   ├── database.py
 │   ├── main.py
-│   ├── routes/
-│   └── database/
-│
-├── frontend/
+│   ├── routers
+│   └── services
+├── backend
+│   └── scripts
+├── database
+│   └── schema
+├── frontend
+│   ├── assets
+│   ├── css
+│   ├── images
 │   ├── index.html
 │   ├── joel_admin.html
-│   ├── michael_admin.html
-│   ├── css/
-│   └── assets/
-│
-├── static/
-│   ├── images/
-│   └── assets/
-│
+│   ├── js
+│   └── michael_admin.html
+├── maps
+│   ├── generate_capitol_map.py
+│   ├── generate_joel_could_live_map.py
+│   ├── generate_theatre_map.py
+│   ├── generate_visit_order_map.py
+│   └── output
+├── notes.md
+├── paradise_atlas_noted.md
 ├── requirements.txt
-└── README.md
-```
-
----
-
-## Installation
-
-### 1. Clone the repository
-
-```bash
-git clone https://github.com/YOUR_USERNAME/atlas-paradiso.git
-cd atlas-paradiso
-```
-
-### 2. Create a virtual environment
-
-```bash
-python3 -m venv venv
-source venv/bin/activate
-```
-
-Windows:
-
-```bash
-venv\Scripts\activate
-```
-
-### 3. Install dependencies
-
-```bash
-pip install -r requirements.txt
-```
-
-### 4. Configure environment variables
-
-Create a `.env` file:
-
-```env
-DATABASE_URL=your_database_connection_string
-THUNDERFOREST_API_KEY=your_api_key
-```
-
-### 5. Run the application
-
-```bash
-uvicorn main:app --reload
-```
-
-Open:
-
-```
-http://localhost:8000
+├── resources
+│   └── tables.sql
+├── screenshots
 ```
 
 ---
