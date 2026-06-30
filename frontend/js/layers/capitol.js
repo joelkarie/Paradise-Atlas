@@ -1,10 +1,10 @@
-export function createCapitolLayer(capitols) {
+export function createCapitolLayer(capitols, icon) {
     const capitolLayer = L.layerGroup();
 
     capitols.forEach(capitol => {
         const customMarker = L.divIcon({
             html: `
-                <img src="/static/assets/capitol_marker.png"
+                <img src="/static/assets/${icon}"
                     style="
                         width:40px;
                         filter: drop-shadow(2px 4px 3px rgba(0,0,0,0.4));
