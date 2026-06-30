@@ -58,7 +58,7 @@ export function createTheatreLayer(theatres) {
 
         marker.on("click", async () => {
             const content = await createTheatrePopupContent(theatre);
-            marker.bindPopup(content).openPopup();
+            marker.bindPopup(content, {keepInView: true}).openPopup();
         });
 
     });

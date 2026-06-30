@@ -115,7 +115,7 @@ export function createLocationsLayer(locations) {
 
         marker.on("click", async () => {
             const content = await createLocationsPopupContent(location);
-            marker.bindPopup(content).openPopup();
+            marker.bindPopup(content, {keepInView: true}).openPopup();
         });
     });
     return locationLayer;

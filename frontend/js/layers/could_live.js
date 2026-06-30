@@ -21,7 +21,7 @@ export function createCouldLiveLayer(cities, icon_filename, icon_size) {
             .bindPopup(`
                 <b>${city.city}</b><br>
                 ${city.state_province}
-            `);
+            `, {keepInView: true});
 
     });
     return CouldLiveLayer;

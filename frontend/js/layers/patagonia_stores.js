@@ -20,7 +20,7 @@ export function createPatagoniaStoreLayer(stores) {
             .bindPopup(`
                 <b>${store.store_name}</b><br>
                 ${store.city}, ${store.state_province}
-            `);
+            `, {keepInView: true});
 
     });
     return storeLayer;

@@ -59,7 +59,7 @@ export function createVisitOrderLayer(locations) {
             .addTo(visitOrderLayer);
         marker.on("click", async () => {
             const content = await createLocationsPopupContent(location, locations);
-            marker.bindPopup(content).openPopup();
+            marker.bindPopup(content, {keepInView: true}).openPopup();
         });
 
     });

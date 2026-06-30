@@ -20,7 +20,7 @@ export function createQuakerMeetingsLayer(meetings) {
             .bindPopup(`
                 <b>${meeting.name}</b><br>
                 ${meeting.city}, ${meeting.state_province}
-            `);
+            `, {keepInView: true});
 
     });
     return meetingLayer;
