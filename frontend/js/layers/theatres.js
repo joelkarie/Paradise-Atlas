@@ -5,9 +5,20 @@ async function imageExists(url) {
 
 async function createTheatrePopupContent(theatre) {
     let html = `
-                <b>${theatre.name}</b><br>
+        <div style="min-width: 260px; line-height: 1.4;">
+            <div style="font-size: 22px; font-weight: 700; margin-bottom: 2px;">
+                ${theatre.name}
+            </div>
+
+            <div style="font-size: 13px; color: #666; margin-bottom: 10px;">
                 ${theatre.city}, ${theatre.state_province}
+            </div>
+            <div>
                 ${theatre.date ? `<br><i>Visited on ${theatre.date}</i>` : ''}
+            </div?>
+
+            <hr style="margin: 6px 0 10px 0; border: none; border-top: 1px solid #ddd;">
+        </div>
             `;
 
     const imageUrl = `/static/images/theatres/${theatre.city.toLowerCase().replaceAll(" ", "_")}_theatre.webp`;
