@@ -10,14 +10,13 @@ async function createTheatrePopupContent(theatre) {
                 ${theatre.name}
             </div>
 
-            <div style="font-size: 13px; color: #666; margin-bottom: 10px;">
+            <div style="font-size: 13px; color: #666; margin-bottom: 2px;">
                 ${theatre.city}, ${theatre.state_province}
             </div>
+            <hr style="margin: 6px 0 10px 0; border: none; border-top: 1px solid #ddd;">
             <div>
                 ${theatre.date ? `<br><i>Visited on ${theatre.date}</i>` : ''}
-            </div?>
-
-            <hr style="margin: 6px 0 10px 0; border: none; border-top: 1px solid #ddd;">
+            </div?>      
         </div>
             `;
 

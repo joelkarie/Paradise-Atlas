@@ -14,15 +14,19 @@ export function createCapitolLayer(capitols, icon) {
             iconAnchor: [15, 30]
         });
 
-        L.marker([
-            capitol.latitude,
-            capitol.longitude
-        ], { icon: customMarker })
-            .addTo(capitolLayer)
-            .bindPopup(`
-                <div class="map-popup">
+        let popup_info = `
+        <div style="min-width: 260px; line-height: 1.4;">
+            <div style="font-size: 22px; font-weight: 700; margin-bottom: 2px;">
                 <b>${capitol.state_province} Capitol</b><br>
-                ${capitol.city}, ${capitol.state_province}<br>
+            </div>
+
+            <div style="font-size: 13px; color: #666; margin-bottom: 10px;">
+                ${capitol.city}, ${capitol.state_province}
+            </div>
+
+            <hr style="margin: 6px 0 10px 0; border: none; border-top: 1px solid #ddd;">
+
+            <div>
                 Year Completed: ${capitol.year_completed}<br>
                 Architect: ${capitol.architect}<br>
                 Style: ${capitol.architectural_style}<br>
@@ -32,7 +36,17 @@ export function createCapitolLayer(capitols, icon) {
                         style="width:100%; max-width:300px; cursor:pointer;">
                  </a>
                 </d>
-            `);
+            </div>
+
+        </div>
+        `
+
+        L.marker([
+            capitol.latitude,
+            capitol.longitude
+        ], { icon: customMarker })
+            .addTo(capitolLayer)
+            .bindPopup(popup_info);
 
     });
     return capitolLayer;
