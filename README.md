@@ -50,7 +50,7 @@ Atlas Paradiso transforms travel experiences into an interactive map. It allows 
 
 ### Mapping
 - Leaflet
-- Thunderforest Outdoors tiles
+- ESRI Typographic tiles
 - OpenStreetMap data
 
 ---

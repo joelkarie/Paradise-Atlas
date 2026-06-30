@@ -23,15 +23,6 @@ export function createMap() {
     //     }
     // ).addTo(map);
 
-    // // Prettier Thunderforest tileset 
-    // L.tileLayer(
-    //     'https://api.thunderforest.com/outdoors/{z}/{x}/{y}.png?apikey=REMOVED_API_KEY',
-    //     {
-    //         attribution: '&copy; Thunderforest &copy; OpenStreetMap contributors',
-    //         maxZoom: 18
-    //     }
-    // ).addTo(map);
-
     L.tileLayer(
         'https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}',
         {
