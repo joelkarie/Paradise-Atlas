@@ -36,6 +36,7 @@ h1 {
     align-items: center;
     min-height: 25px;
     background-color: #fbfdc8;
+    padding: 15px 30px; 
 }
 
 .flex-container-2 img {
