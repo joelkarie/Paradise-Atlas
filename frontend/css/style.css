@@ -1,8 +1,9 @@
 :root {
-  --primary-bg-color: #FCC3A4; /* global scope */
-  --primary-border-color: #0cbdb7; /* global scope */
-  --secondary-border-color: #9A733A; /* global scope */
-  --primary-highlight-color: #fbfdc8; /* global scope */
+    --primary-bg-color: #FCC3A4; /* global scope */
+    --secondary-bg-color: #70bec7; /* global scope */
+    --primary-border-color: #0cbdb7; /* global scope */
+    --secondary-border-color: #9A733A; /* global scope */
+    --primary-highlight-color: #fbfdc8; /* global scope */
 }
 /* GENERAL STYLES */
 body {
@@ -115,7 +116,7 @@ h1 {
 }
 
 .star-rating {
-    color: var(--primary-border-color);
+    color: var(--primary-background-color);
 }
 
 .joel-label {
