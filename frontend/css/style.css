@@ -1,8 +1,14 @@
+:root {
+  --primary-bg-color: #FCC3A4; /* global scope */
+  --primary-border-color: #0cbdb7; /* global scope */
+  --secondary-border-color: #9A733A; /* global scope */
+  --primary-highlight-color: #fbfdc8; /* global scope */
+}
 /* GENERAL STYLES */
 body {
     margin: 0;
     font-family: 'Playfair Display', serif;
-    background-color: #FCC3A4;
+    background-color: var(--primary-bg-color);
 }
 
 h1 {
@@ -15,7 +21,7 @@ h1 {
 }
 
 .banner-line {
-    border: 2px solid #0cbdb7;
+    border: 2px solid var(--primary-border-color);
 }
 
 .flex-container {
@@ -35,7 +41,7 @@ h1 {
     justify-content: center;
     align-items: center;
     min-height: 25px;
-    background-color: #fbfdc8;
+    background-color: var(--primary-highlight-color);
     padding: 5px 30px; 
 }
 
@@ -109,15 +115,15 @@ h1 {
 }
 
 .star-rating {
-    color: rgb(231, 95, 188);
+    color: var(--primary-border-color);
 }
 
 .joel-label {
-    color: #ddd232;
+    color:var(--secondary-border-color);
 }
 
 .michael-label {
-    color: #1db1e7;
+    color: var(--primary-border-color);
 }
 
 .person-label {
