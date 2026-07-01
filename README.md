@@ -146,3 +146,6 @@ The goal is to create a personal digital atlas where memories, journeys, and pla
 **Joel Karie**
 
 Software Developer | GIS Enthusiast | Traveler
+
+## License
+This project is licensed under the MIT License - see the LICENSE file for details.
