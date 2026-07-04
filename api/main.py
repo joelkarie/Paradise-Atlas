@@ -3,7 +3,7 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-from fastapi import FastAPI
+from fastapi import FastAPI, Form
 from fastapi.responses import FileResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.middleware.cors import CORSMiddleware
@@ -112,3 +112,17 @@ def michael_admin_page():
 @app.get("/login")
 def login_page():
     return FileResponse(BASE_DIR / "frontend" / "login.html")
+
+
+@app.post("/login")
+def login(
+    username: str = Form(),
+    password: str = Form()
+):
+    print(f"Username: {username}")
+    print(f"Password: {password}")
+
+    return {
+        "username": username,
+        "password": password
+    }
