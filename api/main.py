@@ -107,3 +107,8 @@ def joel_admin_page():
 @app.get("/admin/michael")
 def michael_admin_page():
     return FileResponse(BASE_DIR / "frontend" / "michael_admin.html")
+
+
+@app.get("/login")
+def login_page():
+    return FileResponse(BASE_DIR / "frontend" / "login.html")
