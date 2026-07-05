@@ -131,3 +131,10 @@ h1 {
     font-size: 14px;
     font-weight: 700;
 }
+
+.login-container {
+    height: 100vh;
+    display: flex;
+    justify-content: center;  /* left/right */
+    align-items: center;      /* up/down */
+}
