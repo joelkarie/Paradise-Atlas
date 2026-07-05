@@ -165,6 +165,15 @@ def require_admin(request: Request):
         raise Exception("NOT_AUTHORIZED")
 
 
+@app.get("/admin/home")
+def admin_home_page(request: Request):
+    try:
+        user = require_admin(request)
+    except Exception:
+        return RedirectResponse("/login")
+
+    return FileResponse(BASE_DIR / "frontend" / "admin_home.html")
+
 @app.get("/admin/joel")
 def joel_admin_page(request: Request):
     try:
