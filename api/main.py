@@ -123,7 +123,7 @@ def login(username: str = Form(), password: str = Form()):
 
     token = serializer.dumps({"user": username})
 
-    response = RedirectResponse(url="/admin/joel", status_code=303)
+    response = RedirectResponse(url="/admin/home", status_code=303)
 
     response.set_cookie(
         key="session", value=token, httponly=True, secure=True, samesite="lax"
