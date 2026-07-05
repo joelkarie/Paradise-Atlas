@@ -32,3 +32,38 @@ def get_next_visit_order():
         """))
 
         return result.scalar_one()
+
+
+def create_visit(
+    location_id: int,
+    visit_date: str,
+    visit_number: int,
+    visit_order: int,
+):
+    with engine.begin() as conn:
+
+        result = conn.execute(
+            text("""
+                INSERT INTO visit (
+                    location_id,
+                    visit_date,
+                    visit_number,
+                    visit_order
+                )
+                VALUES (
+                    :location_id,
+                    :visit_date,
+                    :visit_number,
+                    :visit_order
+                )
+                RETURNING id;
+            """),
+            {
+                "location_id": location_id,
+                "visit_date": visit_date,
+                "visit_number": visit_number,
+                "visit_order": visit_order,
+            },
+        )
+
+        return result.scalar_one()

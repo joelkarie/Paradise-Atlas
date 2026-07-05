@@ -123,3 +123,16 @@ def create_location(
         )
 
         return result.scalar_one()
+
+
+def create_location_rating(location_id: int):
+    with engine.begin() as conn:
+        conn.execute(
+            text("""
+                INSERT INTO location_rating (
+                    location_id
+                )
+                VALUES (:location_id)
+            """),
+            {"location_id": location_id},
+        )

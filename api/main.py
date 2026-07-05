@@ -29,8 +29,9 @@ from api.services.locations_services import (
     get_location_types,
     get_locations_for_dropdown,
     create_location,
+    create_location_rating,
 )
-from api.services.visit_order_services import get_next_visit_number, get_next_visit_order
+from api.services.visit_order_services import get_next_visit_number, get_next_visit_order, create_visit
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -239,6 +240,7 @@ def add_visit(
     print(f"State: {new_state}")
     print(f"Country: {new_country}")
 
+    next_visit_order = None
     if location_id == "new":
         location_id = create_location(
             name=new_location_name,
@@ -250,8 +252,18 @@ def add_visit(
         print(f"New location created with id = {location_id}")
         next_visit_order =get_next_visit_order()
         print(f"Next visit order = {next_visit_order}")
+        create_location_rating(location_id)
     
     next_visit_number = get_next_visit_number()
     print(f"Next visit number = {next_visit_number}")
+
+    visit_id = create_visit(
+        location_id=location_id,
+        visit_date=visit_date,
+        visit_number=next_visit_number,
+        visit_order=next_visit_order,
+    )
+
+    print(f"Visit created with id = {visit_id}")
 
     return {"success": True}
