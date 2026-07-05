@@ -28,7 +28,7 @@
     <img src="/static/assets/paradise_pelican.png" alt="Atlas Paradiso Logo" class="logo" height="170px">
   </div>
   <h1>Add A Visit</h1>
-
+<form action="/admin/add_visit" method="POST">
   <div class="rating-row">
     <div class="subtitle">Location Type:</div>
     <select name="location_type">
@@ -76,6 +76,9 @@
     <div class="subtitle">Visit Date:</div>
     <input type="date" name="visit_date">
   </div>
+<button type="submit" required>Save Visit</button>
+
+</form>
   <script>
     const locationSelect = document.getElementById("locationSelect");
     const newLocationFields = document.getElementById("newLocationFields");
