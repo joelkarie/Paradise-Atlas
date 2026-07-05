@@ -34,7 +34,7 @@ password_hash = PasswordHash.recommended()
 
 serializer = URLSafeSerializer(os.getenv("SECRET_KEY"), salt="session")
 
-templates = Jinja2Templates(directory="frontent/templates")
+templates = Jinja2Templates(directory="frontend/templates")
 
 app.add_middleware(
     CORSMiddleware,
