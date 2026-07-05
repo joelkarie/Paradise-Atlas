@@ -71,3 +71,18 @@ def get_location_types():
         """))
 
         return [dict(row._mapping) for row in rows]
+    
+def get_locations_for_dropdown():
+    with engine.connect() as conn:
+
+        rows = conn.execute(text("""
+            SELECT
+                id,
+                name,
+                state_province,
+                country
+            FROM location
+            ORDER BY LOWER(name) ASC;
+        """))
+
+        return [dict(row._mapping) for row in rows]
