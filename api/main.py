@@ -211,3 +211,23 @@ def add_visit_page(request: Request):
             "locations": locations,
         },
     ) 
+
+@app.post("/admin/add_visit")
+def add_visit(
+    location_type: int = Form(...),
+    location_id: str = Form(...),
+    visit_date: str = Form(...),
+
+    new_location_name: str = Form(""),
+    new_state: str = Form(""),
+    new_country: str = Form("USA"),
+):
+    print(f"Location Type: {location_type}")
+    print(f"Location ID: {location_id}")
+    print(f"Visit Date: {visit_date}")
+
+    print(f"New Name: {new_location_name}")
+    print(f"State: {new_state}")
+    print(f"Country: {new_country}")
+
+    return {"success": True}
