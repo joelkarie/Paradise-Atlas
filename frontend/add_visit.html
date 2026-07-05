@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <link rel="icon" type="image/x-icon" href="/static/assets/peach_dot.png">
+  <!-- <link rel="icon" type="image/x-icon" href="assets/peach_dot.png"> -->
+
+  <link rel="stylesheet" href="/static/css/style.css">
+  <!-- <link rel="stylesheet" href="css/style.css"> -->
+
+  <meta charset="UTF-8">
+  <title>Add Visit</title>
+
+  <style>
+    body {
+      font-family: 'Playfair Display', serif;
+      margin: 20px;
+    }
+
+    label {
+      margin-right: 12px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="rating-row">
+    <div class="subtitle">Location Type:</div>
+    <select name="location_type">
+<select name="location_type">
+
+    {% for location_type in location_types %}
+        <option value="{{ location_type.id }}">
+            {{ location_type.name.replace('_', ' ').title() }}
+        </option>
+    {% endfor %}
+
+</select>
+    </select>
+  </div>
+    <div class="rating-row">
+    <div class="subtitle">Location Name:</div>
+    <textarea rows="1" style="width:25%">this should be drop down</textarea>
+  </div>
+</body>
+</body>
+
+</html>

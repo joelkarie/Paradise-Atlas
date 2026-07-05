@@ -10,6 +10,8 @@ from fastapi import FastAPI, Form, Response, Request
 from fastapi.responses import FileResponse, RedirectResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.templating import Jinja2Templates
+
 
 from api.database import engine
 from api.routers.theatres_router import router as theatre_router
@@ -22,7 +24,7 @@ from api.routers.patagonia_router import router as patagonia_router
 from api.routers.quaker_meetings_router import router as quaker_meetings_router
 from api.routers.michael_could_live_router import router as michael_could_live_router
 from api.routers.together_could_live_router import router as together_could_live_router
-from api.services.locations_services import get_location_ratings
+from api.services.locations_services import get_location_ratings, get_location_types
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -31,6 +33,8 @@ app = FastAPI()
 password_hash = PasswordHash.recommended()
 
 serializer = URLSafeSerializer(os.getenv("SECRET_KEY"), salt="session")
+
+templates = Jinja2Templates(directory="templates")
 
 app.add_middleware(
     CORSMiddleware,
@@ -192,3 +196,17 @@ def michael_admin_page(request: Request):
         return RedirectResponse("/login")
 
     return FileResponse(BASE_DIR / "frontend" / "michael_admin.html")
+
+@app.get("/admin/add_visit")
+def add_visit_page(request: Request):
+
+    location_types = get_location_types()
+
+
+    return templates.TemplateResponse(
+        "add_visit.html",
+        {
+            "request": request,
+            "location_types": location_types,
+        }
+    )    

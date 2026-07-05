@@ -1,5 +1,5 @@
 from fastapi import APIRouter, Form
-from ..services.locations_services import get_locations, update_location_rating_value
+from ..services.locations_services import get_locations, update_location_rating_value, get_location_types
 
 router = APIRouter(prefix="/locations", tags=["Locations"])
 
@@ -31,3 +31,7 @@ def update_location_rating(
     update_location_rating_value(location_id, field, value)
 
     return {"status": "ok"}
+
+@router.get("/location_types")
+def location_types():
+    return get_location_types()

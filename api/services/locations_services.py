@@ -57,3 +57,17 @@ def update_location_rating_value(location_id, field, value):
         """,
             (value, location_id),
         )
+
+def get_location_types():
+
+    with engine.connect() as conn:
+
+        rows = conn.execute(text("""
+            SELECT
+                id,
+                name
+            FROM location_type
+            ORDER BY name;
+        """))
+
+        return [dict(row._mapping) for row in rows]
