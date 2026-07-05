@@ -48,3 +48,4 @@ xyzservices==2026.3.0
 python-multipart
 pwdlib
 argon2-cffi
+itsdangerous

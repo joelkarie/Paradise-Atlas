@@ -2,10 +2,11 @@ import os
 from pwdlib import PasswordHash
 from pathlib import Path
 from dotenv import load_dotenv
+from itsdangerous import URLSafeSerializer
 
 load_dotenv()
 
-from fastapi import FastAPI, Form
+from fastapi import FastAPI, Form, Response, Request
 from fastapi.responses import FileResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.middleware.cors import CORSMiddleware
@@ -26,7 +27,10 @@ from api.services.locations_services import get_location_ratings
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 app = FastAPI()
+
 password_hash = PasswordHash.recommended()
+
+serializer = URLSafeSerializer(os.getenv("SECRET_KEY"), salt="session")
 
 app.add_middleware(
     CORSMiddleware,
@@ -102,9 +106,9 @@ def home():
     return FileResponse(BASE_DIR / "frontend" / "index.html")
 
 
-@app.get("/admin/joel")
-def joel_admin_page():
-    return FileResponse(BASE_DIR / "frontend" / "joel_admin.html")
+# @app.get("/admin/joel")
+# def joel_admin_page():
+#     return FileResponse(BASE_DIR / "frontend" / "joel_admin.html")
 
 
 @app.get("/admin/michael")
@@ -118,21 +122,48 @@ def login_page():
 
 
 @app.post("/login")
-def login(
-    username: str = Form(),
-    password: str = Form()
-):
+def login(username: str = Form(), password: str = Form(), response: Response = None):
     admin_username = os.getenv("ADMIN_USERNAME")
     admin_password_hash = os.getenv("ADMIN_PASSWORD_HASH")
-    print("Username from .env:", os.getenv("ADMIN_USERNAME"))
-    print("Hash exists:", os.getenv("ADMIN_PASSWORD_HASH") is not None)
+
     if username != admin_username:
-        return {"success": False, "message": "Invalid username or password"}
+        return {"success": False}
 
     if not password_hash.verify(password, admin_password_hash):
-        return {"success": False, "message": "Invalid username or password"}
+        return {"success": False}
 
-    return {
-        "success": True,
-        "message": "Login successful!"
-    }
+    token = serializer.dumps({"user": username})
+
+    response = Response()
+    response.set_cookie(
+        key="session",
+        value=token,
+        httponly=True,
+        secure=True,  # keep True on Render (HTTPS)
+        samesite="lax",
+    )
+
+    return response
+
+
+def get_current_user(request: Request):
+    token = request.cookies.get("session")
+
+    if not token:
+        return None
+
+    try:
+        data = serializer.loads(token)
+        return data.get("user")
+    except Exception:
+        return None
+
+
+@app.get("/admin/joel")
+def joel_admin_page(request: Request):
+    user = get_current_user(request)
+
+    if not user:
+        return RedirectResponse("/login")
+
+    return FileResponse(BASE_DIR / "frontend" / "joel_admin.html")
