@@ -24,7 +24,7 @@ from api.routers.patagonia_router import router as patagonia_router
 from api.routers.quaker_meetings_router import router as quaker_meetings_router
 from api.routers.michael_could_live_router import router as michael_could_live_router
 from api.routers.together_could_live_router import router as together_could_live_router
-from api.services.locations_services import get_location_ratings, get_location_types
+from api.services.locations_services import get_location_ratings, get_location_types, get_locations
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -201,11 +201,13 @@ def michael_admin_page(request: Request):
 def add_visit_page(request: Request):
 
     location_types = get_location_types()
+    locations = get_locations()
 
     return templates.TemplateResponse(
         request=request,
         name="add_visit.html",
         context={
             "location_types": location_types,
+            "locations": locations,
         },
     ) 

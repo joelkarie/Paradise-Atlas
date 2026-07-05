@@ -39,7 +39,19 @@
   </div>
   <div class="rating-row">
     <div class="subtitle">Location Name:</div>
-    <textarea rows="1" style="width:25%">this should be drop down</textarea>
+    <select name="location_id">
+
+      <option value="new">
+        + Add Location
+      </option>
+
+      {% for location in locations %}
+      <option value="{{ location.id }}">
+        {{ location.name }}, {{ location.state_province }}, {{ location.country }}
+      </option>
+      {% endfor %}
+
+    </select>
   </div>
 </body>
 </body>
