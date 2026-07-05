@@ -153,19 +153,23 @@ def get_current_user(request: Request):
 
 
 def require_admin(request: Request):
-    user = get_current_user(request)
+    token = request.cookies.get("session")
 
-    if not user:
-        return RedirectResponse("/login")
+    if not token:
+        raise Exception("NOT_AUTHORIZED")
 
-    return user
+    try:
+        data = serializer.loads(token)
+        return data.get("user")
+    except Exception:
+        raise Exception("NOT_AUTHORIZED")
 
 
 @app.get("/admin/joel")
 def joel_admin_page(request: Request):
-    user = require_admin(request)
-
-    if not user:
+    try:
+        user = require_admin(request)
+    except Exception:
         return RedirectResponse("/login")
 
     return FileResponse(BASE_DIR / "frontend" / "joel_admin.html")
@@ -173,9 +177,9 @@ def joel_admin_page(request: Request):
 
 @app.get("/admin/michael")
 def michael_admin_page(request: Request):
-    user = require_admin(request)
-
-    if not user:
+    try:
+        user = require_admin(request)
+    except Exception:
         return RedirectResponse("/login")
 
     return FileResponse(BASE_DIR / "frontend" / "michael_admin.html")
