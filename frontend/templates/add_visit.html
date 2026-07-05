@@ -57,6 +57,29 @@
 
     </select>
   </div>
+  <div id="newLocationFields" style="display:none; margin-top: 15px;">
+
+    <h4>New Location</h4>
+
+    <input type="text" name="new_location_name" placeholder="City / Location name"><br><br>
+
+    <input type="text" name="new_state" placeholder="State / Province"><br><br>
+
+    <input type="text" name="new_country" placeholder="Country" value="USA"><br><br>
+
+  </div>
+  <script>
+    const locationSelect = document.getElementById("locationSelect");
+    const newLocationFields = document.getElementById("newLocationFields");
+
+    locationSelect.addEventListener("change", function () {
+      if (this.value === "new") {
+        newLocationFields.style.display = "block";
+      } else {
+        newLocationFields.style.display = "none";
+      }
+    });
+  </script>
 </body>
 </body>
 
