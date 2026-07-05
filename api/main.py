@@ -1,3 +1,5 @@
+import os
+from pwdlib import PasswordHash
 from pathlib import Path
 from dotenv import load_dotenv
 
@@ -24,6 +26,7 @@ from api.services.locations_services import get_location_ratings
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 app = FastAPI()
+password_hash = PasswordHash.recommended()
 
 app.add_middleware(
     CORSMiddleware,
@@ -119,10 +122,16 @@ def login(
     username: str = Form(),
     password: str = Form()
 ):
-    print(f"Username: {username}")
-    print(f"Password: {password}")
+    admin_username = os.getenv("ADMIN_USERNAME")
+    admin_password_hash = os.getenv("ADMIN_PASSWORD_HASH")
+
+    if username != admin_username:
+        return {"success": False, "message": "Invalid username or password"}
+
+    if not password_hash.verify(password, admin_password_hash):
+        return {"success": False, "message": "Invalid username or password"}
 
     return {
-        "username": username,
-        "password": password
+        "success": True,
+        "message": "Login successful!"
     }
