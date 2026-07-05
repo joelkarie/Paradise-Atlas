@@ -46,7 +46,7 @@ def create_visit(
             text("""
                 INSERT INTO visit (
                     location_id,
-                    visit_date,
+                    date,
                     visit_number,
                     visit_order
                 )
