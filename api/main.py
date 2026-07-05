@@ -202,11 +202,10 @@ def add_visit_page(request: Request):
 
     location_types = get_location_types()
 
-
     return templates.TemplateResponse(
-        "add_visit.html",
-        {
-            "request": request,
+        request=request,
+        name="add_visit.html",
+        context={
             "location_types": location_types,
-        }
-    )    
+        },
+    ) 
