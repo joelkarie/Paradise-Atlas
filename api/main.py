@@ -105,27 +105,13 @@ def admin_locations():
 def home():
     return FileResponse(BASE_DIR / "frontend" / "index.html")
 
-
-# @app.get("/admin/joel")
-# def joel_admin_page():
-#     return FileResponse(BASE_DIR / "frontend" / "joel_admin.html")
-
-
-@app.get("/admin/michael")
-def michael_admin_page():
-    return FileResponse(BASE_DIR / "frontend" / "michael_admin.html")
-
-
 @app.get("/login")
 def login_page():
     return FileResponse(BASE_DIR / "frontend" / "login.html")
 
 
 @app.post("/login")
-def login(
-    username: str = Form(),
-    password: str = Form()
-):
+def login(username: str = Form(), password: str = Form()):
     admin_username = os.getenv("ADMIN_USERNAME")
     admin_password_hash = os.getenv("ADMIN_PASSWORD_HASH")
 
@@ -140,13 +126,16 @@ def login(
     response = RedirectResponse(url="/admin/joel", status_code=303)
 
     response.set_cookie(
-        key="session",
-        value=token,
-        httponly=True,
-        secure=True,
-        samesite="lax"
+        key="session", value=token, httponly=True, secure=True, samesite="lax"
     )
 
+    return response
+
+
+@app.get("/logout")
+def logout():
+    response = RedirectResponse(url="/login")
+    response.delete_cookie("session")
     return response
 
 
@@ -163,11 +152,30 @@ def get_current_user(request: Request):
         return None
 
 
-@app.get("/admin/joel")
-def joel_admin_page(request: Request):
+def require_admin(request: Request):
     user = get_current_user(request)
 
     if not user:
         return RedirectResponse("/login")
 
+    return user
+
+
+@app.get("/admin/joel")
+def joel_admin_page(request: Request):
+    user = require_admin(request)
+
+    if not user:
+        return RedirectResponse("/login")
+
     return FileResponse(BASE_DIR / "frontend" / "joel_admin.html")
+
+
+@app.get("/admin/michael")
+def michael_admin_page(request: Request):
+    user = require_admin(request)
+
+    if not user:
+        return RedirectResponse("/login")
+
+    return FileResponse(BASE_DIR / "frontend" / "michael_admin.html")
