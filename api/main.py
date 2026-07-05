@@ -24,7 +24,12 @@ from api.routers.patagonia_router import router as patagonia_router
 from api.routers.quaker_meetings_router import router as quaker_meetings_router
 from api.routers.michael_could_live_router import router as michael_could_live_router
 from api.routers.together_could_live_router import router as together_could_live_router
-from api.services.locations_services import get_location_ratings, get_location_types, get_locations_for_dropdown
+from api.services.locations_services import (
+    get_location_ratings,
+    get_location_types,
+    get_locations_for_dropdown,
+    create_location,
+)
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -109,6 +114,7 @@ def admin_locations():
 def home():
     return FileResponse(BASE_DIR / "frontend" / "index.html")
 
+
 @app.get("/login")
 def login_page():
     return FileResponse(BASE_DIR / "frontend" / "login.html")
@@ -178,6 +184,7 @@ def admin_home_page(request: Request):
 
     return FileResponse(BASE_DIR / "frontend" / "admin_home.html")
 
+
 @app.get("/admin/joel")
 def joel_admin_page(request: Request):
     try:
@@ -197,6 +204,7 @@ def michael_admin_page(request: Request):
 
     return FileResponse(BASE_DIR / "frontend" / "michael_admin.html")
 
+
 @app.get("/admin/add_visit")
 def add_visit_page(request: Request):
 
@@ -210,14 +218,14 @@ def add_visit_page(request: Request):
             "location_types": location_types,
             "locations": locations,
         },
-    ) 
+    )
+
 
 @app.post("/admin/add_visit")
 def add_visit(
     location_type: int = Form(...),
     location_id: str = Form(...),
     visit_date: str = Form(...),
-
     new_location_name: str = Form(""),
     new_state: str = Form(""),
     new_country: str = Form("USA"),
@@ -229,5 +237,15 @@ def add_visit(
     print(f"New Name: {new_location_name}")
     print(f"State: {new_state}")
     print(f"Country: {new_country}")
+
+    if location_id == "new":
+        location_id = create_location(
+            name=new_location_name,
+            location_type_id=location_type,
+            state_province=new_state,
+            country=new_country,
+        )
+
+        print(f"New location created with id = {location_id}")
 
     return {"success": True}

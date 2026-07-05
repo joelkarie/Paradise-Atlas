@@ -86,3 +86,40 @@ def get_locations_for_dropdown():
         """))
 
         return [dict(row._mapping) for row in rows]
+    
+def create_location(
+        name, 
+        location_type_id,
+        state_province,
+        country,
+):
+    with engine.begin() as conn:
+
+        result = conn.execute(
+            text("""
+                INSERT INTO location (
+                    name,
+                    census_name,
+                    location_type_id,
+                    state_province,
+                    country
+                )
+                VALUES (
+                    :name,
+                    :census_name,
+                    :location_type_id,
+                    :state_province,
+                    :country
+                )
+                RETURNING id;
+            """),
+            {
+                "name": name,
+                "census_name": name,
+                "location_type_id": location_type_id,
+                "state_province": state_province,
+                "country": country,
+            },
+        )
+
+        return result.scalar_one()
