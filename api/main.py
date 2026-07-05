@@ -7,7 +7,7 @@ from itsdangerous import URLSafeSerializer
 load_dotenv()
 
 from fastapi import FastAPI, Form, Response, Request
-from fastapi.responses import FileResponse
+from fastapi.responses import FileResponse, RedirectResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.middleware.cors import CORSMiddleware
 
@@ -122,7 +122,10 @@ def login_page():
 
 
 @app.post("/login")
-def login(username: str = Form(), password: str = Form(), response: Response = None):
+def login(
+    username: str = Form(),
+    password: str = Form()
+):
     admin_username = os.getenv("ADMIN_USERNAME")
     admin_password_hash = os.getenv("ADMIN_PASSWORD_HASH")
 
@@ -134,13 +137,14 @@ def login(username: str = Form(), password: str = Form(), response: Response = N
 
     token = serializer.dumps({"user": username})
 
-    response = Response()
+    response = RedirectResponse(url="/admin/joel", status_code=303)
+
     response.set_cookie(
         key="session",
         value=token,
         httponly=True,
-        secure=True,  # keep True on Render (HTTPS)
-        samesite="lax",
+        secure=True,
+        samesite="lax"
     )
 
     return response
