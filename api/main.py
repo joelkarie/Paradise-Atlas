@@ -30,6 +30,7 @@ from api.services.locations_services import (
     get_locations_for_dropdown,
     create_location,
 )
+from api.services.visit_order_services import get_next_visit_number, get_next_visit_order
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -247,5 +248,10 @@ def add_visit(
         )
 
         print(f"New location created with id = {location_id}")
+        next_visit_order =get_next_visit_order()
+        print(f"Next visit order = {next_visit_order}")
+    
+    next_visit_number = get_next_visit_number()
+    print(f"Next visit number = {next_visit_number}")
 
     return {"success": True}

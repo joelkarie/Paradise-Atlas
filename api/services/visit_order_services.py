@@ -12,3 +12,23 @@ def get_visit_order():
         """))
 
         return [dict(row._mapping) for row in rows]
+
+def get_next_visit_number():
+    with engine.connect() as conn:
+
+        result = conn.execute(text("""
+            SELECT COALESCE(MAX(visit_number), 0) + 1
+            FROM visit;
+        """))
+
+        return result.scalar_one()
+
+def get_next_visit_order():
+    with engine.connect() as conn:
+
+        result = conn.execute(text("""
+            SELECT COALESCE(MAX(visit_order), 0) + 1
+            FROM visit;
+        """))
+
+        return result.scalar_one()
