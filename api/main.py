@@ -124,7 +124,8 @@ def login(
 ):
     admin_username = os.getenv("ADMIN_USERNAME")
     admin_password_hash = os.getenv("ADMIN_PASSWORD_HASH")
-
+    print("Username from .env:", os.getenv("ADMIN_USERNAME"))
+    print("Hash exists:", os.getenv("ADMIN_PASSWORD_HASH") is not None)
     if username != admin_username:
         return {"success": False, "message": "Invalid username or password"}
 
