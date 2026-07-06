@@ -21,9 +21,6 @@ from api.routers.patagonia_router import router as patagonia_router
 from api.routers.quaker_meetings_router import router as quaker_meetings_router
 from api.routers.michael_could_live_router import router as michael_could_live_router
 from api.routers.together_could_live_router import router as together_could_live_router
-from api.services.locations_services import (
-    get_location_ratings,
-)
 from api.routers.admin_router import router as admin_router
 
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -92,11 +89,6 @@ def health():
 @app.get("/ping")
 def ping():
     return {"ok": True}
-
-
-@app.get("/admin/locations")
-def admin_locations():
-    return get_location_ratings()
 
 
 # Serve frontend HTML pages for the main site and admin interfaces

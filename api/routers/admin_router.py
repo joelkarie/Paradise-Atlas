@@ -6,6 +6,7 @@ from pathlib import Path
 
 from api.auth import require_admin
 from api.services.locations_services import (
+    get_location_ratings,
     get_location_types,
     get_locations_for_dropdown,
     create_location,
@@ -22,6 +23,11 @@ BASE_DIR = Path(__file__).resolve().parent.parent.parent
 router = APIRouter(prefix="/admin")
 
 templates = Jinja2Templates(directory="frontend/templates")
+
+
+@router.get("/locations")
+def admin_locations():
+    return get_location_ratings()
 
 
 @router.get("/home")
