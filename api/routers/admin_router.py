@@ -62,6 +62,10 @@ def michael_admin_page(request: Request):
 
 @router.get("/add_visit")
 def add_visit_page(request: Request):
+    try:
+        user = require_admin(request)
+    except Exception:
+        return RedirectResponse("/login")
 
     location_types = get_location_types()
     locations = get_locations_for_dropdown()
