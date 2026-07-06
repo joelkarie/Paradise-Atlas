@@ -159,7 +159,7 @@ def add_digs_page(request: Request):
 
     return templates.TemplateResponse(
         request=request,
-        name="add_theatre.html",
+        name="add_digs.html",
         context={
             "visits": visits,
             "digs_types": digs_types
