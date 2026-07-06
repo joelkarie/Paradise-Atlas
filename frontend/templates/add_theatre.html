@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <link rel="icon" type="image/x-icon" href="/static/assets/peach_dot.png">
+  <!-- <link rel="icon" type="image/x-icon" href="assets/peach_dot.png"> -->
+
+  <link rel="stylesheet" href="/static/css/style.css">
+  <!-- <link rel="stylesheet" href="css/style.css"> -->
+
+  <meta charset="UTF-8">
+  <title>Add A Theatre</title>
+
+  <style>
+    body {
+      font-family: 'Playfair Display', serif;
+      margin: 20px;
+    }
+
+    label {
+      margin-right: 12px;
+    }
+  </style>
+</head>
+
+<body>
+  <a href="/logout">Logout</a>
+  <div>
+    <img src="/static/assets/paradise_pelican.png" alt="Atlas Paradiso Logo" class="logo" height="170px">
+  </div>
+  <h1>Add A Theatre</h1>
+<form action="/admin/add_visit" method="POST">
+  <div class="rating-row">
+    <div class="subtitle">Location:</div>
+    <select name="location_id" id="locationSelect">
+
+      {% for location in locations %}
+      <option value="{{ location.id }}">
+        {{ location.name }}, {{ location.state_province }}, {{ location.country }}
+      </option>
+      {% endfor %}
+
+    </select>
+  </div>
+  <div id="newTheatreFields" style="display:none; margin-top: 15px;">
+
+    <h4>New Theatre</h4>
+
+    <input type="text" name="new_theatre_name" placeholder="Theatre Name"><br><br>
+
+    <input type="text" name="new_address" placeholder="Address"><br><br>
+
+    <input type="text" name="new_latitude" placeholder="latitude"><br><br>
+
+    <input type="text" name="new_longitude" placeholder="longitude"><br><br>
+
+  </div>
+
+<!-- <button type="submit" required>Save Visit</button> -->
+<a href="/admin/joel">Cancel</a>
+</form>
+  <!-- <script>
+    const locationSelect = document.getElementById("locationSelect");
+    const newTheatreFields = document.getElementById("newTheatreFields");
+
+    locationSelect.addEventListener("change", function () {
+      if (this.value === "new") {
+        newTheatreFields.style.display = "block";
+      } else {
+        newTheatreFields.style.display = "none";
+      }
+    });
+  </script> -->
+</body>
+</body>
+
+</html>

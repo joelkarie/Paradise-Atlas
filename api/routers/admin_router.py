@@ -124,3 +124,22 @@ def add_visit(
     print(f"Visit created with id = {visit_id}")
 
     return {"success": True}
+
+@router.get("/add_theatre")
+def add_theatre_page(request: Request):
+    try:
+        user = require_admin(request)
+    except Exception:
+        return RedirectResponse("/login")
+
+    location_types = get_location_types()
+    locations = get_locations_for_dropdown()
+
+    return templates.TemplateResponse(
+        request=request,
+        name="add_theatre.html",
+        context={
+            "location_types": location_types,
+            "locations": locations,
+        },
+    )
