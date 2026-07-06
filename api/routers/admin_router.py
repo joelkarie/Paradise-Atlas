@@ -16,6 +16,7 @@ from api.services.visit_order_services import (
     get_next_visit_number,
     get_next_visit_order,
     create_visit,
+    get_visits_for_dropdown
 )
 
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
@@ -132,14 +133,13 @@ def add_theatre_page(request: Request):
     except Exception:
         return RedirectResponse("/login")
 
-    location_types = get_location_types()
-    locations = get_locations_for_dropdown()
+
+    visits = get_visits_for_dropdown()
 
     return templates.TemplateResponse(
         request=request,
         name="add_theatre.html",
         context={
-            "location_types": location_types,
-            "locations": locations,
+            "visits": visits,
         },
     )

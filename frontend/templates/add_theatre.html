@@ -31,12 +31,12 @@
   <h1>Add A Theatre</h1>
 <form action="/admin/add_visit" method="POST">
   <div class="rating-row">
-    <div class="subtitle">Location:</div>
-    <select name="location_id" id="locationSelect">
+    <div class="subtitle">Visit:</div>
+    <select name="visit_id" id="visitSelect">
 
-      {% for location in locations %}
-      <option value="{{ location.id }}">
-        {{ location.name }}, {{ location.state_province }}, {{ location.country }}
+      {% for visit in visits %}
+      <option value="{{ visit.id }}">
+        {{ visit.location_name }}, {{ visit.state_province }} [{{ visit.date }}]
       </option>
       {% endfor %}
 

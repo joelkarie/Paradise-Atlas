@@ -67,3 +67,20 @@ def create_visit(
         )
 
         return result.scalar_one()
+    
+def get_visits_for_dropdown():
+    with engine.connect() as conn:
+
+        rows = conn.execute(text("""
+            SELECT 
+            v.id AS id,
+            v.visit_number AS visit_number, 
+            l.name AS location_name, 
+            l.state_province AS state_province, 
+            v.date AS date
+            FROM visit v 
+            JOIN location l on l.id = v.location_id
+            ORDER BY v.visit_number ASC;
+        """))
+
+        return [dict(row._mapping) for row in rows]
