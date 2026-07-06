@@ -29,36 +29,36 @@
     <img src="/static/assets/paradise_pelican.png" alt="Atlas Paradiso Logo" class="logo" height="170px">
   </div>
   <h1>Add A Theatre</h1>
-<form action="/admin/add_visit" method="POST">
-  <div class="rating-row">
-    <div class="subtitle">Visit:</div>
-    <select name="visit_id" id="visitSelect">
+  <form action="/admin/add_visit" method="POST">
+    <div class="rating-row">
+      <div class="subtitle">Visit:</div>
+      <select name="visit_id" id="visitSelect">
 
-      {% for visit in visits %}
-      <option value="{{ visit.id }}">
-        {{ visit.location_name }}, {{ visit.state_province }} [{{ visit.date }}]
-      </option>
-      {% endfor %}
+        {% for visit in visits %}
+        <option value="{{ visit.id }}">
+          {{ visit.location_name }}, {{ visit.state_province }} [{{ visit.date }}]
+        </option>
+        {% endfor %}
 
-    </select>
-  </div>
-  <div id="newTheatreFields" style="display:none; margin-top: 15px;">
+      </select>
+    </div>
+    <div id="newTheatreFields" style="display:block; margin-top: 15px;">
 
-    <h4>New Theatre</h4>
+      <h4>New Theatre</h4>
 
-    <input type="text" name="new_theatre_name" placeholder="Theatre Name"><br><br>
+      <input type="text" name="new_theatre_name" placeholder="Theatre Name"><br><br>
 
-    <input type="text" name="new_address" placeholder="Address"><br><br>
+      <input type="text" name="new_address" placeholder="Address"><br><br>
 
-    <input type="text" name="new_latitude" placeholder="latitude"><br><br>
+      <input type="text" name="new_latitude" placeholder="latitude"><br><br>
 
-    <input type="text" name="new_longitude" placeholder="longitude"><br><br>
+      <input type="text" name="new_longitude" placeholder="longitude"><br><br>
 
-  </div>
+    </div>
 
-<!-- <button type="submit" required>Save Visit</button> -->
-<a href="/admin/joel">Cancel</a>
-</form>
+    <!-- <button type="submit" required>Save Visit</button> -->
+    <a href="/admin/joel">Cancel</a>
+  </form>
   <!-- <script>
     const locationSelect = document.getElementById("locationSelect");
     const newTheatreFields = document.getElementById("newTheatreFields");
