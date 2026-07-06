@@ -18,6 +18,7 @@ from api.services.visit_order_services import (
     create_visit,
     get_visits_for_dropdown
 )
+from api.services.digs_services import get_digs_types
 
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
 
@@ -141,5 +142,26 @@ def add_theatre_page(request: Request):
         name="add_theatre.html",
         context={
             "visits": visits,
+        },
+    )
+
+
+@router.get("/add_digs")
+def add_digs_page(request: Request):
+    try:
+        user = require_admin(request)
+    except Exception:
+        return RedirectResponse("/login")
+
+
+    visits = get_visits_for_dropdown()
+    digs_types = get_digs_types()
+
+    return templates.TemplateResponse(
+        request=request,
+        name="add_theatre.html",
+        context={
+            "visits": visits,
+            "digs_types": digs_types
         },
     )

@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="icon" type="image/x-icon" href="/static/assets/peach_dot.png">
+    <!-- <link rel="icon" type="image/x-icon" href="assets/peach_dot.png"> -->
+
+    <link rel="stylesheet" href="/static/css/style.css">
+    <!-- <link rel="stylesheet" href="css/style.css"> -->
+
+    <meta charset="UTF-8">
+    <title>Add Digs</title>
+
+    <style>
+        body {
+            font-family: 'Playfair Display', serif;
+            margin: 20px;
+        }
+
+        label {
+            margin-right: 12px;
+        }
+    </style>
+</head>
+
+<body>
+    <a href="/logout">Logout</a>
+    <div>
+        <img src="/static/assets/paradise_pelican.png" alt="Atlas Paradiso Logo" class="logo" height="170px">
+    </div>
+    <h1>Add Digs</h1>
+    <form action="/admin/add_digs" method="POST">
+        <div class="rating-row">
+            <div class="subtitle">Visit:</div>
+            <select name="visit_id" id="visitSelect">
+
+                {% for visit in visits %}
+                <option value="{{ visit.id }}">
+                    {{ visit.location_name }}, {{ visit.state_province }} [{{ visit.date }}]
+                </option>
+                {% endfor %}
+
+            </select>
+        </div>
+        <div id="newDigsFields" style="display:block; margin-top: 15px;">
+
+            <h4>New Digs</h4>
+            <div class="rating-row">
+                <div class="subtitle">Digs Type:</div>
+                <select name="digs_type">
+
+                    {% for digs_type in digs_types %}
+                    <option value="{{ digs_type.id }}">
+                        {{ digs_type.name.replace('_', ' ').title() }}
+                    </option>
+                    {% endfor %}
+
+                </select>
+            </div>
+            <input type="text" name="new_address" placeholder="Address"><br><br>
+
+            <input type="text" name="new_latitude" placeholder="latitude"><br><br>
+
+            <input type="text" name="new_longitude" placeholder="longitude"><br><br>
+
+            <input type="radio" name="companhoust_housing_bool" value="false">
+            <!-- ${loc.joel_could_live === false ? "checked" : ""}
+                      onchange="updateLocation('${loc.location_id}', false)"> -->
+
+        </div>
+
+        <!-- <button type="submit" required>Save Visit</button> -->
+        <a href="/admin/joel">Cancel</a>
+    </form>
+    <!-- <script>
+    const locationSelect = document.getElementById("locationSelect");
+    const newTheatreFields = document.getElementById("newTheatreFields");
+
+    locationSelect.addEventListener("change", function () {
+      if (this.value === "new") {
+        newTheatreFields.style.display = "block";
+      } else {
+        newTheatreFields.style.display = "none";
+      }
+    });
+  </script> -->
+</body>
+</body>
+
+</html>
