@@ -18,7 +18,7 @@ from api.services.visit_order_services import (
     create_visit,
     get_visits_for_dropdown
 )
-from api.services.digs_services import get_digs_types
+from api.services.digs_services import get_digs_types, get_next_digs_number
 
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
 
@@ -165,3 +165,35 @@ def add_digs_page(request: Request):
             "digs_types": digs_types
         },
     )
+
+
+@router.post("/add_digs")
+def add_digs(
+    visit_id: int = Form(...),
+    digs_type: int = Form(...),
+    new_address: str = Form(...),
+    new_latitude: str = Form(""),
+    new_longitude: str = Form(""),
+    company_housing_bool: bool = Form("FALSE"),
+):
+    print(f"Visit ID: {visit_id}")
+    print(f"Digs Type Num: {digs_type}")
+    print(f"Address: {new_address}")
+
+    print(f"Latitude: {new_latitude}")
+    print(f"Longitude: {new_longitude}")
+    print(f"Company Housing: {company_housing_bool}")
+
+    next_visit_number = get_next_digs_number()
+    print(f"Next visit number = {next_visit_number}")
+
+    # visit_id = create_visit(
+    #     location_id=location_id,
+    #     visit_date=visit_date,
+    #     visit_number=next_visit_number,
+    #     visit_order=next_visit_order,
+    # )
+
+    # print(f"Visit created with id = {visit_id}")
+
+    return {"success": True}
