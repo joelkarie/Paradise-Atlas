@@ -32,7 +32,7 @@ def get_next_digs_number():
     with engine.connect() as conn:
 
         result = conn.execute(text("""
-            SELECT COALESCE(MAX(visit_number), 0) + 1
+            SELECT COALESCE(MAX(id), 0) + 1
             FROM digs;
         """))
 

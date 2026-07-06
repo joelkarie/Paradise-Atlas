@@ -154,7 +154,7 @@ def add_digs_page(request: Request):
         return RedirectResponse("/login")
 
 
-    visits = get_visits_for_dropdown()
+    visits = get_visits_for_dropdown(without_digs=True)
     digs_types = get_digs_types()
 
     return templates.TemplateResponse(
