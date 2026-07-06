@@ -1,5 +1,5 @@
 from fastapi import APIRouter
-from ..services.housing_distances_services import get_housing_distances
+from ..services.digs_services import get_housing_distances
 
 router = APIRouter(prefix="/housing-distances", tags=["Housing Distances"])
 

@@ -14,7 +14,7 @@ from api.database import engine
 from api.routers.theatres_router import router as theatre_router
 from api.routers.joel_could_live_router import router as joel_could_live_router
 from api.routers.capitols_router import router as capitols_router
-from api.routers.housing_distances_router import router as housing_distances_router
+from api.routers.digs_router import router as digs_router
 from api.routers.visit_order import router as visit_order_router
 from api.routers.locations_router import router as locations_router
 from api.routers.patagonia_router import router as patagonia_router
@@ -48,7 +48,7 @@ routers = [
     joel_could_live_router,
     michael_could_live_router,
     capitols_router,
-    housing_distances_router,
+    digs_router,
     visit_order_router,
     locations_router,
     patagonia_router,
