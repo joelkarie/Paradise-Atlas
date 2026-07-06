@@ -31,6 +31,7 @@ from api.services.locations_services import (
     create_location,
     create_location_rating,
 )
+from api.routers.admin_router import router as admin_router
 from api.services.visit_order_services import get_next_visit_number, get_next_visit_order, create_visit
 
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -69,6 +70,7 @@ routers = [
     patagonia_router,
     quaker_meetings_router,
     together_could_live_router,
+    admin_router,
 ]
 
 for router in routers:
@@ -177,14 +179,14 @@ def require_admin(request: Request):
         raise Exception("NOT_AUTHORIZED")
 
 
-@app.get("/admin/home")
-def admin_home_page(request: Request):
-    try:
-        user = require_admin(request)
-    except Exception:
-        return RedirectResponse("/login")
+# @app.get("/admin/home")
+# def admin_home_page(request: Request):
+#     try:
+#         user = require_admin(request)
+#     except Exception:
+#         return RedirectResponse("/login")
 
-    return FileResponse(BASE_DIR / "frontend" / "admin_home.html")
+#     return FileResponse(BASE_DIR / "frontend" / "admin_home.html")
 
 
 @app.get("/admin/joel")
