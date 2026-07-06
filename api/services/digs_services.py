@@ -12,3 +12,18 @@ def get_housing_distances():
         """))
 
         return [dict(row._mapping) for row in rows]
+
+
+def get_digs_types():
+
+    with engine.connect() as conn:
+
+        rows = conn.execute(text("""
+            SELECT
+                id,
+                name
+            FROM digs_type
+            ORDER BY id;
+        """))
+
+        return [dict(row._mapping) for row in rows]
