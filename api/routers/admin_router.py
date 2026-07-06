@@ -1,28 +1,27 @@
-import os
-from fastapi import APIRouter, Request
+from fastapi import APIRouter, Request, Form
 from fastapi.responses import FileResponse, RedirectResponse
-
-from itsdangerous import URLSafeSerializer
+from fastapi.templating import Jinja2Templates
 
 from pathlib import Path
+
+from api.auth import require_admin
+from api.services.locations_services import (
+    get_location_types,
+    get_locations_for_dropdown,
+    create_location,
+    create_location_rating,
+)
+from api.services.visit_order_services import (
+    get_next_visit_number,
+    get_next_visit_order,
+    create_visit,
+)
 
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
 
 router = APIRouter(prefix="/admin")
 
-serializer = URLSafeSerializer(os.getenv("SECRET_KEY"), salt="session")
-
-def require_admin(request: Request):
-    token = request.cookies.get("session")
-
-    if not token:
-        raise Exception("NOT_AUTHORIZED")
-
-    try:
-        data = serializer.loads(token)
-        return data.get("user")
-    except Exception:
-        raise Exception("NOT_AUTHORIZED")
+templates = Jinja2Templates(directory="frontend/templates")
 
 
 @router.get("/home")
@@ -33,3 +32,85 @@ def admin_home_page(request: Request):
         return RedirectResponse("/login")
 
     return FileResponse(BASE_DIR / "frontend" / "admin_home.html")
+
+
+@router.get("/joel")
+def joel_admin_page(request: Request):
+    try:
+        user = require_admin(request)
+    except Exception:
+        return RedirectResponse("/login")
+
+    return FileResponse(BASE_DIR / "frontend" / "joel_admin.html")
+
+
+@router.get("/michael")
+def michael_admin_page(request: Request):
+    try:
+        user = require_admin(request)
+    except Exception:
+        return RedirectResponse("/login")
+
+    return FileResponse(BASE_DIR / "frontend" / "michael_admin.html")
+
+
+@router.get("/add_visit")
+def add_visit_page(request: Request):
+
+    location_types = get_location_types()
+    locations = get_locations_for_dropdown()
+
+    return templates.TemplateResponse(
+        request=request,
+        name="add_visit.html",
+        context={
+            "location_types": location_types,
+            "locations": locations,
+        },
+    )
+
+
+@router.post("/add_visit")
+def add_visit(
+    location_type: int = Form(...),
+    location_id: str = Form(...),
+    visit_date: str = Form(...),
+    new_location_name: str = Form(""),
+    new_state: str = Form(""),
+    new_country: str = Form("USA"),
+):
+    print(f"Location Type: {location_type}")
+    print(f"Location ID: {location_id}")
+    print(f"Visit Date: {visit_date}")
+
+    print(f"New Name: {new_location_name}")
+    print(f"State: {new_state}")
+    print(f"Country: {new_country}")
+
+    next_visit_order = None
+    if location_id == "new":
+        location_id = create_location(
+            name=new_location_name,
+            location_type_id=location_type,
+            state_province=new_state,
+            country=new_country,
+        )
+
+        print(f"New location created with id = {location_id}")
+        next_visit_order = get_next_visit_order()
+        print(f"Next visit order = {next_visit_order}")
+        create_location_rating(location_id)
+
+    next_visit_number = get_next_visit_number()
+    print(f"Next visit number = {next_visit_number}")
+
+    visit_id = create_visit(
+        location_id=location_id,
+        visit_date=visit_date,
+        visit_number=next_visit_number,
+        visit_order=next_visit_order,
+    )
+
+    print(f"Visit created with id = {visit_id}")
+
+    return {"success": True}
