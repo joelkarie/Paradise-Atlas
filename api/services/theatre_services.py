@@ -43,7 +43,7 @@ def create_theatre(
                     address,
                     latitude,
                     longitude,
-                    dresser,
+                    dresser
                 )
                 VALUES (
                     :theatre_id,
