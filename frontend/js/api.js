@@ -27,7 +27,7 @@ export async function getTogetherCouldLive() {
 }
 
 export async function getVisitOrder() {
-    const response = await fetch(`${API_URL}/visit-order`);
+    const response = await fetch(`${API_URL}/visit/visit_order`);
     return await response.json();
 }
 
@@ -44,6 +44,12 @@ export async function getQuakerMeetings() {
 
 export async function getLocations() {
     const response = await fetch(`${API_URL}/locations`);
+    return await response.json();
+
+}
+
+export async function getDigs() {
+    const response = await fetch(`${API_URL}/digs/digs_for_map`);
     return await response.json();
 
 }
