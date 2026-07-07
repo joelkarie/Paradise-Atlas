@@ -113,7 +113,7 @@ def create_location(
                     :census_name,
                     :location_type_id,
                     :state_province,
-                    :country
+                    :country,
                     :latitude,
                     :longitude
                 )
@@ -126,7 +126,7 @@ def create_location(
                 "state_province": state_province,
                 "country": country,
                 "latitude": latitude,
-                "logitude": longitude
+                "longitude": longitude
             },
         )
 
