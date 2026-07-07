@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="icon" type="image/x-icon" href="/static/assets/peach_dot.png">
+    <!-- <link rel="icon" type="image/x-icon" href="assets/peach_dot.png"> -->
+
+    <link rel="stylesheet" href="/static/css/style.css">
+    <!-- <link rel="stylesheet" href="css/style.css"> -->
+
+    <meta charset="UTF-8">
+    <title>Add Location</title>
+
+    <style>
+        body {
+            font-family: 'Playfair Display', serif;
+            margin: 20px;
+        }
+
+        label {
+            margin-right: 12px;
+        }
+    </style>
+</head>
+
+<body>
+    <a href="/logout">Logout</a>
+    <div>
+        <img src="/static/assets/paradise_pelican.png" alt="Atlas Paradiso Logo" class="logo" height="170px">
+    </div>
+    <h1>Add Location</h1>
+    <form action="/admin/add_location" method="POST">
+        <div class="rating-row">
+            <div class="subtitle">Location Type:</div>
+            <select name="location_type">
+
+                {% for location_type in location_types %}
+                <option value="{{ location_type.id }}">
+                    {{ location_type.name.replace('_', ' ').title() }}
+                </option>
+                {% endfor %}
+
+            </select>
+        </div>
+        <div id="newLocationFields" style="display:block; margin-top: 15px;">
+
+            Location Name: <input type="text" name="new_name" placeholder="Location Name"><br><br>
+
+            State/Provice: <input type="text" name="new_state_province" placeholder="State/Province"><br><br>
+
+            Country: <input type="text" name="new_country" placeholder="Country"><br><br>
+
+            Latitude: <input type="text" name="new_latitude" placeholder="latitude"><br><br>
+
+            Longitude: <input type="text" name="new_longitude" placeholder="longitude"><br><br>
+
+        </div>
+
+        <button type="submit" required>Save Digs</button>
+        <a href="/admin/joel">Cancel</a>
+    </form>
+</body>
+</body>
+
+</html>

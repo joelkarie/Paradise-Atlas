@@ -198,3 +198,20 @@ def add_digs(
     print(f"Visit [{visit_id}] updated with digs id = {digs_id}")
 
     return {"success": True}
+
+@router.get("/add_location")
+def add_location_page(request: Request):
+    try:
+        user = require_admin(request)
+    except Exception:
+        return RedirectResponse("/login")
+
+    location_types = get_location_types()
+    locations = get_locations_for_dropdown()
+
+
+    return templates.TemplateResponse(
+        request=request,
+        name="add_location.html",
+        context={"location_types": location_types, "locations": locations},
+    )

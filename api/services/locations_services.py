@@ -92,6 +92,8 @@ def create_location(
         location_type_id,
         state_province,
         country,
+        latitude = None,
+        longitude = None
 ):
     with engine.begin() as conn:
 
@@ -102,7 +104,9 @@ def create_location(
                     census_name,
                     location_type_id,
                     state_province,
-                    country
+                    country,
+                    latitude,
+                    longitude
                 )
                 VALUES (
                     :name,
@@ -110,6 +114,8 @@ def create_location(
                     :location_type_id,
                     :state_province,
                     :country
+                    :latitude,
+                    :longitude
                 )
                 RETURNING id;
             """),
@@ -119,6 +125,8 @@ def create_location(
                 "location_type_id": location_type_id,
                 "state_province": state_province,
                 "country": country,
+                "latitude": latitude,
+                "logitude": longitude
             },
         )
 
