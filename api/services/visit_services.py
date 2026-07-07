@@ -127,7 +127,7 @@ def add_theatre_to_visit(visit_id: int, theatre_id: int) -> bool:
             """),
             {
                 "visit_id": visit_id,
-                "theater_id": theatre_id,
+                "theatre_id": theatre_id,
             },
         )
 

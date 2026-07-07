@@ -25,6 +25,7 @@ def get_next_theatre_number():
 
         return result.scalar_one()
 
+
 def create_theatre(
     theatre_id: int,
     new_theatre_name: str,
@@ -61,7 +62,7 @@ def create_theatre(
                 "new_address": new_address,
                 "new_latitude": new_latitude,
                 "new_longitude": new_longitude,
-                "new_dresser": new_dresser
+                "new_dresser": new_dresser,
             },
         )
 
