@@ -97,6 +97,8 @@ def add_visit(
     new_location_name: str = Form(""),
     new_state: str = Form(""),
     new_country: str = Form("USA"),
+    new_latitude: str = Form(""),
+    new_longitude: str = Form("")
 ):
     print(f"Location Type: {location_type}")
     print(f"Location ID: {location_id}")
@@ -113,6 +115,8 @@ def add_visit(
             location_type_id=location_type,
             state_province=new_state,
             country=new_country,
+            latitude=new_latitude,
+            longitude=new_longitude
         )
 
         print(f"New location created with id = {location_id}")
