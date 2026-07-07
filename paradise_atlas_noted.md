@@ -70,3 +70,9 @@
 - Maps are updating using Javascript
 - Maps have custom icons
 - next step: create journey data
+
+
+## Current State (July 7)
+
+- Added Canadian Pacific Railway API/map
+- Added National Park API/map

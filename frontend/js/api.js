@@ -58,3 +58,8 @@ export async function getVisitedCanadianRailwayHotels() {
     const response = await fetch(`${API_URL}/canadian_railway_hotels/visited`);
     return await response.json();
 }
+
+export async function getNationalParks() {
+    const response = await fetch(`${API_URL}/locations/national_parks`);
+    return await response.json();
+}

@@ -17,6 +17,8 @@ import { createDigsLayer } from "./layers/digs.js";
 import { getDigs } from "./api.js";
 import { createCanadianRailwayHotelsLayer } from "./layers/canadian_railway_hotels.js";
 import { getVisitedCanadianRailwayHotels } from "./api.js";
+import { createNationalParksLayer } from "./layers/national_parks.js";
+import { getNationalParks } from "./api.js";
 
 
 
@@ -36,6 +38,7 @@ async function main() {
     const locationLayer = createLocationsLayer(await getLocations());
     const digsLayer = createDigsLayer(await getDigs(), "digs_marker_2.png")
     const visitedCanadianRailwayHotelsLayer = createCanadianRailwayHotelsLayer(await getVisitedCanadianRailwayHotels(), "chateau-frontenac.png")
+    const nationalParksLayer = createNationalParksLayer( await getNationalParks(), "national-park.png")
 
     locationLayer.addTo(map)
 
@@ -46,6 +49,7 @@ async function main() {
         "Place We Have Stayed": digsLayer,
         "Capitols Visited": capitolLayer,
         "Canadian Railway Hotels Visited": visitedCanadianRailwayHotelsLayer,
+        "National Parks Visited": nationalParksLayer,
         "Cities Michael Could Live In": michaelCouldLiveLayer,
         "Cities Joel Could Live In": joelCouldLiveLayer,
         "Cities We Both Could Live In": togetherCouldLiveLayer,
