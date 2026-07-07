@@ -91,3 +91,21 @@ def get_visits_for_dropdown(without_digs=False):
         rows = conn.execute(text(sql))
 
         return [dict(row._mapping) for row in rows]
+    
+def add_digs_to_visit(visit_id: int, digs_id: int) -> bool:
+    with engine.begin() as conn:
+
+        result = conn.execute(
+            text("""
+                UPDATE visit
+                SET digs_id = :digs_id,
+                    updated_at = NOW()
+                WHERE id = :visit_id;
+            """),
+            {
+                "visit_id": visit_id,
+                "digs_id": digs_id,
+            },
+        )
+
+        return result.rowcount == 1

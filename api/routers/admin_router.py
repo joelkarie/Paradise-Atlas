@@ -16,9 +16,10 @@ from api.services.visit_order_services import (
     get_next_visit_number,
     get_next_visit_order,
     create_visit,
-    get_visits_for_dropdown
+    get_visits_for_dropdown,
+    add_digs_to_visit,
 )
-from api.services.digs_services import get_digs_types, get_next_digs_number
+from api.services.digs_services import get_digs_types, get_next_digs_number, create_digs
 
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
 
@@ -127,13 +128,13 @@ def add_visit(
 
     return {"success": True}
 
+
 @router.get("/add_theatre")
 def add_theatre_page(request: Request):
     try:
         user = require_admin(request)
     except Exception:
         return RedirectResponse("/login")
-
 
     visits = get_visits_for_dropdown()
 
@@ -153,17 +154,13 @@ def add_digs_page(request: Request):
     except Exception:
         return RedirectResponse("/login")
 
-
     visits = get_visits_for_dropdown(without_digs=True)
     digs_types = get_digs_types()
 
     return templates.TemplateResponse(
         request=request,
         name="add_digs.html",
-        context={
-            "visits": visits,
-            "digs_types": digs_types
-        },
+        context={"visits": visits, "digs_types": digs_types},
     )
 
 
@@ -184,16 +181,20 @@ def add_digs(
     print(f"Longitude: {new_longitude}")
     print(f"Company Housing: {company_housing_bool}")
 
-    next_visit_number = get_next_digs_number()
-    print(f"Next visit number = {next_visit_number}")
+    next_digs_number = get_next_digs_number()
+    print(f"Next visit number = {next_digs_number}")
 
-    # visit_id = create_visit(
-    #     location_id=location_id,
-    #     visit_date=visit_date,
-    #     visit_number=next_visit_number,
-    #     visit_order=next_visit_order,
-    # )
+    digs_id = create_digs(
+        digs_id=next_digs_number,
+        digs_type_id=digs_type,
+        new_address=new_address,
+        new_latitude=new_latitude,
+        new_longitude=new_longitude,
+        company_housing_bool=company_housing_bool,
+    )
 
-    # print(f"Visit created with id = {visit_id}")
+    add_digs_to_visit(visit_id=visit_id, digs_id=digs_id)
+
+    print(f"Visit [{visit_id}] updated with digs id = {digs_id}")
 
     return {"success": True}
