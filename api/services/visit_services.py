@@ -113,3 +113,22 @@ def add_digs_to_visit(visit_id: int, digs_id: int) -> bool:
         )
 
         return result.rowcount == 1
+
+
+def add_theatre_to_visit(visit_id: int, theatre_id: int) -> bool:
+    with engine.begin() as conn:
+
+        result = conn.execute(
+            text("""
+                UPDATE visit
+                SET theatre_id = :theatre_id,
+                    updated_at = NOW()
+                WHERE id = :visit_id;
+            """),
+            {
+                "visit_id": visit_id,
+                "theater_id": theatre_id,
+            },
+        )
+
+        return result.rowcount == 1

@@ -13,3 +13,56 @@ def get_theatres():
         """))
 
         return [dict(row._mapping) for row in rows]
+
+
+def get_next_theatre_number():
+    with engine.connect() as conn:
+
+        result = conn.execute(text("""
+            SELECT COALESCE(MAX(id), 0) + 1
+            FROM theatre;
+        """))
+
+        return result.scalar_one()
+
+def create_theatre(
+    theatre_id: int,
+    new_theatre_name: str,
+    new_address: str,
+    new_latitude: str,
+    new_longitude: str,
+    new_dresser: str,
+):
+    with engine.begin() as conn:
+
+        result = conn.execute(
+            text("""
+                INSERT INTO theatre (
+                    id,
+                    name,
+                    address,
+                    latitude,
+                    longitude,
+                    dresser,
+                )
+                VALUES (
+                    :theatre_id,
+                    :new_theatre_name,
+                    :new_address,
+                    :new_latitude,
+                    :new_longitude,
+                    :new_dresser
+                )
+                RETURNING id;
+            """),
+            {
+                "theatre_id": theatre_id,
+                "new_theatre_name": new_theatre_name,
+                "new_address": new_address,
+                "new_latitude": new_latitude,
+                "new_longitude": new_longitude,
+                "new_dresser": new_dresser
+            },
+        )
+
+        return result.scalar_one()

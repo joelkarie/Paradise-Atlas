@@ -33,15 +33,19 @@
 <body>
     {% if success == "visit_added" %}
     <div class="success-message">
-        ✅ Visit successfully added.
+        ✅ Visit successfully added. 😀
     </div>
     {% elif success == "digs_added" %}
     <div class="success-message">
-        ✅ Digs successfully added.
+        ✅ Digs successfully added. 🏠
     </div>
     {% elif success == "location_added" %}
     <div class="success-message">
-        ✅ Location successfully added.
+        ✅ Location successfully added. 📍
+    </div>
+    {% elif success == "theatre_added" %}
+    <div class="success-message">
+        ✅ Theatre successfully added. 🎭
     </div>
     {% endif %}
     <a href="/logout">Logout</a>

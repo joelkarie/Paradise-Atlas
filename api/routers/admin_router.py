@@ -18,8 +18,11 @@ from api.services.visit_services import (
     create_visit,
     get_visits_for_dropdown,
     add_digs_to_visit,
+    add_theatre_to_visit
 )
 from api.services.digs_services import get_digs_types, get_next_digs_number, create_digs
+
+from api.services.theatre_services import get_next_theatre_number, create_theatre
 
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
 
@@ -156,6 +159,44 @@ def add_theatre_page(request: Request):
         context={
             "visits": visits,
         },
+    )
+
+@router.post("/add_theatre")
+def add_theatre(
+    visit_id: int = Form(...),
+    new_theatre_name: str = Form(...),
+    new_address: str = Form(...),
+    new_latitude: str = Form(""),
+    new_longitude: str = Form(""),
+    new_dresser: str = Form("")
+):
+    print(f"Visit ID: {visit_id}")
+    print(f"Theatre Name: {new_theatre_name}")
+    print(f"Address: {new_address}")
+
+    print(f"Latitude: {new_latitude}")
+    print(f"Longitude: {new_longitude}")
+    print(f"Dresser: {new_dresser}")
+
+    next_theatre_number = get_next_theatre_number()
+    print(f"Next theatre number = {next_theatre_number}")
+
+    theatre_id = create_theatre(
+        theatre_id=next_theatre_number,
+        new_theatre_name=new_theatre_name,
+        new_address=new_address,
+        new_latitude=new_latitude,
+        new_longitude=new_longitude,
+        new_dresser=new_dresser
+    )
+
+    add_theatre_to_visit(visit_id=visit_id, theatre_id=theatre_id)
+
+    print(f"Visit [{visit_id}] updated with theatre id = {theatre_id}")
+
+    return RedirectResponse(
+        url="/admin/home?success=theatre_added",
+        status_code=303
     )
 
 
