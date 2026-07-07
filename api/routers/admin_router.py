@@ -12,7 +12,7 @@ from api.services.locations_services import (
     create_location,
     create_location_rating,
 )
-from api.services.visit_order_services import (
+from api.services.visit_services import (
     get_next_visit_number,
     get_next_visit_order,
     create_visit,

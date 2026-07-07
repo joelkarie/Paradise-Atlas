@@ -15,7 +15,7 @@ from api.routers.theatres_router import router as theatre_router
 from api.routers.joel_could_live_router import router as joel_could_live_router
 from api.routers.capitols_router import router as capitols_router
 from api.routers.digs_router import router as digs_router
-from api.routers.visit_order import router as visit_order_router
+from api.routers.visit_router import router as visit_order_router
 from api.routers.locations_router import router as locations_router
 from api.routers.patagonia_router import router as patagonia_router
 from api.routers.quaker_meetings_router import router as quaker_meetings_router
