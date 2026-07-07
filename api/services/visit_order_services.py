@@ -13,6 +13,7 @@ def get_visit_order():
 
         return [dict(row._mapping) for row in rows]
 
+
 def get_next_visit_number():
     with engine.connect() as conn:
 
@@ -22,6 +23,7 @@ def get_next_visit_number():
         """))
 
         return result.scalar_one()
+
 
 def get_next_visit_order():
     with engine.connect() as conn:
@@ -67,7 +69,8 @@ def create_visit(
         )
 
         return result.scalar_one()
-    
+
+
 def get_visits_for_dropdown(without_digs=False):
     with engine.connect() as conn:
 
@@ -91,7 +94,8 @@ def get_visits_for_dropdown(without_digs=False):
         rows = conn.execute(text(sql))
 
         return [dict(row._mapping) for row in rows]
-    
+
+
 def add_digs_to_visit(visit_id: int, digs_id: int) -> bool:
     with engine.begin() as conn:
 

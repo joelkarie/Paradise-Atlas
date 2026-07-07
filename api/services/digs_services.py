@@ -28,6 +28,7 @@ def get_digs_types():
 
         return [dict(row._mapping) for row in rows]
 
+
 def get_next_digs_number():
     with engine.connect() as conn:
 
@@ -37,6 +38,7 @@ def get_next_digs_number():
         """))
 
         return result.scalar_one()
+
 
 def create_digs(
     digs_id: int,
@@ -56,7 +58,7 @@ def create_digs(
                     latitude,
                     longitude,
                     digs_type_id,
-                    company_housing,
+                    company_housing
                 )
                 VALUES (
                     :digs_id,
@@ -64,7 +66,7 @@ def create_digs(
                     :new_latitude,
                     :new_longitude,
                     :digs_type_id,
-                    :company_housing_bool,
+                    :company_housing_bool
                 )
                 RETURNING id;
             """),

@@ -182,7 +182,7 @@ def add_digs(
     print(f"Company Housing: {company_housing_bool}")
 
     next_digs_number = get_next_digs_number()
-    print(f"Next visit number = {next_digs_number}")
+    print(f"Next digs number = {next_digs_number}")
 
     digs_id = create_digs(
         digs_id=next_digs_number,
