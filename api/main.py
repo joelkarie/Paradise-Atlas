@@ -22,6 +22,7 @@ from api.routers.quaker_meetings_router import router as quaker_meetings_router
 from api.routers.michael_could_live_router import router as michael_could_live_router
 from api.routers.together_could_live_router import router as together_could_live_router
 from api.routers.admin_router import router as admin_router
+from api.routers.canadian_railway_hotel_router import router as canadian_railway_hotels_router
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -55,6 +56,7 @@ routers = [
     quaker_meetings_router,
     together_could_live_router,
     admin_router,
+    canadian_railway_hotels_router,
 ]
 
 for router in routers:
