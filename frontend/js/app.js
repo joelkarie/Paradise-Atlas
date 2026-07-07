@@ -13,7 +13,8 @@ import { createQuakerMeetingsLayer } from "./layers/quaker_meetings.js";
 import { getQuakerMeetings } from "./api.js";
 import { getLocations } from "./api.js";
 import { createLocationsLayer } from "./layers/locations.js";
-
+import { createDigsLayer } from "./layers/digs.js";
+import { getDigs } from "./api.js";
 
 
 async function main() {
@@ -30,6 +31,7 @@ async function main() {
     const vistitOrderLayer = createVisitOrderLayer(await getVisitOrder());
     const quakerMeetingHouseLayer = createQuakerMeetingsLayer(await getQuakerMeetings());
     const locationLayer = createLocationsLayer( await getLocations());
+    const digsLayer = createDigsLayer( await getDigs(), "digs_marker_2.png")
 
     locationLayer.addTo(map)
 
@@ -37,6 +39,7 @@ async function main() {
         "Locations Visited": locationLayer,
         "Visit Order": vistitOrderLayer,
         "Theatres We Have Worked At": theatreLayer,
+        "Place We Have Stayed": digsLayer,
         "Capitols Visited": capitolLayer,
         "Cities Michael Could Live In": michaelCouldLiveLayer,
         "Cities Joel Could Live In": joelCouldLiveLayer,
