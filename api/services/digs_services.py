@@ -13,6 +13,26 @@ def get_housing_distances():
 
         return [dict(row._mapping) for row in rows]
 
+def get_digs_for_map():
+
+    with engine.connect() as conn:
+
+        rows = conn.execute(text("""
+            select 
+            dt.name as digs_type, 
+            d.address as address, 
+            d.latitude as latitude, 
+            d.longitude as longitude, 
+            d.company_housing as company_housing,
+            hb.name as name
+            from 
+            digs d
+            join digs_type dt on dt.id = d.digs_type_id
+            left join hotel_details hd on hd.digs_id  = d.id 
+            left join hotel_brand hb on hb.id = hd.hotel_brand_id     
+        """))
+
+        return [dict(row._mapping) for row in rows]
 
 def get_digs_types():
 
@@ -81,3 +101,4 @@ def create_digs(
         )
 
         return result.scalar_one()
+
