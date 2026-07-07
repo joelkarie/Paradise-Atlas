@@ -31,6 +31,19 @@
 </head>
 
 <body>
+    {% if success == "visit_added" %}
+    <div class="success-message">
+        ✅ Visit successfully added.
+    </div>
+    {% elif success == "digs_added" %}
+    <div class="success-message">
+        ✅ Digs successfully added.
+    </div>
+    {% elif success == "location_added" %}
+    <div class="success-message">
+        ✅ Location successfully added.
+    </div>
+    {% endif %}
     <a href="/logout">Logout</a>
     <div>
         <img src="/static/assets/paradise_pelican.png" alt="Atlas Paradiso Logo" class="logo" height="170px">
@@ -46,6 +59,9 @@
     </div>
     <div>
         <a href="/admin/add_digs">Add Digs</a>
+    </div>
+    <div>
+        <a href="/admin/add_location">Add A Location</a>
     </div>
 </body>
 

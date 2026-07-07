@@ -138,3 +138,11 @@ h1 {
     justify-content: center;  /* left/right */
     align-items: center;      /* up/down */
 }
+.success-message {
+    background: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+    padding: 12px;
+    margin-bottom: 20px;
+    border-radius: 6px;
+}

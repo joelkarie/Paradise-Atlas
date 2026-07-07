@@ -40,7 +40,13 @@ def admin_home_page(request: Request):
     except Exception:
         return RedirectResponse("/login")
 
-    return FileResponse(BASE_DIR / "frontend" / "admin_home.html")
+    return templates.TemplateResponse(
+        request=request,
+        name="admin_home.html",
+        context={
+            "success": request.query_params.get("success")
+        }
+    )
 
 
 @router.get("/joel")
@@ -126,8 +132,10 @@ def add_visit(
 
     print(f"Visit created with id = {visit_id}")
 
-    return {"success": True}
-
+    return RedirectResponse(
+        url="/admin/home?success=visit_added",
+        status_code=303
+    )
 
 @router.get("/add_theatre")
 def add_theatre_page(request: Request):
@@ -197,7 +205,10 @@ def add_digs(
 
     print(f"Visit [{visit_id}] updated with digs id = {digs_id}")
 
-    return {"success": True}
+    return RedirectResponse(
+        url="/admin/home?success=digs_added",
+        status_code=303
+    )
 
 @router.get("/add_location")
 def add_location_page(request: Request):
@@ -250,4 +261,7 @@ def add_location(
     create_location_rating(new_id)
     print(f"New location rating created with id = {new_id}")
 
-    return {"success": True}
+    return RedirectResponse(
+        url="/admin/home?success=location_added",
+        status_code=303
+    )
