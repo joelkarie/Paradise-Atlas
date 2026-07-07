@@ -215,3 +215,39 @@ def add_location_page(request: Request):
         name="add_location.html",
         context={"location_types": location_types, "locations": locations},
     )
+
+@router.post("/add_location")
+def add_location(
+    location_type: int = Form(...),
+    new_name: str = Form(...),
+    new_state_province: str = Form(""),
+    new_country: str = Form("USA"),
+    new_latitude: str = Form(""),
+    new_longitude: str = Form("")
+):
+    print(f"Location Type: {location_type}")
+    print(f"Name {new_name}")
+
+
+    print(f"State: {new_state_province}")
+    print(f"Country: {new_country}")
+    print(f"Latitude: {new_latitude}")
+    print(f"Longitude: {new_longitude}")
+
+
+
+    new_id = create_location(
+        name=new_name,
+        location_type_id=location_type,
+        state_province=new_state_province,
+        country=new_country,
+        latitude=new_latitude,
+        longitude=new_longitude
+    )
+
+    print(f"New location created with id = {new_id}")
+
+    create_location_rating(new_id)
+    print(f"New location rating created with id = {new_id}")
+
+    return {"success": True}
