@@ -1,5 +1,10 @@
 from fastapi import APIRouter, Form
-from ..services.locations_services import get_locations, update_location_rating_value, get_location_types
+from ..services.locations_services import (
+    get_locations,
+    update_location_rating_value,
+    get_location_types,
+    get_national_parks,
+)
 
 router = APIRouter(prefix="/locations", tags=["Locations"])
 
@@ -19,12 +24,12 @@ def update_location_rating(
         "joel_highlights",
         "michael_highlights",
         "joel_star_rating",
-        "michael_star_rating"
+        "michael_star_rating",
     }
 
     if field not in allowed_fields:
         raise ValueError("Invalid field")
-    
+
     if field in ["joel_could_live", "michael_could_live"]:
         value = True if str(value).lower() == "true" else False
 
@@ -32,6 +37,12 @@ def update_location_rating(
 
     return {"status": "ok"}
 
+
 @router.get("/location_types")
 def location_types():
     return get_location_types()
+
+
+@router.get("/national_parks")
+def national_parks():
+    return get_national_parks()

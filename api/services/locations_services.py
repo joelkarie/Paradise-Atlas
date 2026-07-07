@@ -136,3 +136,15 @@ def create_location_rating(location_id: int):
             """),
             {"location_id": location_id},
         )
+
+def get_national_parks():
+    with engine.connect() as conn:
+
+        rows = conn.execute(text("""
+            select 
+                *
+            from location l
+            where l.location_type_id = 2;
+        """))
+
+        return [dict(row._mapping) for row in rows]
