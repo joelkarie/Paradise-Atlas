@@ -6,18 +6,28 @@ export function createDigsLayer(digs, icon) {
             html: `
                 <img src="/static/assets/${icon}"
                     style="
-                        width:40px;
+                        width:30px;
                         filter: drop-shadow(2px 4px 3px rgba(0,0,0,0.4));
                     ">
             `,
             className: "",
-            iconAnchor: [15, 30]
+            iconAnchor: [15, 15]
         });
+
+        let popup_title = digs.digs_type.replace(/_/g, " ").replace(/\b\w/g, c => c.toUpperCase())
+
+        if (digs.name) {
+            popup_title = digs.name
+        };
+
+        if (popup_title == 'Other') {
+            popup_title = "Apartment"
+        };
 
         let popup_info = `
         <div style="min-width: 260px; line-height: 1.4;">
             <div style="font-size: 22px; font-weight: 700; margin-bottom: 2px;">
-                <b>${digs.digs_type.replace(/_/g, " ").replace(/\b\w/g, c => c.toUpperCase())}</b><br>
+                <b>${popup_title}</b><br>
             </div>
 
             <div style="font-size: 13px; color: #666; margin-bottom: 10px;">
@@ -29,13 +39,6 @@ export function createDigsLayer(digs, icon) {
         </div>
         `
 
-        if (digs.name) {
-            popup_info += `
-            <div>
-                ${digs.name}
-            </div>
-            `
-        };
         L.marker([
             digs.latitude,
             digs.longitude
