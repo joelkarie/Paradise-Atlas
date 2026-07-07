@@ -48,7 +48,7 @@ export function createTheatreLayer(theatres) {
                     ">
             `,
             className: "",
-            iconAnchor: [38, 43]
+            iconAnchor: [30, 43]
         });
 
         const marker = L.marker([
