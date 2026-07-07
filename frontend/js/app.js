@@ -15,6 +15,9 @@ import { getLocations } from "./api.js";
 import { createLocationsLayer } from "./layers/locations.js";
 import { createDigsLayer } from "./layers/digs.js";
 import { getDigs } from "./api.js";
+import { createCanadianRailwayHotelsLayer } from "./layers/canadian_railway_hotels.js";
+import { getVisitedCanadianRailwayHotels } from "./api.js";
+
 
 
 async function main() {
@@ -30,8 +33,9 @@ async function main() {
     const patagoniaStoreLayer = createPatagoniaStoreLayer(await getPatagoniaStores());
     const vistitOrderLayer = createVisitOrderLayer(await getVisitOrder());
     const quakerMeetingHouseLayer = createQuakerMeetingsLayer(await getQuakerMeetings());
-    const locationLayer = createLocationsLayer( await getLocations());
-    const digsLayer = createDigsLayer( await getDigs(), "digs_marker_2.png")
+    const locationLayer = createLocationsLayer(await getLocations());
+    const digsLayer = createDigsLayer(await getDigs(), "digs_marker_2.png")
+    const visitedCanadianRailwayHotelsLayer = createCanadianRailwayHotelsLayer(await getVisitedCanadianRailwayHotels(), "chateau-frontenac.png")
 
     locationLayer.addTo(map)
 
@@ -41,6 +45,7 @@ async function main() {
         "Theatres We Have Worked At": theatreLayer,
         "Place We Have Stayed": digsLayer,
         "Capitols Visited": capitolLayer,
+        "Canadian Railway Hotels Visited": visitedCanadianRailwayHotelsLayer,
         "Cities Michael Could Live In": michaelCouldLiveLayer,
         "Cities Joel Could Live In": joelCouldLiveLayer,
         "Cities We Both Could Live In": togetherCouldLiveLayer,
