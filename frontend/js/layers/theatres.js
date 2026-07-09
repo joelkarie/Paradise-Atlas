@@ -1,5 +1,3 @@
-console.log("theatres.js loaded");
-
 async function imageExists(url) {
     const response = await fetch(url, { method: "HEAD" });
     return response.ok;
@@ -36,7 +34,7 @@ async function createTheatrePopupContent(theatre) {
     return html;
 }
 
- function createTheatreLayer(theatres) {
+export function createTheatreLayer(theatres) {
     const theatreLayer = L.layerGroup();
 
     theatres.forEach(theatre => {
@@ -60,144 +58,10 @@ async function createTheatrePopupContent(theatre) {
 
         marker.on("click", async () => {
             const content = await createTheatrePopupContent(theatre);
-            marker.bindPopup(content, { keepInView: true }).openPopup();
+            marker.bindPopup(content, {keepInView: true}).openPopup();
         });
 
     });
     return theatreLayer;
 
 }
-
-document.addEventListener("DOMContentLoaded", () => {
-
-    const theatreSelect =
-        document.getElementById("imageTheatreSelect");
-
-    const imagePreview =
-        document.getElementById("theatreImagePreview");
-
-    const uploadButton =
-        document.getElementById("uploadTheatreImage");
-
-    const imageInput =
-        document.getElementById("theatreImageInput");
-
-
-    function loadTheatreImage() {
-
-        const theatreId = theatreSelect.value;
-
-        fetch(`/theatres/${theatreId}/image`)
-            .then(response => response.json())
-            .then(data => {
-
-                imagePreview.src =
-                    data.url + "?v=" + Date.now();
-
-            })
-            .catch(error => {
-                console.error(
-                    "Unable to load theatre image:",
-                    error
-                );
-            });
-    }
-
-
-    if (theatreSelect && imagePreview) {
-
-        theatreSelect.addEventListener(
-            "change",
-            loadTheatreImage
-        );
-
-        loadTheatreImage();
-    }
-
-
-    if (uploadButton && imageInput) {
-
-        uploadButton.addEventListener(
-            "click",
-            async () => {
-                console.log("Upload button clicked");
-                const theatreId = theatreSelect.value;
-                const file = imageInput.files[0];
-
-                if (!file) {
-                    alert("Please select an image first.");
-                    return;
-                }
-
-                const formData = new FormData();
-
-                formData.append(
-                    "file",
-                    file
-                );
-
-
-                try {
-
-                    uploadButton.disabled = true;
-                    uploadButton.innerText =
-                        "Uploading...";
-
-
-                    const response = await fetch(
-                        `/admin/theatres/${theatreId}/image`,
-                        {
-                            method: "POST",
-                            body: formData
-                        }
-                    );
-
-
-                    if (!response.ok) {
-
-                        const error =
-                            await response.json();
-
-                        throw new Error(
-                            error.detail ||
-                            "Upload failed"
-                        );
-                    }
-
-
-                    const result =
-                        await response.json();
-
-
-                    imagePreview.src =
-                        result.image_url +
-                        "?v=" +
-                        Date.now();
-
-
-                    alert(
-                        "Image uploaded successfully!"
-                    );
-
-                } catch (error) {
-
-                    console.error(
-                        "Upload error:",
-                        error
-                    );
-
-                    alert(error.message);
-
-                } finally {
-
-                    uploadButton.disabled = false;
-                    uploadButton.innerText =
-                        "Upload Image";
-                }
-
-            }
-        );
-
-    }
-
-});
