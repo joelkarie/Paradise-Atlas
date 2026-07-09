@@ -15,6 +15,25 @@ def get_theatres():
         return [dict(row._mapping) for row in rows]
 
 
+def get_theatre(theatre_id: int):
+
+    with engine.connect() as conn:
+
+        row = conn.execute(
+            text("""
+                SELECT *
+                FROM theatre_view
+                WHERE id = :id
+            """),
+            {"id": theatre_id},
+        ).first()
+
+        if row is None:
+            return None
+
+        return dict(row._mapping)
+
+
 def get_next_theatre_number():
     with engine.connect() as conn:
 

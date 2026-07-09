@@ -1,5 +1,5 @@
 from fastapi import APIRouter, UploadFile, File, HTTPException
-from api.services.theatre_services import get_theatres
+from api.services.theatre_services import get_theatres, get_theatre
 from api.services.github_service import GithubService
 from api.services.image_service import ImageService
 from api.services.image_paths import ImagePaths
@@ -14,6 +14,11 @@ def theatres():
 
 @router.post("/admin/theatres/{theatre_id}/image")
 async def upload_theatre_image(theatre_id: int, file: UploadFile = File(...)):
+    theatre = get_theatre(theatre_id)
+
+    if theatre is None:
+        raise HTTPException(status_code=404, detail="Theatre not found.")
+
     # Make sure it's an image
     if not file.content_type.startswith("image/"):
         raise HTTPException(status_code=400, detail="File must be an image.")
