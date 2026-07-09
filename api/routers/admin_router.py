@@ -22,7 +22,7 @@ from api.services.visit_services import (
 )
 from api.services.digs_services import get_digs_types, get_next_digs_number, create_digs
 
-from api.services.theatre_services import get_next_theatre_number, create_theatre
+from api.services.theatre_services import get_next_theatre_number, create_theatre, get_theatres
 
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
 
@@ -152,12 +152,14 @@ def add_theatre_page(request: Request):
         return RedirectResponse("/login")
 
     visits = get_visits_for_dropdown()
+    theatres = get_theatres()
 
     return templates.TemplateResponse(
         request=request,
         name="add_theatre.html",
         context={
             "visits": visits,
+            "theatres": theatres
         },
     )
 

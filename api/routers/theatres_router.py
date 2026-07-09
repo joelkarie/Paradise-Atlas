@@ -1,3 +1,5 @@
+from pathlib import Path
+from fastapi.responses import JSONResponse
 from fastapi import APIRouter, UploadFile, File, HTTPException
 from api.services.theatre_services import get_theatres, get_theatre
 from api.services.github_service import GithubService
@@ -36,3 +38,17 @@ async def upload_theatre_image(theatre_id: int, file: UploadFile = File(...)):
     )
 
     return result
+
+
+@router.get("/theatres/{theatre_id}/image")
+def get_theatre_image(theatre_id: int):
+
+    image_path = Path(f"frontend/images/theatres/" f"{theatre_id}_theatre.webp")
+
+    if image_path.exists():
+        return {
+            "exists": True,
+            "url": f"/static/images/theatres/" f"{theatre_id}_theatre.webp",
+        }
+
+    return {"exists": False, "url": "/static/assets/no_image.webp"}

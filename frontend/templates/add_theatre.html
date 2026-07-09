@@ -61,8 +61,45 @@
     <button type="submit" required>Save Theatre</button>
     <a href="/admin/home">Cancel</a>
   </form>
+  <details style="margin-top:30px;">
+    <summary>
+      <h2 style="display:inline;">
+        Add An Image To A Theatre
+      </h2>
+    </summary>
 
+    <div style="margin-top:20px;">
+
+      <label>Select Theatre:</label>
+
+      <select id="imageTheatreSelect">
+        {% for theatre in theatres %}
+        <option value="{{ theatre.id }}">
+          {{ theatre.name }}
+        </option>
+        {% endfor %}
+      </select>
+
+
+      <h3>Current Image</h3>
+
+      <img id="theatreImagePreview" src="/static/assets/no_image.webp" width="400" style="border-radius:8px;">
+
+
+      <h3>Upload New Image</h3>
+
+      <input type="file" id="theatreImageInput" accept="image/*">
+
+      <br><br>
+
+      <button id="uploadTheatreImage">
+        Upload Image
+      </button>
+
+    </div>
+
+  </details>
 </body>
 </body>
-
+<script src="/static/js/layers/theatres.js"></script>
 </html>

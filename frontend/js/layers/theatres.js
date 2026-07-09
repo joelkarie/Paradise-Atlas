@@ -58,10 +58,41 @@ export function createTheatreLayer(theatres) {
 
         marker.on("click", async () => {
             const content = await createTheatrePopupContent(theatre);
-            marker.bindPopup(content, {keepInView: true}).openPopup();
+            marker.bindPopup(content, { keepInView: true }).openPopup();
         });
 
     });
     return theatreLayer;
 
 }
+
+const theatreSelect =
+    document.getElementById("imageTheatreSelect");
+
+const imagePreview =
+    document.getElementById("theatreImagePreview");
+
+
+function loadTheatreImage() {
+
+    const id = theatreSelect.value;
+
+    fetch(`/theatres/${id}/image`)
+        .then(response => response.json())
+        .then(data => {
+
+            imagePreview.src =
+                data.url + "?v=" + Date.now();
+
+        });
+
+}
+
+
+theatreSelect.addEventListener(
+    "change",
+    loadTheatreImage
+);
+
+
+loadTheatreImage();
