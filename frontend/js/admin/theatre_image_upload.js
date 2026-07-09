@@ -3,6 +3,14 @@ console.log("theatre_image_upload.js loaded");
 
 document.addEventListener("DOMContentLoaded", () => {
 
+    const uploadSection =
+        document.getElementById("imageUploadSection");
+
+    const entity =
+        uploadSection.dataset.entity;
+
+    console.log(entity);   // "theatre"
+
     const theatreSelect =
         document.getElementById("imageTheatreSelect");
 
