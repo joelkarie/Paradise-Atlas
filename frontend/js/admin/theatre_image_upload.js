@@ -124,13 +124,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
                 try {
-
+                    console.log("In try")
                     uploadButton.disabled = true;
 
                     uploadButton.innerText =
                         "Uploading...";
 
-
+                    console.log("about to fetch")
                     const response =
                         await fetch(
                             `/admin/theatres/${theatreId}/image`,
@@ -142,7 +142,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
                     if (!response.ok) {
-
+                        console.log("Respone not ok")
                         let message =
                             "Upload failed";
 
@@ -158,7 +158,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
                         }
                         catch {
-
+                            console.log("In catch")
                             // Response was not JSON
                         }
 
@@ -166,7 +166,7 @@ document.addEventListener("DOMContentLoaded", () => {
                         throw new Error(message);
                     }
 
-
+                    console.log("Awaiting response")
                     const result =
                         await response.json();
 
