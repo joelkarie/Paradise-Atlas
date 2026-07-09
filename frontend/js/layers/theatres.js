@@ -36,7 +36,7 @@ async function createTheatrePopupContent(theatre) {
     return html;
 }
 
-function createTheatreLayer(theatres) {
+ function createTheatreLayer(theatres) {
     const theatreLayer = L.layerGroup();
 
     theatres.forEach(theatre => {
