@@ -18,7 +18,7 @@ document.addEventListener("DOMContentLoaded", () => {
     //         document.getElementById("theatreImagePreview");
 
     const uploadButton =
-        document.getElementById("imageIdImage");
+        document.getElementById("uploadIdImage");
 
     const imageInput =
         document.getElementById("idImageInput");
