@@ -7,9 +7,16 @@ def get_theatres():
     with engine.connect() as conn:
 
         rows = conn.execute(text("""
-            SELECT *
-            FROM theatre_view t
-            ORDER BY t.name
+            SELECT t.name AS name, 
+            l.name AS city, 
+            l.state_province AS state_province, 
+            v.date AS date, l.latitude AS latitude, 
+            l.longitude AS longitude,
+            t.id as id
+            FROM visit v
+            JOIN theatre t ON t.id = v.theatre_id
+            JOIN location l ON l.id = v.location_id
+            ORDER by name ASC
         """))
 
         return [dict(row._mapping) for row in rows]
