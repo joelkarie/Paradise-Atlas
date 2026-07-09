@@ -14,7 +14,7 @@ def theatres():
     return get_theatres()
 
 
-@router.post("/admin/theatres/{theatre_id}/image")
+@router.post("/admin/add_image/{theatre_id}/image")
 async def upload_theatre_image(theatre_id: int, file: UploadFile = File(...)):
     print("UPLOAD ROUTE HIT")
     print("THEATRE ID:", theatre_id)
