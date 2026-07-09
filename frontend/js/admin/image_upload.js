@@ -1,4 +1,4 @@
-console.log("theatre_image_upload.js loaded");
+console.log("image_upload.js loaded");
 
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -9,7 +9,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const entity =
         uploadSection.dataset.entity;
 
-    console.log(entity);   // "theatre"
+    console.log(entity);   
 
     const idSelect =
         document.getElementById("imageIdSelect");
