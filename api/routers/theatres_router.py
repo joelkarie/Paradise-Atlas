@@ -16,10 +16,18 @@ def theatres():
 
 @router.post("/admin/theatres/{theatre_id}/image")
 async def upload_theatre_image(theatre_id: int, file: UploadFile = File(...)):
+    print("UPLOAD ROUTE HIT")
+    print("THEATRE ID:", theatre_id)
+    print("FILE:", file.filename)    
+    
     theatre = get_theatre(theatre_id)
 
     if theatre is None:
-        raise HTTPException(status_code=404, detail="Theatre not found.")
+        print("NO THEATRE FOUND:", theatre_id)
+        raise HTTPException(
+            status_code=404,
+            detail=f"Theatre {theatre_id} not found."
+        )
 
     # Make sure it's an image
     if not file.content_type.startswith("image/"):
