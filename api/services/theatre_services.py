@@ -34,7 +34,7 @@ def get_theatre(theatre_id: int):
         row = conn.execute(
             text("""
                 SELECT *
-                FROM theatre_view
+                FROM theatre
                 WHERE id = :id
             """),
             {"id": theatre_id},
