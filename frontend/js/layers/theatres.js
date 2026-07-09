@@ -66,33 +66,49 @@ export function createTheatreLayer(theatres) {
 
 }
 
-const theatreSelect =
-    document.getElementById("imageTheatreSelect");
 
-const imagePreview =
-    document.getElementById("theatreImagePreview");
+document.addEventListener("DOMContentLoaded", () => {
 
+    const theatreSelect =
+        document.getElementById("imageTheatreSelect");
 
-function loadTheatreImage() {
-
-    const id = theatreSelect.value;
-
-    fetch(`/theatres/${id}/image`)
-        .then(response => response.json())
-        .then(data => {
-
-            imagePreview.src =
-                data.url + "?v=" + Date.now();
-
-        });
-
-}
+    const imagePreview =
+        document.getElementById("theatreImagePreview");
 
 
-theatreSelect.addEventListener(
-    "change",
-    loadTheatreImage
-);
+    if (!theatreSelect || !imagePreview) {
+        return;
+    }
 
 
-loadTheatreImage();
+    function loadTheatreImage() {
+
+        const theatreId = theatreSelect.value;
+
+        fetch(`/theatres/${theatreId}/image`)
+            .then(response => response.json())
+            .then(data => {
+
+                imagePreview.src =
+                    data.url + "?v=" + Date.now();
+
+            })
+            .catch(error => {
+                console.error(
+                    "Unable to load theatre image:",
+                    error
+                );
+            });
+    }
+
+
+    theatreSelect.addEventListener(
+        "change",
+        loadTheatreImage
+    );
+
+
+    // Load first selected theatre immediately
+    loadTheatreImage();
+
+});

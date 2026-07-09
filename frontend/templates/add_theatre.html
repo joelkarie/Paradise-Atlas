@@ -28,39 +28,48 @@
   <div>
     <img src="/static/assets/paradise_pelican.png" alt="Atlas Paradiso Logo" class="logo" height="170px">
   </div>
-  <h1>Add A Theatre</h1>
-  <form action="/admin/add_theatre" method="POST">
-    <div class="rating-row">
-      <div class="subtitle">Visit:</div>
-      <select name="visit_id" id="visitSelect">
+  <details style="margin-top:30px;">
+    <summary>
+      <h2 style="display:inline;">
+        Add A Theatre
+      </h2>
+    </summary>
 
-        {% for visit in visits %}
-        <option value="{{ visit.id }}">
-          {{ visit.location_name }}, {{ visit.state_province }} [{{ visit.date }}]
-        </option>
-        {% endfor %}
+    <div style="margin-top:20px;">
 
-      </select>
-    </div>
-    <div id="newTheatreFields" style="display:block; margin-top: 15px;">
+      <form action="/admin/add_theatre" method="POST">
+        <div class="rating-row">
+          <div class="subtitle">Visit:</div>
+          <select name="visit_id" id="visitSelect">
 
-      <h4>New Theatre</h4>
+            {% for visit in visits %}
+            <option value="{{ visit.id }}">
+              {{ visit.location_name }}, {{ visit.state_province }} [{{ visit.date }}]
+            </option>
+            {% endfor %}
 
-      <input type="text" name="new_theatre_name" placeholder="Theatre Name"><br><br>
+          </select>
+        </div>
+        <div id="newTheatreFields" style="display:block; margin-top: 15px;">
 
-      <input type="text" name="new_address" placeholder="Address"><br><br>
+          <h4>New Theatre</h4>
 
-      <input type="text" name="new_latitude" placeholder="latitude"><br><br>
+          <input type="text" name="new_theatre_name" placeholder="Theatre Name"><br><br>
 
-      <input type="text" name="new_longitude" placeholder="longitude"><br><br>
+          <input type="text" name="new_address" placeholder="Address"><br><br>
 
-      <input type="text" name="new_dresser" placeholder="Name"><br><br>
+          <input type="text" name="new_latitude" placeholder="latitude"><br><br>
 
-    </div>
+          <input type="text" name="new_longitude" placeholder="longitude"><br><br>
 
-    <button type="submit" required>Save Theatre</button>
-    <a href="/admin/home">Cancel</a>
-  </form>
+          <input type="text" name="new_dresser" placeholder="Name"><br><br>
+
+        </div>
+
+        <button type="submit" required>Save Theatre</button>
+        <a href="/admin/home">Cancel</a>
+      </form>
+  </details>
   <details style="margin-top:30px;">
     <summary>
       <h2 style="display:inline;">
@@ -99,7 +108,8 @@
     </div>
 
   </details>
+  <script src="/static/js/layers/theatres.js"></script>
 </body>
 </body>
-<script src="/static/js/layers/theatres.js"></script>
+
 </html>
