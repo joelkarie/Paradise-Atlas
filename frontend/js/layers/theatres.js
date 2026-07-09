@@ -20,7 +20,7 @@ async function createTheatrePopupContent(theatre) {
         </div>
             `;
 
-    const imageUrl = `/static/images/theatres/${theatre.city.toLowerCase().replaceAll(" ", "_")}_theatre.webp`;
+    const imageUrl = `/static/images/theatres/${theatre.id}_theatre.webp`;
 
     if (await imageExists(imageUrl)) {
         html += `
