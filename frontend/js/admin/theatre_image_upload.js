@@ -6,75 +6,75 @@ document.addEventListener("DOMContentLoaded", () => {
     const theatreSelect =
         document.getElementById("imageTheatreSelect");
 
-//     const imagePreview =
-//         document.getElementById("theatreImagePreview");
+    //     const imagePreview =
+    //         document.getElementById("theatreImagePreview");
 
-//     const uploadButton =
-//         document.getElementById("uploadTheatreImage");
+    const uploadButton =
+        document.getElementById("uploadTheatreImage");
 
     const imageInput =
         document.getElementById("theatreImageInput");
 
-console.log("In the function:");
-console.log(theatreSelect.value);
-//     // This page does not have the image section
-//     // so safely exit.
-//     if (!theatreSelect || !imagePreview) {
-//         return;
-//     }
+    console.log("In the function:");
+    console.log(theatreSelect.value);
+    //     // This page does not have the image section
+    //     // so safely exit.
+    //     if (!theatreSelect || !imagePreview) {
+    //         return;
+    //     }
 
 
-//     async function loadTheatreImage() {
+    //     async function loadTheatreImage() {
 
-//         const theatreId = theatreSelect.value;
+    //         const theatreId = theatreSelect.value;
 
-//         if (!theatreId) {
-//             return;
-//         }
-
-
-//         try {
-
-//             const response = await fetch(
-//                 `/theatres/${theatreId}/image`
-//             );
+    //         if (!theatreId) {
+    //             return;
+    //         }
 
 
-//             if (!response.ok) {
-//                 throw new Error(
-//                     "Unable to retrieve theatre image"
-//                 );
-//             }
+    //         try {
+
+    //             const response = await fetch(
+    //                 `/theatres/${theatreId}/image`
+    //             );
 
 
-//             const data = await response.json();
+    //             if (!response.ok) {
+    //                 throw new Error(
+    //                     "Unable to retrieve theatre image"
+    //                 );
+    //             }
 
 
-//             imagePreview.src =
-//                 data.url + "?v=" + Date.now();
-
-//         }
-//         catch (error) {
-
-//             console.error(
-//                 "Unable to load theatre image:",
-//                 error
-//             );
-
-//             imagePreview.src =
-//                 "/static/assets/no_image.webp";
-//         }
-//     }
+    //             const data = await response.json();
 
 
-//     theatreSelect.addEventListener(
-//         "change",
-//         loadTheatreImage
-//     );
+    //             imagePreview.src =
+    //                 data.url + "?v=" + Date.now();
+
+    //         }
+    //         catch (error) {
+
+    //             console.error(
+    //                 "Unable to load theatre image:",
+    //                 error
+    //             );
+
+    //             imagePreview.src =
+    //                 "/static/assets/no_image.webp";
+    //         }
+    //     }
 
 
-//     // Load the first selected theatre immediately
-//     loadTheatreImage();
+    //     theatreSelect.addEventListener(
+    //         "change",
+    //         loadTheatreImage
+    //     );
+
+
+    //     // Load the first selected theatre immediately
+    //     loadTheatreImage();
 
 
 
@@ -95,18 +95,22 @@ console.log(theatreSelect.value);
                 console.log(
                     theatreId
                 );
-                // const file =
-                //     imageInput.files[0];
+                const file =
+                    imageInput.files[0];
 
 
-                // if (!file) {
+                if (!file) {
 
-                //     alert(
-                //         "Please select an image first."
-                //     );
+                    alert(
+                        "Please select an image first."
+                    );
 
-                //     return;
-                // }
+                    return;
+                }
+                else
+                {
+                    console.log("There is a file.")
+                }
 
 
                 // const formData =
