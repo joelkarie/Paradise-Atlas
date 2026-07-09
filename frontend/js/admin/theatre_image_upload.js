@@ -1,11 +1,10 @@
-alert("THEATRE IMAGE SCRIPT LOADED");
-// console.log("theatre_image_upload.js loaded");
+console.log("theatre_image_upload.js loaded");
 
 
-// document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", () => {
 
-//     const theatreSelect =
-//         document.getElementById("imageTheatreSelect");
+    const theatreSelect =
+        document.getElementById("imageTheatreSelect");
 
 //     const imagePreview =
 //         document.getElementById("theatreImagePreview");
@@ -13,10 +12,11 @@ alert("THEATRE IMAGE SCRIPT LOADED");
 //     const uploadButton =
 //         document.getElementById("uploadTheatreImage");
 
-//     const imageInput =
-//         document.getElementById("theatreImageInput");
+    const imageInput =
+        document.getElementById("theatreImageInput");
 
-
+console.log("In the function:");
+console.log(theatreSelect.value);
 //     // This page does not have the image section
 //     // so safely exit.
 //     if (!theatreSelect || !imagePreview) {
@@ -209,4 +209,4 @@ alert("THEATRE IMAGE SCRIPT LOADED");
 
 //     }
 
-// });
+});
