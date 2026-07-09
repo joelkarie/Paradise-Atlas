@@ -8,6 +8,18 @@ def get_theatres():
 
         rows = conn.execute(text("""
             SELECT *
+            FROM theatre_view t
+            ORDER BY t.name
+        """))
+
+        return [dict(row._mapping) for row in rows]
+
+def get_all_theatres_data():
+
+    with engine.connect() as conn:
+
+        rows = conn.execute(text("""
+            SELECT *
             FROM theatre t
             ORDER BY t.name
         """))
