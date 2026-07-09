@@ -66,7 +66,6 @@ export function createTheatreLayer(theatres) {
 
 }
 
-
 document.addEventListener("DOMContentLoaded", () => {
 
     const theatreSelect =
@@ -75,10 +74,11 @@ document.addEventListener("DOMContentLoaded", () => {
     const imagePreview =
         document.getElementById("theatreImagePreview");
 
+    const uploadButton =
+        document.getElementById("uploadTheatreImage");
 
-    if (!theatreSelect || !imagePreview) {
-        return;
-    }
+    const imageInput =
+        document.getElementById("theatreImageInput");
 
 
     function loadTheatreImage() {
@@ -102,13 +102,100 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
 
-    theatreSelect.addEventListener(
-        "change",
-        loadTheatreImage
-    );
+    if (theatreSelect && imagePreview) {
+
+        theatreSelect.addEventListener(
+            "change",
+            loadTheatreImage
+        );
+
+        loadTheatreImage();
+    }
 
 
-    // Load first selected theatre immediately
-    loadTheatreImage();
+    if (uploadButton && imageInput) {
+
+        uploadButton.addEventListener(
+            "click",
+            async () => {
+
+                const theatreId = theatreSelect.value;
+                const file = imageInput.files[0];
+
+                if (!file) {
+                    alert("Please select an image first.");
+                    return;
+                }
+
+                const formData = new FormData();
+
+                formData.append(
+                    "file",
+                    file
+                );
+
+
+                try {
+
+                    uploadButton.disabled = true;
+                    uploadButton.innerText =
+                        "Uploading...";
+
+
+                    const response = await fetch(
+                        `/admin/theatres/${theatreId}/image`,
+                        {
+                            method: "POST",
+                            body: formData
+                        }
+                    );
+
+
+                    if (!response.ok) {
+
+                        const error =
+                            await response.json();
+
+                        throw new Error(
+                            error.detail ||
+                            "Upload failed"
+                        );
+                    }
+
+
+                    const result =
+                        await response.json();
+
+
+                    imagePreview.src =
+                        result.image_url +
+                        "?v=" +
+                        Date.now();
+
+
+                    alert(
+                        "Image uploaded successfully!"
+                    );
+
+                } catch (error) {
+
+                    console.error(
+                        "Upload error:",
+                        error
+                    );
+
+                    alert(error.message);
+
+                } finally {
+
+                    uploadButton.disabled = false;
+                    uploadButton.innerText =
+                        "Upload Image";
+                }
+
+            }
+        );
+
+    }
 
 });
