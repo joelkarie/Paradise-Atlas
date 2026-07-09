@@ -1,3 +1,5 @@
+console.log("theatres.js loaded");
+
 async function imageExists(url) {
     const response = await fetch(url, { method: "HEAD" });
     return response.ok;
@@ -118,7 +120,7 @@ document.addEventListener("DOMContentLoaded", () => {
         uploadButton.addEventListener(
             "click",
             async () => {
-
+                console.log("Upload button clicked");
                 const theatreId = theatreSelect.value;
                 const file = imageInput.files[0];
 
