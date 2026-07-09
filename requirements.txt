@@ -49,3 +49,7 @@ python-multipart
 pwdlib
 argon2-cffi
 itsdangerous
+pillow
+requests
+PyGithub
+python-dotenv

@@ -77,4 +77,10 @@
 - Added Canadian Pacific Railway API/map
 - Added National Park API/map
 - Add add_location api for front end
+- Use Add Theatre api
+
+
+## Current State (July 8)
+
+- Start GitHub api for uploading images
 
