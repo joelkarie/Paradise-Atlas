@@ -2,13 +2,21 @@ from sqlalchemy import text
 from ..database import engine
 
 
-def get_theatres():
+def ==> ///////////////////////////////////////////////////////////
+INFO:     75.188.244.172:0 - "GET /admin/joel HTTP/1.1" 200 OK
+INFO:     75.188.244.172:0 - "GET /static/assets/paradise_pelican.png HTTP/1.1" 200 OK
+INFO:     75.188.244.172:0 - "GET /static/css/style.css HTTP/1.1" 200 OK
+INFO:     75.188.244.172:0 - "GET /admin/locations HTTP/1.1" 200 OK
+INFO:     75.188.244.172:0 - "GET /admin/add_theatre HTTP/1.1" 200 OK
+INFO:     75.188.244.172:0 - "GET /static/assets/no_image.webp HTTP/1.1" 404 Not Found
+INFO:     75.188.244.172:0 - "GET /static/js/admin/theatre_image_upload.js HTTP/1.1" 200 OK
+INFO:     75.188.244.172:0 - "POST /admin/theatres//image HTTP/1.1" 404 Not Found():
 
     with engine.connect() as conn:
 
         rows = conn.execute(text("""
             SELECT *
-            FROM theatre_view t
+            FROM theatre t
             ORDER BY t.name
         """))
 
