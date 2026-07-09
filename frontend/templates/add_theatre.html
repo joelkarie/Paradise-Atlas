@@ -70,7 +70,7 @@
         <a href="/admin/home">Cancel</a>
       </form>
   </details>
-  <details style="margin-top:30px;" id="imageUploadSection" data-entity="theatre">
+  <details style="margin-top:30px;" id="imageUploadSection" data-entity="theatres">
     <summary>
       <h2 style="display:inline;">
         Add An Image To A Theatre
@@ -81,7 +81,7 @@
 
       <label>Select Theatre:</label>
 
-      <select id="imageTheatreSelect">
+      <select id="imageIdSelect">
         {% for theatre in theatres %}
         <option value="{{ theatre.id }}">
           {{ theatre.name }}

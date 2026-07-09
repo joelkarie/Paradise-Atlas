@@ -11,20 +11,20 @@ document.addEventListener("DOMContentLoaded", () => {
 
     console.log(entity);   // "theatre"
 
-    const theatreSelect =
-        document.getElementById("imageTheatreSelect");
+    const idSelect =
+        document.getElementById("imageIdSelect");
 
     //     const imagePreview =
     //         document.getElementById("theatreImagePreview");
 
     const uploadButton =
-        document.getElementById("uploadTheatreImage");
+        document.getElementById("imageIdImage");
 
     const imageInput =
-        document.getElementById("theatreImageInput");
+        document.getElementById("idImageInput");
 
     console.log("In the function:");
-    console.log(theatreSelect.value);
+    console.log(idSelect.value);
     //     // This page does not have the image section
     //     // so safely exit.
     //     if (!theatreSelect || !imagePreview) {
@@ -97,11 +97,11 @@ document.addEventListener("DOMContentLoaded", () => {
                 );
 
 
-                const theatreId =
-                    theatreSelect.value;
+                const imageId =
+                    idSelect.value;
 
                 console.log(
-                    theatreId
+                    imageId
                 );
                 const file =
                     imageInput.files[0];
@@ -141,7 +141,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     console.log("about to fetch")
                     const response =
                         await fetch(
-                            `/theatres/admin/add_image/${theatreId}/image`,
+                            `/${entity}/admin/add_image/${imageId}/image`,
                             {
                                 method: "POST",
                                 body: formData
@@ -185,10 +185,10 @@ document.addEventListener("DOMContentLoaded", () => {
                     );
 
 
-                    imagePreview.src =
-                        result.image_url +
-                        "?v=" +
-                        Date.now();
+                    // imagePreview.src =
+                    //     result.image_url +
+                    //     "?v=" +
+                    //     Date.now();
 
 
                     alert(
