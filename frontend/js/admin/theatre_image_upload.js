@@ -113,102 +113,102 @@ document.addEventListener("DOMContentLoaded", () => {
                 }
 
 
-                // const formData =
-                //     new FormData();
+                const formData =
+                    new FormData();
 
 
-                // formData.append(
-                //     "file",
-                //     file
-                // );
+                formData.append(
+                    "file",
+                    file
+                );
 
 
-                // try {
+                try {
 
-                //     uploadButton.disabled = true;
+                    uploadButton.disabled = true;
 
-                //     uploadButton.innerText =
-                //         "Uploading...";
-
-
-                //     const response =
-                //         await fetch(
-                //             `/admin/theatres/${theatreId}/image`,
-                //             {
-                //                 method: "POST",
-                //                 body: formData
-                //             }
-                //         );
+                    uploadButton.innerText =
+                        "Uploading...";
 
 
-                //     if (!response.ok) {
-
-                //         let message =
-                //             "Upload failed";
-
-
-                //         try {
-
-                //             const error =
-                //                 await response.json();
-
-                //             message =
-                //                 error.detail ||
-                //                 message;
-
-                //         }
-                //         catch {
-
-                //             // Response was not JSON
-                //         }
+                    const response =
+                        await fetch(
+                            `/admin/theatres/${theatreId}/image`,
+                            {
+                                method: "POST",
+                                body: formData
+                            }
+                        );
 
 
-                //         throw new Error(message);
-                //     }
+                    if (!response.ok) {
+
+                        let message =
+                            "Upload failed";
 
 
-                //     const result =
-                //         await response.json();
+                        try {
+
+                            const error =
+                                await response.json();
+
+                            message =
+                                error.detail ||
+                                message;
+
+                        }
+                        catch {
+
+                            // Response was not JSON
+                        }
 
 
-                //     console.log(
-                //         "Upload result:",
-                //         result
-                //     );
+                        throw new Error(message);
+                    }
 
 
-                //     imagePreview.src =
-                //         result.image_url +
-                //         "?v=" +
-                //         Date.now();
+                    const result =
+                        await response.json();
 
 
-                //     alert(
-                //         "Image uploaded successfully!"
-                //     );
-
-                // }
-                // catch (error) {
-
-                //     console.error(
-                //         "Upload error:",
-                //         error
-                //     );
+                    console.log(
+                        "Upload result:",
+                        result
+                    );
 
 
-                //     alert(
-                //         error.message
-                //     );
+                    imagePreview.src =
+                        result.image_url +
+                        "?v=" +
+                        Date.now();
 
-                // }
-                // finally {
 
-                //     uploadButton.disabled =
-                //         false;
+                    alert(
+                        "Image uploaded successfully!"
+                    );
 
-                //     uploadButton.innerText =
-                //         "Upload Image";
-                // }
+                }
+                catch (error) {
+
+                    console.error(
+                        "Upload error:",
+                        error
+                    );
+
+
+                    alert(
+                        error.message
+                    );
+
+                }
+                finally {
+
+                    uploadButton.disabled =
+                        false;
+
+                    uploadButton.innerText =
+                        "Upload Image";
+                }
 
             }
         );
