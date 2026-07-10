@@ -11,7 +11,7 @@ router = APIRouter(prefix="/images", tags=["Images"])
 
 
 
-@router.post("/admin/add_image/{theatre_id}/image")
+@router.post("/admin/add_image/{type_name}/{type_id}/image")
 async def upload_image(type_name: str,type_id: int, file: UploadFile = File(...)):
     print("UPLOAD ROUTE HIT")
     print("TYPE:", type_name)

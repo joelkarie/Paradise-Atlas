@@ -141,7 +141,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     console.log("about to fetch")
                     const response =
                         await fetch(
-                            `/${entity}/admin/add_image/${imageId}/image`,
+                            `/image/admin/add_image/${entity}/${imageId}/image`,
                             {
                                 method: "POST",
                                 body: formData
@@ -224,3 +224,5 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
 });
+
+                            // `/${entity}/admin/add_image/${imageId}/image`,
