@@ -11,6 +11,7 @@ from fastapi.middleware.cors import CORSMiddleware
 
 from api.auth import password_hash, serializer
 from api.database import engine
+from api.routers.image_router import router as image_router
 from api.routers.theatres_router import router as theatre_router
 from api.routers.joel_could_live_router import router as joel_could_live_router
 from api.routers.capitols_router import router as capitols_router
@@ -22,7 +23,9 @@ from api.routers.quaker_meetings_router import router as quaker_meetings_router
 from api.routers.michael_could_live_router import router as michael_could_live_router
 from api.routers.together_could_live_router import router as together_could_live_router
 from api.routers.admin_router import router as admin_router
-from api.routers.canadian_railway_hotel_router import router as canadian_railway_hotels_router
+from api.routers.canadian_railway_hotel_router import (
+    router as canadian_railway_hotels_router,
+)
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -45,6 +48,7 @@ app.add_middleware(
 )
 
 routers = [
+    image_router,
     theatre_router,
     joel_could_live_router,
     michael_could_live_router,

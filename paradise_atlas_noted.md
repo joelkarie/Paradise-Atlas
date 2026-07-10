@@ -84,3 +84,11 @@
 
 - Start GitHub api for uploading images
 
+## Current State (July 9)
+
+- Create api, js, and html for uploading theatre images.
+
+## Current State (July 10)
+
+- Make posting of images generic
+
