@@ -28,37 +28,83 @@
     <div>
         <img src="/static/assets/paradise_pelican.png" alt="Atlas Paradiso Logo" class="logo" height="170px">
     </div>
-    <h1>Add Location</h1>
-    <form action="/admin/add_location" method="POST">
-        <div class="rating-row">
-            <div class="subtitle">Location Type:</div>
-            <select name="location_type">
+    <details style="margin-top:30px;" id="imageUploadSection" data-entity="locations">
+        <summary>
+            <h2 style="display:inline;">
+                Add Location
+            </h2>
+        </summary>
+        <form action="/admin/add_location" method="POST">
+            <div class="rating-row">
+                <div class="subtitle">Location Type:</div>
+                <select name="location_type">
 
-                {% for location_type in location_types %}
-                <option value="{{ location_type.id }}">
-                    {{ location_type.name.replace('_', ' ').title() }}
+                    {% for location_type in location_types %}
+                    <option value="{{ location_type.id }}">
+                        {{ location_type.name.replace('_', ' ').title() }}
+                    </option>
+                    {% endfor %}
+
+                </select>
+            </div>
+            <div id="newLocationFields" style="display:block; margin-top: 15px;">
+
+                Location Name: <input type="text" name="new_name" placeholder="Location Name"><br><br>
+
+                State/Provice: <input type="text" name="new_state_province" placeholder="State/Province"><br><br>
+
+                Country: <input type="text" name="new_country" placeholder="Country"><br><br>
+
+                Latitude: <input type="text" name="new_latitude" placeholder="latitude"><br><br>
+
+                Longitude: <input type="text" name="new_longitude" placeholder="longitude"><br><br>
+
+            </div>
+
+            <button type="submit" required>Save Location</button>
+            <a href="/admin/home">Cancel</a>
+        </form>
+    </details>
+
+    <details style="margin-top:30px;" id="imageUploadSection" data-entity="locations">
+        <summary>
+            <h2 style="display:inline;">
+                Add An Image To A Location
+            </h2>
+        </summary>
+
+        <div style="margin-top:20px;">
+
+            <label>Select Location:</label>
+
+            <select id="imageIdSelect">
+                {% for location in locations %}
+                <option value="{{ location.id }}">
+                    {{ location.name }}, {{ location.state_province }}, {{ location.country}}
                 </option>
                 {% endfor %}
-
             </select>
+
+
+            <!-- <h3>Current Image</h3>
+
+      <img id="theatreImagePreview" src="/static/assets/no_image.webp" width="400" style="border-radius:8px;">
+ -->
+
+            <h3>Upload New Image</h3>
+
+            <input type="file" id="idImageInput" accept="image/*">
+
+            <br><br>
+
+            <button id="uploadIdImage">
+                Upload Image
+            </button>
+
         </div>
-        <div id="newLocationFields" style="display:block; margin-top: 15px;">
 
-            Location Name: <input type="text" name="new_name" placeholder="Location Name"><br><br>
-
-            State/Provice: <input type="text" name="new_state_province" placeholder="State/Province"><br><br>
-
-            Country: <input type="text" name="new_country" placeholder="Country"><br><br>
-
-            Latitude: <input type="text" name="new_latitude" placeholder="latitude"><br><br>
-
-            Longitude: <input type="text" name="new_longitude" placeholder="longitude"><br><br>
-
-        </div>
-
-        <button type="submit" required>Save Digs</button>
-        <a href="/admin/home">Cancel</a>
-    </form>
+    </details>
+    <script src="/static/js/admin/image_upload.js"></script>
 </body>
 </body>
 
