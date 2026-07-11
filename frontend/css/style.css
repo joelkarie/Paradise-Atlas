@@ -69,10 +69,10 @@ h1 {
     border-radius: 8px;
 }
 .section-divider {
-    border: none;                 /* Remove the default HR border */
+ /*   border: none;                 /* Remove the default HR border */
     border-top: 3px solid var(--primary-border-color);
-    margin: 2rem 0;               /* Optional spacing above and below */
-    width: 100%;
+   /* margin: 2rem 0;               /* Optional spacing above and below */
+  /*  width: 100%; */
 }
 .location-title {
     font-size: 18px;
