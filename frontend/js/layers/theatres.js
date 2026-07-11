@@ -2,7 +2,7 @@
 //     const response = await fetch(url, { method: "HEAD" });
 //     return response.ok;
 // }
-import { imageExists } from "./layers/utils.js"
+import { imageExists } from "./utils.js";
 
 async function createTheatrePopupContent(theatre) {
     let html = `
