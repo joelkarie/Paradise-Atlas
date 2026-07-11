@@ -28,72 +28,74 @@
   <div>
     <img src="/static/assets/paradise_pelican.png" alt="Atlas Paradiso Logo" class="logo" height="170px">
   </div>
-  <hr class="section-divider">
-  <h1>Add A Visit</h1>
-<form action="/admin/add_visit" method="POST">
-  <div class="rating-row">
-    <div class="subtitle">Location Type:</div>
-    <select name="location_type">
+  <div style="background-color :#fbfdc8">
+    <hr class="section-divider">
+    <h1>Add A Visit</h1>
+    <form action="/admin/add_visit" method="POST">
+      <div class="rating-row">
+        <div class="subtitle">Location Type:</div>
+        <select name="location_type">
 
-      {% for location_type in location_types %}
-      <option value="{{ location_type.id }}">
-        {{ location_type.name.replace('_', ' ').title() }}
-      </option>
-      {% endfor %}
+          {% for location_type in location_types %}
+          <option value="{{ location_type.id }}">
+            {{ location_type.name.replace('_', ' ').title() }}
+          </option>
+          {% endfor %}
 
-    </select>
+        </select>
+      </div>
+      <div class="rating-row">
+        <div class="subtitle">Location Name:</div>
+        <select name="location_id" id="locationSelect">
+
+          <option value="new">
+            + Add Location
+          </option>
+
+          {% for location in locations %}
+          <option value="{{ location.id }}">
+            {{ location.name }}, {{ location.state_province }}, {{ location.country }}
+          </option>
+          {% endfor %}
+
+        </select>
+      </div>
+      <div id="newLocationFields" style="display:none; margin-top: 15px;">
+
+        <h4>New Location</h4>
+
+        <input type="text" name="new_location_name" placeholder="City / Location name"><br><br>
+
+        <input type="text" name="new_state" placeholder="State / Province"><br><br>
+
+        <input type="text" name="new_country" placeholder="Country" value="USA"><br><br>
+
+        <input type="text" name="new_latitude" placeholder="latitude"><br><br>
+
+        <input type="text" name="new_longitude" placeholder="longitude"><br><br>
+
+      </div>
+      <div class="rating-row">
+        <div class="subtitle">Visit Date:</div>
+        <input type="date" name="visit_date">
+      </div>
+      <button type="submit" required>Save Visit</button>
+      <a href="/admin/home">Cancel</a>
+    </form>
+    <script>
+      const locationSelect = document.getElementById("locationSelect");
+      const newLocationFields = document.getElementById("newLocationFields");
+
+      locationSelect.addEventListener("change", function () {
+        if (this.value === "new") {
+          newLocationFields.style.display = "block";
+        } else {
+          newLocationFields.style.display = "none";
+        }
+      });
+    </script>
+    <hr class="section-divider">
   </div>
-  <div class="rating-row">
-    <div class="subtitle">Location Name:</div>
-    <select name="location_id" id="locationSelect">
-
-      <option value="new">
-        + Add Location
-      </option>
-
-      {% for location in locations %}
-      <option value="{{ location.id }}">
-        {{ location.name }}, {{ location.state_province }}, {{ location.country }}
-      </option>
-      {% endfor %}
-
-    </select>
-  </div>
-  <div id="newLocationFields" style="display:none; margin-top: 15px;">
-
-    <h4>New Location</h4>
-
-    <input type="text" name="new_location_name" placeholder="City / Location name"><br><br>
-
-    <input type="text" name="new_state" placeholder="State / Province"><br><br>
-
-    <input type="text" name="new_country" placeholder="Country" value="USA"><br><br>
-
-    <input type="text" name="new_latitude" placeholder="latitude"><br><br>
-
-    <input type="text" name="new_longitude" placeholder="longitude"><br><br>
-
-  </div>
-  <div class="rating-row">
-    <div class="subtitle">Visit Date:</div>
-    <input type="date" name="visit_date">
-  </div>
-<button type="submit" required>Save Visit</button>
-<a href="/admin/home">Cancel</a>
-</form>
-  <script>
-    const locationSelect = document.getElementById("locationSelect");
-    const newLocationFields = document.getElementById("newLocationFields");
-
-    locationSelect.addEventListener("change", function () {
-      if (this.value === "new") {
-        newLocationFields.style.display = "block";
-      } else {
-        newLocationFields.style.display = "none";
-      }
-    });
-  </script>
-  <hr class="section-divider">
 </body>
 </body>
 
