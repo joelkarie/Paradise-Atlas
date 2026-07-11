@@ -28,89 +28,89 @@
   <div>
     <img src="/static/assets/paradise_pelican.png" alt="Atlas Paradiso Logo" class="logo" height="170px">
   </div>
-  <hr class="section-divider">
-  <details style="margin-top:30px;">
-    <summary>
-      <h2 style="display:inline;">
-        Add A Theatre
-      </h2>
-    </summary>
+  <div class="content-box">
+    <details style="margin-top:30px;">
+      <summary>
+        <h2 style="display:inline;">
+          Add A Theatre
+        </h2>
+      </summary>
 
-    <div style="margin-top:20px;">
+      <div style="margin-top:20px;">
 
-      <form action="/admin/add_theatre" method="POST">
-        <div class="rating-row">
-          <div class="subtitle">Visit:</div>
-          <select name="visit_id" id="visitSelect">
+        <form action="/admin/add_theatre" method="POST">
+          <div class="rating-row">
+            <div class="subtitle">Visit:</div>
+            <select name="visit_id" id="visitSelect">
 
-            {% for visit in visits %}
-            <option value="{{ visit.id }}">
-              {{ visit.location_name }}, {{ visit.state_province }} [{{ visit.date }}]
-            </option>
-            {% endfor %}
+              {% for visit in visits %}
+              <option value="{{ visit.id }}">
+                {{ visit.location_name }}, {{ visit.state_province }} [{{ visit.date }}]
+              </option>
+              {% endfor %}
 
-          </select>
-        </div>
-        <div id="newTheatreFields" style="display:block; margin-top: 15px;">
+            </select>
+          </div>
+          <div id="newTheatreFields" style="display:block; margin-top: 15px;">
 
-          <h4>New Theatre</h4>
+            <h4>New Theatre</h4>
 
-          <input type="text" name="new_theatre_name" placeholder="Theatre Name"><br><br>
+            <input type="text" name="new_theatre_name" placeholder="Theatre Name"><br><br>
 
-          <input type="text" name="new_address" placeholder="Address"><br><br>
+            <input type="text" name="new_address" placeholder="Address"><br><br>
 
-          <input type="text" name="new_latitude" placeholder="latitude"><br><br>
+            <input type="text" name="new_latitude" placeholder="latitude"><br><br>
 
-          <input type="text" name="new_longitude" placeholder="longitude"><br><br>
+            <input type="text" name="new_longitude" placeholder="longitude"><br><br>
 
-          <input type="text" name="new_dresser" placeholder="Name"><br><br>
+            <input type="text" name="new_dresser" placeholder="Name"><br><br>
 
-        </div>
+          </div>
 
-        <button type="submit" required>Save Theatre</button>
-        <a href="/admin/home">Cancel</a>
-      </form>
-  </details>
-  <details style="margin-top:30px;" id="imageUploadSection" data-entity="theatres">
-    <summary>
-      <h2 style="display:inline;">
-        Add An Image To A Theatre
-      </h2>
-    </summary>
+          <button type="submit" required>Save Theatre</button>
+          <a href="/admin/home">Cancel</a>
+        </form>
+    </details>
+    <details style="margin-top:30px;" id="imageUploadSection" data-entity="theatres">
+      <summary>
+        <h2 style="display:inline;">
+          Add An Image To A Theatre
+        </h2>
+      </summary>
 
-    <div style="margin-top:20px;">
+      <div style="margin-top:20px;">
 
-      <label>Select Theatre:</label>
+        <label>Select Theatre:</label>
 
-      <select id="imageIdSelect">
-        {% for theatre in theatres %}
-        <option value="{{ theatre.id }}">
-          {{ theatre.name }}
-        </option>
-        {% endfor %}
-      </select>
+        <select id="imageIdSelect">
+          {% for theatre in theatres %}
+          <option value="{{ theatre.id }}">
+            {{ theatre.name }}
+          </option>
+          {% endfor %}
+        </select>
 
 
-      <!-- <h3>Current Image</h3>
+        <!-- <h3>Current Image</h3>
 
       <img id="theatreImagePreview" src="/static/assets/no_image.webp" width="400" style="border-radius:8px;">
  -->
 
-      <h3>Upload New Image</h3>
+        <h3>Upload New Image</h3>
 
-      <input type="file" id="idImageInput" accept="image/*">
+        <input type="file" id="idImageInput" accept="image/*">
 
-      <br><br>
+        <br><br>
 
-      <button id="uploadIdImage">
-        Upload Image
-      </button>
+        <button id="uploadIdImage">
+          Upload Image
+        </button>
 
-    </div>
+      </div>
 
-  </details>
-  <script src="/static/js/admin/image_upload.js"></script>
-  <hr class="section-divider">
+    </details>
+    <script src="/static/js/admin/image_upload.js"></script>
+  </div>
 </body>
 </body>
 

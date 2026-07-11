@@ -28,62 +28,62 @@
     <div>
         <img src="/static/assets/paradise_pelican.png" alt="Atlas Paradiso Logo" class="logo" height="170px">
     </div>
-    <hr class="section-divider">
-    <h1>Add Digs</h1>
-    <form action="/admin/add_digs" method="POST">
-        <div class="rating-row">
-            <div class="subtitle">Visit:</div>
-            <select name="visit_id" id="visitSelect">
-
-                {% for visit in visits %}
-                <option value="{{ visit.id }}">
-                    {{ visit.location_name }}, {{ visit.state_province }} [{{ visit.date }}]
-                </option>
-                {% endfor %}
-
-            </select>
-        </div>
-        <div id="newDigsFields" style="display:block; margin-top: 15px;">
-
-            <h4>New Digs</h4>
+    <div class="content-box">
+        <h1>Add Digs</h1>
+        <form action="/admin/add_digs" method="POST">
             <div class="rating-row">
-                <div class="subtitle">Digs Type:</div>
-                <select name="digs_type">
+                <div class="subtitle">Visit:</div>
+                <select name="visit_id" id="visitSelect">
 
-                    {% for digs_type in digs_types %}
-                    <option value="{{ digs_type.id }}">
-                        {{ digs_type.name.replace('_', ' ').title() }}
+                    {% for visit in visits %}
+                    <option value="{{ visit.id }}">
+                        {{ visit.location_name }}, {{ visit.state_province }} [{{ visit.date }}]
                     </option>
                     {% endfor %}
 
                 </select>
             </div>
-            Address: <input type="text" name="new_address" placeholder="Address"><br><br>
+            <div id="newDigsFields" style="display:block; margin-top: 15px;">
 
-            Latitude: <input type="text" name="new_latitude" placeholder="latitude"><br><br>
+                <h4>New Digs</h4>
+                <div class="rating-row">
+                    <div class="subtitle">Digs Type:</div>
+                    <select name="digs_type">
 
-            Longitude: <input type="text" name="new_longitude" placeholder="longitude"><br><br>
+                        {% for digs_type in digs_types %}
+                        <option value="{{ digs_type.id }}">
+                            {{ digs_type.name.replace('_', ' ').title() }}
+                        </option>
+                        {% endfor %}
 
-            <div class="rating-row">
-                <div class="subtitle">Company Housing:</div>
+                    </select>
+                </div>
+                Address: <input type="text" name="new_address" placeholder="Address"><br><br>
 
-                <label>
-                    <input type="radio" name="company_housing_bool" value="true">
-                    Yes
-                </label>
+                Latitude: <input type="text" name="new_latitude" placeholder="latitude"><br><br>
 
-                <label>
-                    <input type="radio" name="company_housing_bool" value="false" checked>
-                    No
-                </label>
+                Longitude: <input type="text" name="new_longitude" placeholder="longitude"><br><br>
+
+                <div class="rating-row">
+                    <div class="subtitle">Company Housing:</div>
+
+                    <label>
+                        <input type="radio" name="company_housing_bool" value="true">
+                        Yes
+                    </label>
+
+                    <label>
+                        <input type="radio" name="company_housing_bool" value="false" checked>
+                        No
+                    </label>
+                </div>
+
             </div>
 
-        </div>
-
-        <button type="submit" required>Save Digs</button>
-        <a href="/admin/home">Cancel</a>
-    </form>
-    <hr class="section-divider">
+            <button type="submit" required>Save Digs</button>
+            <a href="/admin/home">Cancel</a>
+        </form>
+    </div>
 </body>
 </body>
 
