@@ -13,7 +13,7 @@ const TYPE_SINGULAR = {
 
 function typeId(typeName, typeId) {
     const singular = TYPE_SINGULAR[typeName] ?? typeName;
-    return `frontend/images/${typeName}/${typeId}_${singular}.webp`;
+    return `static/images/${typeName}/${typeId}_${singular}.webp`;
 }
 
 document.addEventListener("DOMContentLoaded", () => {
