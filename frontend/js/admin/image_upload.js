@@ -1,6 +1,8 @@
 console.log("image_upload.js loaded");
 
 async function imageExists(url) {
+    console.log("In imageExists")
+    console.log(url)
     const response = await fetch(url, { method: "HEAD" });
     return response.ok;
 }
