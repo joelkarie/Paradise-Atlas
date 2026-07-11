@@ -43,48 +43,48 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
 
-                try {
+        try {
 
-                    const response = await fetch(
-                        `/${entity}/${imageId}/image`
-                    );
-
-
-                    if (!response.ok) {
-                        throw new Error(
-                            "Unable to retrieve theatre image"
-                        );
-                    }
+            const response = await fetch(
+                `/${entity}/${imageId}/image`
+            );
 
 
-                    const data = await response.json();
+            if (!response.ok) {
+                throw new Error(
+                    "Unable to retrieve theatre image"
+                );
+            }
 
 
-                    imagePreview.src =
-                        data.url + "?v=" + Date.now();
+            const data = await response.json();
 
-                }
-                catch (error) {
 
-                    console.error(
-                        "Unable to load theatre image:",
-                        error
-                    );
+            imagePreview.src =
+                data.url + "?v=" + Date.now();
 
-                    imagePreview.src =
-                        "/static/assets/no_image.webp";
-                }
+        }
+        catch (error) {
+
+            console.error(
+                "Unable to load theatre image:",
+                error
+            );
+
+            imagePreview.src =
+                "/static/assets/no_image.webp";
+        }
     }
 
 
-        idSelect.addEventListener(
-            "change",
-            loadTheatreImage
-        );
+    idSelect.addEventListener(
+        "change",
+        loadTheatreImage
+    );
 
 
-    //     // Load the first selected theatre immediately
-    //     loadTheatreImage();
+    // Load the first selected theatre immediately
+    loadTheatreImage();
 
 
 
