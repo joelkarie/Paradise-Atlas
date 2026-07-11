@@ -70,7 +70,7 @@ h1 {
 }
 .section-divider {
     border: none;                 /* Remove the default HR border */
-    border-top: 3px solid (--primary-border-color);
+    border-top: 3px solid var(--primary-border-color);
     margin: 2rem 0;               /* Optional spacing above and below */
     width: 100%;
 }
