@@ -1,7 +1,3 @@
-// async function imageExists(url) {
-//     const response = await fetch(url, { method: "HEAD" });
-//     return response.ok;
-// }
 import { imageExists } from "./utils.js";
 
 async function createTheatrePopupContent(theatre) {

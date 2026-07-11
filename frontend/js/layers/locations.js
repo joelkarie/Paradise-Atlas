@@ -1,3 +1,7 @@
+
+import { imageExists } from "./utils.js";
+
+
 async function createLocationsPopupContent(location) {
     const escapeHtml = (str) => {
         if (!str) return '';
@@ -89,6 +93,17 @@ async function createLocationsPopupContent(location) {
             `
     };
 
+    const imageUrl = `/static/images/locations/${location.id}_location.webp`;
+
+    if (await imageExists(imageUrl)) {
+        html += `
+            <a href="${imageUrl}" target="_blank">
+                <img src="${imageUrl}" 
+                    style="width:100%; max-width:400px; cursor:pointer;">
+            </a>
+                `;
+    }
+
     return html;
 }
 
@@ -115,7 +130,7 @@ export function createLocationsLayer(locations) {
 
         marker.on("click", async () => {
             const content = await createLocationsPopupContent(location);
-            marker.bindPopup(content, {keepInView: true}).openPopup();
+            marker.bindPopup(content, { keepInView: true }).openPopup();
         });
     });
     return locationLayer;
