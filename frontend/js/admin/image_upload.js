@@ -67,10 +67,12 @@ document.addEventListener("DOMContentLoaded", () => {
             } else {
                 imagePreview.src = "/static/assets/no_image.webp";
             }
+            console.log("It worked")
         } catch (error) {
             console.error("Unable to load theatre image:", error);
             imagePreview.src = "/static/assets/no_image.webp";
         }
+        console.log("Leaving load theatre function")
     }
 
     idSelect.addEventListener(
