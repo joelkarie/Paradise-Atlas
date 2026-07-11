@@ -1,6 +1,9 @@
 console.log("image_upload.js loaded");
-import { imageExists } from "../layers/utils.js";
 
+async function imageExists(url) {
+    const response = await fetch(url, { method: "HEAD" });
+    return response.ok;
+}
 const TYPE_SINGULAR = {
     theatres: "theatre",
     locations: "location",
