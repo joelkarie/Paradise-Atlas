@@ -1,5 +1,17 @@
 console.log("image_upload.js loaded");
+import { imageExists } from "../layers/utils.js";
 
+const TYPE_SINGULAR = {
+    theatres: "theatre",
+    locations: "location",
+    visits: "visit",
+    capitols: "capitol",
+};
+
+function typeId(typeName, typeId) {
+    const singular = TYPE_SINGULAR[typeName] ?? typeName;
+    return `frontend/images/${typeName}/${typeId}_${singular}.webp`;
+}
 
 document.addEventListener("DOMContentLoaded", () => {
 
@@ -35,47 +47,25 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
     async function loadTheatreImage() {
-
         const imageId = idSelect.value;
 
         if (!imageId) {
             return;
         }
 
+        const imageUrl = typeId(entity, imageId);
 
         try {
-
-            const response = await fetch(
-                `/${entity}/${imageId}/image`
-            );
-
-
-            if (!response.ok) {
-                throw new Error(
-                    "Unable to retrieve theatre image"
-                );
+            if (await imageExists(imageUrl)) {
+                imagePreview.src = imageUrl + "?v=" + Date.now();
+            } else {
+                imagePreview.src = "/static/assets/no_image.webp";
             }
-
-
-            const data = await response.json();
-
-
-            imagePreview.src =
-                data.url + "?v=" + Date.now();
-
-        }
-        catch (error) {
-
-            console.error(
-                "Unable to load theatre image:",
-                error
-            );
-
-            imagePreview.src =
-                "/static/assets/no_image.webp";
+        } catch (error) {
+            console.error("Unable to load theatre image:", error);
+            imagePreview.src = "/static/assets/no_image.webp";
         }
     }
-
 
     idSelect.addEventListener(
         "change",
