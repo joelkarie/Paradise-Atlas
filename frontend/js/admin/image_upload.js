@@ -45,18 +45,21 @@ document.addEventListener("DOMContentLoaded", () => {
     // This page does not have the image section
     // so safely exit.
     if (!idSelect || !imagePreview) {
+        console.log("In the return")
         return;
     }
 
 
     async function loadTheatreImage() {
         const imageId = idSelect.value;
-
+        console.log("In loadTheatre1")
         if (!imageId) {
+            console.log("In loadTheatre return")
             return;
         }
 
         const imageUrl = typeId(entity, imageId);
+                console.log(imageUrl)
 
         try {
             if (await imageExists(imageUrl)) {
