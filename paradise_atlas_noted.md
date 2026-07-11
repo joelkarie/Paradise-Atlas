@@ -91,5 +91,6 @@
 ## Current State (July 10)
 
 - Make posting of images generic
-- A api/html for adding images to locations.
+- Add api/html for adding images to locations.
+
 

@@ -40,8 +40,3 @@ export function createNationalParksLayer(parks, icon) {
     });
     return nationalParksLayer;
 }
-
-                // <a href="/static/images/capitols/${hotel.state_province.toLowerCase().replace(/\s+/g, "_")}.webp"  target="_blank">
-                //      <img src="/static/images/capitols/${hotel.state_province.toLowerCase().replace(/\s+/g, "_")}.webp" 
-                //         style="width:100%; max-width:300px; cursor:pointer;">
-                //  </a>
