@@ -93,4 +93,8 @@
 - Make posting of images generic
 - Add api/html for adding images to locations.
 
+## Current State (July 11)
+
+- Update css and look of websites
+- Host Excaliber Nouveau font
 

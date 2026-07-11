@@ -1,14 +1,18 @@
 :root {
+    /* global scope */
     --primary-bg-color: #FCC3A4;
-    /* global scope */
+
     --secondary-bg-color: #70bec7;
-    /* global scope */
+
     --primary-border-color: #0cbdb7;
-    /* global scope */
+
     --secondary-border-color: #9A733A;
-    /* global scope */
+
     --primary-highlight-color: #fbfdc8;
-    /* global scope */
+
+    --star-color: #bf2dcd;
+
+    --visit-marker-color: #a47ca8;
 }
 
 /* GENERAL STYLES */
@@ -19,23 +23,20 @@
     font-style: normal;
     font-display: swap;
 }
-h1,
-h2 {
-    font-family: "Amarante", serif;
-}
-body {
-    margin: 0;
-    font-family: 'Playfair Display', serif;
-    background-color: var(--primary-bg-color);
-}
 
 h1 {
     text-align: center;
 }
 
-#map {
-    width: 100%;
-    height: 65vh;
+h1,
+h2 {
+    font-family: "Amarante", serif;
+}
+
+body {
+    margin: 0;
+    font-family: 'Playfair Display', serif;
+    background-color: var(--primary-bg-color);
 }
 
 .banner-line {
@@ -80,6 +81,11 @@ h1 {
 }
 
 /* MAP STYLES */
+#map {
+    width: 100%;
+    height: 65vh;
+}
+
 .map-popup {
     width: min(300px, 80vw);
 }
@@ -110,6 +116,21 @@ h1 {
     margin-bottom: 6px;
 }
 
+.numbered-marker {
+    background-color: var(--visit-marker-color);
+    color: white;
+    border-radius: 50%;
+    width: 28px !important;
+    height: 28px !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    font-weight: bold;
+    border: 3px solid var(--visit-marker-color);
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.4);
+}
+
 /* POPUP DATA STYLES */
 .subtitle {
     font-size: 14px;
@@ -129,19 +150,12 @@ h1 {
     gap: 15px;
 }
 
-.numbered-marker {
-    background-color: #a47ca8;
-    color: white;
-    border-radius: 50%;
-    width: 28px !important;
-    height: 28px !important;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 16px;
-    font-weight: bold;
-    border: 3px solid #a47ca8;
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.4);
+.joel-label {
+    color: var(--secondary-border-color);
+}
+
+.michael-label {
+    color: var(--primary-border-color);
 }
 
 /* STAR RATING STYLES */
@@ -151,22 +165,16 @@ h1 {
 }
 
 .star-rating {
-    color: #bf2dcd;
+    color: var(--star-color);
 }
 
-.joel-label {
-    color: var(--secondary-border-color);
-}
-
-.michael-label {
-    color: var(--primary-border-color);
-}
 
 .person-label {
     font-size: 14px;
     font-weight: 700;
 }
 
+/* Admin Styles */
 .login-container {
     height: 100vh;
     display: flex;
