@@ -9,13 +9,13 @@ document.addEventListener("DOMContentLoaded", () => {
     const entity =
         uploadSection.dataset.entity;
 
-    console.log(entity);   
+    console.log(entity);
 
     const idSelect =
         document.getElementById("imageIdSelect");
 
-    //     const imagePreview =
-    //         document.getElementById("theatreImagePreview");
+    const imagePreview =
+        document.getElementById("idImagePreview");
 
     const uploadButton =
         document.getElementById("uploadIdImage");
@@ -24,61 +24,63 @@ document.addEventListener("DOMContentLoaded", () => {
         document.getElementById("idImageInput");
 
     console.log("In the function:");
+
     console.log(idSelect.value);
-    //     // This page does not have the image section
-    //     // so safely exit.
-    //     if (!theatreSelect || !imagePreview) {
-    //         return;
-    //     }
+
+    // This page does not have the image section
+    // so safely exit.
+    if (!idSelect || !imagePreview) {
+        return;
+    }
 
 
-    //     async function loadTheatreImage() {
+    async function loadTheatreImage() {
 
-    //         const theatreId = theatreSelect.value;
+        const imageId = idSelect.value;
 
-    //         if (!theatreId) {
-    //             return;
-    //         }
-
-
-    //         try {
-
-    //             const response = await fetch(
-    //                 `/theatres/${theatreId}/image`
-    //             );
+        if (!imageId) {
+            return;
+        }
 
 
-    //             if (!response.ok) {
-    //                 throw new Error(
-    //                     "Unable to retrieve theatre image"
-    //                 );
-    //             }
+                try {
+
+                    const response = await fetch(
+                        `/${entity}/${imageId}/image`
+                    );
 
 
-    //             const data = await response.json();
+                    if (!response.ok) {
+                        throw new Error(
+                            "Unable to retrieve theatre image"
+                        );
+                    }
 
 
-    //             imagePreview.src =
-    //                 data.url + "?v=" + Date.now();
-
-    //         }
-    //         catch (error) {
-
-    //             console.error(
-    //                 "Unable to load theatre image:",
-    //                 error
-    //             );
-
-    //             imagePreview.src =
-    //                 "/static/assets/no_image.webp";
-    //         }
-    //     }
+                    const data = await response.json();
 
 
-    //     theatreSelect.addEventListener(
-    //         "change",
-    //         loadTheatreImage
-    //     );
+                    imagePreview.src =
+                        data.url + "?v=" + Date.now();
+
+                }
+                catch (error) {
+
+                    console.error(
+                        "Unable to load theatre image:",
+                        error
+                    );
+
+                    imagePreview.src =
+                        "/static/assets/no_image.webp";
+                }
+    }
+
+
+        idSelect.addEventListener(
+            "change",
+            loadTheatreImage
+        );
 
 
     //     // Load the first selected theatre immediately
@@ -115,8 +117,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
                     return;
                 }
-                else
-                {
+                else {
                     console.log("There is a file.")
                 }
 
@@ -185,10 +186,10 @@ document.addEventListener("DOMContentLoaded", () => {
                     );
 
 
-                    // imagePreview.src =
-                    //     result.image_url +
-                    //     "?v=" +
-                    //     Date.now();
+                    imagePreview.src =
+                        result.image_url +
+                        "?v=" +
+                        Date.now();
 
 
                     alert(
@@ -224,5 +225,3 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
 });
-
-                            // `/${entity}/admin/add_image/${imageId}/image`,
