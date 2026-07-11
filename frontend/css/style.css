@@ -50,7 +50,13 @@ h1 {
     max-width: 500px;
     border-radius: 10px;
 }
-
+.content-box {
+    background-color: var(--primary-highlight-color);
+    border: 3px solid var(--primary-border-color);
+    border-radius: 8px;      /* Optional rounded corners */
+    padding: 1rem;           /* Space between border and content */
+    margin: 1.5rem 0;        /* Space above and below the box */
+}
 /* MAP STYLES */
 .map-popup {
     width: min(300px, 80vw);
