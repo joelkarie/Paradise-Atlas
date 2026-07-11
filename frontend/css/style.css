@@ -105,7 +105,7 @@ body {
 
 .section-divider {
     /*   border: none;                 /* Remove the default HR border */
-    border-top: 3px solid var(--primary-border-color);
+    border-top: 5px solid var(--primary-border-color);
     /* margin: 2rem 0;               /* Optional spacing above and below */
     /*  width: 100%; */
 }
