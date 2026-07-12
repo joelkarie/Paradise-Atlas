@@ -1,11 +1,14 @@
 console.log("image_upload.js loaded");
 
 async function imageExists(url) {
-    console.log("In imageExists")
-    console.log(url)
-    const response = await fetch(url, { method: "HEAD" });
-    return response.ok;
+    try {
+        const response = await fetch(url, { method: "HEAD" });
+        return response.ok;
+    } catch (err) {
+        return false;
+    }
 }
+
 const TYPE_SINGULAR = {
     theatres: "theatre",
     locations: "location",
@@ -15,7 +18,7 @@ const TYPE_SINGULAR = {
 
 function typeId(typeName, typeId) {
     const singular = TYPE_SINGULAR[typeName] ?? typeName;
-    return `static/images/${typeName}/${typeId}_${singular}.webp`;
+    return `/static/images/${typeName}/${typeId}_${singular}.webp`;
 }
 
 document.addEventListener("DOMContentLoaded", () => {
