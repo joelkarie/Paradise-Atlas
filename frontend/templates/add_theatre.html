@@ -85,7 +85,7 @@
         <select id="imageIdSelect">
           {% for theatre in theatres %}
           <option value="{{ theatre.id }}">
-            {{ theatre.name }}
+            {{ theatre.name }}, {{theatre.city}}
           </option>
           {% endfor %}
         </select>
