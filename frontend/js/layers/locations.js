@@ -97,6 +97,7 @@ async function createLocationsPopupContent(location) {
 
     if (await imageExists(imageUrl)) {
         html += `
+            <hr style="margin: 6px 0 10px 0; border: none; border-top: 1px solid #ddd;">
             <a href="${imageUrl}" target="_blank">
                 <img src="${imageUrl}" 
                     style="width:100%; max-width:400px; cursor:pointer;">
