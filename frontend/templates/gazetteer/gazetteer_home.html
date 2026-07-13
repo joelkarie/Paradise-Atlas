@@ -29,24 +29,44 @@
     </div>
     <div class="content-box">
         <h1>Gazetteer</h1>
-        <h2>Cities ({{city_count}})</h2>
+        <details>
+            <summary style="display:inline;">
+                <h2>Cities ({{city_count}})</h2>
+            </summary>
             {% for location in locations %}
-                {% if location.location_type_id == 1 %}
-                    {{ location.name }}, {{ location.state_province }}, {{ location.country}} <br>
-                {% endif %}
+            {% if location.location_type_id == 1 %}
+            {{ location.name }}, {{ location.state_province }}, {{ location.country}} <br>
+            {% endif %}
             {% endfor %}
-        <h2>National Parks ({{parks_count}})</h2>
+        </details>
+        <details>
+            <summary style="display:inline;">
+                <h2>National Parks ({{parks_count}})</h2>
+            </summary>
             {% for location in locations %}
-                {% if location.location_type_id == 2 %}
-                    {{ location.name }}, {{ location.state_province }}, {{ location.country}} <br>
-                {% endif %}
+            {% if location.location_type_id == 2 %}
+            {{ location.name }}, {{ location.state_province }}, {{ location.country}} <br>
+            {% endif %}
             {% endfor %}
-        <h2>Landmarks ({{landmarks_count}})</h2>
+        </details>
+        <details>
+            <summary style="display:inline;">
+                <h2>Landmarks ({{landmarks_count}})</h2>
+            </summary>
             {% for location in locations %}
-                {% if location.location_type_id == 3 %}
-                    {{ location.name }}, {{ location.state_province }}, {{ location.country}} <br>
-                {% endif %}
+            {% if location.location_type_id == 3 %}
+            {{ location.name }}, {{ location.state_province }}, {{ location.country}} <br>
+            {% endif %}
             {% endfor %}
+        </details>
+        <details>
+            <summary style="display:inline;">
+                <h2>USCapitols and Canadian Legislative Buildings ({{us_capitol_count}})</h2>
+            </summary>
+            {% for capitol in us_capitols %}
+            {{capitol.state_province}} ({{capitol.city}}) <br>
+            {% endfor %}
+        </details>
         <!-- <script>
       const locationSelect = document.getElementById("locationSelect");
       const newLocationFields = document.getElementById("newLocationFields");
