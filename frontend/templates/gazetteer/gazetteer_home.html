@@ -61,10 +61,26 @@
         </details>
         <details>
             <summary style="display:inline;">
-                <h2>USCapitols and Canadian Legislative Buildings ({{us_capitol_count}})</h2>
+                <h2>US Capitols and Canadian Legislative Buildings ({{us_capitol_count}})</h2>
             </summary>
             {% for capitol in us_capitols %}
-            {{capitol.state_province}} ({{capitol.city}}) <br>
+                {{capitol.state_province}} ({{capitol.city}}) <br>
+            {% endfor %}
+        </details>
+        <details>
+            <summary style="display:inline;">
+                <h2>Theatres ({{theatre_count}})</h2>
+            </summary>
+            {% for theatre in theatres %}
+                {{theatre.name}} - {{theatre.city}}, {{theatre.state_province}}  <br>
+            {% endfor %}
+        </details>
+        <details>
+            <summary style="display:inline;">
+                <h2>Canadian Railway Hotesl ({{ ca_railway_hotels | length }})</h2>
+            </summary>
+            {% for hotel in ca_railway_hotels %}
+                {{hotel.name}} - {{hotel.city}}, {{hotel.province}}  <br>
             {% endfor %}
         </details>
         <!-- <script>
