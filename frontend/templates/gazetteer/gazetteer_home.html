@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="icon" type="image/x-icon" href="/static/assets/peach_dot.png">
+    <!-- <link rel="icon" type="image/x-icon" href="assets/peach_dot.png"> -->
+
+    <link rel="stylesheet" href="/static/css/style.css">
+    <!-- <link rel="stylesheet" href="css/style.css"> -->
+
+    <meta charset="UTF-8">
+    <title>Add Visit</title>
+
+    <style>
+        body {
+            font-family: 'Playfair Display', serif;
+            margin: 20px;
+        }
+
+        label {
+            margin-right: 12px;
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        <img src="/static/assets/paradise_pelican.png" alt="Atlas Paradiso Logo" class="logo" height="170px">
+    </div>
+    <div class="content-box">
+        <h1>Gazetteer</h1>
+        <h2>Cities ({{city_count}})</h2>
+            {% for location in locations %}
+                {% if location.location_type_id == 1 %}
+                    {{ location.name }}, {{ location.state_province }}, {{ location.country}} <br>
+                {% endif %}
+            {% endfor %}
+        <h2>National Parks ({{parks_count}})</h2>
+            {% for location in locations %}
+                {% if location.location_type_id == 2 %}
+                    {{ location.name }}, {{ location.state_province }}, {{ location.country}} <br>
+                {% endif %}
+            {% endfor %}
+        <h2>Landmarks ({{landmarks_count}})</h2>
+            {% for location in locations %}
+                {% if location.location_type_id == 3 %}
+                    {{ location.name }}, {{ location.state_province }}, {{ location.country}} <br>
+                {% endif %}
+            {% endfor %}
+        <!-- <script>
+      const locationSelect = document.getElementById("locationSelect");
+      const newLocationFields = document.getElementById("newLocationFields");
+
+      locationSelect.addEventListener("change", function () {
+        if (this.value === "new") {
+          newLocationFields.style.display = "block";
+        } else {
+          newLocationFields.style.display = "none";
+        }
+      });
+    </script> -->
+    </div>
+</body>
+</body>
+
+</html>
