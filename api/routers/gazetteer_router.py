@@ -4,6 +4,13 @@ from api.services.locations_services import get_locations
 from api.services.capitols_services import get_capitols
 from api.services.theatre_services import get_theatres
 from api.services.canadian_railway_hotel_services import get_canadian_railway_hotels
+from api.services.quaker_meeting_services import get_quaker_meetings
+from api.services.patagonia_services import get_patagonia_stores
+from api.services.living_services import (
+    get_joel_livable_cities,
+    get_michael_livable_city,
+    get_joined_livable_cities,
+)
 
 router = APIRouter(prefix="/gazetteer", tags=["Gazetteer"])
 
@@ -39,6 +46,26 @@ def gazetteer_home_page(request: Request):
         get_canadian_railway_hotels(), key=lambda x: x["name"].lower()
     )
 
+    quaker_meeting_houses_sorted = sorted(
+        get_quaker_meetings(), key=lambda x: x["city".lower()]
+    )
+
+    patagonia_stores_sorted = sorted(
+        get_patagonia_stores(), key=lambda x: x["city".lower()]
+    )
+
+    joel_livable_sorted = sorted(
+        get_joel_livable_cities(), key=lambda x: x["city".lower()]
+    )
+
+    michael_livable_sorted = sorted(
+        get_michael_livable_city(), key=lambda x: x["city".lower()]
+    )
+
+    joined_livable_cities = sorted(
+        get_joined_livable_cities(), key=lambda x: x["city".lower()]
+    )
+
     return templates.TemplateResponse(
         request=request,
         name="gazetteer_home.html",
@@ -52,5 +79,10 @@ def gazetteer_home_page(request: Request):
             "theatres": theatres_sorted,
             "theatre_count": theatre_count,
             "ca_railway_hotels": ca_railway_hotels_sorted,
+            "quaker_meeting_houses": quaker_meeting_houses_sorted,
+            "patagonia_stores": patagonia_stores_sorted,
+            "michael_livable": michael_livable_sorted,
+            "joel_livable": joel_livable_sorted,
+            "joined_livable": joined_livable_cities,
         },
     )
