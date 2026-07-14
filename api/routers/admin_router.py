@@ -30,6 +30,11 @@ router = APIRouter(prefix="/admin")
 
 templates = Jinja2Templates(directory="frontend/templates")
 
+def article_for(word):
+    return "an" if word and word[0].lower() in "aeiou" else "a"
+
+
+templates.env.filters["article"] = article_for
 
 @router.get("/locations")
 def admin_locations():

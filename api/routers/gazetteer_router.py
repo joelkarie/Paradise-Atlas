@@ -1,6 +1,6 @@
 from fastapi import APIRouter, Request
 from fastapi.templating import Jinja2Templates
-from api.services.locations_services import get_locations
+from api.services.locations_services import get_locations, get_gazetteer_data
 from api.services.capitols_services import get_capitols
 from api.services.theatre_services import get_theatres
 from api.services.canadian_railway_hotel_services import get_canadian_railway_hotels
@@ -84,5 +84,18 @@ def gazetteer_home_page(request: Request):
             "michael_livable": michael_livable_sorted,
             "joel_livable": joel_livable_sorted,
             "joined_livable": joined_livable_cities,
+        },
+    )
+
+
+@router.get("/location/{location_id}")
+async def gazetteer_location(request: Request, location_id: int):
+    location = get_gazetteer_data(location_id)  # however you retrieve it
+    print(location)
+    return templates.TemplateResponse(
+        request=request,
+        name="gazetteer_location.html",
+        context={
+            "location": location,
         },
     )

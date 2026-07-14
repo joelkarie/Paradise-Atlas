@@ -99,3 +99,10 @@
 - Host Excaliber Nouveau font
 - Update css style sheet
 
+## Current State (July 12)
+
+- Add gazetteer homepage
+
+## Current State (July 13)
+
+- Add templates for gazetteer locations

@@ -35,7 +35,9 @@
             </summary>
             {% for location in locations %}
             {% if location.location_type_id == 1 %}
-            {{ location.name }}, {{ location.state_province }}, {{ location.country}} <br>
+            <a href="/gazetteer/location/{{ location.id }}">
+                {{ location.name }}, {{ location.state_province }}, {{ location.country}}
+            </a><br>
             {% endif %}
             {% endfor %}
         </details>
@@ -64,7 +66,7 @@
                 <h2>US Capitols and Canadian Legislative Buildings ({{us_capitol_count}})</h2>
             </summary>
             {% for capitol in us_capitols %}
-                {{capitol.state_province}} ({{capitol.city}}) <br>
+            {{capitol.state_province}} ({{capitol.city}}) <br>
             {% endfor %}
         </details>
         <details>
@@ -72,7 +74,7 @@
                 <h2>Theatres ({{theatre_count}})</h2>
             </summary>
             {% for theatre in theatres %}
-                {{theatre.name}} - {{theatre.city}}, {{theatre.state_province}}  <br>
+            {{theatre.name}} - {{theatre.city}}, {{theatre.state_province}} <br>
             {% endfor %}
         </details>
         <details>
@@ -80,7 +82,7 @@
                 <h2>Canadian Railway Hotesl ({{ ca_railway_hotels | length }})</h2>
             </summary>
             {% for hotel in ca_railway_hotels %}
-                {{hotel.name}} - {{hotel.city}}, {{hotel.province}}  <br>
+            {{hotel.name}} - {{hotel.city}}, {{hotel.province}} <br>
             {% endfor %}
         </details>
         <details>
@@ -88,7 +90,7 @@
                 <h2>Quaker Meeting Houses ({{ quaker_meeting_houses | length }})</h2>
             </summary>
             {% for meeting in quaker_meeting_houses %}
-                {{meeting.city}} - {{meeting.name}}  <br>
+            {{meeting.city}} - {{meeting.name}} <br>
             {% endfor %}
         </details>
         <details>
@@ -96,7 +98,7 @@
                 <h2>Patagonia Stores ({{ patagonia_stores | length }})</h2>
             </summary>
             {% for store in patagonia_stores %}
-                {{store.city}} - {{store.store_name}} <br>
+            {{store.city}} - {{store.store_name}} <br>
             {% endfor %}
         </details>
         <details>
@@ -104,7 +106,7 @@
                 <h2>Michael's Livable Cities ({{ michael_livable | length }})</h2>
             </summary>
             {% for city in michael_livable %}
-                {{ city.city }}, {{ city.state_province }} <br>
+            {{ city.city }}, {{ city.state_province }} <br>
             {% endfor %}
         </details>
         <details>
@@ -112,7 +114,7 @@
                 <h2>Joel's Livable Cities ({{ joel_livable | length }})</h2>
             </summary>
             {% for city in joel_livable %}
-                {{ city.city }}, {{ city.state_province }} <br>
+            {{ city.city }}, {{ city.state_province }} <br>
             {% endfor %}
         </details>
         <details>
@@ -120,7 +122,7 @@
                 <h2>Cities We Both Find Livable ({{ joined_livable | length }})</h2>
             </summary>
             {% for city in joined_livable %}
-                {{ city.city }}, {{ city.state_province }} <br>
+            {{ city.city }}, {{ city.state_province }} <br>
             {% endfor %}
         </details>
         <!-- <script>
@@ -136,7 +138,9 @@
       });
     </script> -->
     </div>
-            <a href="/"><h2>Back to Atlas</h2></a>
+    <a href="/">
+        <h2>Back to Atlas</h2>
+    </a>
 </body>
 </body>
 

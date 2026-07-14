@@ -128,3 +128,26 @@ Paradise-Atlas/
     │   └── style.css
     └── js/
         └── map.js
+
+
+            select 
+            	l.name as city,
+            	l.state_province as state_province,
+            	l.country  as country,
+            	l.latitude  as latitude,
+            	l.longitude  as longitude, 
+            	v.date as visit_date,
+            	v.visit_order  as visit_order,
+            	d.address  as digs_address,
+            	d.longitude  as digs_logitude,
+            	d.latitude as digs_latitude,
+            	d.digs_type_id as digs_type_id,
+            	t.name as theatre_name,
+            	t.address as theatre_address,
+            	t.latitude as theatre_latitude,
+            	t.longitude as theatre_longitude
+           	from location l
+            join visit v on v.location_id = l.id
+            join digs d on d.id = v.digs_id
+            join theatre t on t.id = v.theatre_id 
+            where l.id = 278;

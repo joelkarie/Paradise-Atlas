@@ -156,3 +156,40 @@ def get_national_parks():
         """))
 
         return [dict(row._mapping) for row in rows]
+
+def get_gazetteer_data(location_id):
+    with engine.connect() as conn:
+
+        row = conn.execute(
+            text("""
+            select 
+            	l.name as city,
+            	l.state_province as state_province,
+            	l.country  as country,
+            	l.latitude  as latitude,
+            	l.longitude  as longitude, 
+            	v.date as visit_date,
+            	v.visit_order  as visit_order,
+            	d.address  as digs_address,
+            	d.longitude  as digs_longitude,
+            	d.latitude as digs_latitude,
+            	d.digs_type_id as digs_type_id,
+            	t.name as theatre_name,
+            	t.address as theatre_address,
+            	t.latitude as theatre_latitude,
+            	t.longitude as theatre_longitude
+           	from location l
+            left join visit v on v.location_id = l.id
+            left join digs d on d.id = v.digs_id
+            left join theatre t on t.id = v.theatre_id 
+            where l.id = :id;
+            """),
+            {"id": location_id},
+        ).first()
+
+        if row is None:
+            return None
+
+        return dict(row._mapping)
+    
+
