@@ -64,8 +64,10 @@ def joel_admin_page(request: Request):
     except Exception:
         return RedirectResponse("/login")
 
-    return FileResponse(BASE_DIR / "frontend" / "joel_admin.html")
-
+    return templates.TemplateResponse(
+        request=request,
+        name="/admin/admin_joel.html",
+    )
 
 @router.get("/michael")
 def michael_admin_page(request: Request):
@@ -74,7 +76,10 @@ def michael_admin_page(request: Request):
     except Exception:
         return RedirectResponse("/login")
 
-    return FileResponse(BASE_DIR / "frontend" / "michael_admin.html")
+    return templates.TemplateResponse(
+        request=request,
+        name="/admin/admin_michael.html",
+    )
 
 
 @router.get("/add_visit")

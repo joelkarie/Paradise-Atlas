@@ -106,3 +106,7 @@
 ## Current State (July 13)
 
 - Add templates for gazetteer locations
+
+## Current State (July 14) Tech Debt Tuesday
+
+- Move michael/joel admins to template folder
