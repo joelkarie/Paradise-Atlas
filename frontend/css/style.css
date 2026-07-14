@@ -201,12 +201,52 @@ body {
 
 /* Admin Styles */
 .login-container {
-    height: 100vh;
+    min-height: 100vh;
     display: flex;
     justify-content: center;
-    /* left/right */
     align-items: center;
-    /* up/down */
+    padding: 1.5rem;
+    box-sizing: border-box;
+}
+
+.login-box {
+    width: 100%;
+    max-width: 420px;
+    padding: 2rem;
+    border: 3px solid var(--primary-border-color);
+    border-radius: 12px;
+    background: var(--content-background-color);
+}
+
+.login-box h1 {
+    font-size: 2rem;
+    text-align: center;
+}
+
+.login-box input,
+.login-box button {
+    width: 100%;
+    font-size: 1.1rem;
+    padding: 0.9rem;
+    margin-top: 0.75rem;
+    box-sizing: border-box;
+}
+
+@media (max-width: 768px) {
+    .login-box {
+        max-width: 100%;
+        padding: 1.5rem;
+    }
+
+    .login-box h1 {
+        font-size: 2.25rem;
+    }
+
+    .login-box input,
+    .login-box button {
+        font-size: 1.25rem;
+        padding: 1rem;
+    }
 }
 
 .success-message {
