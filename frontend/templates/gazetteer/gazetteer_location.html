@@ -43,115 +43,131 @@
         <h1>{{ location.city }}</h1>
         {% if location.visit_date %}
         <div style="text-align: center;">
-            <b>State/Province:</b> {{ location.state_province }}<br>
+            {% if location.country == "Canada" %}
+            <b>Province:</b>
+            {% elif location.country == "Japan" %}
+            <b>Prefecture</b>
+            {% else %}
+            <b>State:</b>
+            {% endif %}
+            {{ location.state_province }}<br>
             <b>Country:</b> {{ location.country }}<br>
         </div>
 
         {% endif %}
         <div id="location-map"></div>
-        We visited on {{location.visit_date.strftime("%B %d, %Y")}}. {{location.city}} ranks #{{location.visit_order}}
-        in the order of places we have visited. <br>
+        <div style="background-color: var(--light-bg); padding: 10px;"">
+            <hr>
+        We visited on {{location.visit_date.strftime(" %B %d, %Y")}}. {{location.city}} ranks #{{location.visit_order}}
+            in the order of places we have visited. <br>
 
-        {% if location.digs_address %}
-        While we were there we stayed at {{ location.digs_address }}.
-        {% endif %}
+            {% if location.digs_address %}
+            While we were there we stayed at {{ location.digs_address }}.
+            {% endif %}
 
-        {% if location.theatre_name %}
-        In {{location.city}}, we worked at {{location.theatre_name }}; located at {{location.theatre_address}}
-        {% endif %}
+            {% if location.theatre_name %}
+            In {{location.city}}, we worked at {{location.theatre_name }}; located at {{location.theatre_address}}
+            {% endif %}
+            <hr>
+        </div>
 
-
-    </div>
-
-    <a href="/gazetteer/home">
-        <h2>Back to Gazetteer</h2>
-    </a>
-
-    <script>
-        const lat = Number("{{ location.latitude }}");
-        const lon = Number("{{ location.longitude }}");
+        <script>
+            const lat = Number("{{ location.latitude }}");
+            const lon = Number("{{ location.longitude }}");
 
 
 
-        const map = L.map("location-map", {
-            attributionControl: false
-        }).setView([lat, lon], 13);
+            const map = L.map("location-map", {
+                attributionControl: false
+            }).setView([lat, lon], 13);
 
-        const markers = L.featureGroup().addTo(map);
+            const markers = L.featureGroup().addTo(map);
 
 
-        L.tileLayer(
-            'https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}',
-            {
-                attribution: 'Tiles &copy; Esri &mdash; Sources: Esri, Garmin, USGS, NGA, and others',
-                maxZoom: 19
-            }
-        ).addTo(map);
-        const locationMarker = L.divIcon({
-            html: `
+            L.tileLayer(
+                'https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}',
+                {
+                    attribution: 'Tiles &copy; Esri &mdash; Sources: Esri, Garmin, USGS, NGA, and others',
+                    maxZoom: 19
+                }
+            ).addTo(map);
+            const locationMarker = L.divIcon({
+                html: `
                 <img src="/static/assets/map_pin_2.png"
                     style="
                         width:30px;
                         filter: drop-shadow(2px 4px 3px rgba(0,0,0,0.4));
                     ">
             `,
-            className: "",
-            iconAnchor: [15, 25]
-        });
-        L.marker([lat, lon], { icon: locationMarker }).addTo(markers);
+                className: "",
+                iconAnchor: [15, 25]
+            });
+            L.marker([lat, lon], { icon: locationMarker }).addTo(markers);
 
-        if ("{{location.digs_address}}") {
-            // Theatre marker
-            console.log("Hi Joel")
-            const digsLat = "{{ location.digs_latitude }}";
-            const digsLon = "{{ location.digs_longitude }}";
-            const digsMarker = L.divIcon({
-                html: `
+            if ("{{location.digs_address}}") {
+                // Theatre marker
+                console.log("Hi Joel")
+                const digsLat = "{{ location.digs_latitude }}";
+                const digsLon = "{{ location.digs_longitude }}";
+                const digsMarker = L.divIcon({
+                    html: `
                 <img src="/static/assets/digs_marker_2.png"
                     style="
                         width:30px;
                         filter: drop-shadow(2px 4px 3px rgba(0,0,0,0.4));
                     ">
             `,
-                className: "",
-                iconAnchor: [15, 15]
-            });
-            console.log("Hi Joel 2")
-            L.marker([digsLat, digsLon], { icon: digsMarker })
-                .addTo(markers)
-                .bindPopup("{{ location.digs_address }}");
-            console.log("Hi Joel 3")
-        };
+                    className: "",
+                    iconAnchor: [15, 15]
+                });
+                console.log("Hi Joel 2")
+                L.marker([digsLat, digsLon], { icon: digsMarker })
+                    .addTo(markers)
+                    .bindPopup("{{ location.digs_address }}");
+                console.log("Hi Joel 3")
+            };
 
-        if ("{{location.theatre_name}}") {
-            // Theatre marker
-            const theatreLat = "{{ location.theatre_latitude }}";
-            const theatreLon = "{{ location.theatre_longitude }}";
-            const theatreMarker = L.divIcon({
-                html: `
+            if ("{{location.theatre_name}}") {
+                // Theatre marker
+                const theatreLat = "{{ location.theatre_latitude }}";
+                const theatreLon = "{{ location.theatre_longitude }}";
+                const theatreMarker = L.divIcon({
+                    html: `
                 <img src="/static/assets/lk_logo.png"
                     style="
                         width:70px;
                         filter: drop-shadow(2px 4px 3px rgba(0,0,0,0.4));
                     ">
             `,
-                className: "",
-                iconAnchor: [32, 43]
+                    className: "",
+                    iconAnchor: [32, 43]
+                });
+                L.marker([theatreLat, theatreLon], { icon: theatreMarker })
+                    .addTo(markers)
+                    .bindPopup("{{ location.theatre_name }}");
+            };
+
+            markers.addTo(map);
+
+            // Automatically zoom to show all markers
+            map.fitBounds(markers.getBounds(), {
+                padding: [40, 40]
             });
-            L.marker([theatreLat, theatreLon], { icon: theatreMarker })
-                .addTo(markers)
-                .bindPopup("{{ location.theatre_name }}");
-        };
 
-        markers.addTo(map);
+        </script>
+        <footer class="bottom-nav">
 
-        // Automatically zoom to show all markers
-        map.fitBounds(markers.getBounds(), {
-            padding: [40, 40]
-        });
+            <a href="/" class="nav-logo">
+                <img src="/static/assets/peach_dot.png" alt="Paradise Atlas Logo" class="site-logo-small">
+            </a>
 
-    </script>
+            <div class="nav-links">
 
+                <a href="/gazetteer/home">Back to Gazetteer</a>
+
+            </div>
+
+        </footer>
 </body>
 
 </html>
