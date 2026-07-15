@@ -1,5 +1,5 @@
 from fastapi import APIRouter
-from ..services.digs_services import (
+from api.services.digs_services import (
     get_housing_distances,
     get_digs_types,
     get_digs_for_map,

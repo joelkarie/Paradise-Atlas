@@ -1,5 +1,5 @@
 from fastapi import APIRouter
-from ..services.patagonia_services import get_patagonia_stores
+from api.services.patagonia_services import get_patagonia_stores
 
 router = APIRouter(prefix="/patagonia", tags=["Patagonia"])
 

@@ -1,5 +1,5 @@
 from fastapi import APIRouter, Form
-from ..services.locations_services import (
+from api.services.locations_services import (
     get_locations,
     update_location_rating_value,
     get_location_types,

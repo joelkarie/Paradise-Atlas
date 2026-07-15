@@ -111,3 +111,4 @@
 
 - Move michael/joel admins to template folder
 - Add new footer to all pages
+- Combine could_live routers

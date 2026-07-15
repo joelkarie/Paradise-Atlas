@@ -1,5 +1,4 @@
 from pathlib import Path
-from fastapi.responses import JSONResponse
 from fastapi import APIRouter, UploadFile, File, HTTPException
 from api.services.theatre_services import get_theatres, get_theatre
 from api.services.github_service import GithubService
@@ -18,16 +17,13 @@ def theatres():
 async def upload_theatre_image(theatre_id: int, file: UploadFile = File(...)):
     print("UPLOAD ROUTE HIT")
     print("THEATRE ID:", theatre_id)
-    print("FILE:", file.filename)    
-    
+    print("FILE:", file.filename)
+
     theatre = get_theatre(theatre_id)
 
     if theatre is None:
         print("NO THEATRE FOUND:", theatre_id)
-        raise HTTPException(
-            status_code=404,
-            detail=f"Theatre {theatre_id} not found."
-        )
+        raise HTTPException(status_code=404, detail=f"Theatre {theatre_id} not found.")
 
     # Make sure it's an image
     if not file.content_type.startswith("image/"):

@@ -8,16 +8,13 @@ from api.services.image_paths import ImagePaths
 router = APIRouter(prefix="/images", tags=["Images"])
 
 
-
-
-
 @router.post("/admin/add_image/{type_name}/{type_id}/image")
-async def upload_image(type_name: str,type_id: int, file: UploadFile = File(...)):
+async def upload_image(type_name: str, type_id: int, file: UploadFile = File(...)):
     print("UPLOAD ROUTE HIT")
     print("TYPE:", type_name)
     print("TYPE ID:", type_id)
-    print("FILE:", file.filename)    
-    
+    print("FILE:", file.filename)
+
     # TODO: Add check to make sure id exists in type table
 
     # Make sure it's an image

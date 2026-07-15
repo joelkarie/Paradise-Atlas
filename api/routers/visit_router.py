@@ -1,5 +1,5 @@
 from fastapi import APIRouter
-from ..services.visit_services import get_visit_order
+from api.services.visit_services import get_visit_order
 
 router = APIRouter(prefix="/visit", tags=["Visit"])
 

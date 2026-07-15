@@ -18,11 +18,15 @@ from api.services.visit_services import (
     create_visit,
     get_visits_for_dropdown,
     add_digs_to_visit,
-    add_theatre_to_visit
+    add_theatre_to_visit,
 )
 from api.services.digs_services import get_digs_types, get_next_digs_number, create_digs
 
-from api.services.theatre_services import get_next_theatre_number, create_theatre, get_theatres, get_all_theatres_data
+from api.services.theatre_services import (
+    get_next_theatre_number,
+    create_theatre,
+    get_all_theatres_data,
+)
 
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
 
@@ -30,11 +34,13 @@ router = APIRouter(prefix="/admin")
 
 templates = Jinja2Templates(directory="frontend/templates")
 
+
 def article_for(word):
     return "an" if word and word[0].lower() in "aeiou" else "a"
 
 
 templates.env.filters["article"] = article_for
+
 
 @router.get("/locations")
 def admin_locations():
@@ -51,9 +57,7 @@ def admin_home_page(request: Request):
     return templates.TemplateResponse(
         request=request,
         name="admin_home.html",
-        context={
-            "success": request.query_params.get("success")
-        }
+        context={"success": request.query_params.get("success")},
     )
 
 
@@ -68,6 +72,7 @@ def joel_admin_page(request: Request):
         request=request,
         name="/admin/admin_joel.html",
     )
+
 
 @router.get("/michael")
 def michael_admin_page(request: Request):
@@ -111,7 +116,7 @@ def add_visit(
     new_state: str = Form(""),
     new_country: str = Form("USA"),
     new_latitude: str = Form(""),
-    new_longitude: str = Form("")
+    new_longitude: str = Form(""),
 ):
     print(f"Location Type: {location_type}")
     print(f"Location ID: {location_id}")
@@ -129,7 +134,7 @@ def add_visit(
             state_province=new_state,
             country=new_country,
             latitude=new_latitude,
-            longitude=new_longitude
+            longitude=new_longitude,
         )
 
         print(f"New location created with id = {location_id}")
@@ -149,10 +154,8 @@ def add_visit(
 
     print(f"Visit created with id = {visit_id}")
 
-    return RedirectResponse(
-        url="/admin/home?success=visit_added",
-        status_code=303
-    )
+    return RedirectResponse(url="/admin/home?success=visit_added", status_code=303)
+
 
 @router.get("/add_theatre")
 def add_theatre_page(request: Request):
@@ -167,11 +170,9 @@ def add_theatre_page(request: Request):
     return templates.TemplateResponse(
         request=request,
         name="add_theatre.html",
-        context={
-            "visits": visits,
-            "theatres": theatres
-        },
+        context={"visits": visits, "theatres": theatres},
     )
+
 
 @router.post("/add_theatre")
 def add_theatre(
@@ -180,7 +181,7 @@ def add_theatre(
     new_address: str = Form(...),
     new_latitude: str = Form(""),
     new_longitude: str = Form(""),
-    new_dresser: str = Form("")
+    new_dresser: str = Form(""),
 ):
     print(f"Visit ID: {visit_id}")
     print(f"Theatre Name: {new_theatre_name}")
@@ -199,17 +200,14 @@ def add_theatre(
         new_address=new_address,
         new_latitude=new_latitude,
         new_longitude=new_longitude,
-        new_dresser=new_dresser
+        new_dresser=new_dresser,
     )
 
     add_theatre_to_visit(visit_id=visit_id, theatre_id=theatre_id)
 
     print(f"Visit [{visit_id}] updated with theatre id = {theatre_id}")
 
-    return RedirectResponse(
-        url="/admin/home?success=theatre_added",
-        status_code=303
-    )
+    return RedirectResponse(url="/admin/home?success=theatre_added", status_code=303)
 
 
 @router.get("/add_digs")
@@ -262,10 +260,8 @@ def add_digs(
 
     print(f"Visit [{visit_id}] updated with digs id = {digs_id}")
 
-    return RedirectResponse(
-        url="/admin/home?success=digs_added",
-        status_code=303
-    )
+    return RedirectResponse(url="/admin/home?success=digs_added", status_code=303)
+
 
 @router.get("/add_location")
 def add_location_page(request: Request):
@@ -277,12 +273,12 @@ def add_location_page(request: Request):
     location_types = get_location_types()
     locations = get_locations_for_dropdown()
 
-
     return templates.TemplateResponse(
         request=request,
         name="add_location.html",
         context={"location_types": location_types, "locations": locations},
     )
+
 
 @router.post("/add_location")
 def add_location(
@@ -291,18 +287,15 @@ def add_location(
     new_state_province: str = Form(""),
     new_country: str = Form("USA"),
     new_latitude: str = Form(""),
-    new_longitude: str = Form("")
+    new_longitude: str = Form(""),
 ):
     print(f"Location Type: {location_type}")
     print(f"Name {new_name}")
-
 
     print(f"State: {new_state_province}")
     print(f"Country: {new_country}")
     print(f"Latitude: {new_latitude}")
     print(f"Longitude: {new_longitude}")
-
-
 
     new_id = create_location(
         name=new_name,
@@ -310,7 +303,7 @@ def add_location(
         state_province=new_state_province,
         country=new_country,
         latitude=new_latitude,
-        longitude=new_longitude
+        longitude=new_longitude,
     )
 
     print(f"New location created with id = {new_id}")
@@ -318,7 +311,4 @@ def add_location(
     create_location_rating(new_id)
     print(f"New location rating created with id = {new_id}")
 
-    return RedirectResponse(
-        url="/admin/home?success=location_added",
-        status_code=303
-    )
+    return RedirectResponse(url="/admin/home?success=location_added", status_code=303)
