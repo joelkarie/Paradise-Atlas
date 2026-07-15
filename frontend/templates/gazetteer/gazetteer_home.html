@@ -3,10 +3,7 @@
 
 <head>
     <link rel="icon" type="image/x-icon" href="/static/assets/peach_dot.png">
-    <!-- <link rel="icon" type="image/x-icon" href="assets/peach_dot.png"> -->
-
     <link rel="stylesheet" href="/static/css/style.css">
-    <!-- <link rel="stylesheet" href="css/style.css"> -->
 
     <meta charset="UTF-8">
     <title>Add Visit</title>
@@ -14,7 +11,6 @@
     <style>
         body {
             font-family: 'Playfair Display', serif;
-            margin: 20px;
         }
 
         label {
@@ -27,8 +23,10 @@
     <div>
         <img src="/static/assets/paradise_pelican.png" alt="Atlas Paradiso Logo" class="logo" height="170px">
     </div>
-    <div class="content-box">
+    <div class="page-banner">
         <h1>Gazetteer</h1>
+    </div>
+    <div class="content-lightbox">
         <details>
             <summary style="display:inline;">
                 <h2>Cities ({{city_count}})</h2>
@@ -47,7 +45,9 @@
             </summary>
             {% for location in locations %}
             {% if location.location_type_id == 2 %}
-            {{ location.name }}, {{ location.state_province }}, {{ location.country}} <br>
+            <a href="/gazetteer/location/{{ location.id }}">
+                {{ location.name }}, {{ location.state_province }}, {{ location.country}}
+            </a><br>
             {% endif %}
             {% endfor %}
         </details>
@@ -57,7 +57,9 @@
             </summary>
             {% for location in locations %}
             {% if location.location_type_id == 3 %}
-            {{ location.name }}, {{ location.state_province }}, {{ location.country}} <br>
+            <a href="/gazetteer/location/{{ location.id }}">
+                {{ location.name }}, {{ location.state_province }}, {{ location.country}}
+            </a><br>
             {% endif %}
             {% endfor %}
         </details>
@@ -125,22 +127,9 @@
             {{ city.city }}, {{ city.state_province }} <br>
             {% endfor %}
         </details>
-        <!-- <script>
-      const locationSelect = document.getElementById("locationSelect");
-      const newLocationFields = document.getElementById("newLocationFields");
 
-      locationSelect.addEventListener("change", function () {
-        if (this.value === "new") {
-          newLocationFields.style.display = "block";
-        } else {
-          newLocationFields.style.display = "none";
-        }
-      });
-    </script> -->
     </div>
-    <a href="/">
-        <h2>Back to Atlas</h2>
-    </a>
+
     <footer class="bottom-nav">
 
         <a href="/" class="nav-logo">
