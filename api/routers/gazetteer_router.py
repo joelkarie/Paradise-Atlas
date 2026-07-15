@@ -6,7 +6,7 @@ from api.services.theatre_services import get_theatres
 from api.services.canadian_railway_hotel_services import get_canadian_railway_hotels
 from api.services.quaker_meeting_services import get_quaker_meetings
 from api.services.patagonia_services import get_patagonia_stores
-from api.services.living_services import (
+from api.services.livable_services import (
     get_joel_livable_cities,
     get_michael_livable_city,
     get_joined_livable_cities,

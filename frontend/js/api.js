@@ -14,17 +14,17 @@ export async function getTheatres() {
 }
 
 export async function getJoelCouldLive() {
-    const response = await fetch(`${API_BASE}/joel-could-live`);
+    const response = await fetch(`${API_BASE}/livable/joel`);
     return await response.json();
 }
 
 export async function getMichaelCouldLive() {
-    const response = await fetch(`${API_BASE}/michael-could-live`);
+    const response = await fetch(`${API_BASE}/livable/michael`);
     return await response.json();
 }
 
 export async function getTogetherCouldLive() {
-    const response = await fetch(`${API_BASE}/together-could-live`);
+    const response = await fetch(`${API_BASE}/livable/together`);
     return await response.json();
 }
 
