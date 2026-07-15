@@ -1,6 +1,3 @@
-
-
-// const API_URL = "http://localhost:8000";
 const API_BASE = window.location.origin;
 console.log("API_BASE =", API_BASE);
 console.log("Origin =", window.location.origin);

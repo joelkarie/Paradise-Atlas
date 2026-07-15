@@ -15,13 +15,6 @@ export function createMap() {
         4
     );
 
-    // Standard OpenStreetMap
-    // L.tileLayer(
-    //     'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
-    //     {
-    //         attribution: '&copy; OpenStreetMap contributors'
-    //     }
-    // ).addTo(map);
 
     L.tileLayer(
         'https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}',

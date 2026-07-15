@@ -46,7 +46,7 @@ export function createCapitolLayer(capitols, icon) {
             capitol.longitude
         ], { icon: customMarker })
             .addTo(capitolLayer)
-            .bindPopup(popup_info, {keepInView: true});
+            .bindPopup(popup_info, { keepInView: true });
 
     });
     return capitolLayer;
