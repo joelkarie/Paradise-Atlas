@@ -21,7 +21,7 @@
 </head>
 
 <body>
-    <a href="/logout">Logout</a>
+
     <div>
         <img src="/static/assets/paradise_pelican.png" alt="Atlas Paradiso Logo" class="logo" height="170px">
     </div>
@@ -134,17 +134,17 @@
                 method: "POST",
                 body: formData
             })
-            .then(r => r.json())
-            .then(res => {
-                console.log("updated:", res);
-            });
-        }  
+                .then(r => r.json())
+                .then(res => {
+                    console.log("updated:", res);
+                });
+        }
 
         // To access the stars
         // let stars =
         //   document.getElementsByClassName("star");
         let output =
-        document.getElementById("output");
+            document.getElementById("output");
 
         // Funtion to update rating
         function update_star(starRating, location_id, element) {
@@ -171,12 +171,12 @@
                 method: "POST",
                 body: formData
             })
-            .then(r => r.json())
-            .then(res => {
-                console.log("updated:", res);
-            });
+                .then(r => r.json())
+                .then(res => {
+                    console.log("updated:", res);
+                });
         }
-        
+
         function remove(location_id) {
             console.log("Removing:", location_id)
             const stars = document.querySelectorAll(
@@ -188,7 +188,20 @@
             });
         }
     </script>
+    <footer class="bottom-nav">
 
+        <a href="/" class="nav-logo">
+            <img src="/static/assets/peach_dot.png" alt="Paradise Atlas Logo" class="site-logo-small">
+        </a>
+
+        <div class="nav-links">
+            <a href="/">Atlas</a>
+            <a href="/gazetteer/home">Gazetteer</a>
+            <a href="/admin/home">Admin</a>
+            <a href="/logout">Logout</a>
+        </div>
+
+    </footer>
 </body>
 
 </html>

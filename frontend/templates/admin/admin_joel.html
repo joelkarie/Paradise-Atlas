@@ -21,7 +21,6 @@
 </head>
 
 <body>
-  <a href="/logout">Logout</a>
   <div>
     <img src="/static/assets/paradise_pelican.png" alt="Atlas Paradiso Logo" class="logo" height="170px">
   </div>
@@ -147,47 +146,60 @@
 
     // Funtion to update rating
     function update_star(starRating, location_id, element) {
-        console.log("Updating:", location_id);
+      console.log("Updating:", location_id);
 
-        remove(location_id);
+      remove(location_id);
 
-        const stars = document.querySelectorAll(
-            `[data-star-id="${location_id}"]`
-        );
+      const stars = document.querySelectorAll(
+        `[data-star-id="${location_id}"]`
+      );
 
-        for (let i = 0; i < starRating; i++) {
-            stars[i].className = "star star-rating";
-        }
+      for (let i = 0; i < starRating; i++) {
+        stars[i].className = "star star-rating";
+      }
 
-        // Update db
-        const formData = new FormData();
+      // Update db
+      const formData = new FormData();
 
-        formData.append("location_id", location_id);
-        formData.append("field", "joel_star_rating");
-        formData.append("value", starRating);
+      formData.append("location_id", location_id);
+      formData.append("field", "joel_star_rating");
+      formData.append("value", starRating);
 
-        fetch("/locations/update_location_rating", {
-            method: "POST",
-            body: formData
-        })
+      fetch("/locations/update_location_rating", {
+        method: "POST",
+        body: formData
+      })
         .then(r => r.json())
         .then(res => {
-            console.log("updated:", res);
+          console.log("updated:", res);
         });
     }
-    
-    function remove(location_id) {
-        console.log("Removing:", location_id)
-        const stars = document.querySelectorAll(
-            `[data-star-id="${location_id}"]`
-        );
 
-        stars.forEach(star => {
-            star.className = "star";
-        });
+    function remove(location_id) {
+      console.log("Removing:", location_id)
+      const stars = document.querySelectorAll(
+        `[data-star-id="${location_id}"]`
+      );
+
+      stars.forEach(star => {
+        star.className = "star";
+      });
     }
   </script>
+  <footer class="bottom-nav">
 
+    <a href="/" class="nav-logo">
+      <img src="/static/assets/peach_dot.png" alt="Paradise Atlas Logo" class="site-logo-small">
+    </a>
+
+    <div class="nav-links">
+      <a href="/">Atlas</a>
+      <a href="/gazetteer/home">Gazetteer</a>
+      <a href="/admin/home">Admin</a>
+      <a href="/logout">Logout</a>
+    </div>
+
+  </footer>
 </body>
 
 </html>
