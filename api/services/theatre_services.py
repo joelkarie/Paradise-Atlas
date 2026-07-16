@@ -26,8 +26,18 @@ def get_all_theatres_data():
     with engine.connect() as conn:
 
         rows = conn.execute(text("""
-            SELECT *
+            SELECT 
+            t. id, 
+            t.name, 
+            t.address, 
+            t.latitude,
+            t.longitude,
+            t.dresser,
+            l."name" as city,
+            l.state_province 
             FROM theatre t
+            join visit v on v.theatre_id = t.id
+            join location l on l.id = v.location_id 
             ORDER BY t.name
         """))
 
