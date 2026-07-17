@@ -26,19 +26,22 @@ def get_all_theatres_data():
     with engine.connect() as conn:
 
         rows = conn.execute(text("""
-            SELECT 
-            t. id, 
-            t.name, 
-            t.address, 
-            t.latitude,
-            t.longitude,
-            t.dresser,
-            l."name" as city,
-            l.state_province 
-            FROM theatre t
-            join visit v on v.theatre_id = t.id
-            join location l on l.id = v.location_id 
-            ORDER BY t.name
+SELECT *
+FROM (
+SELECT DISTINCT
+    t.id,
+    t.name,
+    t.address,
+    t.latitude,
+    t.longitude,
+    t.dresser,
+    l.name AS city,
+    l.state_province
+FROM theatre t
+JOIN visit v ON v.theatre_id = t.id
+JOIN location l ON l.id = v.location_id
+) AS theatres
+ORDER BY city
         """))
 
         return [dict(row._mapping) for row in rows]
