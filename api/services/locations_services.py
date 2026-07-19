@@ -10,7 +10,8 @@ def get_locations():
             SELECT *
             FROM location l
             JOIN location_rating lr
-            ON l.id = lr.location_id;
+            ON l.id = lr.location_id
+            ORDER BY l.name ASC
         """))
 
         return [dict(row._mapping) for row in rows]
