@@ -12,7 +12,8 @@ def get_theatres():
             l.state_province AS state_province, 
             v.date AS date, l.latitude AS latitude, 
             l.longitude AS longitude,
-            t.id as id
+            t.id as id,
+            l.id as location_id
             FROM visit v
             JOIN theatre t ON t.id = v.theatre_id
             JOIN location l ON l.id = v.location_id
