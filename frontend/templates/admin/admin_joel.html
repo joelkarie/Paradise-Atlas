@@ -78,6 +78,15 @@
             >${loc.joel_highlights ?? ""}</textarea>
           </div>  
           <div class="rating-row">
+            <div class="subtitle">Restaurants:</div>
+            <textarea
+              id="restaurant_${loc.location_id}"
+              rows="1"
+              style="width:75%"
+              onchange="updateRestaurant('${loc.location_id}', this.value)"
+            >${loc.restaurants ?? ""}</textarea>
+          </div>  
+          <div class="rating-row">
               <div class="subtitle">Rating:</div>
 
               <div onclick="update_star(1, '${loc.location_id}', this)"
@@ -126,6 +135,23 @@
 
       formData.append("location_id", location_id);
       formData.append("field", "joel_highlights");
+      formData.append("value", value);
+
+      fetch("/locations/update_location_rating", {
+        method: "POST",
+        body: formData
+      })
+        .then(r => r.json())
+        .then(res => {
+          console.log("updated:", res);
+        });
+    }
+
+    function updateRestaurant(location_id, value) {
+      const formData = new FormData();
+
+      formData.append("location_id", location_id);
+      formData.append("field", "restaurants");
       formData.append("value", value);
 
       fetch("/locations/update_location_rating", {

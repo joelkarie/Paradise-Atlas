@@ -22,7 +22,8 @@ def get_location_ratings():
         result = conn.exec_driver_sql("""
             SELECT l.name, l.state_province, l.country, 
             lr.joel_could_live, lr.michael_could_live, lr.location_id, 
-            lr.joel_highlights, lr.michael_highlights, lr.joel_star_rating, lr.michael_star_rating
+            lr.joel_highlights, lr.michael_highlights, lr.joel_star_rating, lr.michael_star_rating,
+            lr.restaurants
             FROM location l 
             JOIN location_rating lr ON lr.location_id = l.id
             WHERE l.location_type_id = 1
@@ -42,6 +43,7 @@ def get_location_ratings():
             "michael_highlights": r[7],
             "joel_star_rating": r[8],
             "michael_star_rating": r[9],
+            "restaurants": r[10]
         }
         for r in rows
     ]

@@ -18,6 +18,7 @@ def locations():
 def update_location_rating(
     location_id: str = Form(...), field: str = Form(...), value: str = Form(...)
 ):
+
     allowed_fields = {
         "joel_could_live",
         "michael_could_live",
@@ -25,6 +26,7 @@ def update_location_rating(
         "michael_highlights",
         "joel_star_rating",
         "michael_star_rating",
+        "restaurants"
     }
 
     if field not in allowed_fields:
