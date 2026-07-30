@@ -86,6 +86,37 @@ def michael_admin_page(request: Request):
         name="/admin/admin_michael.html",
     )
 
+@router.get("/generic_joel")
+def joel_generic_admin_page(request: Request):
+    try:
+        user = require_admin(request)
+    except Exception:
+        return RedirectResponse("/login")
+
+    return templates.TemplateResponse(
+        request=request,
+        name="/admin/admin_template.html",
+        context={
+            "user_name" : "Joel",
+            "background_color": "var(--primary-highlight-color)"
+        }
+    )
+
+@router.get("/generic_michael")
+def michael_generic_admin_page(request: Request):
+    try:
+        user = require_admin(request)
+    except Exception:
+        return RedirectResponse("/login")
+
+    return templates.TemplateResponse(
+        request=request,
+        name="/admin/admin_template.html",
+        context={
+            "user_name" : "Michael",
+            "background_color": "var(--primary-highlight-color)"
+        }
+    )
 
 @router.get("/add_visit")
 def add_visit_page(request: Request):

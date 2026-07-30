@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <link rel="icon" type="image/x-icon" href="/static/assets/peach_dot.png">
+  <link rel="stylesheet" href="/static/css/style.css">
+  <meta charset="UTF-8">
+  <title> {{user_name}} Locations Admin</title>
+
+  <style>
+    body {
+      font-family: 'Playfair Display', serif;
+      margin: 20px;
+      background-color: var(--secondary-bg-color);
+    }
+
+    label {
+      margin-right: 12px;
+    }
+  </style>
+</head>
+
+<body>
+  <div>
+    <img src="/static/assets/paradise_pelican.png" alt="Atlas Paradiso Logo" class="logo" height="170px">
+  </div>
+  <h1>{{user_name}} Locations Admin</h1>
+
+  <div id="locations"></div>
+
+  <script>
+    const userName = "{{ user_name|lower }}"
+    fetch("/admin/locations")
+      .then(r => r.json())
+      .then(data => {
+        document.getElementById("locations").innerHTML = data.map(loc => {
+
+          const label = `${loc.location}, ${loc.state}, ${loc.country}`;
+
+          return `
+        <div class="location-card">
+
+          <div class="location-title">${label}</div>
+
+          <div class="rating-row">
+              <div class="subtitle">Could you live here?</div>
+
+              <label>
+                  <input type="radio"
+                      name="loc_${loc.location}"
+                      value="true"
+                      ${loc[`${userName}_could_live`] === true ? "checked" : ""}
+                      onchange="updateLocation('${loc.location_id}', true)">
+                  True
+              </label>
+
+              <label>
+                  <input type="radio"
+                      name="loc_${loc.location}"
+                      value="false"
+                      ${loc[`${userName}_could_live`] === false ? "checked" : ""}
+                      onchange="updateLocation('${loc.location_id}', false)">
+                  False
+              </label>
+
+            <div class="meta">
+              Joel: ${loc.joel_could_live ? "Yes" : "No"} </br>
+              Michael: ${loc.michael_could_live ? "Yes" : "No"}
+            </div>
+
+          </div>
+          <div class="rating-row">
+            <div class="subtitle">Highlights:</div>
+            <textarea
+              id="highlight_${loc.location_id}"
+              rows="1"
+              style="width:75%"
+              onchange="updateHighlight('${loc.location_id}', this.value)"
+            >${loc[`${userName}_highlights`] ?? ""}</textarea>
+          </div>  
+          <div class="rating-row">
+            <div class="subtitle">Restaurants:</div>
+            <textarea
+              id="restaurant_${loc.location_id}"
+              rows="1"
+              style="width:75%"
+              onchange="updateRestaurant('${loc.location_id}', this.value)"
+            >${loc.restaurants ?? ""}</textarea>
+          </div>  
+          <div class="rating-row">
+              <div class="subtitle">Rating:</div>
+
+              <div onclick="update_star(1, '${loc.location_id}', this)"
+                  class="${loc[`${userName}_star_rating`] >= 1 ? 'star star-rating' : 'star'}"
+                  data-star-id="${loc.location_id}">★</div>
+
+              <div onclick="update_star(2, '${loc.location_id}', this)"
+                  class="${loc[`${userName}_star_rating`] >= 2 ? 'star star-rating' : 'star'}"
+                  data-star-id="${loc.location_id}">★</div>
+
+              <div onclick="update_star(3, '${loc.location_id}', this)"
+                  class="${loc[`${userName}_star_rating`] >= 3 ? 'star star-rating' : 'star'}"
+                  data-star-id="${loc.location_id}">★</div>
+
+              <div onclick="update_star(4, '${loc.location_id}', this)"
+                  class="${loc[`${userName}_star_rating`] >= 4 ? 'star star-rating' : 'star'}"
+                  data-star-id="${loc.location_id}">★</div>
+
+              <div onclick="update_star(5, '${loc.location_id}', this)"
+                  class="${loc[`${userName}_star_rating`] >= 5 ? 'star star-rating' : 'star'}"
+                  data-star-id="${loc.location_id}">★</div>
+          </div>
+        </div>
+      `;
+        }).join("");
+      });
+
+    function updateLocation(location_id, value) {
+      const formData = new FormData();
+      formData.append("location_id", location_id);
+      formData.append("field", `${userName}_could_live`);
+      formData.append("value", value);
+
+      fetch("/locations/update_location_rating", {
+        method: "POST",
+        body: formData
+      })
+        .then(r => r.json())
+        .then(res => {
+          console.log("updated:", res);
+        });
+    }
+
+    function updateHighlight(location_id, value) {
+      const formData = new FormData();
+
+      formData.append("location_id", location_id);
+      formData.append("field", `${userName}_highlights`);
+      formData.append("value", value);
+
+      fetch("/locations/update_location_rating", {
+        method: "POST",
+        body: formData
+      })
+        .then(r => r.json())
+        .then(res => {
+          console.log("updated:", res);
+        });
+    }
+
+    function updateRestaurant(location_id, value) {
+      const formData = new FormData();
+
+      formData.append("location_id", location_id);
+      formData.append("field", "restaurants");
+      formData.append("value", value);
+
+      fetch("/locations/update_location_rating", {
+        method: "POST",
+        body: formData
+      })
+        .then(r => r.json())
+        .then(res => {
+          console.log("updated:", res);
+        });
+    }
+
+    // To access the stars
+    // let stars =
+    //   document.getElementsByClassName("star");
+    let output =
+      document.getElementById("output");
+
+    // Funtion to update rating
+    function update_star(starRating, location_id, element) {
+      console.log("Updating:", location_id);
+
+      remove(location_id);
+
+      const stars = document.querySelectorAll(
+        `[data-star-id="${location_id}"]`
+      );
+
+      for (let i = 0; i < starRating; i++) {
+        stars[i].className = "star star-rating";
+      }
+
+      // Update db
+      const formData = new FormData();
+
+      formData.append("location_id", location_id);
+      formData.append("field", `${userName}_star_rating`);
+      formData.append("value", starRating);
+
+      fetch("/locations/update_location_rating", {
+        method: "POST",
+        body: formData
+      })
+        .then(r => r.json())
+        .then(res => {
+          console.log("updated:", res);
+        });
+    }
+
+    function remove(location_id) {
+      console.log("Removing:", location_id)
+      const stars = document.querySelectorAll(
+        `[data-star-id="${location_id}"]`
+      );
+
+      stars.forEach(star => {
+        star.className = "star";
+      });
+    }
+  </script>
+  <footer class="bottom-nav">
+
+    <a href="/" class="nav-logo">
+      <img src="/static/assets/peach_dot.png" alt="Paradise Atlas Logo" class="site-logo-small">
+    </a>
+
+    <div class="nav-links">
+      <a href="/">Atlas</a>
+      <a href="/gazetteer/home">Gazetteer</a>
+      <a href="/admin/home">Admin</a>
+      <a href="/logout">Logout</a>
+    </div>
+
+  </footer>
+</body>
+
+</html>
