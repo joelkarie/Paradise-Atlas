@@ -10,4 +10,4 @@ def patagonia_stores():
 
 @router.get("/stores_for_app")
 def patagonia_stores_for_app():
-    get_patagonia_for_apps()
+    return get_patagonia_for_apps()
