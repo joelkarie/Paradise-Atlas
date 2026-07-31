@@ -14,13 +14,12 @@ def get_patagonia_stores():
 
         return [dict(row._mapping) for row in rows]
 
-
-def get_patagoinia_for_apps():
+def get_patagonia_for_apps():
 
     with engine.connect() as conn:
 
-        rows = conn.exec_driver_sql(text("""
-                    SELECT psv.id, 
+        rows = conn.execute(text("""
+            SELECT psv.id, 
             psv.store_name as name, 
             psv.city, 
             psv.state_province,

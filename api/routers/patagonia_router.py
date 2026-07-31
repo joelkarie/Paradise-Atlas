@@ -1,5 +1,5 @@
 from fastapi import APIRouter
-from api.services.patagonia_services import get_patagonia_stores, get_patagoinia_for_apps
+from api.services.patagonia_services import get_patagonia_stores, get_patagonia_for_apps
 
 router = APIRouter(prefix="/patagonia", tags=["Patagonia"])
 
@@ -10,4 +10,4 @@ def patagonia_stores():
 
 @router.get("/stores_for_app")
 def patagonia_stores_for_app():
-    get_patagoinia_for_apps()
+    get_patagonia_for_apps()
