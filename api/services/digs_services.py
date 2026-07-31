@@ -39,10 +39,13 @@ def get_digs_for_app():
     with engine.connect() as conn:
 
         rows = conn.execute(text("""
-            select 
+           select distinct
             d.id as id,
             dt.name as digs_type, 
-            d.address as address, 
+            d.address as address,
+            l."name"  as city,
+            l.state_province as state_province,
+            v."date" as date,
             d.latitude as latitude, 
             d.longitude as longitude, 
             d.company_housing as company_housing,
@@ -50,8 +53,10 @@ def get_digs_for_app():
             from 
             digs d
             join digs_type dt on dt.id = d.digs_type_id
+            left join visit v on v.digs_id = d.id
+            left join location l on v.location_id = l.id
             left join hotel_details hd on hd.digs_id  = d.id 
-            left join hotel_brand hb on hb.id = hd.hotel_brand_id     
+            left join hotel_brand hb on hb.id = hd.hotel_brand_id 
         """))
 
         return [dict(row._mapping) for row in rows]
