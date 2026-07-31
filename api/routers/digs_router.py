@@ -3,6 +3,7 @@ from api.services.digs_services import (
     get_housing_distances,
     get_digs_types,
     get_digs_for_map,
+    get_digs_for_app,
 )
 
 router = APIRouter(prefix="/digs", tags=["Digs"])
@@ -21,3 +22,7 @@ def digs_types():
 @router.get("/digs_for_map")
 def digs_for_map():
     return get_digs_for_map()
+
+@router.get("/digs_for_app")
+def digs_for_app():
+    return get_digs_for_app()

@@ -34,6 +34,28 @@ def get_digs_for_map():
 
         return [dict(row._mapping) for row in rows]
 
+def get_digs_for_app():
+
+    with engine.connect() as conn:
+
+        rows = conn.execute(text("""
+            select 
+            d.id as id,
+            dt.name as digs_type, 
+            d.address as address, 
+            d.latitude as latitude, 
+            d.longitude as longitude, 
+            d.company_housing as company_housing,
+            hb.name as name
+            from 
+            digs d
+            join digs_type dt on dt.id = d.digs_type_id
+            left join hotel_details hd on hd.digs_id  = d.id 
+            left join hotel_brand hb on hb.id = hd.hotel_brand_id     
+        """))
+
+        return [dict(row._mapping) for row in rows]
+    
 def get_digs_types():
 
     with engine.connect() as conn:
