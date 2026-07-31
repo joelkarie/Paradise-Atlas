@@ -19,8 +19,9 @@ def get_patagonia_for_apps():
     with engine.connect() as conn:
 
         rows = conn.execute(text("""
-            select * 
-            from patagonia_store_visit psv 
+            SELECT *
+            FROM patagonia_visit_view
+            WHERE visited = TRUE
         """))
 
         return [dict(row._mapping) for row in rows]
