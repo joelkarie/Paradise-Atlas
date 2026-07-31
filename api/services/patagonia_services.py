@@ -19,17 +19,19 @@ def get_patagonia_for_apps():
     with engine.connect() as conn:
 
         rows = conn.execute(text("""
-            SELECT psv.id, 
-            psv.store_name as name, 
-            psv.city, 
-            psv.state_province,
-            psv.address,
-            psv.postal_code,
-            psv.latitude,
-            psv.longitude 
-            FROM patagonia_store_visit psv 
-            WHERE visited = TRUE
+            select * 
+            from patagonia_store_visit psv 
         """))
 
         return [dict(row._mapping) for row in rows]
-    
+
+                # SELECT psv.id, 
+            # psv.store_name as name, 
+            # psv.city, 
+            # psv.state_province,
+            # psv.address,
+            # psv.postal_code,
+            # psv.latitude,
+            # psv.longitude 
+            # FROM patagonia_store_visit psv 
+            # WHERE visited = TRUE
