@@ -14,6 +14,26 @@ def get_visit_order():
         return [dict(row._mapping) for row in rows]
 
 
+def get_journey():
+
+    with engine.connect() as conn:
+
+        rows = conn.execute(text("""
+            select 
+            id, 
+            date,
+            visit_number,
+            visit_order,
+            location_id,
+            digs_id,
+            theatre_id,
+            capitol_id
+            from
+            visit
+        """))
+
+        return [dict(row._mapping) for row in rows]
+
 def get_next_visit_number():
     with engine.connect() as conn:
 
