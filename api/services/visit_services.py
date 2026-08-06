@@ -30,6 +30,7 @@ def get_journey():
             capitol_id
             from
             visit
+            order by visit_number ASC
         """))
 
         return [dict(row._mapping) for row in rows]
