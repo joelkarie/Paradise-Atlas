@@ -63,10 +63,10 @@ def update_location_rating_from_app(
     if update.field not in allowed_fields:
         raise ValueError("Invalid field")
 
-    if update.field in ["joel_could_live", "michael_could_live"]:
-        value = True if str(value).lower() == "true" else False
+    # if update.field in ["joel_could_live", "michael_could_live"]:
+    #     value = True if str(value).lower() == "true" else False
 
-    update_location_rating_value(update.location_id, update.field, value)
+    update_location_rating_value(update.location_id, update.field, update.value)
 
     return {"status": "ok"}
 
