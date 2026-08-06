@@ -5,6 +5,7 @@ from api.services.locations_services import (
     get_location_types,
     get_national_parks,
 )
+from pydantic import BaseModel
 
 router = APIRouter(prefix="/locations", tags=["Locations"])
 
@@ -39,6 +40,35 @@ def update_location_rating(
 
     return {"status": "ok"}
 
+class LocationUpdate(BaseModel):
+    location_id: int
+    field: str
+    value: str
+
+@router.post("/update_location_rating_from_app")
+def update_location_rating_from_app(
+    update: LocationUpdate
+):
+
+    allowed_fields = {
+        "joel_could_live",
+        "michael_could_live",
+        "joel_highlights",
+        "michael_highlights",
+        "joel_star_rating",
+        "michael_star_rating",
+        "restaurants"
+    }
+
+    if update.field not in allowed_fields:
+        raise ValueError("Invalid field")
+
+    if update.field in ["joel_could_live", "michael_could_live"]:
+        value = True if str(value).lower() == "true" else False
+
+    update_location_rating_value(update.location_id, update.field, value)
+
+    return {"status": "ok"}
 
 @router.get("/location_types")
 def location_types():
