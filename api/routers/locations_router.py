@@ -6,6 +6,7 @@ from api.services.locations_services import (
     get_national_parks,
 )
 from pydantic import BaseModel
+from typing import Optional
 
 router = APIRouter(prefix="/locations", tags=["Locations"])
 
@@ -17,7 +18,7 @@ def locations():
 
 @router.post("/update_location_rating")
 def update_location_rating(
-    location_id: str = Form(...), field: str = Form(...), value: str = Form(...)
+    location_id: str = Form(...), field: str = Form(...), value: Optional[str] = Form(None)
 ):
 
     allowed_fields = {

@@ -53,3 +53,4 @@ pillow
 requests
 PyGithub
 python-dotenv
+typing
