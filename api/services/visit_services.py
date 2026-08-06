@@ -19,18 +19,24 @@ def get_journey():
     with engine.connect() as conn:
 
         rows = conn.execute(text("""
-            select 
-            id, 
-            date,
-            visit_number,
-            visit_order,
-            location_id,
-            digs_id,
-            theatre_id,
-            capitol_id
-            from
-            visit
-            order by visit_number ASC
+            SELECT 
+            v.id, 
+            v.date,
+            v.visit_number,
+            v.visit_order,
+            v.location_id,
+            v.digs_id,
+            v.theatre_id,
+            v.capitol_id,
+            l.name,
+            l.state_province,
+            l.country,
+            l.location_type_id
+            FROM
+            visit v
+            JOIN location l
+                ON l.id = v.location_id
+            ORDER BY visit_number ASC
         """))
 
         return [dict(row._mapping) for row in rows]
