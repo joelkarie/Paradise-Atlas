@@ -3,6 +3,8 @@ from fastapi.responses import FileResponse, RedirectResponse
 from fastapi.templating import Jinja2Templates
 
 from pathlib import Path
+from pydantic import BaseModel
+
 
 from api.auth import require_admin
 from api.services.locations_services import (
@@ -335,6 +337,40 @@ def add_location(
         country=new_country,
         latitude=new_latitude,
         longitude=new_longitude,
+    )
+
+    print(f"New location created with id = {new_id}")
+
+    create_location_rating(new_id)
+    print(f"New location rating created with id = {new_id}")
+
+    return RedirectResponse(url="/admin/home?success=location_added", status_code=303)
+
+class LocationAddition(BaseModel):
+    location_type_id: int
+    location_name: str
+    state_province: str
+    country: str
+    latitude: str
+    longitude: str
+
+@router.post("/add_location")
+def add_location_from_app(addition: LocationAddition):
+    print(f"Location Type: {addition.location_type_id}")
+    print(f"Name {addition.location_name}")
+
+    print(f"State: {addition.state_province}")
+    print(f"Country: {addition.country}")
+    print(f"Latitude: {addition.latitude}")
+    print(f"Longitude: {addition.longitude}")
+
+    new_id = create_location(
+        name=addition.location_name,
+        location_type_id=addition.location_type_id,
+        state_province=addition.state_province,
+        country=addition.country,
+        latitude=addition.latitude,
+        longitude=addition.longitude,
     )
 
     print(f"New location created with id = {new_id}")
