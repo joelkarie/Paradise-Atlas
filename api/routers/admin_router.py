@@ -354,7 +354,7 @@ class LocationAddition(BaseModel):
     latitude: str
     longitude: str
 
-@router.post("/add_location")
+@router.post("/add_location_from_app")
 def add_location_from_app(addition: LocationAddition):
     print(f"Location Type: {addition.location_type_id}")
     print(f"Name {addition.location_name}")
