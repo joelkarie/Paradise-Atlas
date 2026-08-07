@@ -351,8 +351,8 @@ class LocationAddition(BaseModel):
     location_name: str
     state_province: str
     country: str
-    latitude: str
-    longitude: str
+    latitude: float
+    longitude: float
 
 @router.post("/add_location_from_app")
 def add_location_from_app(addition: LocationAddition):
