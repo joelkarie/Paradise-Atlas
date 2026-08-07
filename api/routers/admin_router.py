@@ -378,4 +378,7 @@ def add_location_from_app(addition: LocationAddition):
     create_location_rating(new_id)
     print(f"New location rating created with id = {new_id}")
 
-    return RedirectResponse(url="/admin/home?success=location_added", status_code=303)
+    return {
+    "status": "ok",
+    "location_id": new_id
+    }
