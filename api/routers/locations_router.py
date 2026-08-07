@@ -17,7 +17,7 @@ def locations():
 
 @router.post("/update_location_rating")
 def update_location_rating(
-    location_id: str = Form(...), field: str = Form(...), value: Optional[str] = Form(None)
+    location_id: str = Form(...), field: str = Form(...), value: str | None = Form(None),
 ):
 
     allowed_fields = {
