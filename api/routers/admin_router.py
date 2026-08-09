@@ -189,6 +189,31 @@ def add_visit(
 
     return RedirectResponse(url="/admin/home?success=visit_added", status_code=303)
 
+class VisitAddition(BaseModel):
+    location_id: int
+    visit_date: str
+
+@router.post("/add_visit_from_app")
+def add_visit_from_app(visit: VisitAddition):
+
+    print(f"Location ID: {visit.location_id}")
+    print(f"Visit Date: {visit.visit_date}")
+
+    next_visit_order = None
+
+    next_visit_number = get_next_visit_number()
+    print(f"Next visit number = {next_visit_number}")
+
+    visit_id = create_visit(
+        location_id=visit.location_id,
+        visit_date=visit.visit_date,
+        visit_number=next_visit_number,
+        visit_order=next_visit_order,
+    )
+
+    print(f"Visit created with id = {visit_id}")
+
+    return RedirectResponse(url="/admin/home?success=visit_added", status_code=303)
 
 @router.get("/add_theatre")
 def add_theatre_page(request: Request):
