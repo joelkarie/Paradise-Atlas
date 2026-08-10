@@ -46,7 +46,7 @@ def get_theatres_for_app():
                 t.name,
                 l.name,
                 l.state_province,
-                l.longitude
+                l.longitude,
                 t.id,
                 l.id
 
