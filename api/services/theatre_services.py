@@ -7,7 +7,7 @@ def get_theatres():
     with engine.connect() as conn:
 
         rows = conn.execute(text("""
-            SELECT t.name AS name, 
+            SELECT DISTINCT t.name AS name, 
             l.name AS city, 
             l.state_province AS state_province, 
             v.date AS date, l.latitude AS latitude, 
