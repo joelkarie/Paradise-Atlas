@@ -1,6 +1,6 @@
 from pathlib import Path
 from fastapi import APIRouter, UploadFile, File, HTTPException
-from api.services.theatre_services import get_theatres, get_theatre
+from api.services.theatre_services import get_theatres, get_theatre, get_theatres_for_app
 from api.services.github_service import GithubService
 from api.services.image_service import ImageService
 from api.services.image_paths import ImagePaths
@@ -12,6 +12,10 @@ router = APIRouter(prefix="/theatres", tags=["Theatres"])
 def theatres():
     return get_theatres()
 
+@router.get("/theatres_for_app")
+def theatres_for_app():
+    return get_theatres_for_app()
+    
 
 @router.post("/admin/add_image/{theatre_id}/image")
 async def upload_theatre_image(theatre_id: int, file: UploadFile = File(...)):

@@ -22,6 +22,39 @@ def get_theatres():
 
         return [dict(row._mapping) for row in rows]
 
+def get_theatres_for_app():
+
+    with engine.connect() as conn:
+
+        rows = conn.execute(text("""
+            SELECT
+                t.name AS name,
+                l.name AS city,
+                l.state_province as state_province,
+
+                ARRAY_AGG(v."date" ORDER BY v."date) as dates,
+
+                            l.longitude AS longitude,
+                t.id as id,
+                l.id as location_id
+
+            FROM visit v
+            JOIN theatre t ON t.id = v.theatre_id
+            JOIN location l ON l.id = v.location_id
+
+            GROUP BY
+                t.name,
+                l.name,
+                l.state_province,
+                t.id,
+                l.id
+
+            ORDER BY name ASC
+
+        """))
+
+        return [dict(row._mapping) for row in rows]
+
 def get_all_theatres_data():
 
     with engine.connect() as conn:
