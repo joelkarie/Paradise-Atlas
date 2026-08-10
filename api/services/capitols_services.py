@@ -18,19 +18,35 @@ def get_capitols_for_app():
     with engine.connect() as conn:
 
         rows = conn.execute(text("""
-            SELECT DISTINCT
-            cap.id as id, 
-            l.name as city, 
-            l.state_province as state_province, 
-            v."date" as date,
-            l.latitude AS latitude, 
-            l.longitude AS longitude, 
-            cap.fact AS fact, cap.architect AS architect, 
-            cap.architectural_style AS architectural_style, 
-            cap.year_completed AS year_completed
+            SELECT
+                cap.id AS id, 
+                l.name AS city, 
+                l.state_province AS state_province, 
+
+                ARRAY_AGG(v."date" ORDER BY v."date") AS dates,
+
+                l.latitude AS latitude, 
+                l.longitude AS longitude, 
+                cap.fact AS fact, 
+                cap.architect AS architect, 
+                cap.architectural_style AS architectural_style, 
+                cap.year_completed AS year_completed
+
             FROM visit v
-            JOIN location l on l.id = v.location_id
+            JOIN location l ON l.id = v.location_id
             JOIN capitol cap ON cap.id = v.capitol_id
+
+            GROUP BY
+                cap.id,
+                l.name,
+                l.state_province,
+                l.latitude,
+                l.longitude,
+                cap.fact,
+                cap.architect,
+                cap.architectural_style,
+                cap.year_completed
+
             ORDER BY l.state_province ASC
         """))
 
