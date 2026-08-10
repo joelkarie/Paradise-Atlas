@@ -34,6 +34,7 @@ def get_theatres_for_app():
 
                 ARRAY_AGG(v."date" ORDER BY v."date") as dates,
 
+                l.latitude AS latitude
                 l.longitude AS longitude,
                 t.id as id,
                 l.id as location_id
@@ -46,6 +47,7 @@ def get_theatres_for_app():
                 t.name,
                 l.name,
                 l.state_province,
+                l.latitude,
                 l.longitude,
                 t.id,
                 l.id
