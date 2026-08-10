@@ -18,7 +18,7 @@ def get_capitols_for_app():
     with engine.connect() as conn:
 
         rows = conn.execute(text("""
-            SELECT 
+            SELECT DISTINCT
             cap.id as id, 
             l.name as city, 
             l.state_province as state_province, 
