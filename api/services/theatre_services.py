@@ -10,8 +10,8 @@ def get_theatres():
             SELECT DISTINCT t.name AS name, 
             l.name AS city, 
             l.state_province AS state_province, 
-            v.date AS date, l.latitude AS latitude, 
-            l.longitude AS longitude,
+            v.date AS date, t.latitude AS latitude, 
+            t.longitude AS longitude,
             t.id as id,
             l.id as location_id
             FROM visit v
@@ -34,8 +34,8 @@ def get_theatres_for_app():
 
                 ARRAY_AGG(v."date" ORDER BY v."date") as dates,
 
-                l.latitude AS latitude,
-                l.longitude AS longitude,
+                t.latitude AS latitude,
+                t.longitude AS longitude,
                 t.id as id,
                 l.id as location_id
 
