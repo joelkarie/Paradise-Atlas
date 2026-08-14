@@ -25,8 +25,8 @@ def get_capitols_for_app():
 
                 ARRAY_AGG(v."date" ORDER BY v."date") AS dates,
 
-                l.latitude AS latitude, 
-                l.longitude AS longitude, 
+                cap.latitude AS latitude, 
+                cap.longitude AS longitude, 
                 cap.fact AS fact, 
                 cap.architect AS architect, 
                 cap.architectural_style AS architectural_style, 
