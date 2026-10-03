@@ -148,6 +148,18 @@ def create_location_rating(location_id: int):
             {"location_id": location_id},
         )
 
+def create_building_details(location_id: int):
+    with engine.begin() as conn:
+        conn.execute(
+            text("""
+                INSERT INTO building_details (
+                    location_id
+                )
+                VALUES (:location_id)
+            """),
+            {"location_id": location_id},
+        )
+
 def get_national_parks():
     with engine.connect() as conn:
 

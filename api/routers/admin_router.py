@@ -13,6 +13,7 @@ from api.services.locations_services import (
     get_locations_for_dropdown,
     create_location,
     create_location_rating,
+    create_building_details
 )
 from api.services.visit_services import (
     get_next_visit_number,
@@ -368,6 +369,11 @@ def add_location(
 
     create_location_rating(new_id)
     print(f"New location rating created with id = {new_id}")
+
+    if location_type in (5, 6, 7, 8):
+        create_building_details(new_id)
+        print(f"New buidling details created with id = {new_id}")
+
 
     return RedirectResponse(url="/admin/home?success=location_added", status_code=303)
 
