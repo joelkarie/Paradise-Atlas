@@ -409,6 +409,10 @@ def add_location_from_app(addition: LocationAddition):
     create_location_rating(new_id)
     print(f"New location rating created with id = {new_id}")
 
+    if addition.location_type_id in (5, 6, 7, 8):
+        create_building_details(new_id)
+        print(f"New buidling details created with id = {new_id}")
+
     return {
     "status": "ok",
     "location_id": new_id
