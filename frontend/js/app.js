@@ -19,7 +19,14 @@ import { createCanadianRailwayHotelsLayer } from "./layers/canadian_railway_hote
 import { getVisitedCanadianRailwayHotels } from "./api.js";
 import { createNationalParksLayer } from "./layers/national_parks.js";
 import { getNationalParks } from "./api.js";
+import {createHeatMapLayer} from "./layers/heat_map.js"
 
+// Temporary points for heatmap
+const heatPoints = [
+    [40.7128, -74.0060],
+    [40.7306, -73.9352],
+    [40.6500, -73.9500]
+];
 
 
 async function main() {
@@ -39,11 +46,13 @@ async function main() {
     const digsLayer = createDigsLayer(await getDigs(), "digs_marker_2.png")
     const visitedCanadianRailwayHotelsLayer = createCanadianRailwayHotelsLayer(await getVisitedCanadianRailwayHotels(), "chateau-frontenac.png")
     const nationalParksLayer = createNationalParksLayer( await getNationalParks(), "national-park.png")
+    const heatmapLayer = createHeatMapLayer(heatPoints)
 
     locationLayer.addTo(map)
 
     const overlays = {
         "Locations Visited": locationLayer,
+        "Heat Map": heatmapLayer,
         "Visit Order": vistitOrderLayer,
         "Theatres We Have Worked At": theatreLayer,
         "Place We Have Stayed": digsLayer,

@@ -1,5 +1,7 @@
 
 
+
+
 export function createHeatMapLayer(locations) {
 
     const heatLayer = L.heatLayer(locations, {
@@ -9,12 +11,6 @@ export function createHeatMapLayer(locations) {
 });
 
     const heatmapLayerGroup = L.layerGroup([heatLayer]);
-
-    locations.forEach(location => {
-
-
-    });
-
 
     return heatmapLayerGroup;
 
