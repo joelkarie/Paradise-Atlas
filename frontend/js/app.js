@@ -19,7 +19,7 @@ import { createCanadianRailwayHotelsLayer } from "./layers/canadian_railway_hote
 import { getVisitedCanadianRailwayHotels } from "./api.js";
 import { createNationalParksLayer } from "./layers/national_parks.js";
 import { getNationalParks } from "./api.js";
-import {createHeatMapLayer} from "./layers/heat_map.js"
+import { createHeatMapLayer } from "./layers/heat_map.js"
 
 // Temporary points for heatmap
 const heatPoints = [
@@ -33,7 +33,7 @@ async function main() {
 
     const map = createMap();
 
-
+    console.log("At start of layers")
     const theatreLayer = createTheatreLayer(await getTheatres());
     const capitolLayer = createCapitolLayer(await getCapitols(), "capitol_marker_2.png");
     const joelCouldLiveLayer = createCouldLiveLayer(await getJoelCouldLive(), "joel_in_dot_gray_2.png");
@@ -47,6 +47,8 @@ async function main() {
     const visitedCanadianRailwayHotelsLayer = createCanadianRailwayHotelsLayer(await getVisitedCanadianRailwayHotels(), "chateau-frontenac.png")
     const nationalParksLayer = createNationalParksLayer( await getNationalParks(), "national-park.png")
     const heatmapLayer = createHeatMapLayer(heatPoints)
+    console.log("Heatmap layer:", heatmapLayer);
+    console.log("Is Leaflet layer:", heatmapLayer instanceof L.Layer);
 
     locationLayer.addTo(map)
 
