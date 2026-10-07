@@ -1,4 +1,4 @@
-console.log("🔥 APP.JS IS RUNNING");
+console.log("🔥 APP.JS IS RUNNING 2");
 
 import { createMap } from "./map.js";
 import { createTheatreLayer } from "./layers/theatres.js";
