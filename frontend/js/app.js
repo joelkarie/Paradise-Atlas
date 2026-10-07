@@ -1,3 +1,5 @@
+console.log("🔥 APP.JS IS RUNNING");
+
 import { createMap } from "./map.js";
 import { createTheatreLayer } from "./layers/theatres.js";
 import { getTheatres } from "./api.js";
