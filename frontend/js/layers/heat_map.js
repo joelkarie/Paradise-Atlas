@@ -3,7 +3,7 @@
 
 
 export function createHeatMapLayer(locations) {
-
+    print("Testing createHeatMapLayer function.")
     const heatLayer = L.heatLayer(locations, {
     radius: 25,
     blur: 15,
