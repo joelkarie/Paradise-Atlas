@@ -112,3 +112,8 @@
 - Move michael/joel admins to template folder
 - Add new footer to all pages
 - Combine could_live routers
+
+## Current State (October 7)
+ 
+ - A lot has been changed since I last made notes
+ - Today a heatmap was added that give weight to all places we have visited
