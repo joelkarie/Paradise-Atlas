@@ -9,8 +9,8 @@ export function createHeatMapLayer(locations) {
     });
 
     const heatLayer = L.heatLayer(heatPoints, {
-        radius: 30,
-        blur: 10,
+        radius: 10,
+        blur: 30,
         maxZoom: 5,
         max: 1.0
 });
