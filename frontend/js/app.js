@@ -41,7 +41,15 @@ async function main() {
     const digsLayer = createDigsLayer(await getDigs(), "digs_marker_2.png")
     const visitedCanadianRailwayHotelsLayer = createCanadianRailwayHotelsLayer(await getVisitedCanadianRailwayHotels(), "chateau-frontenac.png")
     const nationalParksLayer = createNationalParksLayer( await getNationalParks(), "national-park.png")
-    const heatmapLayer = createHeatMapLayer(await getLocations())
+    const heatmapLayer = createHeatMapLayer([
+            ...(await getLocations()),
+            ...(await getTheatres()),
+            ...(await getCapitols()),
+            ...(await getPatagoniaStores()),
+            ...(await getQuakerMeetings()),
+            ...(await getDigs()),
+            ...(await getVisitedCanadianRailwayHotels())
+        ]);
     console.log("Heatmap layer:", heatmapLayer);
     console.log("Is Leaflet layer:", heatmapLayer instanceof L.Layer);
 
