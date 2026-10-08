@@ -1,10 +1,14 @@
 
-
-
-
 export function createHeatMapLayer(locations) {
     console.log("Testing createHeatMapLayer function.");
-    const heatLayer = L.heatLayer(locations, {
+    let heatPoints = []
+
+    locations.forEach(location => {
+        let coordinates = [location.latitude, location.longitude]
+        heatPoints.push(coordinates)
+    });
+
+    const heatLayer = L.heatLayer(heatPoints, {
     radius: 25,
     blur: 15,
     maxZoom: 12

@@ -23,13 +23,6 @@ import { createNationalParksLayer } from "./layers/national_parks.js";
 import { getNationalParks } from "./api.js";
 import { createHeatMapLayer } from "./layers/heat_map.js"
 
-// Temporary points for heatmap
-const heatPoints = [
-    [40.7128, -74.0060],
-    [40.7306, -73.9352],
-    [40.6500, -73.9500]
-];
-
 
 async function main() {
 
@@ -48,7 +41,7 @@ async function main() {
     const digsLayer = createDigsLayer(await getDigs(), "digs_marker_2.png")
     const visitedCanadianRailwayHotelsLayer = createCanadianRailwayHotelsLayer(await getVisitedCanadianRailwayHotels(), "chateau-frontenac.png")
     const nationalParksLayer = createNationalParksLayer( await getNationalParks(), "national-park.png")
-    const heatmapLayer = createHeatMapLayer(heatPoints)
+    const heatmapLayer = createHeatMapLayer(await getLocations())
     console.log("Heatmap layer:", heatmapLayer);
     console.log("Is Leaflet layer:", heatmapLayer instanceof L.Layer);
 
