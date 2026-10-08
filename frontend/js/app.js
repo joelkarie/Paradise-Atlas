@@ -1,5 +1,3 @@
-console.log("🔥 APP.JS IS RUNNING 2");
-
 import { createMap } from "./map.js";
 import { createTheatreLayer } from "./layers/theatres.js";
 import { getTheatres } from "./api.js";
@@ -28,7 +26,6 @@ async function main() {
 
     const map = createMap();
 
-    console.log("At start of layers")
     const theatreLayer = createTheatreLayer(await getTheatres());
     const capitolLayer = createCapitolLayer(await getCapitols(), "capitol_marker_2.png");
     const joelCouldLiveLayer = createCouldLiveLayer(await getJoelCouldLive(), "joel_in_dot_gray_2.png");
@@ -50,8 +47,6 @@ async function main() {
             ...(await getDigs()),
             ...(await getVisitedCanadianRailwayHotels())
         ]);
-    console.log("Heatmap layer:", heatmapLayer);
-    console.log("Is Leaflet layer:", heatmapLayer instanceof L.Layer);
 
     locationLayer.addTo(map)
 

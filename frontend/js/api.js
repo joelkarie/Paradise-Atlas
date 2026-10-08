@@ -1,7 +1,6 @@
 const API_BASE = window.location.origin;
 console.log("API_BASE =", API_BASE);
 console.log("Origin =", window.location.origin);
-console.log("Debug log");
 
 // const API_URL = "https://paradise-atlas.onrender.com";
 
