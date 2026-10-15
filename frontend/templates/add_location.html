@@ -27,7 +27,7 @@
         <img src="/static/assets/paradise_pelican.png" alt="Atlas Paradiso Logo" class="logo" height="170px">
     </div>
     <div class="content-box">
-        <details style="margin-top:30px;" id="imageUploadSection" data-entity="locations">
+        <details style="margin-top:30px;" id="addLocationSection" data-entity="locations">
             <summary>
                 <h2 style="display:inline;">
                     Add Location
@@ -102,8 +102,51 @@
             </div>
 
         </details>
+
+        <details style="margin-top:30px;" id="batchImageUploadSection"
+                data-entity="locations">
+            <summary>
+                <h2 style="display:inline;">
+                    Batch Upload Location Images
+                </h2>
+            </summary>
+
+            <div style="margin-top:20px;">
+                <p>
+                    Select multiple images, then assign each image to a location.
+                    All images will be submitted together.
+                </p>
+
+                <select id="batchLocationOptions" hidden>
+                    {% for location in locations %}
+                    <option value="{{ location.id }}">
+                        {{ location.name }}{% if location.state_province %}, {{ location.state_province }}{% endif %}{% if location.country %}, {{ location.country }}{% endif %}
+                    </option>
+                    {% endfor %}
+                </select>
+
+                <label for="batchImageInput">Select Images:</label>
+                <input
+                    type="file"
+                    id="batchImageInput"
+                    accept="image/*"
+                    multiple
+                >
+
+                <div id="batchImageList" style="margin-top:20px;"></div>
+
+                <br>
+
+                <button type="button" id="batchUploadButton" disabled>
+                    Upload All Images
+                </button>
+
+                <p id="batchUploadStatus" role="status"></p>
+            </div>
+        </details>
+
         <script src="/static/js/admin/image_upload.js"></script>
-    </div>
+        <script src="/static/js/admin/image_upload_batch.js" defer></script>    </div>
 </body>
 {% include "partials/admin_footer.html" %}
 </body>
