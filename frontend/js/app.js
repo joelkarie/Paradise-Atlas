@@ -22,7 +22,8 @@ import { getNationalParks } from "./api.js";
 import { createHeatMapLayer } from "./layers/heat_map.js"
 import { createLibrariesLayer } from "./layers/libraries.js";
 import { getLibraries } from "./api.js";
-
+import { createCityhallLayer } from "./layers/cityhalls.js";
+import { getCityhalls } from "./api.js";
 
 async function main() {
 
@@ -49,7 +50,8 @@ async function main() {
             ...(await getDigs()),
             ...(await getVisitedCanadianRailwayHotels())
         ]);
-    const librariesLayer = createLibrariesLayer(await getLibraries());
+    const librariesLayer = createLibrariesLayer( await getLibraries());
+    const cityhallsLayer = createCityhallLayer( await getCityhalls());
 
     locationLayer.addTo(map)
 
@@ -63,6 +65,7 @@ async function main() {
         "Canadian Railway Hotels Visited": visitedCanadianRailwayHotelsLayer,
         "National Parks Visited": nationalParksLayer,
         "Libraries Visited": librariesLayer,
+        "City Halls Visited": cityhallsLayer,
         "Cities Michael Could Live In": michaelCouldLiveLayer,
         "Cities Joel Could Live In": joelCouldLiveLayer,
         "Cities We Both Could Live In": togetherCouldLiveLayer,

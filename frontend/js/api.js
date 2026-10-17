@@ -71,3 +71,8 @@ export async function getLibraries() {
     const response = await fetch(`${API_BASE}/locations/libraries`);
     return await response.json();
 }
+
+export async function getCityhalls() {
+    const response = await fetch(`${API_BASE}/locations/cityhalls`);
+    return await response.json();
+}
