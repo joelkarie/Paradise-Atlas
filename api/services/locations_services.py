@@ -212,7 +212,7 @@ def get_cityhalls():
     with engine.connect() as conn:
 
         rows = conn.execute(text("""
-            SELECT l.name, l.state_province , l.country, l.latitude, l.longitude
+            SELECT l.id, l.name, l.state_province , l.country, l.latitude, l.longitude
             FROM location l
             WHERE l.location_type_id = 6
             ORDER BY l.name ASC
@@ -225,7 +225,7 @@ def get_libraries():
     with engine.connect() as conn:
 
         rows = conn.execute(text("""
-            SELECT l.name, l.state_province , l.country, l.latitude, l.longitude
+            SELECT l.id, l.name, l.state_province , l.country, l.latitude, l.longitude
             FROM location l
             WHERE l.location_type_id = 7
             ORDER BY l.name ASC
