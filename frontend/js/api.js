@@ -66,3 +66,8 @@ export async function getNationalParks() {
     const response = await fetch(`${API_BASE}/locations/national_parks`);
     return await response.json();
 }
+
+export async function getLibraries() {
+    const response = await fetch(`${API_BASE}/locations/libraries`);
+    return await response.json();
+}
