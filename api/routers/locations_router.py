@@ -4,6 +4,8 @@ from api.services.locations_services import (
     update_location_rating_value,
     get_location_types,
     get_national_parks,
+    get_cityhalls,
+    get_libraries
 )
 from pydantic import BaseModel
 
@@ -82,3 +84,11 @@ def location_types():
 @router.get("/national_parks")
 def national_parks():
     return get_national_parks()
+
+@router.get("/libraries")
+def libraries():
+    return get_libraries()
+
+@router.get("/cityhalls")
+def cityhalls():
+    return get_cityhalls()
