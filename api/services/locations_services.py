@@ -207,4 +207,28 @@ def get_gazetteer_data(location_id):
 
         return dict(row._mapping)
     
+def get_cityhalls():
 
+    with engine.connect() as conn:
+
+        rows = conn.execute(text("""
+            SELECT l.name, l.state_province , l.country, l.latitude, l.longitude
+            FROM location l
+            WHERE l.location_type_id = 6
+            ORDER BY l.name ASC
+        """))
+
+        return [dict(row._mapping) for row in rows]
+
+def get_libraries():
+
+    with engine.connect() as conn:
+
+        rows = conn.execute(text("""
+            SELECT l.name, l.state_province , l.country, l.latitude, l.longitude
+            FROM location l
+            WHERE l.location_type_id = 7
+            ORDER BY l.name ASC
+        """))
+
+        return [dict(row._mapping) for row in rows]
