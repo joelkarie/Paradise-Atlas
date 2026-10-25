@@ -25,7 +25,7 @@ from api.routers.canadian_railway_hotel_router import (
 )
 from api.routers.gazetteer_router import router as gazetteer_router
 from api.routers.livable_router import router as living_router 
-from api.routers.favorites_router import router as favorites_router
+from api.routers.miscellany_router import router as miscellany_router
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -60,7 +60,7 @@ routers = [
     canadian_railway_hotels_router,
     gazetteer_router,
     living_router,
-    favorites_router
+    miscellany_router
 ]
 
 for router in routers:

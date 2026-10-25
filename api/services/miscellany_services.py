@@ -1,7 +1,7 @@
 from sqlalchemy import text
 from ..database import engine
 
-def get_favorite_location_list(column: str, topic: str):
+def get_top_ten_location_list(column: str, topic: str):
     with engine.connect() as conn:
 
         rows = conn.execute(
@@ -24,7 +24,7 @@ def get_favorite_location_list(column: str, topic: str):
 
         return [dict(row._mapping) for row in rows]
 
-def get_favorite_capitol_list(column: str):
+def get_top_ten_capitol_list(column: str):
     with engine.connect() as conn:
 
         rows = conn.execute(

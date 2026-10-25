@@ -1,25 +1,25 @@
 from fastapi import APIRouter, HTTPException, Request
 from fastapi.templating import Jinja2Templates
-from api.services.favorites_services import get_favorite_location_list, get_favorite_capitol_list
+from api.services.miscellany_services import get_top_ten_location_list, get_top_ten_capitol_list
 from sqlalchemy import text
 from ..database import engine
 
-router = APIRouter(prefix="/favorites", tags=["Favorites"])
-templates = Jinja2Templates(directory="frontend/templates/favorites")
+router = APIRouter(prefix="/miscellany", tags=["Miscellany"])
+templates = Jinja2Templates(directory="frontend/templates/miscellany")
 
 
 @router.get("/{column}/{topic}")
-def favorite_list(column, topic):
-    return get_favorite_location_list(column, topic)
+def top_ten_list(column, topic):
+    return get_top_ten_location_list(column, topic)
 
 @router.get("/top_ten/capitol/{column}")
 def top_ten_capitol_list(column):
-    return get_favorite_capitol_list(column)
+    return get_top_ten_capitol_list(column)
 
 
 
-@router.put("/favorites/{column}/{name}/{position}/{location_id}")
-async def replace_favorite_location(
+@router.put("/miscellany/{column}/{name}/{position}/{location_id}")
+async def replace_top_ten_location(
     column: str,
     name: str,
     position: int,
@@ -72,16 +72,16 @@ async def replace_favorite_location(
             if updated_array is None:
                 raise HTTPException(
                     status_code=404,
-                    detail="Favorites row not found or position is out of range"
+                    detail="Top Ten row not found or position is out of range"
                 )
 
         return {
-            "message": "Favorite location replaced successfully",
+            "message": "Top Ten location replaced successfully",
             "column": column,
             "name": name,
             "position": position,
             "location_id": location_id,
-            "updated_favorites": updated_array
+            "updated_top_ten": updated_array
         }
 
     except HTTPException:
@@ -91,14 +91,14 @@ async def replace_favorite_location(
 
 
 @router.get("/home")
-def favorites_home_page(request: Request):
+def miscellany_home_page(request: Request):
 
-    joels_cities = get_favorite_location_list("joel", "city")
+    joels_cities = get_top_ten_location_list("joel", "city")
 
 
     return templates.TemplateResponse(
         request=request,
-        name="favorite_home.html",
+        name="miscellany_home.html",
         context={
            "joel_cities": joels_cities
         },
