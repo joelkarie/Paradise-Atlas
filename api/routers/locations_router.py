@@ -5,7 +5,8 @@ from api.services.locations_services import (
     get_location_types,
     get_national_parks,
     get_cityhalls,
-    get_libraries
+    get_libraries,
+    get_cities_for_dropdown
 )
 from pydantic import BaseModel
 
@@ -92,3 +93,7 @@ def libraries():
 @router.get("/cityhalls")
 def cityhalls():
     return get_cityhalls()
+
+@router.get("/cities")
+def cities():
+    return get_cities_for_dropdown()

@@ -89,6 +89,22 @@ def get_locations_for_dropdown():
         """))
 
         return [dict(row._mapping) for row in rows]
+
+def get_cities_for_dropdown():
+    with engine.connect() as conn:
+
+        rows = conn.execute(text("""
+            SELECT
+                l.id,
+                l.name,
+                l.state_province,
+                l.country
+            FROM location l
+            WHERE l.location_type_id = 1
+            ORDER BY LOWER(name) ASC;
+        """))
+
+        return [dict(row._mapping) for row in rows]
     
 def create_location(
         name, 
