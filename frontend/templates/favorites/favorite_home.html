@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="icon" type="image/x-icon" href="/static/assets/peach_dot.png">
+    <link rel="stylesheet" href="/static/css/style.css">
+
+    <meta charset="UTF-8">
+    <title>Miscellany</title>
+
+    <style>
+        body {
+            font-family: 'Playfair Display', serif;
+        }
+
+        label {
+            margin-right: 12px;
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        <img src="/static/assets/paradise_pelican.png" alt="Atlas Paradiso Logo" class="logo" height="170px">
+    </div>
+    <div class="page-banner">
+        <h1>Miscellany</h1>
+    </div>
+    <div class="content-lightbox">
+        <h1>Top Tens</h1>
+        <h2>Cities</h2>
+        <h3>Joel</h3>
+        {% for joel_city in joel_cities %}
+        <a href="/gazetteer/location/{{ joel_city.id }}">
+            {{joel_city.favorite_order}}. {{ joel_city.city }}, {{ joel_city.state_province }}, {{
+            joel_city.country}}
+        </a><br>
+        {% endfor %}
+
+
+    </div>
+
+    <footer class="bottom-nav">
+
+        <a href="/" class="nav-logo">
+            <img src="/static/assets/peach_dot.png" alt="Paradise Atlas Logo" class="site-logo-small">
+        </a>
+
+        <div class="nav-links">
+            <a href="/">Atlas</a>
+            <a href="/gazetteer/home">Gazetteer</a>
+            <a href="/admin/home">Admin</a>
+
+            <a href="https://www.instagram.com/michaelhergel/" target="_blank" rel="noopener noreferrer">
+                Links
+            </a>
+        </div>
+
+    </footer>
+</body>
+
+</html>

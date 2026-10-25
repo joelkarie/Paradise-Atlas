@@ -1,14 +1,21 @@
-from fastapi import APIRouter, HTTPException
-from api.services.favorites_services import get_favorite_list
+from fastapi import APIRouter, HTTPException, Request
+from fastapi.templating import Jinja2Templates
+from api.services.favorites_services import get_favorite_location_list, get_favorite_capitol_list
 from sqlalchemy import text
 from ..database import engine
 
 router = APIRouter(prefix="/favorites", tags=["Favorites"])
+templates = Jinja2Templates(directory="frontend/templates/favorites")
 
 
 @router.get("/{column}/{topic}")
 def favorite_list(column, topic):
-    return get_favorite_list(column, topic)
+    return get_favorite_location_list(column, topic)
+
+@router.get("/top_ten/capitol/{column}")
+def top_ten_capitol_list(column):
+    return get_favorite_capitol_list(column)
+
 
 
 @router.put("/favorites/{column}/{name}/{position}/{location_id}")
@@ -81,3 +88,18 @@ async def replace_favorite_location(
         raise
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
+
+
+@router.get("/home")
+def favorites_home_page(request: Request):
+
+    joels_cities = get_favorite_location_list("joel", "city")
+
+
+    return templates.TemplateResponse(
+        request=request,
+        name="favorite_home.html",
+        context={
+           "joel_cities": joels_cities
+        },
+    )
