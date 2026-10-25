@@ -32,7 +32,7 @@
         <h3>Joel</h3>
         {% for joel_city in joel_cities %}
         <a href="/gazetteer/location/{{ joel_city.id }}">
-            {{joel_city.favorite_order}}. {{ joel_city.city }}, {{ joel_city.state_province }}, {{
+            {{joel_city.top_ten_order}}. {{ joel_city.city }}, {{ joel_city.state_province }}, {{
             joel_city.country}}
         </a><br>
         {% endfor %}

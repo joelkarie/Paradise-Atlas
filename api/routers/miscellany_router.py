@@ -40,20 +40,20 @@ async def replace_top_ten_location(
         )
 
     query = text(f"""
-        UPDATE favorites AS f
+        UPDATE top_tens AS t
         SET {column} = (
             SELECT array_agg(
                 CASE
                     WHEN s.i = :position THEN :location_id
-                    ELSE f.{column}[s.i]
+                    ELSE t.{column}[s.i]
                 END
                 ORDER BY s.i
             )
-            FROM generate_subscripts(f.{column}, 1) AS s(i)
+            FROM generate_subscripts(t.{column}, 1) AS s(i)
         )
-        WHERE f.name = :name
-          AND array_length(f.{column}, 1) >= :position
-        RETURNING f.{column}
+        WHERE t.name = :name
+          AND array_length(t.{column}, 1) >= :position
+        RETURNING t.{column}
     """)
 
     try:
