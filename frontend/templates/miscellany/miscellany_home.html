@@ -26,19 +26,32 @@
     <div class="page-banner">
         <h1>Miscellany</h1>
     </div>
-    <div class="content-lightbox">
-        <h1>Top Tens</h1>
-        <h2>Cities</h2>
-        <h3>Joel</h3>
-        {% for joel_city in joel_cities %}
-        <a href="/gazetteer/location/{{ joel_city.id }}">
-            {{joel_city.top_ten_order}}. {{ joel_city.city }}, {{ joel_city.state_province }}, {{
-            joel_city.country}}
-        </a><br>
-        {% endfor %}
+<div class="content-lightbox">
+    <h1>Top Tens</h1>
+    <h2>Cities</h2>
 
+    <div class="top-tens-columns">
+        <div class="top-tens-column">
+            <h3>Joel</h3>
+            {% for joel_city in joel_cities %}
+            <a href="/gazetteer/location/{{ joel_city.id }}">
+                {{ joel_city.top_ten_order }}. {{ joel_city.city }}, 
+                {{ joel_city.state_province }}, {{ joel_city.country }}
+            </a><br>
+            {% endfor %}
+        </div>
 
+        <div class="top-tens-column">
+            <h3>Michael</h3>
+            {% for michael_city in michael_cities %}
+            <a href="/gazetteer/location/{{ michael_city.id }}">
+                {{ michael_city.top_ten_order }}. {{ michael_city.city }}, 
+                {{ michael_city.state_province }}, {{ michael_city.country }}
+            </a><br>
+            {% endfor %}
+        </div>
     </div>
+</div>
 
     <footer class="bottom-nav">
 

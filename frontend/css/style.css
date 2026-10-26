@@ -379,3 +379,18 @@ a:hover {
 .page-banner h1 {
     margin: 0;
 }
+
+.top-tens-columns {
+    display: flex;
+    gap: 30px;
+    align-items: flex-start;
+}
+
+.top-tens-column {
+    flex: 1;
+    min-width: 0;
+}
+
+.top-tens-column h3 {
+    margin-top: 0;
+}

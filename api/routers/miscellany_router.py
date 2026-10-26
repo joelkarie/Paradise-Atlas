@@ -94,12 +94,14 @@ async def replace_top_ten_location(
 def miscellany_home_page(request: Request):
 
     joels_cities = get_top_ten_location_list("joel", "city")
+    michael_cities = get_top_ten_location_list("michael", "city")
 
 
     return templates.TemplateResponse(
         request=request,
         name="miscellany_home.html",
         context={
-           "joel_cities": joels_cities
+           "joel_cities": joels_cities,
+           "michael_cities": michael_cities
         },
     )
