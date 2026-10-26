@@ -51,6 +51,32 @@
             {% endfor %}
         </div>
     </div>
+
+    <h2>Capitols</h2>
+
+    <div class="top-tens-columns">
+        <div class="top-tens-column">
+            <h3>Joel</h3>
+            {% for capitol in joel_capitols %}
+            <a href="/gazetteer/location/{{ capitol.id }}">
+                {{ capitol.top_ten_order }}. {{ capitol.name }}, 
+                {{ capitol.country }}
+            </a><br>
+            {% endfor %}
+        </div>
+
+        <div class="top-tens-column">
+            <h3>Michael</h3>
+            {% for capitol in michael_capitols %}
+            <a href="/gazetteer/location/{{ capitol.id }}">
+                {{ capitol.top_ten_order }}. {{ capitol.name }}, 
+                {{ capitol.country }}
+            </a><br>
+            {% endfor %}
+        </div>
+    </div>
+
+
 </div>
 
     <footer class="bottom-nav">

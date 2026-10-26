@@ -95,6 +95,8 @@ def miscellany_home_page(request: Request):
 
     joels_cities = get_top_ten_location_list("joel", "city")
     michael_cities = get_top_ten_location_list("michael", "city")
+    joel_capitols = get_top_ten_capitol_list("joel")
+    michael_capitols = get_top_ten_capitol_list("michael")
 
 
     return templates.TemplateResponse(
@@ -102,6 +104,8 @@ def miscellany_home_page(request: Request):
         name="miscellany_home.html",
         context={
            "joel_cities": joels_cities,
-           "michael_cities": michael_cities
+           "michael_cities": michael_cities,
+           "joel_capitols": joel_capitols,
+           "michael_capitols": michael_capitols
         },
     )
