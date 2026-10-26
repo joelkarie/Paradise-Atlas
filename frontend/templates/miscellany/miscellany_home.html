@@ -77,7 +77,7 @@
         </div>
     </div>
 
-        
+    <br>   
     <h2>Parks</h2>
 
     <div class="top-tens-columns">
@@ -97,6 +97,31 @@
             <a href="/gazetteer/location/{{ park.id }}">
                 {{ park.top_ten_order }}. {{ park.name }}, 
                 {{ park.state_province }}, {{ park.country }}
+            </a><br>
+            {% endfor %}
+        </div>
+    </div>
+
+   <br>   
+    <h2>City Halls</h2>
+
+    <div class="top-tens-columns">
+        <div class="top-tens-column">
+            <h3>Joel</h3>
+            {% for location in joel_cityhalls %}
+            <a href="/gazetteer/location/{{ location.id }}">
+                {{ location.top_ten_order }}. {{ location.name }}, 
+                {{ location.state_province }}, {{ location.country }}
+            </a><br>
+            {% endfor %}
+        </div>
+
+        <div class="top-tens-column">
+            <h3>Michael</h3>
+            {% for location in michael_cityhalls %}
+            <a href="/gazetteer/location/{{ location.id }}">
+                {{ location.top_ten_order }}. {{ location.name }}, 
+                {{ location.state_province }}, {{ location.country }}
             </a><br>
             {% endfor %}
         </div>

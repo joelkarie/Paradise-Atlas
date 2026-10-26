@@ -99,6 +99,8 @@ def miscellany_home_page(request: Request):
     michael_capitols = get_top_ten_capitol_list("michael")
     joel_parks = get_top_ten_location_list("joel", "national park")
     michael_parks = get_top_ten_location_list("michael", "national park")
+    joel_cityhalls = get_top_ten_location_list("joel", "city hall")
+    michael_cityhalls = get_top_ten_location_list("michael", "city hall")
 
 
     return templates.TemplateResponse(
@@ -110,7 +112,8 @@ def miscellany_home_page(request: Request):
            "joel_capitols": joel_capitols,
            "michael_capitols": michael_capitols,
            "joel_parks": joel_parks,
-           "michael_parks": michael_parks
-
+           "michael_parks": michael_parks,
+           "joel_cityhalls": joel_cityhalls,
+           "michael_cityhalls": michael_cityhalls
         },
     )
