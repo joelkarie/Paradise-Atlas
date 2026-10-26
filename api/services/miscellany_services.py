@@ -9,7 +9,7 @@ def get_top_ten_location_list(column: str, topic: str):
                 SELECT
                     ord.position AS top_ten_order,
                     l.id,
-                    l.name AS city,
+                    l.name,
                     l.state_province,
                     l.country,
                     l.latitude,

@@ -36,7 +36,7 @@
             <h3>Joel</h3>
             {% for joel_city in joel_cities %}
             <a href="/gazetteer/location/{{ joel_city.id }}">
-                {{ joel_city.top_ten_order }}. {{ joel_city.city }}, 
+                {{ joel_city.top_ten_order }}. {{ joel_city.name }}, 
                 {{ joel_city.state_province }}, {{ joel_city.country }}
             </a><br>
             {% endfor %}
@@ -46,7 +46,7 @@
             <h3>Michael</h3>
             {% for michael_city in michael_cities %}
             <a href="/gazetteer/location/{{ michael_city.id }}">
-                {{ michael_city.top_ten_order }}. {{ michael_city.city }}, 
+                {{ michael_city.top_ten_order }}. {{ michael_city.name }}, 
                 {{ michael_city.state_province }}, {{ michael_city.country }}
             </a><br>
             {% endfor %}
@@ -85,7 +85,7 @@
             <h3>Joel</h3>
             {% for park in joel_parks %}
             <a href="/gazetteer/location/{{ park.id }}">
-                {{ park.top_ten_order }}. {{ park.city }}, 
+                {{ park.top_ten_order }}. {{ park.name }}, 
                 {{ park.state_province }}, {{ park.country }}
             </a><br>
             {% endfor %}
@@ -95,7 +95,7 @@
             <h3>Michael</h3>
             {% for park in michael_parks %}
             <a href="/gazetteer/location/{{ park.id }}">
-                {{ park.top_ten_order }}. {{ park.city }}, 
+                {{ park.top_ten_order }}. {{ park.name }}, 
                 {{ park.state_province }}, {{ park.country }}
             </a><br>
             {% endfor %}
