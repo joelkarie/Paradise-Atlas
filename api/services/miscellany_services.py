@@ -33,11 +33,22 @@ def get_top_ten_capitol_list(column: str):
                     ord.position AS top_ten_order,
                     c.id,
                     c.name,
+                    l.name as state_province,
                     c.country
                 FROM top_tens t
                 CROSS JOIN LATERAL
                     unnest(t.{column}) WITH ORDINALITY AS ord(location_id, position)
-                JOIN capitol c ON c.id = ord.location_id
+                JOIN capitol c
+                    ON c.id = ord.location_id
+                LEFT JOIN LATERAL (
+                    SELECT v.location_id
+                    FROM visit v
+                    WHERE v.capitol_id = c.id
+                    ORDER BY v.date DESC
+                    LIMIT 1
+                ) v ON TRUE
+                LEFT JOIN location l
+                    ON l.id = v.location_id
                 WHERE t.name = 'capitol'
                 ORDER BY ord.position;
             """))
