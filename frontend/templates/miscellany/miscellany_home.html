@@ -34,20 +34,20 @@
     <div class="top-tens-columns">
         <div class="top-tens-column">
             <h3>Joel</h3>
-            {% for joel_city in joel_cities %}
-            <a href="/gazetteer/location/{{ joel_city.id }}">
-                {{ joel_city.top_ten_order }}. {{ joel_city.name }}, 
-                {{ joel_city.state_province }}, {{ joel_city.country }}
+            {% for location in joel_cities %}
+            <a href="/gazetteer/location/{{ location.id }}">
+                {{ location.top_ten_order }}. {{ location.name }}, 
+                {{ location.state_province }}, {{ location.country }}
             </a><br>
             {% endfor %}
         </div>
 
         <div class="top-tens-column">
             <h3>Michael</h3>
-            {% for michael_city in michael_cities %}
-            <a href="/gazetteer/location/{{ michael_city.id }}">
-                {{ michael_city.top_ten_order }}. {{ michael_city.name }}, 
-                {{ michael_city.state_province }}, {{ michael_city.country }}
+            {% for location in michael_cities %}
+            <a href="/gazetteer/location/{{ location.id }}">
+                {{ location.top_ten_order }}. {{ location.name }}, 
+                {{ location.state_province }}, {{ location.country }}
             </a><br>
             {% endfor %}
         </div>
@@ -58,20 +58,20 @@
     <div class="top-tens-columns">
         <div class="top-tens-column">
             <h3>Joel</h3>
-            {% for capitol in joel_capitols %}
-            <a href="/gazetteer/location/{{ capitol.id }}">
-                {{ capitol.top_ten_order }}. {{ capitol.name }}, 
-                {{ capitol.country }}
+            {% for location in joel_capitols %}
+            <a href="/gazetteer/location/{{ location.id }}">
+                {{ location.top_ten_order }}. {{ location.name }}, 
+                {{ location.country }}
             </a><br>
             {% endfor %}
         </div>
 
         <div class="top-tens-column">
             <h3>Michael</h3>
-            {% for capitol in michael_capitols %}
-            <a href="/gazetteer/location/{{ capitol.id }}">
-                {{ capitol.top_ten_order }}. {{ capitol.name }}, 
-                {{ capitol.country }}
+            {% for location in michael_capitols %}
+            <a href="/gazetteer/location/{{ location.id }}">
+                {{ location.top_ten_order }}. {{ location.name }}, 
+                {{ location.country }}
             </a><br>
             {% endfor %}
         </div>
@@ -83,20 +83,20 @@
     <div class="top-tens-columns">
         <div class="top-tens-column">
             <h3>Joel</h3>
-            {% for park in joel_parks %}
-            <a href="/gazetteer/location/{{ park.id }}">
-                {{ park.top_ten_order }}. {{ park.name }}, 
-                {{ park.state_province }}, {{ park.country }}
+            {% for location in joel_parks %}
+            <a href="/gazetteer/location/{{ location.id }}">
+                {{ location.top_ten_order }}. {{ location.name }}, 
+                {{ location.state_province }}, {{ location.country }}
             </a><br>
             {% endfor %}
         </div>
 
         <div class="top-tens-column">
             <h3>Michael</h3>
-            {% for park in michael_parks %}
-            <a href="/gazetteer/location/{{ park.id }}">
-                {{ park.top_ten_order }}. {{ park.name }}, 
-                {{ park.state_province }}, {{ park.country }}
+            {% for location in michael_parks %}
+            <a href="/gazetteer/location/{{ location.id }}">
+                {{ location.top_ten_order }}. {{ location.name }}, 
+                {{ location.state_province }}, {{ location.country }}
             </a><br>
             {% endfor %}
         </div>
