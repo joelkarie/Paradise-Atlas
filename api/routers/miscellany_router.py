@@ -93,27 +93,18 @@ async def replace_top_ten_location(
 @router.get("/home")
 def miscellany_home_page(request: Request):
 
-    joels_cities = get_top_ten_location_list("joel", "city")
-    michael_cities = get_top_ten_location_list("michael", "city")
-    joel_capitols = get_top_ten_capitol_list("joel")
-    michael_capitols = get_top_ten_capitol_list("michael")
-    joel_parks = get_top_ten_location_list("joel", "national park")
-    michael_parks = get_top_ten_location_list("michael", "national park")
-    joel_cityhalls = get_top_ten_location_list("joel", "city hall")
-    michael_cityhalls = get_top_ten_location_list("michael", "city hall")
+    top_ten_lists = [
+        ("Cities", get_top_ten_location_list("joel", "city"), get_top_ten_location_list("michael", "city")),
+        ("Capitols", get_top_ten_capitol_list("joel"), get_top_ten_capitol_list("michael")),
+        ("Parks", get_top_ten_location_list("joel", "national park"), get_top_ten_location_list("michael", "national park")),
+        ("City Halls", get_top_ten_location_list("joel", "city hall"), get_top_ten_location_list("michael", "city hall"))
+    ]
 
 
     return templates.TemplateResponse(
         request=request,
         name="miscellany_home.html",
         context={
-           "joel_cities": joels_cities,
-           "michael_cities": michael_cities,
-           "joel_capitols": joel_capitols,
-           "michael_capitols": michael_capitols,
-           "joel_parks": joel_parks,
-           "michael_parks": michael_parks,
-           "joel_cityhalls": joel_cityhalls,
-           "michael_cityhalls": michael_cityhalls
+           "top_ten_lists": top_ten_lists
         },
     )

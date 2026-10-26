@@ -29,103 +29,34 @@
 <div class="content-lightbox">
     <h1>Top Tens</h1>
 
-    <h2>Cities</h2>
+<br>
 
-    <div class="top-tens-columns">
-        <div class="top-tens-column">
-            <h3>Joel</h3>
-            {% for location in joel_cities %}
-            <a href="/gazetteer/location/{{ location.id }}">
-                {{ location.top_ten_order }}. {{ location.name }}, 
-                {{ location.state_province }}, {{ location.country }}
-            </a><br>
-            {% endfor %}
-        </div>
+{% for title, joel_locations, michael_locations in top_ten_lists %}
+<h2>{{ title }}</h2>
 
-        <div class="top-tens-column">
-            <h3>Michael</h3>
-            {% for location in michael_cities %}
-            <a href="/gazetteer/location/{{ location.id }}">
-                {{ location.top_ten_order }}. {{ location.name }}, 
-                {{ location.state_province }}, {{ location.country }}
-            </a><br>
-            {% endfor %}
-        </div>
+<div class="top-tens-columns">
+    <div class="top-tens-column">
+        <h3>Joel</h3>
+        {% for location in joel_locations %}
+        <a href="/gazetteer/location/{{ location.id }}">
+            {{ location.top_ten_order }}. {{ location.name }},
+            {{ location.state_province }}, {{ location.country }}
+        </a><br>
+        {% endfor %}
     </div>
 
-    <h2>Capitols</h2>
-
-    <div class="top-tens-columns">
-        <div class="top-tens-column">
-            <h3>Joel</h3>
-            {% for location in joel_capitols %}
-            <a href="/gazetteer/location/{{ location.id }}">
-                {{ location.top_ten_order }}. {{ location.name }}, 
-                {{ location.country }}
-            </a><br>
-            {% endfor %}
-        </div>
-
-        <div class="top-tens-column">
-            <h3>Michael</h3>
-            {% for location in michael_capitols %}
-            <a href="/gazetteer/location/{{ location.id }}">
-                {{ location.top_ten_order }}. {{ location.name }}, 
-                {{ location.country }}
-            </a><br>
-            {% endfor %}
-        </div>
+    <div class="top-tens-column">
+        <h3>Michael</h3>
+        {% for location in michael_locations %}
+        <a href="/gazetteer/location/{{ location.id }}">
+            {{ location.top_ten_order }}. {{ location.name }},
+            {{ location.state_province }}, {{ location.country }}
+        </a><br>
+        {% endfor %}
     </div>
+</div>
+{% endfor %}
 
-    <br>   
-    <h2>Parks</h2>
-
-    <div class="top-tens-columns">
-        <div class="top-tens-column">
-            <h3>Joel</h3>
-            {% for location in joel_parks %}
-            <a href="/gazetteer/location/{{ location.id }}">
-                {{ location.top_ten_order }}. {{ location.name }}, 
-                {{ location.state_province }}, {{ location.country }}
-            </a><br>
-            {% endfor %}
-        </div>
-
-        <div class="top-tens-column">
-            <h3>Michael</h3>
-            {% for location in michael_parks %}
-            <a href="/gazetteer/location/{{ location.id }}">
-                {{ location.top_ten_order }}. {{ location.name }}, 
-                {{ location.state_province }}, {{ location.country }}
-            </a><br>
-            {% endfor %}
-        </div>
-    </div>
-
-   <br>   
-    <h2>City Halls</h2>
-
-    <div class="top-tens-columns">
-        <div class="top-tens-column">
-            <h3>Joel</h3>
-            {% for location in joel_cityhalls %}
-            <a href="/gazetteer/location/{{ location.id }}">
-                {{ location.top_ten_order }}. {{ location.name }}, 
-                {{ location.state_province }}, {{ location.country }}
-            </a><br>
-            {% endfor %}
-        </div>
-
-        <div class="top-tens-column">
-            <h3>Michael</h3>
-            {% for location in michael_cityhalls %}
-            <a href="/gazetteer/location/{{ location.id }}">
-                {{ location.top_ten_order }}. {{ location.name }}, 
-                {{ location.state_province }}, {{ location.country }}
-            </a><br>
-            {% endfor %}
-        </div>
-    </div>
 
 </div>
 
