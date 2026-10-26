@@ -13,7 +13,8 @@ from api.services.locations_services import (
     get_locations_for_dropdown,
     create_location,
     create_location_rating,
-    create_building_details
+    create_building_details,
+    get_cities_for_dropdown
 )
 from api.services.visit_services import (
     get_next_visit_number,
@@ -152,6 +153,7 @@ def add_update_top_ten_page(request: Request):
         request=request,
         name="admin/update_top_ten.html",
         context={
+            "cities": get_cities_for_dropdown()
         },
     )
 

@@ -26,7 +26,30 @@
     <div>
         <img src="/static/assets/paradise_pelican.png" alt="Atlas Paradiso Logo" class="logo" height="170px">
     </div>
- 
+
+    <div class="content-box">
+        <h1>Update Top Ten</h1>
+
+        <h2>Cities</h2>
+        <div class="rating-row">
+            <div class="subtitle">Ranked 1:</div>
+            <select name="location_type">
+                {% for location_type in cities %}
+                <option value="{{ location_type.id }}"
+                    {% if location_type.id == 2 %}selected{% endif %}>
+                    {{ location_type.name.replace('_', ' ').title() }}
+                </option>
+                {% endfor %}
+            </select>
+        </div>
+                <!-- {% for location in cities %}
+
+            {{ location.id }}. {{ location.name }},
+            {{ location.state_province }}, {{ location.country }}
+        </a><br>
+        {% endfor %} -->
+    </div>
+
 </body>
 {% include "partials/admin_footer.html" %}
 </body>
