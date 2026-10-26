@@ -140,6 +140,20 @@ def add_visit_page(request: Request):
         },
     )
 
+@router.get("/update_top_ten")
+def add_update_top_ten_page(request: Request):
+    try:
+        user = require_admin(request)
+    except Exception:
+        return RedirectResponse("/login")
+
+
+    return templates.TemplateResponse(
+        request=request,
+        name="admin/update_top_ten.html",
+        context={
+        },
+    )
 
 @router.post("/add_visit")
 def add_visit(
