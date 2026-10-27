@@ -18,7 +18,7 @@ def top_ten_capitol_list(column):
 
 
 
-@router.put("/miscellany/{column}/{name}/{position}/{location_id}")
+@router.put("/{column}/{name}/{position}/{location_id}")
 async def replace_top_ten_location(
     column: str,
     name: str,

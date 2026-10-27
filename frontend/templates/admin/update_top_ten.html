@@ -31,50 +31,106 @@
         <h1>Update Top Ten</h1>
 
 
-        {% for title, joel_locations, michael_locations, location_list in top_ten_lists %}
+
+        {% for title, list_name, joel_locations, michael_locations, location_list in top_ten_lists %}
         <hr>
         <h2>{{ title }}</h2>
 
         <div class="top-tens-columns">
+            {% for column, locations in [
+            ("joel", joel_locations),
+            ("michael", michael_locations)
+            ] %}
             <div class="top-tens-column">
-                <h3>Joel</h3>
-                {% for location in joel_locations %}
-                <div class="rating-row">
-                    <div class="subtitle">{{ location.top_ten_order }}.</div>
-                    <select name="location_type">
-                        {% for list_loc in location_list %}
-                        <option value="{{ list_loc.id }}" {% if list_loc.id==location.id %}selected{% endif %}>
-                            {{ list_loc.name.replace('_', ' ').title() }}, {{ location.state_province }}
-                        </option>
-                        {% endfor %}
-                    </select>
-                </div>
-                <br>
-                {% endfor %}
-            </div>
+                <form class="top-ten-form" data-column="{{ column }}" data-name="{{ list_name }}">
 
-            <div class="top-tens-column">
-                <h3>Michael</h3>
-                {% for location in michael_locations %}
-                <div class="rating-row">
-                    <div class="subtitle">{{ location.top_ten_order }}.</div>
-                    <select name="location_type">
-                        {% for list_loc in location_list %}
-                        <option value="{{ list_loc.id }}" {% if list_loc.id==location.id %}selected{% endif %}>
-                            {{ list_loc.name.replace('_', ' ').title() }}, {{ location.state_province }}
-                        </option>
-                        {% endfor %}
-                    </select>
-                </div>
-                <br>
-                {% endfor %}
+                    <h3>{{ column.title() }}</h3>
+
+                    {% for location in locations %}
+                    <div class="rating-row">
+                        <div class="subtitle">
+                            {{ location.top_ten_order }}.
+                        </div>
+
+                        <select name="location_id" data-position="{{ location.top_ten_order }}"
+                            data-original-id="{{ location.id }}">
+
+                            {% for list_loc in location_list %}
+                            <option value="{{ list_loc.id }}" {% if list_loc.id==location.id %}selected{% endif %}>
+                                {{ list_loc.name.replace('_', ' ').title() }}, {{ list_loc.state_province }}
+                            </option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <br>
+                    {% endfor %}
+
+                    <button type="submit">Update</button>
+                </form>
             </div>
+            {% endfor %}
         </div>
-        <br>
         {% endfor %}
 
 
     </div>
+
+    <script>
+        document.querySelectorAll(".top-ten-form").forEach(form => {
+            form.addEventListener("submit", async event => {
+                event.preventDefault();
+
+                const column = form.dataset.column;
+                const name = form.dataset.name;
+
+                const changedSelects = [
+                    ...form.querySelectorAll("select")
+                ].filter(select =>
+                    select.value !== select.dataset.originalId
+                );
+
+                if (changedSelects.length === 0) {
+                    alert("No changes to save.");
+                    return;
+                }
+
+                try {
+                    // Update sequentially to avoid concurrent writes
+                    // overwriting changes to other array positions.
+                    for (const select of changedSelects) {
+                        const position = select.dataset.position;
+                        const locationId = select.value;
+
+                        const url =
+                            `/miscellany/${encodeURIComponent(column)}` +
+                            `/${encodeURIComponent(name)}` +
+                            `/${position}/${locationId}`;
+                            
+                        console.log("PUT URL:", url);
+                        const response = await fetch(url, {
+                            method: "PUT"
+                        });
+
+                        if (!response.ok) {
+                            const message = await response.text();
+                            throw new Error(
+                                `Update failed (${response.status}): ${message}`
+                            );
+                        }
+
+                        select.dataset.originalId = locationId;
+                    }
+
+                    alert("Top Ten updated successfully!");
+                    window.location.reload();
+
+                } catch (error) {
+                    console.error("Error updating Top Ten:", error);
+                    alert(error.message);
+                }
+            });
+        });
+    </script>
 
 </body>
 {% include "partials/admin_footer.html" %}

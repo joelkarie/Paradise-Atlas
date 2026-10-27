@@ -157,13 +157,13 @@ def add_update_top_ten_page(request: Request):
         return RedirectResponse("/login")
 
     top_ten_lists = [
-        ("Cities", get_top_ten_location_list("joel", "city"), get_top_ten_location_list("michael", "city"), get_cities_for_dropdown()),
-        ("Capitols", get_top_ten_capitol_list("joel"), get_top_ten_capitol_list("michael"), get_capitols()),
-        ("Parks", get_top_ten_location_list("joel", "national park"), get_top_ten_location_list("michael", "national park"), get_national_parks()),
-        ("City Halls", get_top_ten_location_list("joel", "city hall"), get_top_ten_location_list("michael", "city hall"), get_cityhalls()),
-        ("Libaries", get_top_ten_location_list("joel", "library"), get_top_ten_location_list("michael", "library"), get_libraries()),
-        ("Museums", get_top_ten_location_list("joel", "museum"), get_top_ten_location_list("michael", "museum"), get_museums()),
-        ("Buildings", get_top_ten_location_list("joel", "building"), get_top_ten_location_list("michael", "building"), get_buildings())
+        ("Cities", "city", get_top_ten_location_list("joel", "city"), get_top_ten_location_list("michael", "city"), get_cities_for_dropdown()),
+        ("Capitols", "capitol", get_top_ten_capitol_list("joel"), get_top_ten_capitol_list("michael"), get_capitols()),
+        ("Parks", "national park", get_top_ten_location_list("joel", "national park"), get_top_ten_location_list("michael", "national park"), get_national_parks()),
+        ("City Halls", "city hall", get_top_ten_location_list("joel", "city hall"), get_top_ten_location_list("michael", "city hall"), get_cityhalls()),
+        ("Libaries", "library", get_top_ten_location_list("joel", "library"), get_top_ten_location_list("michael", "library"), get_libraries()),
+        ("Museums", "museum", get_top_ten_location_list("joel", "museum"), get_top_ten_location_list("michael", "museum"), get_museums()),
+        ("Buildings", "building", get_top_ten_location_list("joel", "building"), get_top_ten_location_list("michael", "building"), get_buildings())
     ]
 
     return templates.TemplateResponse(
