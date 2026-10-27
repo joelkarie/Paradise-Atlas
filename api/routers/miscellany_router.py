@@ -100,7 +100,8 @@ def miscellany_home_page(request: Request):
         ("City Halls", get_top_ten_location_list("joel", "city hall"), get_top_ten_location_list("michael", "city hall")),
         ("Libaries", get_top_ten_location_list("joel", "library"), get_top_ten_location_list("michael", "library")),
         ("Museums", get_top_ten_location_list("joel", "museum"), get_top_ten_location_list("michael", "museum")),
-        ("Buildings", get_top_ten_location_list("joel", "building"), get_top_ten_location_list("michael", "building"))
+        ("Buildings", get_top_ten_location_list("joel", "building"), get_top_ten_location_list("michael", "building")),
+        ("Cities To Move To", get_top_ten_location_list("joel", "move to"), get_top_ten_location_list("michael", "move to"))
     ]
 
 

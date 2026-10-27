@@ -163,7 +163,9 @@ def add_update_top_ten_page(request: Request):
         ("City Halls", "city hall", get_top_ten_location_list("joel", "city hall"), get_top_ten_location_list("michael", "city hall"), get_cityhalls()),
         ("Libaries", "library", get_top_ten_location_list("joel", "library"), get_top_ten_location_list("michael", "library"), get_libraries()),
         ("Museums", "museum", get_top_ten_location_list("joel", "museum"), get_top_ten_location_list("michael", "museum"), get_museums()),
-        ("Buildings", "building", get_top_ten_location_list("joel", "building"), get_top_ten_location_list("michael", "building"), get_buildings())
+        ("Buildings", "building", get_top_ten_location_list("joel", "building"), get_top_ten_location_list("michael", "building"), get_buildings()),
+        ("Cities To Move To", "move to", get_top_ten_location_list("joel", "move to"), get_top_ten_location_list("michael", "move to"), get_cities_for_dropdown())
+
     ]
 
     return templates.TemplateResponse(
