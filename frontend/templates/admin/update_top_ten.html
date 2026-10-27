@@ -31,7 +31,7 @@
         <h1>Update Top Ten</h1>
 
 
-        {% for title, joel_locations, michael_locations in top_ten_lists %}
+        {% for title, joel_locations, michael_locations, location_list in top_ten_lists %}
         <hr>
         <h2>{{ title }}</h2>
 
@@ -42,9 +42,9 @@
                 <div class="rating-row">
                     <div class="subtitle">{{ location.top_ten_order }}.</div>
                     <select name="location_type">
-                        {% for city in cities %}
-                        <option value="{{ city.id }}" {% if city.id==location.id %}selected{% endif %}>
-                            {{ city.name.replace('_', ' ').title() }}, {{ location.state_province }}
+                        {% for list_loc in location_list %}
+                        <option value="{{ list_loc.id }}" {% if list_loc.id==location.id %}selected{% endif %}>
+                            {{ list_loc.name.replace('_', ' ').title() }}, {{ location.state_province }}
                         </option>
                         {% endfor %}
                     </select>
@@ -59,9 +59,9 @@
                 <div class="rating-row">
                     <div class="subtitle">{{ location.top_ten_order }}.</div>
                     <select name="location_type">
-                        {% for city in cities %}
-                        <option value="{{ city.id }}" {% if city.id==location.id %}selected{% endif %}>
-                            {{ city.name.replace('_', ' ').title() }}, {{ location.state_province }}
+                        {% for list_loc in location_list %}
+                        <option value="{{ list_loc.id }}" {% if list_loc.id==location.id %}selected{% endif %}>
+                            {{ list_loc.name.replace('_', ' ').title() }}, {{ location.state_province }}
                         </option>
                         {% endfor %}
                     </select>
