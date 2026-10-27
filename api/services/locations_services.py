@@ -248,3 +248,29 @@ def get_libraries():
         """))
 
         return [dict(row._mapping) for row in rows]
+
+def get_museums():
+
+    with engine.connect() as conn:
+
+        rows = conn.execute(text("""
+            SELECT l.id, l.name, l.state_province , l.country, l.latitude, l.longitude
+            FROM location l
+            WHERE l.location_type_id = 8
+            ORDER BY l.name ASC
+        """))
+
+        return [dict(row._mapping) for row in rows]
+
+def get_buildings():
+
+    with engine.connect() as conn:
+
+        rows = conn.execute(text("""
+            SELECT l.id, l.name, l.state_province , l.country, l.latitude, l.longitude
+            FROM location l
+            WHERE l.location_type_id = 5
+            ORDER BY l.name ASC
+        """))
+
+        return [dict(row._mapping) for row in rows]
