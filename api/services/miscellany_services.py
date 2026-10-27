@@ -54,3 +54,26 @@ def get_top_ten_capitol_list(column: str):
             """))
 
         return [dict(row._mapping) for row in rows]        
+
+def get_top_ten_canadian_railway_hotel_list(column: str):
+    with engine.connect() as conn:
+
+        rows = conn.execute(
+            text(f"""  
+                SELECT
+                    ord.position AS top_ten_order,
+                    crh.id,
+                    crh.name,
+                    crh.province AS state_province,
+                    'Canada' AS country,
+                    crh.latitude,
+                    crh.longitude
+                FROM top_tens t
+                CROSS JOIN LATERAL
+                    unnest(t.{column}) WITH ORDINALITY AS ord(location_id, position)
+                JOIN canadian_railway_hotels crh ON crh.id = ord.location_id
+                WHERE t.name = 'canadian railway hotel'
+                ORDER BY ord.position;
+            """))
+
+        return [dict(row._mapping) for row in rows]       

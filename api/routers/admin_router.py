@@ -36,9 +36,11 @@ from api.services.theatre_services import (
     create_theatre,
     get_all_theatres_data,
 )
-from api.services.miscellany_services import get_top_ten_location_list, get_top_ten_capitol_list
+from api.services.miscellany_services import get_top_ten_location_list, get_top_ten_capitol_list, get_top_ten_canadian_railway_hotel_list
 
 from api.services.capitols_services import get_capitols
+
+from api.services.canadian_railway_hotel_services import get_canadian_railway_hotels_for_dropdown
 
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
 
@@ -164,7 +166,8 @@ def add_update_top_ten_page(request: Request):
         ("Libaries", "library", get_top_ten_location_list("joel", "library"), get_top_ten_location_list("michael", "library"), get_libraries()),
         ("Museums", "museum", get_top_ten_location_list("joel", "museum"), get_top_ten_location_list("michael", "museum"), get_museums()),
         ("Buildings", "building", get_top_ten_location_list("joel", "building"), get_top_ten_location_list("michael", "building"), get_buildings()),
-        ("Cities To Move To", "move to", get_top_ten_location_list("joel", "move to"), get_top_ten_location_list("michael", "move to"), get_cities_for_dropdown())
+        ("Cities To Move To", "move to", get_top_ten_location_list("joel", "move to"), get_top_ten_location_list("michael", "move to"), get_cities_for_dropdown()),
+        ("Canadian Railway Hotels", "canadian railway hotel", get_top_ten_canadian_railway_hotel_list("joel"), get_top_ten_canadian_railway_hotel_list("michael"), get_canadian_railway_hotels_for_dropdown())
 
     ]
 

@@ -16,3 +16,22 @@ def get_canadian_railway_hotels(get_visited=True):
         rows = conn.execute(text(sql))
 
         return [dict(row._mapping) for row in rows]
+
+def get_canadian_railway_hotels_for_dropdown(get_visited=True):
+
+    with engine.connect() as conn:
+        sql = """
+            SELECT 
+                crh.id,
+                crh.name,
+                crh.province AS state_province,
+                'Canada' AS country
+            FROM canadian_railway_hotels crh
+        """
+
+        if get_visited:
+            sql += """WHERE visited = TRUE"""
+
+        rows = conn.execute(text(sql))
+
+        return [dict(row._mapping) for row in rows]

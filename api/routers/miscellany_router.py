@@ -1,6 +1,6 @@
 from fastapi import APIRouter, HTTPException, Request
 from fastapi.templating import Jinja2Templates
-from api.services.miscellany_services import get_top_ten_location_list, get_top_ten_capitol_list
+from api.services.miscellany_services import get_top_ten_location_list, get_top_ten_capitol_list, get_top_ten_canadian_railway_hotel_list
 from sqlalchemy import text
 from ..database import engine
 
@@ -101,7 +101,8 @@ def miscellany_home_page(request: Request):
         ("Libaries", get_top_ten_location_list("joel", "library"), get_top_ten_location_list("michael", "library")),
         ("Museums", get_top_ten_location_list("joel", "museum"), get_top_ten_location_list("michael", "museum")),
         ("Buildings", get_top_ten_location_list("joel", "building"), get_top_ten_location_list("michael", "building")),
-        ("Cities To Move To", get_top_ten_location_list("joel", "move to"), get_top_ten_location_list("michael", "move to"))
+        ("Cities To Move To", get_top_ten_location_list("joel", "move to"), get_top_ten_location_list("michael", "move to")),
+        ("Canadian Railway Hotels", get_top_ten_canadian_railway_hotel_list("joel"), get_top_ten_canadian_railway_hotel_list("joel"))
     ]
 
 
