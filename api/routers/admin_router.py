@@ -31,6 +31,8 @@ from api.services.theatre_services import (
     create_theatre,
     get_all_theatres_data,
 )
+from api.services.miscellany_services import get_top_ten_location_list, get_top_ten_capitol_list
+
 
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
 
@@ -148,12 +150,23 @@ def add_update_top_ten_page(request: Request):
     except Exception:
         return RedirectResponse("/login")
 
+    top_ten_lists = [
+        ("Cities", get_top_ten_location_list("joel", "city"), get_top_ten_location_list("michael", "city")),
+        ("Capitols", get_top_ten_capitol_list("joel"), get_top_ten_capitol_list("michael")),
+        ("Parks", get_top_ten_location_list("joel", "national park"), get_top_ten_location_list("michael", "national park")),
+        ("City Halls", get_top_ten_location_list("joel", "city hall"), get_top_ten_location_list("michael", "city hall")),
+        ("Libaries", get_top_ten_location_list("joel", "library"), get_top_ten_location_list("michael", "library")),
+        ("Museums", get_top_ten_location_list("joel", "museum"), get_top_ten_location_list("michael", "museum")),
+        ("Buildings", get_top_ten_location_list("joel", "building"), get_top_ten_location_list("michael", "building"))
+    ]
 
     return templates.TemplateResponse(
         request=request,
         name="admin/update_top_ten.html",
         context={
-            "cities": get_cities_for_dropdown()
+            "cities": get_cities_for_dropdown(),
+            "top_ten_lists": top_ten_lists
+            
         },
     )
 
