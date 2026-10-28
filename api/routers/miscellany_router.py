@@ -5,6 +5,7 @@ from api.services.miscellany_services import (
     get_top_ten_capitol_list,
     get_top_ten_canadian_railway_hotel_list,
     get_top_ten_theatres_list,
+    get_top_ten_quaker_meeting_list
 )
 from sqlalchemy import text
 from ..database import engine
@@ -135,6 +136,11 @@ def miscellany_home_page(request: Request):
             get_top_ten_theatres_list("joel"),
             get_top_ten_theatres_list("michael"),
         ),
+        (
+            "Quaker Meetings",
+            get_top_ten_quaker_meeting_list("joel"),
+            get_top_ten_quaker_meeting_list("michael")
+        )
     ]
 
     return templates.TemplateResponse(

@@ -108,3 +108,25 @@ def get_top_ten_theatres_list(column: str):
             """))
 
         return [dict(row._mapping) for row in rows]
+
+def get_top_ten_quaker_meeting_list(column: str):
+    with engine.connect() as conn:
+
+        rows = conn.execute(text(f"""  
+                SELECT
+                    ord.position AS top_ten_order,
+                    q.id,
+                    q.name,
+                    q.state_province,
+                    q.country,
+                    q.latitude,
+                    q.longitude
+                FROM top_tens t
+                CROSS JOIN LATERAL
+                    unnest(t.{column}) WITH ORDINALITY AS ord(location_id, position)
+                JOIN quaker_meeting_house q ON q.id = ord.location_id
+                WHERE t.name = 'quaker'
+                ORDER BY ord.position;
+            """))
+
+        return [dict(row._mapping) for row in rows]
