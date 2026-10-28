@@ -26,41 +26,45 @@
     <div class="page-banner">
         <h1>Miscellany</h1>
     </div>
-<div class="content-lightbox">
-    <h1>Top Tens</h1>
+    <div class="content-lightbox">
+        <h1>Top Tens</h1>
 
-<br>
+        <br>
 
-{% for title, joel_locations, michael_locations in top_ten_lists %}
-<hr>
-<h2>{{ title }}</h2>
+        {% for title, joel_locations, michael_locations in top_ten_lists %}
+        <details>
+       
+        <summary> <hr><h2>{{ title }}</h2></summary>
 
-<div class="top-tens-columns">
-    <div class="top-tens-column">
-        <h3>Joel</h3>
-        {% for location in joel_locations %}
-        <a href="/gazetteer/location/{{ location.id }}">
-            {{ location.top_ten_order }}. {{ location.name }},
-            {{ location.state_province }}, {{ location.country }}
-        </a><br>
+        <p>
+        <div class="top-tens-columns">
+            <div class="top-tens-column">
+                <h3>Joel</h3>
+                {% for location in joel_locations %}
+                <a href="/gazetteer/location/{{ location.id }}">
+                    {{ location.top_ten_order }}. {{ location.name }},
+                    {{ location.state_province }}, {{ location.country }}
+                </a><br>
+                {% endfor %}
+            </div>
+
+            <div class="top-tens-column">
+                <h3>Michael</h3>
+                {% for location in michael_locations %}
+                <a href="/gazetteer/location/{{ location.id }}">
+                    {{ location.top_ten_order }}. {{ location.name }},
+                    {{ location.state_province }}, {{ location.country }}
+                </a><br>
+                {% endfor %}
+            </div>
+        </div>
+        <br>
+        </p>
+        </details>
         {% endfor %}
+
+
     </div>
-
-    <div class="top-tens-column">
-        <h3>Michael</h3>
-        {% for location in michael_locations %}
-        <a href="/gazetteer/location/{{ location.id }}">
-            {{ location.top_ten_order }}. {{ location.name }},
-            {{ location.state_province }}, {{ location.country }}
-        </a><br>
-        {% endfor %}
-    </div>
-</div>
-<br>
-{% endfor %}
-
-
-</div>
 
     <footer class="bottom-nav">
 

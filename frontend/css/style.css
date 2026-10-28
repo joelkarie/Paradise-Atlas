@@ -394,3 +394,18 @@ a:hover {
 .top-tens-column h3 {
     margin-top: 0;
 }
+
+summary {
+    display: block;
+    list-style: none;
+    cursor: pointer;
+}
+
+summary::-webkit-details-marker {
+    display: none !important;
+}
+
+summary::marker {
+    display: none !important;
+    content: "" !important;
+}
