@@ -1,6 +1,11 @@
 from fastapi import APIRouter, HTTPException, Request
 from fastapi.templating import Jinja2Templates
-from api.services.miscellany_services import get_top_ten_location_list, get_top_ten_capitol_list, get_top_ten_canadian_railway_hotel_list
+from api.services.miscellany_services import (
+    get_top_ten_location_list,
+    get_top_ten_capitol_list,
+    get_top_ten_canadian_railway_hotel_list,
+    get_top_ten_theatres_list,
+)
 from sqlalchemy import text
 from ..database import engine
 
@@ -12,32 +17,23 @@ templates = Jinja2Templates(directory="frontend/templates/miscellany")
 def top_ten_list(column, topic):
     return get_top_ten_location_list(column, topic)
 
+
 @router.get("/top_ten/capitol/{column}")
 def top_ten_capitol_list(column):
     return get_top_ten_capitol_list(column)
 
 
-
 @router.put("/{column}/{name}/{position}/{location_id}")
 async def replace_top_ten_location(
-    column: str,
-    name: str,
-    position: int,
-    location_id: int
+    column: str, name: str, position: int, location_id: int
 ):
     allowed_columns = {"joel", "michael"}
 
     if column not in allowed_columns:
-        raise HTTPException(
-            status_code=400,
-            detail="Invalid column name"
-        )
+        raise HTTPException(status_code=400, detail="Invalid column name")
 
     if position < 1:
-        raise HTTPException(
-            status_code=400,
-            detail="Position must be 1 or greater"
-        )
+        raise HTTPException(status_code=400, detail="Position must be 1 or greater")
 
     query = text(f"""
         UPDATE top_tens AS t
@@ -59,12 +55,7 @@ async def replace_top_ten_location(
     try:
         with engine.begin() as conn:
             result = conn.execute(
-                query,
-                {
-                    "name": name,
-                    "position": position,
-                    "location_id": location_id
-                }
+                query, {"name": name, "position": position, "location_id": location_id}
             )
 
             updated_array = result.scalar_one_or_none()
@@ -72,7 +63,7 @@ async def replace_top_ten_location(
             if updated_array is None:
                 raise HTTPException(
                     status_code=404,
-                    detail="Top Ten row not found or position is out of range"
+                    detail="Top Ten row not found or position is out of range",
                 )
 
         return {
@@ -81,7 +72,7 @@ async def replace_top_ten_location(
             "name": name,
             "position": position,
             "location_id": location_id,
-            "updated_top_ten": updated_array
+            "updated_top_ten": updated_array,
         }
 
     except HTTPException:
@@ -94,22 +85,60 @@ async def replace_top_ten_location(
 def miscellany_home_page(request: Request):
 
     top_ten_lists = [
-        ("Cities", get_top_ten_location_list("joel", "city"), get_top_ten_location_list("michael", "city")),
-        ("Capitols", get_top_ten_capitol_list("joel"), get_top_ten_capitol_list("michael")),
-        ("Parks", get_top_ten_location_list("joel", "national park"), get_top_ten_location_list("michael", "national park")),
-        ("City Halls", get_top_ten_location_list("joel", "city hall"), get_top_ten_location_list("michael", "city hall")),
-        ("Libaries", get_top_ten_location_list("joel", "library"), get_top_ten_location_list("michael", "library")),
-        ("Museums", get_top_ten_location_list("joel", "museum"), get_top_ten_location_list("michael", "museum")),
-        ("Buildings", get_top_ten_location_list("joel", "building"), get_top_ten_location_list("michael", "building")),
-        ("Cities To Move To", get_top_ten_location_list("joel", "move to"), get_top_ten_location_list("michael", "move to")),
-        ("Canadian Railway Hotels", get_top_ten_canadian_railway_hotel_list("joel"), get_top_ten_canadian_railway_hotel_list("joel"))
+        (
+            "Cities",
+            get_top_ten_location_list("joel", "city"),
+            get_top_ten_location_list("michael", "city"),
+        ),
+        (
+            "Capitols",
+            get_top_ten_capitol_list("joel"),
+            get_top_ten_capitol_list("michael"),
+        ),
+        (
+            "Parks",
+            get_top_ten_location_list("joel", "national park"),
+            get_top_ten_location_list("michael", "national park"),
+        ),
+        (
+            "City Halls",
+            get_top_ten_location_list("joel", "city hall"),
+            get_top_ten_location_list("michael", "city hall"),
+        ),
+        (
+            "Libaries",
+            get_top_ten_location_list("joel", "library"),
+            get_top_ten_location_list("michael", "library"),
+        ),
+        (
+            "Museums",
+            get_top_ten_location_list("joel", "museum"),
+            get_top_ten_location_list("michael", "museum"),
+        ),
+        (
+            "Buildings",
+            get_top_ten_location_list("joel", "building"),
+            get_top_ten_location_list("michael", "building"),
+        ),
+        (
+            "Cities To Move To",
+            get_top_ten_location_list("joel", "move to"),
+            get_top_ten_location_list("michael", "move to"),
+        ),
+        (
+            "Canadian Railway Hotels",
+            get_top_ten_canadian_railway_hotel_list("joel"),
+            get_top_ten_canadian_railway_hotel_list("michael"),
+        ),
+        (
+            "Theatres",
+            get_top_ten_theatres_list("joel"),
+            get_top_ten_theatres_list("michael"),
+        ),
     ]
-
 
     return templates.TemplateResponse(
         request=request,
         name="miscellany_home.html",
-        context={
-           "top_ten_lists": top_ten_lists
-        },
+        context={"top_ten_lists": top_ten_lists},
     )

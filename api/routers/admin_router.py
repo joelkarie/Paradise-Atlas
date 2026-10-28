@@ -19,7 +19,7 @@ from api.services.locations_services import (
     get_libraries,
     get_national_parks,
     get_buildings,
-    get_museums
+    get_museums,
 )
 from api.services.visit_services import (
     get_next_visit_number,
@@ -35,12 +35,21 @@ from api.services.theatre_services import (
     get_next_theatre_number,
     create_theatre,
     get_all_theatres_data,
+    get_theatres_for_app,
 )
-from api.services.miscellany_services import get_top_ten_location_list, get_top_ten_capitol_list, get_top_ten_canadian_railway_hotel_list
+
+from api.services.miscellany_services import (
+    get_top_ten_location_list,
+    get_top_ten_capitol_list,
+    get_top_ten_canadian_railway_hotel_list,
+    get_top_ten_theatres_list,
+)
 
 from api.services.capitols_services import get_capitols
 
-from api.services.canadian_railway_hotel_services import get_canadian_railway_hotels_for_dropdown
+from api.services.canadian_railway_hotel_services import (
+    get_canadian_railway_hotels_for_dropdown,
+)
 
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
 
@@ -100,6 +109,7 @@ def michael_admin_page(request: Request):
         name="/admin/admin_michael.html",
     )
 
+
 @router.get("/generic_joel")
 def joel_generic_admin_page(request: Request):
     try:
@@ -111,10 +121,11 @@ def joel_generic_admin_page(request: Request):
         request=request,
         name="/admin/admin_template.html",
         context={
-            "user_name" : "Joel",
-            "background_color": "var(--primary-highlight-color)"
-        }
+            "user_name": "Joel",
+            "background_color": "var(--primary-highlight-color)",
+        },
     )
+
 
 @router.get("/generic_michael")
 def michael_generic_admin_page(request: Request):
@@ -127,10 +138,11 @@ def michael_generic_admin_page(request: Request):
         request=request,
         name="/admin/admin_template.html",
         context={
-            "user_name" : "Michael",
-            "background_color": "var(--primary-highlight-color)"
-        }
+            "user_name": "Michael",
+            "background_color": "var(--primary-highlight-color)",
+        },
     )
+
 
 @router.get("/add_visit")
 def add_visit_page(request: Request):
@@ -151,6 +163,7 @@ def add_visit_page(request: Request):
         },
     )
 
+
 @router.get("/update_top_ten")
 def add_update_top_ten_page(request: Request):
     try:
@@ -159,27 +172,84 @@ def add_update_top_ten_page(request: Request):
         return RedirectResponse("/login")
 
     top_ten_lists = [
-        ("Cities", "city", get_top_ten_location_list("joel", "city"), get_top_ten_location_list("michael", "city"), get_cities_for_dropdown()),
-        ("Capitols", "capitol", get_top_ten_capitol_list("joel"), get_top_ten_capitol_list("michael"), get_capitols()),
-        ("Parks", "national park", get_top_ten_location_list("joel", "national park"), get_top_ten_location_list("michael", "national park"), get_national_parks()),
-        ("City Halls", "city hall", get_top_ten_location_list("joel", "city hall"), get_top_ten_location_list("michael", "city hall"), get_cityhalls()),
-        ("Libaries", "library", get_top_ten_location_list("joel", "library"), get_top_ten_location_list("michael", "library"), get_libraries()),
-        ("Museums", "museum", get_top_ten_location_list("joel", "museum"), get_top_ten_location_list("michael", "museum"), get_museums()),
-        ("Buildings", "building", get_top_ten_location_list("joel", "building"), get_top_ten_location_list("michael", "building"), get_buildings()),
-        ("Cities To Move To", "move to", get_top_ten_location_list("joel", "move to"), get_top_ten_location_list("michael", "move to"), get_cities_for_dropdown()),
-        ("Canadian Railway Hotels", "canadian railway hotel", get_top_ten_canadian_railway_hotel_list("joel"), get_top_ten_canadian_railway_hotel_list("michael"), get_canadian_railway_hotels_for_dropdown())
-
+        (
+            "Cities",
+            "city",
+            get_top_ten_location_list("joel", "city"),
+            get_top_ten_location_list("michael", "city"),
+            get_cities_for_dropdown(),
+        ),
+        (
+            "Capitols",
+            "capitol",
+            get_top_ten_capitol_list("joel"),
+            get_top_ten_capitol_list("michael"),
+            get_capitols(),
+        ),
+        (
+            "Parks",
+            "national park",
+            get_top_ten_location_list("joel", "national park"),
+            get_top_ten_location_list("michael", "national park"),
+            get_national_parks(),
+        ),
+        (
+            "City Halls",
+            "city hall",
+            get_top_ten_location_list("joel", "city hall"),
+            get_top_ten_location_list("michael", "city hall"),
+            get_cityhalls(),
+        ),
+        (
+            "Libaries",
+            "library",
+            get_top_ten_location_list("joel", "library"),
+            get_top_ten_location_list("michael", "library"),
+            get_libraries(),
+        ),
+        (
+            "Museums",
+            "museum",
+            get_top_ten_location_list("joel", "museum"),
+            get_top_ten_location_list("michael", "museum"),
+            get_museums(),
+        ),
+        (
+            "Buildings",
+            "building",
+            get_top_ten_location_list("joel", "building"),
+            get_top_ten_location_list("michael", "building"),
+            get_buildings(),
+        ),
+        (
+            "Cities To Move To",
+            "move to",
+            get_top_ten_location_list("joel", "move to"),
+            get_top_ten_location_list("michael", "move to"),
+            get_cities_for_dropdown(),
+        ),
+        (
+            "Canadian Railway Hotels",
+            "canadian railway hotel",
+            get_top_ten_canadian_railway_hotel_list("joel"),
+            get_top_ten_canadian_railway_hotel_list("michael"),
+            get_canadian_railway_hotels_for_dropdown(),
+        ),
+        (
+            "Theatres",
+            "theatre",
+            get_top_ten_theatres_list("joel"),
+            get_top_ten_theatres_list("michael"),
+            get_theatres_for_app(),
+        ),
     ]
 
     return templates.TemplateResponse(
         request=request,
         name="admin/update_top_ten.html",
-        context={
-            "cities": get_cities_for_dropdown(),
-            "top_ten_lists": top_ten_lists
-            
-        },
+        context={"cities": get_cities_for_dropdown(), "top_ten_lists": top_ten_lists},
     )
+
 
 @router.post("/add_visit")
 def add_visit(
@@ -230,9 +300,11 @@ def add_visit(
 
     return RedirectResponse(url="/admin/home?success=visit_added", status_code=303)
 
+
 class VisitAddition(BaseModel):
     location_id: int
     visit_date: str
+
 
 @router.post("/add_visit_from_app")
 def add_visit_from_app(visit: VisitAddition):
@@ -255,6 +327,7 @@ def add_visit_from_app(visit: VisitAddition):
     print(f"Visit created with id = {visit_id}")
 
     return RedirectResponse(url="/admin/home?success=visit_added", status_code=303)
+
 
 @router.get("/add_theatre")
 def add_theatre_page(request: Request):
@@ -414,8 +487,8 @@ def add_location(
         create_building_details(new_id)
         print(f"New buidling details created with id = {new_id}")
 
-
     return RedirectResponse(url="/admin/home?success=location_added", status_code=303)
+
 
 class LocationAddition(BaseModel):
     location_type_id: int
@@ -424,6 +497,7 @@ class LocationAddition(BaseModel):
     country: str
     latitude: float
     longitude: float
+
 
 @router.post("/add_location_from_app")
 def add_location_from_app(addition: LocationAddition):
@@ -453,7 +527,4 @@ def add_location_from_app(addition: LocationAddition):
         create_building_details(new_id)
         print(f"New buidling details created with id = {new_id}")
 
-    return {
-    "status": "ok",
-    "location_id": new_id
-    }
+    return {"status": "ok", "location_id": new_id}
