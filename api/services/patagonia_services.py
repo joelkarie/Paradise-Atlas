@@ -32,4 +32,19 @@ def get_patagonia_for_apps():
         """))
 
         return [dict(row._mapping) for row in rows]
-    
+
+def get_patagonia_for_dropdown():
+
+    with engine.connect() as conn:
+
+        rows = conn.execute(text("""
+            SELECT psv.id, 
+            psv.store_name as name, 
+            psv.city, 
+            psv.state_province,
+            psv.country
+            FROM patagonia_store_visit psv 
+            WHERE visited = TRUE
+        """))
+
+        return [dict(row._mapping) for row in rows]

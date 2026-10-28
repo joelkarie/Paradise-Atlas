@@ -44,6 +44,7 @@ from api.services.miscellany_services import (
     get_top_ten_canadian_railway_hotel_list,
     get_top_ten_theatres_list,
     get_top_ten_quaker_meeting_list,
+    get_top_ten_patagonia_list,
 )
 
 from api.services.capitols_services import get_capitols
@@ -52,6 +53,7 @@ from api.services.canadian_railway_hotel_services import (
     get_canadian_railway_hotels_for_dropdown,
 )
 
+from api.services.patagonia_services import get_patagonia_for_dropdown
 from api.services.quaker_meeting_services import get_quaker_meetings_for_dropdown
 
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
@@ -252,6 +254,13 @@ def add_update_top_ten_page(request: Request):
             get_top_ten_quaker_meeting_list("michael"),
             get_quaker_meetings_for_dropdown(),
         ),
+        (
+            "Patagonia Stores",
+            "patagonia",
+            get_top_ten_patagonia_list("joel"),
+            get_top_ten_patagonia_list("michael"),
+            get_patagonia_for_dropdown(),
+        )
     ]
 
     return templates.TemplateResponse(

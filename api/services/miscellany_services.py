@@ -130,3 +130,25 @@ def get_top_ten_quaker_meeting_list(column: str):
             """))
 
         return [dict(row._mapping) for row in rows]
+
+def get_top_ten_patagonia_list(column: str):
+    with engine.connect() as conn:
+
+        rows = conn.execute(text(f"""  
+                SELECT
+                    ord.position AS top_ten_order,
+                    p.id,
+                    p.store_name AS name,
+                    p.state_province,
+                    p.country,
+                    p.latitude,
+                    p.longitude
+                FROM top_tens t
+                CROSS JOIN LATERAL
+                    unnest(t.{column}) WITH ORDINALITY AS ord(location_id, position)
+                JOIN patagonia_store_visit p ON p.id = ord.location_id
+                WHERE t.name = 'quaker'
+                ORDER BY ord.position;
+            """))
+
+        return [dict(row._mapping) for row in rows]
