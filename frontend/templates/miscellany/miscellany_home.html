@@ -33,33 +33,38 @@
 
         {% for title, joel_locations, michael_locations in top_ten_lists %}
         <details>
-       
-        <summary> <hr><h2>{{ title }}</h2></summary>
 
-        <p>
-        <div class="top-tens-columns">
-            <div class="top-tens-column">
-                <h3>Joel</h3>
-                {% for location in joel_locations %}
-                <a href="/gazetteer/location/{{ location.id }}">
+            <summary>
+                <hr>
+                <h2>{{ title }}</h2>
+            </summary>
+
+            <p>
+            <div class="top-tens-columns">
+                <div class="top-tens-column">
+                    <h3>Joel</h3>
+                    {% for location in joel_locations %}
+                    <!-- <a href="/gazetteer/location/{{ location.id }}"> -->
                     {{ location.top_ten_order }}. {{ location.name }},
                     {{ location.state_province }}, {{ location.country }}
-                </a><br>
-                {% endfor %}
-            </div>
+                    <!-- </a> -->
+                    <br>
+                    {% endfor %}
+                </div>
 
-            <div class="top-tens-column">
-                <h3>Michael</h3>
-                {% for location in michael_locations %}
-                <a href="/gazetteer/location/{{ location.id }}">
+                <div class="top-tens-column">
+                    <h3>Michael</h3>
+                    {% for location in michael_locations %}
+                    <!-- <a href="/gazetteer/location/{{ location.id }}"> -->
                     {{ location.top_ten_order }}. {{ location.name }},
                     {{ location.state_province }}, {{ location.country }}
-                </a><br>
-                {% endfor %}
+                    <!-- </a> -->
+                    <br>
+                    {% endfor %}
+                </div>
             </div>
-        </div>
-        <br>
-        </p>
+            <br>
+            </p>
         </details>
         {% endfor %}
 
