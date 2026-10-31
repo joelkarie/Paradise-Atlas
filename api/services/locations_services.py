@@ -274,3 +274,16 @@ def get_buildings():
         """))
 
         return [dict(row._mapping) for row in rows]
+
+def get_locations_by_type(location_type_id):
+
+    with engine.connect() as conn:
+
+        rows = conn.execute(text(f"""
+                SELECT l.id, l.name, l.state_province , l.country, l.latitude, l.longitude
+                FROM location l
+                WHERE l.location_type_id = {location_type_id}
+                ORDER BY l.name ASC
+        """))
+
+        return [dict(row._mapping) for row in rows]    

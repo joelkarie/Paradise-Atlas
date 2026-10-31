@@ -3,10 +3,7 @@ from api.services.locations_services import (
     get_locations,
     update_location_rating_value,
     get_location_types,
-    get_national_parks,
-    get_cityhalls,
-    get_libraries,
-    get_cities_for_dropdown
+    get_locations_by_type,
 )
 from pydantic import BaseModel
 
@@ -20,7 +17,9 @@ def locations():
 
 @router.post("/update_location_rating")
 def update_location_rating(
-    location_id: str = Form(...), field: str = Form(...), value: str | None = Form(None),
+    location_id: str = Form(...),
+    field: str = Form(...),
+    value: str | None = Form(None),
 ):
 
     allowed_fields = {
@@ -30,7 +29,7 @@ def update_location_rating(
         "michael_highlights",
         "joel_star_rating",
         "michael_star_rating",
-        "restaurants"
+        "restaurants",
     }
 
     if field not in allowed_fields:
@@ -43,15 +42,15 @@ def update_location_rating(
 
     return {"status": "ok"}
 
+
 class LocationUpdate(BaseModel):
     location_id: int
     field: str
     value: str | None = None
 
+
 @router.post("/update_location_rating_from_app")
-def update_location_rating_from_app(
-    update: LocationUpdate
-):
+def update_location_rating_from_app(update: LocationUpdate):
 
     allowed_fields = {
         "joel_could_live",
@@ -60,7 +59,7 @@ def update_location_rating_from_app(
         "michael_highlights",
         "joel_star_rating",
         "michael_star_rating",
-        "restaurants"
+        "restaurants",
     }
 
     if update.field not in allowed_fields:
@@ -77,23 +76,28 @@ def update_location_rating_from_app(
 
     return {"status": "ok"}
 
+
 @router.get("/location_types")
 def location_types():
     return get_location_types()
 
 
-@router.get("/national_parks")
-def national_parks():
-    return get_national_parks()
 
-@router.get("/libraries")
-def libraries():
-    return get_libraries()
+location_routers = {
+    1: "cities",
+    2: "national_parks",
+    3: "landmarks",
+    4: "home",
+    5: "architecture",
+    6: "cityhalls",
+    7: "libraries",
+    8: "museums",
+    9: "food",
+    10: "outdoors",
+}
 
-@router.get("/cityhalls")
-def cityhalls():
-    return get_cityhalls()
+for type_id, router_name in location_routers.items():
 
-@router.get("/cities")
-def cities():
-    return get_cities_for_dropdown()
+    @router.get(f"/{router_name}")
+    def location_routers(type_id=type_id):
+        return get_locations_by_type(type_id)
