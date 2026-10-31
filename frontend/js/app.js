@@ -24,6 +24,8 @@ import { createLibrariesLayer } from "./layers/libraries.js";
 import { getLibraries } from "./api.js";
 import { createCityhallLayer } from "./layers/cityhalls.js";
 import { getCityhalls } from "./api.js";
+import { createLocationLayer } from "./layers/location_layer_template.js";
+import { getLocationsByType } from "./api.js";
 
 async function main() {
 
@@ -52,6 +54,10 @@ async function main() {
         ]);
     const librariesLayer = createLibrariesLayer( await getLibraries());
     const cityhallsLayer = createCityhallLayer( await getCityhalls());
+    const museumsLayer = createLocationLayer( await getLocationsByType("museums"), "map_pin_3.png")
+    const foodLayer = createLocationsLayer( await getLocationsByType("food"), "map_pin_3.png")
+    const outdoorsLayer = createLocationsLayer( await getLocationsByType("outdoors"), "map_pin_3.png")
+
 
     locationLayer.addTo(map)
 
@@ -70,7 +76,10 @@ async function main() {
         "Cities Joel Could Live In": joelCouldLiveLayer,
         "Cities We Both Could Live In": togetherCouldLiveLayer,
         "Patagonia Stores": patagoniaStoreLayer,
-        "Quaker Meetings Houses Attended": quakerMeetingHouseLayer
+        "Quaker Meetings Houses Attended": quakerMeetingHouseLayer,
+        "Museums Visited": museumsLayer,
+        "Restaurants and Food Locations": foodLayer,
+        "Outdoor Locations We Have Visited": outdoorsLayer,
     };
 
     L.control.layers(null, overlays).addTo(map);

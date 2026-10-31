@@ -76,3 +76,8 @@ export async function getCityhalls() {
     const response = await fetch(`${API_BASE}/locations/cityhalls`);
     return await response.json();
 }
+
+export async function getLocationsByType(locationType) {
+    const response = await fetch(`${API_BASE}/locations/${locationType}`);
+    return await response.json();
+}
