@@ -35,14 +35,13 @@
       .then(data => {
         document.getElementById("locations").innerHTML = data.map(loc => {
 
-          const label = `${loc.location}, ${loc.state}, ${loc.country}`;
+          const label = `${loc.location}, ${loc.state}, ${loc.country} ${loc.location_type_id}`;
 
-          return `
-        <div class="location-card">
+          let can_live_row = ``
 
-          <div class="location-title">${label}</div>
-
-          <div class="rating-row">
+          if (loc.location_type_id == 1) {
+            can_live_row = ` 
+            <div class="rating-row">
               <div class="subtitle">Could you live here?</div>
 
               <label>
@@ -63,12 +62,18 @@
                   False
               </label>
 
-            <div class="meta">
-              Joel: ${loc.joel_could_live ? "Yes" : "No"} </br>
-              Michael: ${loc.michael_could_live ? "Yes" : "No"}
-            </div>
+              <div class="meta">
+                Joel: ${loc.joel_could_live ? "Yes" : "No"} </br>
+                Michael: ${loc.michael_could_live ? "Yes" : "No"}
+              </div>
+            </div>`
+          }
 
-          </div>
+
+          return `
+        <div class="location-card">
+
+          <div class="location-title">${label}</div>
           <div class="rating-row">
             <div class="subtitle">Highlights:</div>
             <textarea
@@ -101,6 +106,7 @@
                   class="${loc[`${userName}_star_rating`] >= 5 ? 'star star-rating' : 'star'}"
                   data-star-id="${loc.location_id}">★</div>
           </div>
+          ${can_live_row}
         </div>
       `;
         }).join("");

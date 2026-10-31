@@ -37,7 +37,7 @@ def get_location_ratings():
             SELECT l.name, l.state_province, l.country, 
             lr.joel_could_live, lr.michael_could_live, lr.location_id, 
             lr.joel_highlights, lr.michael_highlights, lr.joel_star_rating, lr.michael_star_rating,
-            lr.restaurants
+            lr.restaurants, l.location_type_id
             FROM location l 
             JOIN location_rating lr ON lr.location_id = l.id
             ORDER BY l.name ASC
@@ -57,6 +57,7 @@ def get_location_ratings():
             "joel_star_rating": r[8],
             "michael_star_rating": r[9],
             "restaurants": r[10],
+            "location_type_id": r[11]
         }
         for r in rows
     ]
