@@ -40,7 +40,6 @@ def get_location_ratings():
             lr.restaurants
             FROM location l 
             JOIN location_rating lr ON lr.location_id = l.id
-            WHERE l.location_type_id = 1
             ORDER BY l.name ASC
         """)
         rows = result.fetchall()
