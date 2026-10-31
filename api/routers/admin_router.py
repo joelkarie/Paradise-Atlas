@@ -14,12 +14,7 @@ from api.services.locations_services import (
     create_location,
     create_location_rating,
     create_building_details,
-    get_cities_for_dropdown,
-    get_cityhalls,
-    get_libraries,
-    get_national_parks,
-    get_buildings,
-    get_museums,
+    get_locations_by_type,
 )
 from api.services.visit_services import (
     get_next_visit_number,
@@ -182,7 +177,7 @@ def add_update_top_ten_page(request: Request):
             "city",
             get_top_ten_location_list("joel", "city"),
             get_top_ten_location_list("michael", "city"),
-            get_cities_for_dropdown(),
+            get_locations_by_type(1),
         ),
         (
             "Capitols",
@@ -196,42 +191,42 @@ def add_update_top_ten_page(request: Request):
             "national park",
             get_top_ten_location_list("joel", "national park"),
             get_top_ten_location_list("michael", "national park"),
-            get_national_parks(),
+            get_locations_by_type(2),
         ),
         (
             "City Halls",
             "city hall",
             get_top_ten_location_list("joel", "city hall"),
             get_top_ten_location_list("michael", "city hall"),
-            get_cityhalls(),
+            get_locations_by_type(6),
         ),
         (
             "Libaries",
             "library",
             get_top_ten_location_list("joel", "library"),
             get_top_ten_location_list("michael", "library"),
-            get_libraries(),
+            get_locations_by_type(7),
         ),
         (
             "Museums",
             "museum",
             get_top_ten_location_list("joel", "museum"),
             get_top_ten_location_list("michael", "museum"),
-            get_museums(),
+            get_locations_by_type(8),
         ),
         (
             "Buildings",
             "building",
             get_top_ten_location_list("joel", "building"),
             get_top_ten_location_list("michael", "building"),
-            get_buildings(),
+            get_locations_by_type(5),
         ),
         (
             "Cities To Move To",
             "move to",
             get_top_ten_location_list("joel", "move to"),
             get_top_ten_location_list("michael", "move to"),
-            get_cities_for_dropdown(),
+            get_locations_by_type(1),
         ),
         (
             "Canadian Railway Hotels",
@@ -266,7 +261,7 @@ def add_update_top_ten_page(request: Request):
     return templates.TemplateResponse(
         request=request,
         name="admin/update_top_ten.html",
-        context={"cities": get_cities_for_dropdown(), "top_ten_lists": top_ten_lists},
+        context={"cities": get_locations_by_type(1), "top_ten_lists": top_ten_lists},
     )
 
 

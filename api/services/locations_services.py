@@ -17,6 +17,20 @@ def get_locations():
         return [dict(row._mapping) for row in rows]
 
 
+def get_locations_by_type(location_type_id):
+
+    with engine.connect() as conn:
+
+        rows = conn.execute(text(f"""
+                SELECT l.id, l.name, l.state_province , l.country, l.latitude, l.longitude
+                FROM location l
+                WHERE l.location_type_id = {location_type_id}
+                ORDER BY l.name ASC
+        """))
+
+        return [dict(row._mapping) for row in rows]
+
+
 def get_location_ratings():
     with engine.connect() as conn:
         result = conn.exec_driver_sql("""
@@ -43,7 +57,7 @@ def get_location_ratings():
             "michael_highlights": r[7],
             "joel_star_rating": r[8],
             "michael_star_rating": r[9],
-            "restaurants": r[10]
+            "restaurants": r[10],
         }
         for r in rows
     ]
@@ -61,6 +75,7 @@ def update_location_rating_value(location_id, field, value):
             (value, location_id),
         )
 
+
 def get_location_types():
 
     with engine.connect() as conn:
@@ -74,7 +89,8 @@ def get_location_types():
         """))
 
         return [dict(row._mapping) for row in rows]
-    
+
+
 def get_locations_for_dropdown():
     with engine.connect() as conn:
 
@@ -90,29 +106,9 @@ def get_locations_for_dropdown():
 
         return [dict(row._mapping) for row in rows]
 
-def get_cities_for_dropdown():
-    with engine.connect() as conn:
 
-        rows = conn.execute(text("""
-            SELECT
-                l.id,
-                l.name,
-                l.state_province,
-                l.country
-            FROM location l
-            WHERE l.location_type_id = 1
-            ORDER BY LOWER(name) ASC;
-        """))
-
-        return [dict(row._mapping) for row in rows]
-    
 def create_location(
-        name, 
-        location_type_id,
-        state_province,
-        country,
-        latitude = None,
-        longitude = None
+    name, location_type_id, state_province, country, latitude=None, longitude=None
 ):
     with engine.begin() as conn:
 
@@ -145,7 +141,7 @@ def create_location(
                 "state_province": state_province,
                 "country": country,
                 "latitude": latitude,
-                "longitude": longitude
+                "longitude": longitude,
             },
         )
 
@@ -164,6 +160,7 @@ def create_location_rating(location_id: int):
             {"location_id": location_id},
         )
 
+
 def create_building_details(location_id: int):
     with engine.begin() as conn:
         conn.execute(
@@ -176,17 +173,6 @@ def create_building_details(location_id: int):
             {"location_id": location_id},
         )
 
-def get_national_parks():
-    with engine.connect() as conn:
-
-        rows = conn.execute(text("""
-            select 
-                *
-            from location l
-            where l.location_type_id = 2;
-        """))
-
-        return [dict(row._mapping) for row in rows]
 
 def get_gazetteer_data(location_id):
     with engine.connect() as conn:
@@ -222,68 +208,3 @@ def get_gazetteer_data(location_id):
             return None
 
         return dict(row._mapping)
-    
-def get_cityhalls():
-
-    with engine.connect() as conn:
-
-        rows = conn.execute(text("""
-            SELECT l.id, l.name, l.state_province , l.country, l.latitude, l.longitude
-            FROM location l
-            WHERE l.location_type_id = 6
-            ORDER BY l.name ASC
-        """))
-
-        return [dict(row._mapping) for row in rows]
-
-def get_libraries():
-
-    with engine.connect() as conn:
-
-        rows = conn.execute(text("""
-            SELECT l.id, l.name, l.state_province , l.country, l.latitude, l.longitude
-            FROM location l
-            WHERE l.location_type_id = 7
-            ORDER BY l.name ASC
-        """))
-
-        return [dict(row._mapping) for row in rows]
-
-def get_museums():
-
-    with engine.connect() as conn:
-
-        rows = conn.execute(text("""
-            SELECT l.id, l.name, l.state_province , l.country, l.latitude, l.longitude
-            FROM location l
-            WHERE l.location_type_id = 8
-            ORDER BY l.name ASC
-        """))
-
-        return [dict(row._mapping) for row in rows]
-
-def get_buildings():
-
-    with engine.connect() as conn:
-
-        rows = conn.execute(text("""
-            SELECT l.id, l.name, l.state_province , l.country, l.latitude, l.longitude
-            FROM location l
-            WHERE l.location_type_id = 5
-            ORDER BY l.name ASC
-        """))
-
-        return [dict(row._mapping) for row in rows]
-
-def get_locations_by_type(location_type_id):
-
-    with engine.connect() as conn:
-
-        rows = conn.execute(text(f"""
-                SELECT l.id, l.name, l.state_province , l.country, l.latitude, l.longitude
-                FROM location l
-                WHERE l.location_type_id = {location_type_id}
-                ORDER BY l.name ASC
-        """))
-
-        return [dict(row._mapping) for row in rows]    
