@@ -62,21 +62,6 @@ export async function getVisitedCanadianRailwayHotels() {
     return await response.json();
 }
 
-export async function getNationalParks() {
-    const response = await fetch(`${API_BASE}/locations/national_parks`);
-    return await response.json();
-}
-
-export async function getLibraries() {
-    const response = await fetch(`${API_BASE}/locations/libraries`);
-    return await response.json();
-}
-
-export async function getCityhalls() {
-    const response = await fetch(`${API_BASE}/locations/cityhalls`);
-    return await response.json();
-}
-
 export async function getLocationsByType(locationType) {
     const response = await fetch(`${API_BASE}/locations/${locationType}`);
     return await response.json();

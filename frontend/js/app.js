@@ -18,12 +18,9 @@ import { getDigs } from "./api.js";
 import { createCanadianRailwayHotelsLayer } from "./layers/canadian_railway_hotels.js";
 import { getVisitedCanadianRailwayHotels } from "./api.js";
 import { createNationalParksLayer } from "./layers/national_parks.js";
-import { getNationalParks } from "./api.js";
 import { createHeatMapLayer } from "./layers/heat_map.js"
 import { createLibrariesLayer } from "./layers/libraries.js";
-import { getLibraries } from "./api.js";
 import { createCityhallLayer } from "./layers/cityhalls.js";
-import { getCityhalls } from "./api.js";
 import { createLocationLayer } from "./layers/location_layer_template.js";
 import { getLocationsByType } from "./api.js";
 
@@ -42,7 +39,7 @@ async function main() {
     const locationLayer = createLocationsLayer(await getLocations());
     const digsLayer = createDigsLayer(await getDigs(), "digs_marker_2.png")
     const visitedCanadianRailwayHotelsLayer = createCanadianRailwayHotelsLayer(await getVisitedCanadianRailwayHotels(), "chateau-frontenac.png")
-    const nationalParksLayer = createNationalParksLayer( await getNationalParks(), "national-park.png")
+    const nationalParksLayer = createNationalParksLayer( await getLocationsByType("national_parks"), "national-park.png")
     const heatmapLayer = createHeatMapLayer([
             ...(await getLocations()),
             ...(await getTheatres()),
@@ -52,8 +49,8 @@ async function main() {
             ...(await getDigs()),
             ...(await getVisitedCanadianRailwayHotels())
         ]);
-    const librariesLayer = createLibrariesLayer( await getLibraries());
-    const cityhallsLayer = createCityhallLayer( await getCityhalls());
+    const librariesLayer = createLibrariesLayer( await await getLocationsByType("libraries"));
+    const cityhallsLayer = createCityhallLayer( await await getLocationsByType("cityhalls"));
     const museumsLayer = createLocationLayer( await getLocationsByType("museums"), "map_pin_3.png")
     const foodLayer = createLocationsLayer( await getLocationsByType("food"), "map_pin_3.png")
     const outdoorsLayer = createLocationsLayer( await getLocationsByType("outdoors"), "map_pin_3.png")
