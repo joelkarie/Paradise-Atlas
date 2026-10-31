@@ -26,24 +26,7 @@
     <script src="https://unpkg.com/leaflet.heat/dist/leaflet-heat.js"></script>
     <script type="module" src="/static/js/app.js"></script>
 
-    <footer class="bottom-nav">
-
-        <a href="/" class="nav-logo">
-            <img src="/static/assets/peach_dot.png" alt="Paradise Atlas Logo" class="site-logo-small">
-        </a>
-
-        <div class="nav-links">
-            <a href="/">Atlas</a>
-            <a href="/gazetteer/home">Gazetteer</a>
-            <a href="/miscellany/home">Miscellany</a>
-            <a href="/admin/home">Admin</a>
-
-            <a href="https://www.instagram.com/michaelhergel/" target="_blank" rel="noopener noreferrer">
-                Links
-            </a>
-        </div>
-
-    </footer>
+    {% include "partials/admin_footer.html" %}
 </body>
 
 </html>

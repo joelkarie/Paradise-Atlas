@@ -14,7 +14,7 @@ from api.services.livable_services import (
 
 router = APIRouter(prefix="/gazetteer", tags=["Gazetteer"])
 
-templates = Jinja2Templates(directory="frontend/templates/gazetteer")
+templates = Jinja2Templates(directory="frontend/templates")
 
 
 @router.get("/home")
@@ -68,7 +68,7 @@ def gazetteer_home_page(request: Request):
 
     return templates.TemplateResponse(
         request=request,
-        name="gazetteer_home.html",
+        name="/gazetteer/gazetteer_home.html",
         context={
             "locations": locations_sorted,
             "city_count": city_count,

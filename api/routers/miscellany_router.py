@@ -12,7 +12,7 @@ from sqlalchemy import text
 from ..database import engine
 
 router = APIRouter(prefix="/miscellany", tags=["Miscellany"])
-templates = Jinja2Templates(directory="frontend/templates/miscellany")
+templates = Jinja2Templates(directory="frontend/templates")
 
 
 @router.get("/{column}/{topic}")
@@ -151,6 +151,6 @@ def miscellany_home_page(request: Request):
 
     return templates.TemplateResponse(
         request=request,
-        name="miscellany_home.html",
+        name="/miscellany/miscellany_home.html",
         context={"top_ten_lists": top_ten_lists},
     )
